@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Mon Apr 27 18:13:34 2015 Alexander Saenen
+// Last update Tue Apr 28 13:01:20 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -29,7 +29,8 @@ bool	Cube::initialize() {
   _geometry.pushUv(glm::vec2(1.0f, 0.0f));
   _geometry.pushUv(glm::vec2(1.0f, 1.0f));
   _geometry.pushUv(glm::vec2(0.0f, 1.0f));
-  _geometry.setColor(glm::vec4(1, 1, 0, 1));_geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
+  _geometry.setColor(glm::vec4(1, 1, 0, 1));
+  _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
   _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
   _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
   _geometry.pushVertex(glm::vec3(-0.5, -0.5, -0.5));
