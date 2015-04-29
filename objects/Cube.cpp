@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Tue Apr 28 15:20:46 2015 Alexander Saenen
+// Last update Wed Apr 29 11:47:58 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -20,6 +20,9 @@ bool	Cube::initialize() {
     std::cerr << "Cannot load the cube texture" << std::endl;
     return (false);
   }
+  _scale.x = 10;
+  _scale.y = 10;
+  _scale.z = 10;
   _geometry.setColor(glm::vec4(1, 0, 0, 1));
   _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
   _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
