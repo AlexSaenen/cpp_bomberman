@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Tue Apr 28 13:01:20 2015 Alexander Saenen
+// Last update Tue Apr 28 15:20:46 2015 Alexander Saenen
 //
 
 #include "Cube.hh"

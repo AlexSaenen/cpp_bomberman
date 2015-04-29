@@ -5,16 +5,12 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Tue Apr 28 14:32:45 2015 Alexander Saenen
+// Last update Wed Apr 29 09:04:09 2015 Alexander Saenen
 //
 
 #include "GameRoutine.hh"
-#include "Geometry.hh"
 
-
-#include "Model.hh"
-
-gdl::Model		ralouf;
+#include "Marvin.hh"
 
 GameRoutine::GameRoutine() {}
 
@@ -29,6 +25,7 @@ GameRoutine::~GameRoutine() {
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
+  AObject	*marvin = new Marvin;
   // AObject	*cube = new Cube;
 
   if (!_context.start(800, 600, "Bomb the House")) {
@@ -42,18 +39,21 @@ bool	GameRoutine::initialize() {
     std::cerr << "Error while trying to load the shaders" << std::endl;
     return (false);
   }
-  projection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);
+  projection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
   transformation = glm::lookAt(glm::vec3(0, 10, -30), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
+  if (marvin->initialize() == false) {
+    std::cerr << "Couldn't initialize a cube" << std::endl;
+    return (false);
+  }
   // if (cube->initialize() == false) {
   //   std::cerr << "Couldn't initialize a cube" << std::endl;
   //   return (false);
   // }
   // _objects.push_back(cube);
-  ralouf.load("./LibBomberman_linux_x64/assets/marvin.fbx");
-  // _objects.push_back(ralouf);
+  _objects.push_back(marvin);
   return (true);
 }
 
@@ -62,23 +62,15 @@ bool	GameRoutine::update() {
     return (false);
   _context.updateClock(_clock);
   _context.updateInputs(_input);
-  // for (size_t i = 0; i < _objects.size(); ++i)
-  //   _objects[i]->update(_clock, _input);
+  for (size_t i = 0; i < _objects.size(); ++i)
+    _objects[i]->update(_clock, _input);
   return (true);
 }
 
 void	GameRoutine::draw() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _shader.bind();
-  glm::mat4 transform(1);
-  glm::vec3 position(0, 0, 0);
-  glm::vec3 n(0, 0, 100);
-  transform = glm::rotate(transform, position.x, glm::vec3(1, 0, 0));
-  transform = glm::rotate(transform, position.y, glm::vec3(0, 1, 0));
-  transform = glm::rotate(transform, position.z, glm::vec3(0, 0, 1));
-  transform = glm::translate(transform, n);
-  ralouf.draw(_shader, transform, _clock.getElapsed());
-  // for (size_t i = 0; i < _objects.size(); ++i)
-  //   _objects[i]->draw(_shader, _clock);
-  _context.flush();  
+  for (size_t i = 0; i < _objects.size(); ++i)
+    _objects[i]->draw(_shader, _clock);
+  _context.flush();
 }

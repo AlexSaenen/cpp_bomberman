@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue Apr 28 13:05:35 2015 Alexander Saenen
+## Last update Tue Apr 28 14:51:18 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -19,6 +19,7 @@ SRCDIR		= objects/
 SRC		= src/main.cpp \
 		  $(SRCDIR)AObject.cpp \
 		  $(SRCDIR)Cube.cpp \
+		  $(SRCDIR)Marvin.cpp \
 		  $(SRCDIR)GameRoutine.cpp
 
 OBJ		= $(SRC:.cpp=.o)
