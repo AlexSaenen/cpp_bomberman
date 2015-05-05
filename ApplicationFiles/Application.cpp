@@ -5,17 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:51:46 2015 Alexander Saenen
-// Last update Tue May  5 17:25:26 2015 Alexander Saenen
+// Last update Tue May  5 18:10:25 2015 Alexander Saenen
 //
 
 #include "Application.hh"
 
-Application::Application(int ac, char **av):
+Application::Application(const int , const char **):
   _run(true)
 {
-  // TODO : save ac and av somewhere... look for something named design pattern Registry...
-  ac = ac;
-  av = av;
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Application.quit"), new Functor<Application>(this, &Application::_onQuit), 1000);
   ModulesManager::getInstance()->get<EventModule>()
@@ -25,8 +22,10 @@ Application::Application(int ac, char **av):
 Application::~Application() {
   ModulesManager	*manager;
 
-  manager = ModulesManager::getInstance();
-  delete manager;
+  if (ModulesManager::hasInstance()) {
+    manager = ModulesManager::getInstance();
+    delete manager;
+  }
 }
 
 void Application::run()

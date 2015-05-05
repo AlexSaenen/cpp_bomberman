@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:52:14 2015 Alexander Saenen
-// Last update Tue May  5 17:24:29 2015 Alexander Saenen
+// Last update Tue May  5 18:00:55 2015 Alexander Saenen
 //
 
 #ifndef APPLICATION_HH_
@@ -22,7 +22,7 @@ private:
   bool	_run;
 
 public:
-  Application(int ac, char **av);
+  Application(const int ac, const char **av);
   ~Application();
 
 public:

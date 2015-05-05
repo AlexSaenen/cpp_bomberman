@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May  5 13:08:10 2015 Alexander Saenen
-// Last update Tue May  5 13:15:50 2015 Alexander Saenen
+// Last update Tue May  5 18:12:31 2015 Alexander Saenen
 //
 
 #ifndef MODULESMANAGER_HPP_
@@ -21,9 +21,9 @@
 
 class ModulesManager
 {
-  static ModulesManager *instance;
-
-  std::map<std::string, AModule *>		_instances;
+  static ModulesManager			*_instance;
+  std::map<std::string, AModule *>	_instances;
+  static bool				_isInstantiated;
 
 public:  
   ModulesManager();
@@ -31,6 +31,7 @@ public:
 
 public:
   static ModulesManager *getInstance();
+  static bool		hasInstance();
 
 public:
   template <typename T> T *get(const std::string &name) {

@@ -5,12 +5,12 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:54:10 2015 Alexander Saenen
-// Last update Tue May  5 13:03:50 2015 Alexander Saenen
+// Last update Tue May  5 18:01:20 2015 Alexander Saenen
 //
 
 #include "Application.hh"
 
-int main (int ac, char **av)
+int main (const int ac, const char **av)
 {
   Application app(ac, av);
 
