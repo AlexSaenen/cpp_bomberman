@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Wed Apr 29 11:47:58 2015 Alexander Saenen
+// Last update Tue May  5 11:17:45 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -16,7 +16,7 @@ Cube::~Cube() { }
 
 bool	Cube::initialize() {
   _speed = 10.0f;
-  if (_texture.load("./LibBomberman_linux_x64/assets/marvin.fbm/Main_texture_diffuse2.tga") == false) {
+  if (_texture.load("./GraphicsLib/assets/marvin.fbm/Main_texture_diffuse2.tga") == false) {
     std::cerr << "Cannot load the cube texture" << std::endl;
     return (false);
   }

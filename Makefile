@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue Apr 28 14:51:18 2015 Alexander Saenen
+## Last update Tue May  5 17:33:04 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -14,9 +14,17 @@ RM		= rm -f
 
 NAME		= bomberman
 
-SRCDIR		= objects/
+SRCDIR		= Objects/
 
-SRC		= src/main.cpp \
+APPDIR		= ApplicationFiles/
+
+GRADIR		= GraphicsLib/
+
+SRC		= $(APPDIR)main.cpp \
+		  $(APPDIR)Application.cpp \
+		  $(APPDIR)ModulesManager.cpp \
+		  $(SRCDIR)EventModule.cpp \
+		  $(SRCDIR)Event.cpp \
 		  $(SRCDIR)AObject.cpp \
 		  $(SRCDIR)Cube.cpp \
 		  $(SRCDIR)Marvin.cpp \
@@ -24,9 +32,9 @@ SRC		= src/main.cpp \
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -ILibBomberman_linux_x64/includes/ -IheaderObjects -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -IHeaderObjects -W -Wall -Werror -Wextra
 
-LIB		= -LLibBomberman_linux_x64/libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
+LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
 
 all: $(NAME)
 

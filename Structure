@@ -1,0 +1,19 @@
+Application(Bomberman) -> initialize => create ModulesManager(singleton partout) => rajouter modules(Event, Music...)
+		       -> run() => 
+
+
+ModulesManager	       -> gère tous les modules
+
+
+EventModule		-> gère les events et les classes/fonctions qui écoutent l'évènement (par ex: observe("Quit"), &Application::Quit())
+DisplayModule		-> gère les GameObjects(création, gestion, destruction, modification...)
+MusicModule		-> gère la partie son du jeu, peut jouer des musiques ou des bruits (balancer un thread au début du programme et join à la fin)
+
+
+GameRoutine(GameEngine) => liste de GameObject
+			-> initialize => charger lib graphique
+			-> update => parcourir tous les GameObjects(clock, inputs)
+			-> draw => afficher tous les GameObjects à l'écran
+
+
+GameObject(Bombe, joueur, cube destructible, cube, Animation, Bouton, Image...)

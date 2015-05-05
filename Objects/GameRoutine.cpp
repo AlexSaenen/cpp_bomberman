@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Wed Apr 29 11:47:06 2015 Alexander Saenen
+// Last update Tue May  5 11:17:14 2015 Alexander Saenen
 //
 
 #include "GameRoutine.hh"
@@ -33,8 +33,8 @@ bool	GameRoutine::initialize() {
     return (false);
   }
   glEnable(GL_DEPTH_TEST);
-  if (!_shader.load("./LibBomberman_linux_x64/shaders/basic.fp", GL_FRAGMENT_SHADER)
-      || !_shader.load("./LibBomberman_linux_x64/shaders/basic.vp", GL_VERTEX_SHADER)
+  if (!_shader.load("./GraphicsLib/shaders/basic.fp", GL_FRAGMENT_SHADER)
+      || !_shader.load("./GraphicsLib/shaders/basic.vp", GL_VERTEX_SHADER)
       || !_shader.build()) {
     std::cerr << "Error while trying to load the shaders" << std::endl;
     return (false);

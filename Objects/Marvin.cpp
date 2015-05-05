@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue Apr 28 14:47:58 2015 Alexander Saenen
-// Last update Wed Apr 29 16:19:24 2015 Alexander Saenen
+// Last update Tue May  5 11:18:08 2015 Alexander Saenen
 //
 
 #include "Marvin.hh"
@@ -19,11 +19,11 @@ bool	Marvin::initialize() {
   _scale.x = 0.01;
   _scale.y = 0.01;
   _scale.z = 0.01;
-  if (_model.load("./LibBomberman_linux_x64/assets/marvin.fbx") == false) {
+  if (_model.load("./GraphicsLib/assets/marvin.fbx") == false) {
     std::cerr << "Cannot load the marvin model" << std::endl;
     return (false);
   }
-  if (_texture.load("./LibBomberman_linux_x64/assets/marvin.fbm/Main_texture_diffuse2.tga") == false) {
+  if (_texture.load("./GraphicsLib/assets/marvin.fbm/Main_texture_diffuse2.tga") == false) {
     std::cerr << "Cannot load the marvin texture" << std::endl;
     return (false);
   }
