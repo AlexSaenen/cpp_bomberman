@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Mon Apr 27 15:23:29 2015 Alexander Saenen
+// Last update Wed May  6 22:28:41 2015 Alexander Saenen
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -15,8 +15,11 @@
 # include <Game.hh>
 # include <BasicShader.hh>
 # include <Cube.hh>
+# include <AModule.hh>
+# include <ModulesManager.hpp>
+# include <EventModule.hh>
 
-class	GameRoutine : public gdl::Game
+class	GameRoutine : public gdl::Game, public AModule
 {
   gdl::SdlContext	_context;
   gdl::Clock		_clock;
@@ -26,11 +29,13 @@ class	GameRoutine : public gdl::Game
 
 public:
   GameRoutine();
-  ~GameRoutine();
+  virtual ~GameRoutine();
 
   bool	initialize();
   bool	update();
   void	draw();
+  void	_update(Event *);
+  void	_draw(Event *);
 };
 
 #endif /* GameRoutine.hh */

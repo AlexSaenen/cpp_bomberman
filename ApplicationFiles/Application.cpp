@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:51:46 2015 Alexander Saenen
-// Last update Tue May  5 18:10:25 2015 Alexander Saenen
+// Last update Wed May  6 23:06:38 2015 Alexander Saenen
 //
 
 #include "Application.hh"
@@ -34,20 +34,21 @@ void Application::run()
 
   ev->trigger("Application.init")->handle();
   while (this->_run) {
-    ev->trigger("Application.loop.pre", 1000)
-      ->trigger("Application.loop.main", 500)
-      ->trigger("Application.loop.post")
+    ev->trigger("Application.update", 500)
+      ->trigger("Application.draw", 400)
       ->handle();
-    ev->trigger("Application.quit")->handle();
-  }
+  }  
 }
 
 void	Application::_initialize(Event *) {
-  std::cout << "\t\t_initialize()" << std::endl;
+  GameRoutine	*gr = new GameRoutine;
+
+  gr->initialize();
 }
 
 void Application::_onQuit(Event *ev) {
   std::cout << "\t\t_onQuit()" << std::endl;
   this->_run = false;
   ev->stop();
+  ModulesManager::getInstance()->get<EventModule>()->flush();
 }

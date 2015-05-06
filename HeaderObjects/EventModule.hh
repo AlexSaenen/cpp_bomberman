@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May  5 13:10:47 2015 Alexander Saenen
-// Last update Tue May  5 17:11:50 2015 Alexander Saenen
+// Last update Wed May  6 23:03:37 2015 Alexander Saenen
 //
 
 #ifndef EVENTMODULE_HH_
@@ -52,10 +52,13 @@ public:
   EventModule	*trigger(Event *);
   EventModule	*trigger(const std::string &, const int priority = 0);
   EventModule	*handle();
+  void		flush();
 
 private:
   std::map<std::string, std::priority_queue<Handler *, std::vector<Handler *>, CompareH> >	_observers;
   std::priority_queue<Event *, std::vector<Event *>, Event::CompareE>				_events;
+
+  bool	_isFlushed;
 };
 
 #endif /* EventModule.hh */

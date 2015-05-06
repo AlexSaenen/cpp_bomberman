@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:53:48 2015 Alexander Saenen
-// Last update Tue May  5 13:03:28 2015 Alexander Saenen
+// Last update Wed May  6 22:34:18 2015 Alexander Saenen
 //
 
 #ifndef FUNCTOR_HPP_

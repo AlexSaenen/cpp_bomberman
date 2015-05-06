@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Tue May  5 11:17:14 2015 Alexander Saenen
+// Last update Wed May  6 22:56:41 2015 Alexander Saenen
 //
 
 #include "GameRoutine.hh"
@@ -54,12 +54,26 @@ bool	GameRoutine::initialize() {
   }
   _objects.push_back(cube);
   _objects.push_back(marvin);
+  ModulesManager::getInstance()->get<EventModule>()
+    ->observe(std::string("Application.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
+  ModulesManager::getInstance()->get<EventModule>()
+    ->observe(std::string("Application.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
   return (true);
 }
 
+void	GameRoutine::_update(Event *) {
+  this->update();
+}
+
+void	GameRoutine::_draw(Event *) {
+  this->draw();
+}
+
 bool	GameRoutine::update() {
-  if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT))
+  if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT)) {
+    ModulesManager::getInstance()->get<EventModule>()->trigger("Application.quit", 1000);
     return (false);
+  }
   _context.updateClock(_clock);
   _context.updateInputs(_input);
   for (size_t i = 0; i < _objects.size(); ++i)
