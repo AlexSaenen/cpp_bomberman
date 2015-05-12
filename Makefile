@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue May 12 16:08:57 2015 Bozo
+## Last update Tue May 12 17:04:56 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -38,7 +38,7 @@ CXXFLAGS	= -I$(GRADIR)includes/ -IHeaderObjects -W -Wall -Werror -Wextra -g3
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl
 
-RED		= \033[00;33m
+RED		= \033[00;34m
 
 WHITE		= \033[00;0m
 
@@ -46,7 +46,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CXX) $(OBJ) $(LIB) -o $(NAME)
-	@echo "$(RED)export LD_LIBRARY_PATH=GraphicsLib/libs/$(WHITE)"
+	@echo -e "$(RED)export LD_LIBRARY_PATH=GraphicsLib/libs/$(WHITE)"
 
 clean:
 	$(RM) $(OBJ)
