@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Tue May  5 11:17:45 2015 Alexander Saenen
+// Last update Tue May 12 11:57:46 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -14,7 +14,7 @@ Cube::Cube() { }
 
 Cube::~Cube() { }
 
-bool	Cube::initialize() {
+bool	Cube::initialize(Event *) {
   _speed = 10.0f;
   if (_texture.load("./GraphicsLib/assets/marvin.fbm/Main_texture_diffuse2.tga") == false) {
     std::cerr << "Cannot load the cube texture" << std::endl;
@@ -81,7 +81,7 @@ bool	Cube::initialize() {
   return (true);
 }
 
-void	Cube::update(gdl::Clock const &clock, gdl::Input &input) {
+void	Cube::update(const gdl::Clock &clock, gdl::Input &input) {
   if (input.getKey(SDLK_UP))
     translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
   if (input.getKey(SDLK_DOWN))
@@ -92,7 +92,7 @@ void	Cube::update(gdl::Clock const &clock, gdl::Input &input) {
     translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);  
 }
 
-void	Cube::draw(gdl::AShader &shader, gdl::Clock const &clock) {
+void	Cube::draw(gdl::AShader &shader, const gdl::Clock &clock) {
   (void)clock;
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);

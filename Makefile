@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Wed May  6 22:20:25 2015 Alexander Saenen
+## Last update Tue May 12 11:52:04 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -16,6 +16,8 @@ NAME		= bomberman
 
 SRCDIR		= Objects/
 
+CMPDIR		= Components/
+
 APPDIR		= ApplicationFiles/
 
 GRADIR		= GraphicsLib/
@@ -25,10 +27,10 @@ SRC		= $(APPDIR)main.cpp \
 		  $(APPDIR)ModulesManager.cpp \
 		  $(SRCDIR)EventModule.cpp \
 		  $(SRCDIR)Event.cpp \
-		  $(SRCDIR)AObject.cpp \
-		  $(SRCDIR)Cube.cpp \
-		  $(SRCDIR)Marvin.cpp \
-		  $(SRCDIR)GameRoutine.cpp
+		  $(CMPDIR)Cube.cpp \
+		  $(SRCDIR)Shape.cpp \
+		  $(SRCDIR)GameRoutine.cpp \
+		  $(SRCDIR)GameObject.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

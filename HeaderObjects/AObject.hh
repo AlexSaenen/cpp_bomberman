@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:35:25 2015 Alexander Saenen
-// Last update Mon Apr 27 15:06:41 2015 Alexander Saenen
+// Last update Tue May 12 11:38:01 2015 Alexander Saenen
 //
 
 #ifndef AOBJECT_HH_
@@ -14,12 +14,13 @@
 # include <SdlContext.hh>
 # include <AShader.hh>
 # include <Texture.hh>
+# include <IComposant.hpp>
 # include <Geometry.hh>
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
 # include <iostream>
 
-class AObject
+class AObject : virtual public IComposant
 {
 protected:
   glm::vec3 _position;
@@ -30,13 +31,13 @@ public:
   AObject();
   virtual ~AObject();
 
-  virtual bool	initialize();
-  virtual void	update(gdl::Clock const &clock, gdl::Input &input);
-  virtual void	draw(gdl::AShader &shader, gdl::Clock const &clock) = 0;
+  bool	initialize(Event *);
+  virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
+  virtual void	draw(gdl::AShader &shader, const gdl::Clock &clock) = 0;
 
-  void	translate(glm::vec3 const &v);
-  void	rotate(glm::vec3 const& axis, const float angle);
-  void	scale(glm::vec3 const& scale);
+  void	translate(const glm::vec3 &v);
+  void	rotate(const glm::vec3 &axis, const float angle);
+  void	scale(const glm::vec3 &scale);
 
   glm::mat4 getTransformation();
 };
