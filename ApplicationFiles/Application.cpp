@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:51:46 2015 Alexander Saenen
-// Last update Tue May 12 16:43:49 2015 Alexander Saenen
+// Last update Tue May 12 17:46:04 2015 Alexander Saenen
 //
 
 #include "Application.hh"
@@ -44,7 +44,9 @@ void Application::run()
 void	Application::_initialize(Event *) {
   GameRoutine	*gr = new GameRoutine;
 
-  gr->initialize();
+  if (gr->initialize() == false) {
+    _onQuit(new Event("GameRoutine.Error", 1001));
+  }
 }
 
 void Application::_onQuit(Event *ev) {
