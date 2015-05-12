@@ -36,12 +36,12 @@ OBJ		= $(SRC:.cpp=.o)
 
 CXXFLAGS	= -I$(GRADIR)includes/ -IHeaderObjects -W -Wall -Werror -Wextra -g3
 
-LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -ldl -lrt -lfbxsdk -lSDL2 -lpthread
+LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CXX) $(OBJ) -o $(NAME) $(LIB)
+	$(CXX) $(OBJ) $(LIB) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)
