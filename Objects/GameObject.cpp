@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Tue May 12 11:18:36 2015 Alexander Saenen
+// Last update Tue May 12 15:36:07 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
@@ -23,6 +23,18 @@ GameObject::~GameObject() {
     _gameComponents.pop_front();
     delete composant;
   }
+}
+
+GameObject::GameObject(const GameObject &other) 
+  : _gameComponents(other._gameComponents), _type(other._type), _name(other._name) { }
+
+GameObject &GameObject::operator=(const GameObject &other) {
+  if (this != &other) {
+    _type = other._type;
+    _name = other._name;
+    _gameComponents = other._gameComponents;
+  }
+  return (*this);
 }
 
 bool	GameObject::pushComponent(IComposant *composant) {

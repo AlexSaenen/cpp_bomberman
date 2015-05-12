@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May  5 13:08:10 2015 Alexander Saenen
-// Last update Wed May  6 23:02:55 2015 Alexander Saenen
+// Last update Tue May 12 16:58:35 2015 Alexander Saenen
 //
 
 #ifndef MODULESMANAGER_HPP_

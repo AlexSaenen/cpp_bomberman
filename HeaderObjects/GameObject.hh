@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:06:51 2015 Alexander Saenen
-// Last update Tue May 12 11:11:06 2015 Alexander Saenen
+// Last update Tue May 12 15:32:12 2015 Alexander Saenen
 //
 
 #ifndef GAMEOBJECT_HH_
@@ -38,7 +38,9 @@ class	GameObject
 public:
   GameObject(const ObjectType type, const std::string &name);
   ~GameObject();
+  GameObject(const GameObject &other);
 
+  GameObject &operator=(const GameObject &other);
   bool	pushComponent(IComposant *);
   void	popComponent(IComposant *);
   void	update(const gdl::Clock &clock, gdl::Input &input);

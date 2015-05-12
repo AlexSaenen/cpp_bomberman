@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:51:46 2015 Alexander Saenen
-// Last update Wed May  6 23:06:38 2015 Alexander Saenen
+// Last update Tue May 12 16:43:49 2015 Alexander Saenen
 //
 
 #include "Application.hh"
@@ -40,6 +40,7 @@ void Application::run()
   }  
 }
 
+#include <unistd.h>
 void	Application::_initialize(Event *) {
   GameRoutine	*gr = new GameRoutine;
 

@@ -5,27 +5,24 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Tue May 12 12:00:48 2015 Alexander Saenen
+// Last update Tue May 12 16:22:03 2015 Alexander Saenen
 //
 
 #include "GameRoutine.hh"
 
-// #include "Marvin.hh"
-
 GameRoutine::GameRoutine() {}
 
 GameRoutine::~GameRoutine() {
-  // size_t	listSize;
+  size_t	listSize;
 
-  // for (listSize = 0; listSize < _objects.size(); ++listSize) {
-  //   delete _objects[listSize];
-  // }
+  for (listSize = 0; listSize < _objects.size(); ++listSize) {
+    delete _objects[listSize];
+  }
 }
 
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
-  // GameObject	*marvin = new Marvin;
   GameObject	*cube = new GameObject(CUBE, "cubedetest");
 
   if (!_context.start(800, 600, "Bomb the House")) {
@@ -44,16 +41,11 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
-  // if (marvin->initialize() == false) {
-  //   std::cerr << "Couldn't initialize a cube" << std::endl;
-  //   return (false);
-  // }
   if (cube->pushComponent(new Cube) == false) {
     std::cerr << "Couldn't initialize a cube" << std::endl;
     return (false);
   }
-  _objects.push_back(*cube);
-  // _objects.push_back(marvin);
+  _objects.push_back(cube);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Application.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
   ModulesManager::getInstance()->get<EventModule>()
@@ -77,7 +69,7 @@ bool	GameRoutine::update() {
   _context.updateClock(_clock);
   _context.updateInputs(_input);
   for (size_t i = 0; i < _objects.size(); ++i)
-    _objects[i].update(_clock, _input);
+    _objects[i]->update(_clock, _input);
   return (true);
 }
 
@@ -85,6 +77,6 @@ void	GameRoutine::draw() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _shader.bind();
   for (size_t i = 0; i < _objects.size(); ++i)
-    _objects[i].draw(_shader, _clock);
+    _objects[i]->draw(_shader, _clock);
   _context.flush();
 }
