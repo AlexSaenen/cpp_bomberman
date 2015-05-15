@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Tue May 12 18:20:57 2015 Alexander Saenen
+// Last update Fri May 15 09:49:16 2015 Alexander Saenen
 //
 
 #include "GameRoutine.hh"
@@ -26,8 +26,9 @@ GameRoutine::~GameRoutine() {
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
-  GameObject	*cube = new GameObject(CUBE, "cubedetest");
-  GameObject	*marvin = new GameObject(PLAYER1, "marvin");
+  GameObject	*cube = new GameObject(GameObject::CUBE, "cubedetest");
+  GameObject	*marvin = new GameObject(GameObject::PLAYER1, "marvin");
+  GameObject	*ralouf = new GameObject(GameObject::PLAYER2, "ralouf");
 
   if (!_context.start(800, 600, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
@@ -49,12 +50,17 @@ bool	GameRoutine::initialize() {
     std::cerr << "Couldn't initialize a cube" << std::endl;
     return (false);
   }
-  _objects.push_back(cube);
-  if (marvin->pushComponent(new ObjModel("./GraphicsLib/assets/Model/NPCMAX.FBX", "./GraphicsLib/assets/marvin.fbm/Main_texture_diffuse2.tga")) == false) {
+  if (marvin->pushComponent(new ObjModel("./GraphicsLib/assets/marvin.fbx", marvin->getType())) == false) {
     std::cerr << "Couldn't initialize a model" << std::endl;
     return (false);    
   }
+  if (ralouf->pushComponent(new ObjModel("./GraphicsLib/assets/death_knight/deathknight.fbx", marvin->getType())) == false) {
+    std::cerr << "Couldn't initialize a model" << std::endl;
+    return (false);    
+  }
+  _objects.push_back(cube);
   _objects.push_back(marvin);
+  // _objects.push_back(ralouf);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Application.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
   ModulesManager::getInstance()->get<EventModule>()
