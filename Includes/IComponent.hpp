@@ -1,5 +1,5 @@
 //
-// IComponent.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// IComposant.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
