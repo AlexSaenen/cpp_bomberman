@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Tue May 12 15:36:07 2015 Alexander Saenen
+// Last update Wed May 13 12:15:55 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
@@ -59,6 +59,10 @@ void	GameObject::draw(gdl::AShader &shader, const gdl::Clock &clock) {
 
 std::string	GameObject::getName() const {
   return (this->_name);
+}
+
+GameObject::ObjectType	GameObject::getType() const {
+  return (_type);
 }
 
 void	GameObject::handle() const { }

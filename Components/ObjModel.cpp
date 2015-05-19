@@ -5,22 +5,19 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Tue May 12 18:11:45 2015 Alexander Saenen
+// Last update Thu May 14 12:05:05 2015 Alexander Saenen
 //
 
-#include "ObjModel.hh"
+#include <ObjModel.hh>
+#include <GameObject.hh>
 
-ObjModel::ObjModel(const std::string &model, const std::string &texture)
-  : _modelName(model), _textureName(texture) { }
+ObjModel::ObjModel(const std::string &model, const GameObject::ObjectType type)
+  : _modelName(model), _type(type) { }
 
 ObjModel::~ObjModel() { }
 
 bool	ObjModel::initialize(Event *) {
   _speed = 10.0f;
-  if (_texture.load(_textureName) == false) {
-    std::cerr << "Cannot load the cube texture: " << _textureName << std::endl;
-    return (false);
-  }
   _scale.x = 1;
   _scale.y = 1;
   _scale.z = 1;
@@ -33,17 +30,28 @@ bool	ObjModel::initialize(Event *) {
 }
 
 void	ObjModel::update(const gdl::Clock &clock, gdl::Input &input) {
-  if (input.getKey(SDLK_UP))
-    translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
-  if (input.getKey(SDLK_DOWN))
-    translate(glm::vec3(0, 0, 1) * static_cast<float>(clock.getElapsed()) * _speed);
-  if (input.getKey(SDLK_LEFT))
-    translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
-  if (input.getKey(SDLK_RIGHT))
-    translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);  
+  if (_type != GameObject::PLAYER2) {
+    if (input.getKey(SDLK_UP))
+      translate(glm::vec3(0, 0, 1) * static_cast<float>(clock.getElapsed()) * _speed);
+    if (input.getKey(SDLK_DOWN))
+      translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
+    if (input.getKey(SDLK_LEFT))
+      translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+    if (input.getKey(SDLK_RIGHT))
+      translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+  }
+  if (_type != GameObject::PLAYER1) {
+    if (input.getKey(SDLK_z))
+      translate(glm::vec3(0, 0, 1) * static_cast<float>(clock.getElapsed()) * _speed);
+    if (input.getKey(SDLK_s))
+      translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
+    if (input.getKey(SDLK_q))
+      translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+    if (input.getKey(SDLK_d))
+      translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+  }
 }
 
 void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {
-  _texture.bind();
   _model.draw(shader, getTransformation(), clock.getElapsed());
 }

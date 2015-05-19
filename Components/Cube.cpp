@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Tue May 12 15:21:22 2015 Alexander Saenen
+// Last update Wed May 13 12:50:00 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -89,6 +89,14 @@ void	Cube::update(const gdl::Clock &clock, gdl::Input &input) {
   if (input.getKey(SDLK_LEFT))
     translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
   if (input.getKey(SDLK_RIGHT))
+    translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);  
+  if (input.getKey(SDLK_z))
+    translate(glm::vec3(0, 0, -1) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_s))
+    translate(glm::vec3(0, 0, 1) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_q))
+    translate(glm::vec3(-1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);
+  if (input.getKey(SDLK_d))
     translate(glm::vec3(1, 0, 0) * static_cast<float>(clock.getElapsed()) * _speed);  
 }
 
