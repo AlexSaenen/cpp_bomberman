@@ -1,5 +1,5 @@
 
-#include "Parser.hpp"
+#include "Parser.hh"
 
 Parser::Parser() {
   _file = new std::filebuf();
