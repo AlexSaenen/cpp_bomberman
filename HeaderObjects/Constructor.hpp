@@ -16,11 +16,12 @@
 template<class ME>
 class Constructor : public IConstructor
 {
+public:
   Constructor() { }
-  ~Constructor() { }
+  virtual ~Constructor() { }
 
-  ME *operator()() {
-    return (new ME);
+  virtual void *operator()() {
+    return (reinterpret_cast<void *>(new ME));
   }
 };
 

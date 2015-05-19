@@ -8,20 +8,12 @@
 // Last update Wed May  6 19:34:38 2015 Alexander Saenen
 //
 
+#include "Parser.hpp"
+
 #include "Application.hh"
-#include "GameRoutine.hh"
 
 int main (const int ac, const char **av)
-// int main ()
 {
-  // GameRoutine	gr;
-  // gr.initialize();
-
-  // while (1)
-  //   {
-  //     gr.update();
-  //     gr.draw();
-  //   }
   Application app(ac, av);
 
   app.run();

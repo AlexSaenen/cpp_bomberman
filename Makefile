@@ -31,7 +31,8 @@ SRC		= $(APPDIR)main.cpp \
 		  $(CMPDIR)ObjModel.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameRoutine.cpp \
-		  $(SRCDIR)GameObject.cpp
+		  $(SRCDIR)GameObject.cpp \
+		  Parser/Parser.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

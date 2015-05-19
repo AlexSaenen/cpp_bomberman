@@ -13,13 +13,13 @@
 
 # include <AShader.hh>
 # include <Shape.hh>
-# include <IComposant.hpp>
+# include <IComponent.hpp>
 # include <Model.hh>
 # include <Texture.hh>
 # include <glm/glm.hpp>
 # include <iostream>
 
-class	ObjModel : public IComposant, public Shape
+class	ObjModel : public IComponent, public Shape
 {
   gdl::Texture	_texture;
   gdl::Model	_model;

@@ -12,7 +12,7 @@
 # define GAMEOBJECT_HH_
 
 # include <SdlContext.hh>
-# include <IComposant.hpp>
+# include <IComponent.hpp>
 
 enum	ObjectType
   {
@@ -31,7 +31,7 @@ enum	ObjectType
 
 class	GameObject
 {
-  std::list<IComposant *>	_gameComponents;
+  std::list<IComponent *>	_gameComponents;
   ObjectType			_type;
   std::string			_name;
 
@@ -41,8 +41,8 @@ public:
   GameObject(const GameObject &other);
 
   GameObject &operator=(const GameObject &other);
-  bool	pushComponent(IComposant *);
-  void	popComponent(IComposant *);
+  bool	pushComponent(IComponent *);
+  void	popComponent(IComponent *);
   void	update(const gdl::Clock &clock, gdl::Input &input);
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
   std::string	getName() const;

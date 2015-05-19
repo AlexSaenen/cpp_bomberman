@@ -16,7 +16,8 @@ Application::Application(const int , const char **):
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Application.quit"), new Functor<Application>(this, &Application::_onQuit), 1000);
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Application.init"), new Functor<Application>(this, &Application::_initialize), 1000);
+    ->observe(std::string("Application.init"), new Functor<Application>(this, &Application::_initialize), 1000)
+    ->observe(std::string("Application.init"), new Functor<Parser>(new Parser, &Parser::execute), 800);
 }
 
 Application::~Application() {

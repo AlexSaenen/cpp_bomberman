@@ -15,6 +15,7 @@
 # include "EventModule.hh"
 # include "Functor.hpp"
 # include "Event.hh"
+# include "Parser.hpp"
 
 class Application
 {
