@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Tue May 12 16:29:46 2015 Alexander Saenen
+// Last update Tue May 19 12:32:05 2015 Alexander Saenen
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -33,10 +33,15 @@ public:
   virtual ~GameRoutine();
 
   bool	initialize();
-  bool	update();
-  void	draw();
   void	_update(Event *);
   void	_draw(Event *);
+  void		pushGObject(GameObject *GObject);
+  GameObject	*popGObject();
+  void		popGObject(GameObject *GObject);
+
+private:
+  bool	update();
+  void	draw();
 };
 
 #endif /* GameRoutine.hh */
