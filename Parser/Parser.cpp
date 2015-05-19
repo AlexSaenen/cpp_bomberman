@@ -1,26 +1,20 @@
 
 #include "Parser.hpp"
 
-Parser::Parser()
-{
-  std::filebuf file;
-
-  if (file.open("test.conf", std::ios::in))
-    _is = new std::istream(&file);
+Parser::Parser() {
+  _file = new std::filebuf();
+  if (_file->open("test.conf", std::ios::in))
+    _is = new std::istream(_file);
+  else
+    throw ArgException("Cannot open the file : test.conf");
   _constructor["Cube"] = new Constructor<Cube>;
   // _constructor["ObjModel"] = new Constructor<ObjModel>;
 }
 
-Parser::Parser(const Parser & other)
-{
-  _is = other._is;
-}
-
-Parser &Parser::operator=(const Parser &other)
-{
-  if (this != &other)
-    _is = other._is;
-  return (*this);
+Parser::~Parser() {
+  delete _is;
+  delete _file;
+  delete _constructor["Cube"];
 }
 
 void Parser::execute(Event *)
@@ -32,16 +26,18 @@ void Parser::execute(Event *)
   GameObject			*go;
   std::istringstream		*content;
 
-  while (std::getline(*_is, buff, '@')) {
+  while (_is->eof() && std::getline(*_is, buff, '@')) {
+    std::cout << "trognon " << buff << std::endl;
     content = new std::istringstream(buff);
     std::getline(*content, name, ' ');
     std::getline(*content, buff, '\n');
-    std::istringstream verif(buff);
-    verif >> type;
+    std::istringstream *verif = new std::istringstream(buff);
+    *verif >> type;
     go = new GameObject(static_cast<GameObject::ObjectType>(type), name);
     while (!content->eof())
       {
 	std::getline(*content, buff, '\n');
+	std::cout << "buff " << buff << std::endl;
 	go->pushComponent(reinterpret_cast<IComponent *>((*_constructor[buff])()));
 	// (*(reinterpret_cast<Constructor<Cube> *>((_constructor[buff]))))();
       }

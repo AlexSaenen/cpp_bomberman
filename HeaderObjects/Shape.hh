@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:44:50 2015 Alexander Saenen
-// Last update Tue May 12 11:51:44 2015 Alexander Saenen
+// Last update Fri May 15 15:10:52 2015 Alexander Saenen
 //
 
 #ifndef SHAPE_HH_
@@ -14,6 +14,7 @@
 # include <Geometry.hh>
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
+# include <ArgException.hh>
 
 class	Shape
 {

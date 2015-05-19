@@ -5,11 +5,11 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Fri May 15 09:49:16 2015 Alexander Saenen
+// Last update Fri May 15 15:20:35 2015 Alexander Saenen
 //
 
-#include "GameRoutine.hh"
-
+#include <GameRoutine.hh>
+#include <ArgException.hh>
 
 #include <ObjModel.hh>
 
@@ -46,21 +46,17 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
-  if (cube->pushComponent(new Cube) == false) {
-    std::cerr << "Couldn't initialize a cube" << std::endl;
+  try {
+    cube->pushComponent(new Cube);
+    marvin->pushComponent(new ObjModel("./GraphicsLib/assets/marvin.fbx", marvin->getType()));
+    ralouf->pushComponent(new ObjModel("./GraphicsLib/assets/death_knight/deathknight.fbx", marvin->getType()));
+  } catch (ArgException e) {
+    std::cerr << e.getMessage() << std::endl;
     return (false);
-  }
-  if (marvin->pushComponent(new ObjModel("./GraphicsLib/assets/marvin.fbx", marvin->getType())) == false) {
-    std::cerr << "Couldn't initialize a model" << std::endl;
-    return (false);    
-  }
-  if (ralouf->pushComponent(new ObjModel("./GraphicsLib/assets/death_knight/deathknight.fbx", marvin->getType())) == false) {
-    std::cerr << "Couldn't initialize a model" << std::endl;
-    return (false);    
   }
   _objects.push_back(cube);
   _objects.push_back(marvin);
-  // _objects.push_back(ralouf);
+  _objects.push_back(ralouf);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Application.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
   ModulesManager::getInstance()->get<EventModule>()
