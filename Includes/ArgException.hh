@@ -1,11 +1,11 @@
 //
-// DispRunError.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// ArgException.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Fri May 15 15:04:11 2015 Alexander Saenen
-// Last update Fri May 15 15:06:32 2015 Alexander Saenen
+// Started on  Tue May 19 12:33:29 2015 Alexander Saenen
+// Last update Tue May 19 12:33:29 2015 Alexander Saenen
 //
 
 #ifndef ARGEXCEPTION_HH_
