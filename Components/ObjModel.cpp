@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Fri May 15 15:20:22 2015 Alexander Saenen
+// Last update Tue May 19 10:36:09 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -23,7 +23,7 @@ void	ObjModel::initialize(Event *) {
   _scale.z = 0.01;
   _rotation.y = 180;
   if (_model.load(_modelName) == false) {
-    throw ArgException("Cannot load the model: " + _modelName);
+    throw ArgException("Cannot load the model : " + _modelName);
   }
 }
 

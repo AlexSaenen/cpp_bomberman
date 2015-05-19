@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue May 19 10:14:26 2015 Alexander Saenen
+## Last update Tue May 19 11:05:57 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -20,15 +20,18 @@ CMPDIR		= Components/
 
 APPDIR		= ApplicationFiles/
 
+MODDIR		= Modules/
+
 ERRDIR		= Exceptions/
 
 GRADIR		= GraphicsLib/
 
 SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)main.cpp \
-		  $(APPDIR)Application.cpp \
+		  $(APPDIR)Bomberman.cpp \
 		  $(APPDIR)ModulesManager.cpp \
-		  $(SRCDIR)EventModule.cpp \
+		  $(APPDIR)$(MODDIR)EventModule.cpp \
+		  $(APPDIR)$(MODDIR)GameModule.cpp \
 		  $(SRCDIR)Event.cpp \
 		  $(CMPDIR)Cube.cpp \
 		  $(CMPDIR)ObjModel.cpp \
@@ -38,7 +41,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IHeaderObjects -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl
 

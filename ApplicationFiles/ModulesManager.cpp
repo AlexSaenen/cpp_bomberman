@@ -1,11 +1,11 @@
 //
-// ModulesManager.cpp for bomberman in /home/saenen_a/Work/Rendu/Application_test
+// ModulesManager.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Tue May  5 13:07:26 2015 Alexander Saenen
-// Last update Wed May  6 23:07:08 2015 Alexander Saenen
+// Started on  Tue May 19 11:08:24 2015 Alexander Saenen
+// Last update Tue May 19 11:08:25 2015 Alexander Saenen
 //
 
 #include "ModulesManager.hpp"

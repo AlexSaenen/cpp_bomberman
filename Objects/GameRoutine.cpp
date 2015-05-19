@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Fri May 15 15:20:35 2015 Alexander Saenen
+// Last update Tue May 19 11:10:10 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -47,7 +47,7 @@ bool	GameRoutine::initialize() {
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
   try {
-    cube->pushComponent(new Cube);
+    cube->pushComponent((new Cube)->setTexture("./GraphicsLib/assets/wall_512_1_05.tga"));
     marvin->pushComponent(new ObjModel("./GraphicsLib/assets/marvin.fbx", marvin->getType()));
     ralouf->pushComponent(new ObjModel("./GraphicsLib/assets/death_knight/deathknight.fbx", marvin->getType()));
   } catch (ArgException e) {
@@ -58,9 +58,9 @@ bool	GameRoutine::initialize() {
   _objects.push_back(marvin);
   _objects.push_back(ralouf);
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Application.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
+    ->observe(std::string("Bomberman.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Application.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
+    ->observe(std::string("Bomberman.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
   return (true);
 }
 
@@ -74,7 +74,7 @@ void	GameRoutine::_draw(Event *) {
 
 bool	GameRoutine::update() {
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT)) {
-    ModulesManager::getInstance()->get<EventModule>()->trigger("Application.quit", 1000);
+    ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
   }
   _context.updateClock(_clock);
