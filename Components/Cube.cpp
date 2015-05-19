@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Wed May 13 12:50:00 2015 Alexander Saenen
+// Last update Fri May 15 15:16:34 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -14,11 +14,10 @@ Cube::Cube() { }
 
 Cube::~Cube() { }
 
-bool	Cube::initialize(Event *) {
+void	Cube::initialize(Event *) {
   _speed = 10.0f;
   if (_texture.load("./GraphicsLib/assets/wall_512_1_05.tga") == false) {
-    std::cerr << "Cannot load the cube texture" << std::endl;
-    return (false);
+    throw ArgException("Cannot load the cube texture");
   }
   _scale.x = 10;
   _scale.y = 10;
@@ -78,7 +77,7 @@ bool	Cube::initialize(Event *) {
   _geometry.pushUv(glm::vec2(1.0f, 1.0f));
   _geometry.pushUv(glm::vec2(0.0f, 1.0f));
   _geometry.build();
-  return (true);
+  // return (true);
 }
 
 void	Cube::update(const gdl::Clock &clock, gdl::Input &input) {

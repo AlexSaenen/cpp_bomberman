@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:06:51 2015 Alexander Saenen
-// Last update Wed May 13 12:15:13 2015 Alexander Saenen
+// Last update Fri May 15 14:53:51 2015 Alexander Saenen
 //
 
 #ifndef GAMEOBJECT_HH_
@@ -43,7 +43,7 @@ public:
   GameObject(const GameObject &other);
 
   GameObject &operator=(const GameObject &other);
-  bool	pushComponent(IComposant *);
+  void	pushComponent(IComposant *);
   void	popComponent(IComposant *);
   void	update(const gdl::Clock &clock, gdl::Input &input);
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);

@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Thu May 14 11:32:24 2015 Alexander Saenen
+## Last update Tue May 19 10:14:26 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -20,9 +20,12 @@ CMPDIR		= Components/
 
 APPDIR		= ApplicationFiles/
 
+ERRDIR		= Exceptions/
+
 GRADIR		= GraphicsLib/
 
-SRC		= $(APPDIR)main.cpp \
+SRC		= $(ERRDIR)ArgException.cpp \
+		  $(APPDIR)main.cpp \
 		  $(APPDIR)Application.cpp \
 		  $(APPDIR)ModulesManager.cpp \
 		  $(SRCDIR)EventModule.cpp \
