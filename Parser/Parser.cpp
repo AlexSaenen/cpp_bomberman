@@ -7,7 +7,6 @@ Parser::Parser()
 
   if (file.open("test.conf", std::ios::in))
     _is = new std::istream(&file);
-
   _constructor["Cube"] = new Constructor<Cube>;
   // _constructor["ObjModel"] = new Constructor<ObjModel>;
 }
@@ -39,7 +38,7 @@ void Parser::execute(Event *)
     std::getline(*content, buff, '\n');
     std::istringstream verif(buff);
     verif >> type;
-    go = new GameObject((ObjectType)type, name);
+    go = new GameObject(static_cast<GameObject::ObjectType>(type), name);
     while (!content->eof())
       {
 	std::getline(*content, buff, '\n');

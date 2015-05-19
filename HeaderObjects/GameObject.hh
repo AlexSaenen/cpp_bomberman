@@ -16,9 +16,6 @@
 
 class	GameObject
 {
-<<<<<<< HEAD
-  std::list<IComponent *>	_gameComponents;
-=======
 public:
   enum	ObjectType
     {
@@ -36,8 +33,7 @@ public:
     };
 
 private:
-  std::list<IComposant *>	_gameComponents;
->>>>>>> c8949b9733391821dc1fa68f6e616b71b2bf1e78
+  std::list<IComponent *>	_gameComponents;
   ObjectType			_type;
   std::string			_name;
 
