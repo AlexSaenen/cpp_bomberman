@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue May 19 12:35:02 2015 Alexander Saenen
+## Last update Tue May 19 18:03:01 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -28,6 +28,7 @@ GRADIR		= GraphicsLib/
 
 SRC		= $(ERRDIR)ArgException.cpp \
 		  $(ERRDIR)LogicException.cpp \
+		  $(ERRDIR)RuntimeException.cpp \
 		  $(APPDIR)main.cpp \
 		  $(APPDIR)Bomberman.cpp \
 		  $(APPDIR)ModulesManager.cpp \
