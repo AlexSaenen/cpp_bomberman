@@ -16,12 +16,12 @@ GameObject::GameObject(const ObjectType type, const std::string &name)
 }
 
 GameObject::~GameObject() {
-  IComposant	*composant;
+  IComponent	*component;
 
   while (!_gameComponents.empty()) {
-    composant = _gameComponents.front();
+    component = _gameComponents.front();
     _gameComponents.pop_front();
-    delete composant;
+    delete component;
   }
 }
 
@@ -37,17 +37,17 @@ GameObject &GameObject::operator=(const GameObject &other) {
   return (*this);
 }
 
-void	GameObject::pushComponent(IComposant *composant) {
-  _gameComponents.push_front(composant);
-  composant->initialize(NULL);
+void	GameObject::pushComponent(IComponent *component) {
+  _gameComponents.push_front(component);
+  component->initialize(NULL);
 }
 
-void	GameObject::popComponent(IComposant *composant) {
-  _gameComponents.remove(composant);
+void	GameObject::popComponent(IComponent *component) {
+  _gameComponents.remove(component);
 }
 
 void	GameObject::update(const gdl::Clock &clock, gdl::Input &input) {
-  for (std::list<IComposant *>::iterator it = _gameComponents.begin();
+  for (std::list<IComponent *>::iterator it = _gameComponents.begin();
        it != _gameComponents.end(); ++it) {
     (*it)->update(clock, input);
   }

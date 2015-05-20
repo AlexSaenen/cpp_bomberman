@@ -13,7 +13,7 @@
 
 # include <AShader.hh>
 # include <Shape.hh>
-# include <IComposant.hpp>
+# include <IComponent.hpp>
 # include <Model.hh>
 # include <Texture.hh>
 # include <glm/glm.hpp>
@@ -23,7 +23,7 @@
 # include <LogicException.hh>
 # include <RuntimeException.hh>
 
-class	ObjModel : public IComposant, public Shape
+class	ObjModel : public IComponent, public Shape
 {
   gdl::Model	_model;
   std::string	_modelName;

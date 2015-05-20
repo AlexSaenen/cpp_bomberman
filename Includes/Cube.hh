@@ -12,7 +12,7 @@
 # define CUBE_HH_
 
 # include <AShader.hh>
-# include <IComposant.hpp>
+# include <IComponent.hpp>
 # include <Texture.hh>
 # include <Geometry.hh>
 # include <glm/glm.hpp>
@@ -20,7 +20,7 @@
 # include <iostream>
 # include <Shape.hh>
 
-class	Cube : public IComposant, public Shape
+class	Cube : public IComponent, public Shape
 {
   gdl::Texture	_texture;
   gdl::Geometry	_geometry;

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:08:54 2015 Alexander Saenen
-// Last update Tue May 19 11:08:55 2015 Alexander Saenen
+// Last update Tue May 19 15:49:20 2015 Alexander Saenen
 //
 
 #include "EventModule.hh"
@@ -74,7 +74,10 @@ EventModule *EventModule::handle() {
       this->_events.pop();
       std::cout << "\tGetting all handlers for: " << ev->getName() << std::endl;
       std::priority_queue<Handler *, std::vector<Handler *>, CompareH>	handlers = this->_observers[ev->getName()];
-      std::cout << "\t\tGoing to handle: propagating=" << ev->propagate() << " emptyHandlers=" << handlers.empty() << " size=" << handlers.size() << std::endl;
+      std::cout << "\t\tGoing to handle: propagating=" <<
+	ev->propagate() << " emptyHandlers=" <<
+	handlers.empty() << " size=" <<
+	handlers.size() << std::endl;
       while (!handlers.empty() && ev->propagate()) {
 	Handler	*manage = handlers.top();
 	std::cout << "\t\tHandling" << std::endl;

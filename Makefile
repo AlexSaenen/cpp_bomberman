@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue May 19 18:03:01 2015 Alexander Saenen
+## Last update Wed May 20 16:17:12 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -39,7 +39,8 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(CMPDIR)ObjModel.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameRoutine.cpp \
-		  $(SRCDIR)GameObject.cpp
+		  $(SRCDIR)GameObject.cpp \
+		  $(SRCDIR)Parser.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

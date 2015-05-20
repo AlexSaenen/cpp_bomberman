@@ -8,21 +8,21 @@
 // Last update Fri May 15 14:52:07 2015 Alexander Saenen
 //
 
-#ifndef ICOMPOSANT_HH_
-# define ICOMPOSANT_HH_
+#ifndef ICOMPONENT_HH_
+# define ICOMPONENT_HH_
 
 # include <SdlContext.hh>
 # include <Event.hh>
 # include <AShader.hh>
 
-class	IComposant
+class	IComponent
 {
 public:
-  virtual ~IComposant() { }
+  virtual ~IComponent() { }
   
   virtual void	initialize(Event *) = 0;
   virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
   virtual void	draw(gdl::AShader &shader, const gdl::Clock &clock) = 0;
 };
 
-#endif /* IComposant.hh */
+#endif /* IComponent.hh */

@@ -5,14 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Tue May 19 10:36:09 2015 Alexander Saenen
+// Last update Tue May 19 18:02:39 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
 #include <GameObject.hh>
 
 ObjModel::ObjModel(const std::string &model, const GameObject::ObjectType type)
-  : _modelName(model), _type(type) { }
+  : _modelName(model), _isLoaded(false), _type(type) { }
 
 ObjModel::~ObjModel() { }
 
@@ -24,6 +24,25 @@ void	ObjModel::initialize(Event *) {
   _rotation.y = 180;
   if (_model.load(_modelName) == false) {
     throw ArgException("Cannot load the model : " + _modelName);
+  }
+  _isLoaded = true;
+}
+
+void	ObjModel::playAnimation(const std::string &animation, bool loop) {
+  if (!_isLoaded) {
+    throw LogicException("Can't set an Animation when the model hasn't been loaded yet");
+  }
+  if (!_model.setCurrentAnim(animation, loop)) {
+    throw RuntimeException("Couldn't launch the animation : " + animation);
+  }
+}
+
+void	ObjModel::playAnimation(int stack, bool loop) {
+  if (!_isLoaded) {
+    throw LogicException("Can't set an Animation when the model hasn't been loaded yet");
+  }
+  if (!_model.setCurrentAnim(stack, loop)) {
+    throw RuntimeException("Couldn't launch the animation");
   }
 }
 
