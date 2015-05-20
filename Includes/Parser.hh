@@ -16,6 +16,8 @@
 # include "Constructor.hpp"
 # include "Cube.hh"
 # include "Event.hh"
+# include "ModulesManager.hpp"
+# include "GameModule.hh"
 
 class Parser
 {

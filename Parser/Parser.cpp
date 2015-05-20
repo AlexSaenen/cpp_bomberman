@@ -8,7 +8,6 @@ Parser::Parser() {
   else
     throw ArgException("Cannot open the file : test.conf");
   _constructor["Cube"] = new Constructor<Cube>;
-  // _constructor["ObjModel"] = new Constructor<ObjModel>;
 }
 
 Parser::~Parser() {
@@ -25,6 +24,9 @@ void Parser::execute(Event *)
   int				type;
   GameObject			*go;
   std::istringstream		*content;
+  GameModule			*gameModule;
+
+  gameModule = ModulesManager::getInstance()->get<GameModule>();
 
   while (_is->eof() && std::getline(*_is, buff, '@')) {
     std::cout << "trognon " << buff << std::endl;
@@ -39,9 +41,10 @@ void Parser::execute(Event *)
 	std::getline(*content, buff, '\n');
 	std::cout << "buff " << buff << std::endl;
 	go->pushComponent(reinterpret_cast<IComponent *>((*_constructor[buff])()));
-	// (*(reinterpret_cast<Constructor<Cube> *>((_constructor[buff]))))();
       }
-    objectList.push_back(go);
-    //delete go; /// ?
+    if (name == "intro")
+      gameModule->handle(go, true);
+    else
+      gameModule->handle(go);
   }
 }
