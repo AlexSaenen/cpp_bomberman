@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Tue May 19 10:44:46 2015 Alexander Saenen
+// Last update Thu May 21 13:54:41 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -23,9 +23,13 @@ Cube	*Cube::setTexture(const std::string &texturePath) {
 
 void	Cube::initialize(Event *) {
   _speed = 10.0f;
-  _scale.x = 10;
-  _scale.y = 10;
-  _scale.z = 10;
+  _scale.x = 2.5;
+  _scale.y = 2.5;
+  _scale.z = 2.5;
+  _position.y = 1.2;
+
+  setTexture("./GraphicsLib/assets/wall_512_1_05.tga");
+
   _geometry.setColor(glm::vec4(0.64, 0.447, 0.46, 1));
   _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
   _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));

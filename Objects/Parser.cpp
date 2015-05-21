@@ -27,9 +27,7 @@ void Parser::execute(Event *)
   GameModule			*gameModule;
 
   gameModule = ModulesManager::getInstance()->get<GameModule>();
-
-  while (_is->eof() && std::getline(*_is, buff, '@')) {
-    std::cout << "trognon " << buff << std::endl;
+  while (!_is->eof() && std::getline(*_is, buff, '@')) {
     content = new std::istringstream(buff);
     std::getline(*content, name, ' ');
     std::getline(*content, buff, '\n');
@@ -39,7 +37,6 @@ void Parser::execute(Event *)
     while (!content->eof())
       {
 	std::getline(*content, buff, '\n');
-	std::cout << "buff " << buff << std::endl;
 	go->pushComponent(reinterpret_cast<IComponent *>((*_constructor[buff])()));
       }
     if (name == "intro")

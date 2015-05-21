@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Tue May 19 10:09:58 2015 Alexander Saenen
+// Last update Wed May 20 17:34:49 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
@@ -36,6 +36,8 @@ GameObject &GameObject::operator=(const GameObject &other) {
   }
   return (*this);
 }
+
+#include <iostream>
 
 void	GameObject::pushComponent(IComponent *component) {
   _gameComponents.push_front(component);

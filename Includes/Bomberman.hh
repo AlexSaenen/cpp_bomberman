@@ -5,13 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:04:34 2015 Alexander Saenen
-// Last update Tue May 19 13:16:12 2015 Alexander Saenen
+// Last update Wed May 20 16:46:51 2015 Alexander Saenen
 //
 
 #ifndef BOMBERMAN_HH_
 # define BOMBERMAN_HH_
 
 # include "ModulesManager.hpp"
+# include "Parser.hh"
 # include "EventModule.hh"
 # include "GameModule.hh"
 # include "Functor.hpp"

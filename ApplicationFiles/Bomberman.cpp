@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:02:50 2015 Alexander Saenen
-// Last update Tue May 19 13:14:18 2015 Alexander Saenen
+// Last update Wed May 20 16:47:08 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"
@@ -18,7 +18,8 @@ Bomberman::Bomberman(const int , const char **):
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000);
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000);
+    ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
+    ->observe(std::string("Bomberman.init"), new Functor<Parser>(new Parser, &Parser::execute), 800);
 }
 
 Bomberman::~Bomberman() {
