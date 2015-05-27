@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:02:50 2015 Alexander Saenen
-// Last update Wed May 20 16:47:08 2015 Alexander Saenen
+// Last update Thu May 21 15:36:36 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"
@@ -57,7 +57,6 @@ void	Bomberman::_initialize(Event *) {
 }
 
 void Bomberman::_onQuit(Event *ev) {
-  std::cout << "\t\t_onQuit()" << std::endl;
   this->_run = false;
   ev->stop();
   ModulesManager::getInstance()->get<EventModule>()->flush();

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Thu May 21 13:52:45 2015 Alexander Saenen
+// Last update Thu May 21 15:25:02 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -101,8 +101,18 @@ bool	GameRoutine::update() {
   }
   _context.updateClock(_clock);
   _context.updateInputs(_input);
-  for (size_t i = 0; i < _objects.size(); ++i)
-    _objects[i]->update(_clock, _input);
+  try {
+    for (size_t i = 0; i < _objects.size(); ++i)
+      _objects[i]->update(_clock, _input);
+  } catch (LogicException e) {
+    std::cerr << e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Engine.error", 1000)->handle();
+  } catch (RuntimeException e) {
+    std::cerr << e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Engine.error", 1000)->handle();
+  }
   return (true);
 }
 

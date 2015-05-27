@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Thu May 21 13:57:07 2015 Alexander Saenen
+// Last update Thu May 21 15:41:47 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -66,7 +66,7 @@ void	ObjModel::playSubAnim(const std::string &subAnimation, bool loop) {
 }
 
 void	ObjModel::update(const gdl::Clock &clock, gdl::Input &input) {
-  if (_lastMovement && !input.getKey(_lastMovement) && _isMoving) {
+  if (_lastMovement && !input.getKey(_lastMovement)) {
     playSubAnim("Run.stop", false);
     _lastMovement = 0;
     _isMoving = false;
@@ -88,7 +88,6 @@ void	ObjModel::update(const gdl::Clock &clock, gdl::Input &input) {
 	_lastMovement = (*it).first;
       }
     }
-  std::cout << _model.getAnimationFrameNumber(0) << std::endl;
 }
 
 void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {
