@@ -5,14 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Thu May 21 15:25:02 2015 Alexander Saenen
+// Last update Wed May 27 18:39:07 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
 #include <ArgException.hh>
 #include <LogicException.hh>
 
-#include <ObjModel.hh>
+#include <Player.hh>
 
 GameRoutine::GameRoutine() {}
 
@@ -25,9 +25,7 @@ GameRoutine::~GameRoutine() {
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
-  // GameObject	*cube = new GameObject(GameObject::CUBE, "cubedetest");
   GameObject	*marvin = new GameObject(GameObject::PLAYER1, "marvin");
-  // GameObject	*ralouf = new GameObject(GameObject::PLAYER2, "ralouf");
 
   if (!_context.start(800, 600, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
@@ -45,17 +43,13 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
-  // try {
-  //   cube->pushComponent((new Cube)->setTexture("./GraphicsLib/assets/wall_512_1_05.tga"));
-    marvin->pushComponent(new ObjModel("./GraphicsLib/assets/marvin.fbx", marvin->getType()));
-  //   ralouf->pushComponent(new ObjModel("./GraphicsLib/assets/death_knight/deathknight.fbx", marvin->getType()));
-  // } catch (ArgException e) {
-  //   std::cerr << e.getMessage() << std::endl;
-  //   return (false);
-  // }
-  // _objects.push_back(cube);
+  try {
+    marvin->pushComponent(new Player("./GraphicsLib/assets/Warrior.fbx", marvin->getType()));
+  } catch (ArgException e) {
+    std::cerr << e.getMessage() << std::endl;
+    return (false);
+  }
   _objects.push_back(marvin);
-  // _objects.push_back(ralouf);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
   ModulesManager::getInstance()->get<EventModule>()

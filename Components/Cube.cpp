@@ -1,11 +1,11 @@
 //
-// Cube.cpp for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
+// Cube.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Mon Apr 27 14:59:15 2015 Alexander Saenen
-// Last update Wed May 27 16:21:13 2015 Alexander Saenen
+// Started on  Wed May 27 15:35:31 2015 Alexander Saenen
+// Last update Wed May 27 15:35:31 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
