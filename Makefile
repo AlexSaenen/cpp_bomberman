@@ -40,7 +40,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameRoutine.cpp \
 		  $(SRCDIR)GameObject.cpp \
-		  $(SRCDIR)Parser.cpp
+		  $(SRCDIR)Loader.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 

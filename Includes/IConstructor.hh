@@ -16,7 +16,7 @@ class	IConstructor
 public:
   virtual	~IConstructor() { }
 
-  virtual void	*operator()() = 0;
+  // virtual void	*operator()() = 0;
 };
 
 #endif /* IConstructor.hh */

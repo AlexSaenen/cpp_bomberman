@@ -1,6 +1,6 @@
 
-#ifndef _Parser_HH_
-# define _Parser_HH_
+#ifndef _LOADER_HH_
+# define _LOADER_HH_
 
 # include <list>
 # include <iostream>
@@ -19,7 +19,7 @@
 # include "ModulesManager.hpp"
 # include "GameModule.hh"
 
-class Parser
+class Loader
 {
 private:
   std::istream *_is;
@@ -27,8 +27,8 @@ private:
   std::filebuf *_file;
 
 public:
-  Parser();
-  ~Parser();
+  Loader();
+  ~Loader();
   void execute(Event *);
 };
 

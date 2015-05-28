@@ -23,6 +23,7 @@ public:
   virtual void	initialize(Event *) = 0;
   virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
   virtual void	draw(gdl::AShader &shader, const gdl::Clock &clock) = 0;
+  virtual Icomponent *clone(const std::string &conf) const = 0;
 };
 
 #endif /* IComponent.hh */

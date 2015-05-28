@@ -20,8 +20,8 @@ public:
   Constructor() { }
   virtual ~Constructor() { }
 
-  virtual void *operator()() {
-    return (reinterpret_cast<void *>(new ME));
+  ME *operator()() {
+    return (new ME);
   }
 };
 

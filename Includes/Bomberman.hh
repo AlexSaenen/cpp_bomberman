@@ -12,7 +12,7 @@
 # define BOMBERMAN_HH_
 
 # include "ModulesManager.hpp"
-# include "Parser.hh"
+# include "Loader.hh"
 # include "EventModule.hh"
 # include "GameModule.hh"
 # include "Functor.hpp"

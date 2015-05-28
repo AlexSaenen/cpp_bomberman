@@ -1,22 +1,29 @@
 
-#include "Parser.hh"
+#include "Loader.hh"
 
-Parser::Parser() {
-  _file = new std::filebuf();
-  if (_file->open("test.conf", std::ios::in))
-    _is = new std::istream(_file);
-  else
-    throw ArgException("Cannot open the file : test.conf");
-  _constructor["Cube"] = new Constructor<Cube>;
+Loader::Loader() {
+  try {
+    _file = new std::filebuf();
+    if (_file->open("test.conf", std::ios::in))
+      _is = new std::istream(_file);
+    else
+      throw ArgException("Cannot open the file : test.conf");
+    _constructor["Cube"] = new Constructor<Cube>;
+  } catch (ArgException e) {
+    std::cerr << e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Loader.error", 1001)
+      ->handle();
+  }
 }
 
-Parser::~Parser() {
+Loader::~Loader() {
   delete _is;
   delete _file;
   delete _constructor["Cube"];
 }
 
-void Parser::execute(Event *)
+void Loader::execute(Event *)
 {
   std::list<GameObject *>	objectList;
   std::string			buff;
@@ -25,6 +32,7 @@ void Parser::execute(Event *)
   GameObject			*go;
   std::istringstream		*content;
   GameModule			*gameModule;
+  IComponent			*component;
 
   gameModule = ModulesManager::getInstance()->get<GameModule>();
   while (!_is->eof() && std::getline(*_is, buff, '@')) {
@@ -37,7 +45,13 @@ void Parser::execute(Event *)
     while (!content->eof())
       {
 	std::getline(*content, buff, '\n');
-	go->pushComponent(reinterpret_cast<IComponent *>((*_constructor[buff])()));
+	 if (buff == "Cube") {
+	component = reinterpret_cast<IComponent *>((*_constructor[buff])());
+	// }
+	// else {
+	//   /* meme chose sans setPosition */
+	// }
+	go->pushComponent(component);
       }
     if (name == "intro")
       gameModule->handle(go, true);
