@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Wed May 27 18:41:32 2015 Alexander Saenen
+// Last update Fri May 29 17:15:31 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -21,37 +21,28 @@ Player::Player(const std::string &model, const GameObject::ObjectType type)
 Player::~Player() { }
 
 void	Player::_initialize() {
-  // _model.createSubAnim(0, "Run.start", 0, 40);
-  // _model.createSubAnim(0, "Run", 40, 60);
-  // _model.createSubAnim(0, "Run.stop", 60, 140);
+  playAnimation(0);
+  _model.pause(true);
   _isInitialized = true;
 }
 
-void	Player::update(const gdl::Clock &, gdl::Input &) {
-  // if (!_isInitialized)
-  //   _initialize();
-  // if (_lastMovement && !input.getKey(_lastMovement)) {
-  //   playSubAnim("Run.stop", false);
-  //   _lastMovement = 0;
-  //   _isMoving = false;
-  // }
-  // for (std::map<int, int>::const_iterator it = _movementMap.begin(); it != _movementMap.end(); ++it)
-  //   if (input.getKey((*it).first)) {
-  //     _rotation.y = _movementMap[(*it).first];
-  //     if (input.getKey((*it).first)) {
-  // 	if (!_lastMovement) {
-  // 	  playSubAnim("Run.start", false);
-  //         _animLocked = 40 * _model.getFrameDuration();
-  //       }
-  //       else if (_animLocked <= 0 && !_isMoving) {
-  //         playSubAnim("Run");
-  //         _isMoving = true;
-  //       }
-  //       else
-  //         _animLocked -= clock.getElapsed();
-  //       _lastMovement = (*it).first;
-  //     }
-  //   }
+void	Player::update(const gdl::Clock &, gdl::Input &input) {
+  if (!_isInitialized)
+    _initialize();
+  _lastMovement = 0;
+  for (std::map<int, int>::const_iterator it = _movementMap.begin(); it != _movementMap.end(); ++it)
+    if (input.getKey((*it).first)) {
+      _rotation.y = _movementMap[(*it).first];
+      if (!_isMoving) {
+	_model.pause(false);
+	_isMoving = true;
+      }
+      _lastMovement = (*it).first;
+    }
+  if (!_lastMovement) {
+    _isMoving = false;
+    _model.pause(true);
+  }
 }
 
 void    Player::playAnimation(const std::string &animation, bool loop) {

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Wed May 27 18:39:07 2015 Alexander Saenen
+// Last update Fri May 29 16:07:16 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -44,7 +44,7 @@ bool	GameRoutine::initialize() {
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
   try {
-    marvin->pushComponent(new Player("./GraphicsLib/assets/Warrior.fbx", marvin->getType()));
+    marvin->pushComponent(new Player("./GraphicsLib/assets/warrior.fbx", marvin->getType()));
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     return (false);
