@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Fri May 29 16:30:02 2015 Alexander Saenen
+// Last update Mon Jun  1 17:12:19 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -13,10 +13,15 @@
 
 #include <Input.hh>
 
-ObjModel::ObjModel(const std::string &model, const GameObject::ObjectType type)
-  : _modelName(model), _isLoaded(false), _type(type) { }
+ObjModel::ObjModel()
+  : _isLoaded(false) { }
 
 ObjModel::~ObjModel() { }
+
+void	ObjModel::configure(const std::string &model, const GameObject::ObjectType type) {
+  _type = type;
+  _modelName = model;
+}
 
 void	ObjModel::initialize(Event *) {
   _speed = 10.0f;

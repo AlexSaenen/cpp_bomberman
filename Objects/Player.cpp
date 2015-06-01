@@ -5,18 +5,13 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Fri May 29 17:15:31 2015 Alexander Saenen
+// Last update Mon Jun  1 17:25:14 2015 Alexander Saenen
 //
 
 #include "Player.hh"
 
-Player::Player(const std::string &model, const GameObject::ObjectType type)
-  : ObjModel(model, type), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) {
-  _movementMap.insert(std::pair<int, int>(SDLK_UP, 0));
-  _movementMap.insert(std::pair<int, int>(SDLK_DOWN, 180));
-  _movementMap.insert(std::pair<int, int>(SDLK_LEFT, 90));
-  _movementMap.insert(std::pair<int, int>(SDLK_RIGHT, 270));
-}
+Player::Player()
+  : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) { }
 
 Player::~Player() { }
 
@@ -33,6 +28,7 @@ void	Player::update(const gdl::Clock &, gdl::Input &input) {
   for (std::map<int, int>::const_iterator it = _movementMap.begin(); it != _movementMap.end(); ++it)
     if (input.getKey((*it).first)) {
       _rotation.y = _movementMap[(*it).first];
+      // rotate(glm::vec3(0, 1, 0) , _movementMap[(*it).first]);
       if (!_isMoving) {
 	_model.pause(false);
 	_isMoving = true;

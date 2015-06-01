@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:44:50 2015 Alexander Saenen
-// Last update Fri May 15 15:10:52 2015 Alexander Saenen
+// Last update Mon Jun  1 17:13:16 2015 Alexander Saenen
 //
 
 #ifndef SHAPE_HH_
@@ -26,6 +26,8 @@ protected:
 public:
   Shape();
   ~Shape();
+
+  void	setPosition(const int x, const int y, const int z);
 
   void	translate(const glm::vec3 &v);
   void	rotate(const glm::vec3 &axis, const float angle);

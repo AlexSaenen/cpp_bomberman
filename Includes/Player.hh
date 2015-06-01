@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Wed May 27 16:16:59 2015 Alexander Saenen
+// Last update Mon Jun  1 17:12:36 2015 Alexander Saenen
 //
 
 #ifndef PLAYER_HH_
@@ -26,7 +26,7 @@ private:
   void	_initialize();
 
 public:
-  Player(const std::string &model, const GameObject::ObjectType type);
+  Player();
   ~Player();
 
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);

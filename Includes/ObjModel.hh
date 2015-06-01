@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Wed May 27 15:31:32 2015 Alexander Saenen
+// Last update Mon Jun  1 17:12:29 2015 Alexander Saenen
 //
 
 #ifndef OBJMODEL_HH_
@@ -34,9 +34,10 @@ protected:
   GameObject::ObjectType	_type;
 
 public:
-  ObjModel(const std::string &model, const GameObject::ObjectType type);
+  ObjModel();
   virtual ~ObjModel();
 
+  void	configure(const std::string &model, const GameObject::ObjectType type);
   void	initialize(Event *);
   virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
