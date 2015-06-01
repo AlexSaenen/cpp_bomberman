@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Mon Jun  1 17:18:20 2015 Alexander Saenen
+// Last update Mon Jun  1 17:59:01 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -14,6 +14,7 @@
 
 #include <PlayerOne.hh>
 #include <PlayerTwo.hh>
+#include <IA.hh>
 
 GameRoutine::GameRoutine() {}
 
@@ -49,8 +50,8 @@ bool	GameRoutine::initialize() {
     ObjModel	*one = new PlayerOne();
     one->configure("./GraphicsLib/assets/warrior.fbx", marvin->getType());
     one->setPosition(2, 0, 0);
-    ObjModel	*two = new PlayerTwo();
-    two->configure("./GraphicsLib/assets/archer.fbx", skeleton->getType());
+    ObjModel	*two = new IA();
+    two->configure("./GraphicsLib/assets/skeletarcher.fbx", skeleton->getType());
     marvin->pushComponent(one);
     skeleton->pushComponent(two);
   } catch (ArgException e) {

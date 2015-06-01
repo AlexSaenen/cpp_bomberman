@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Mon Jun  1 17:25:14 2015 Alexander Saenen
+// Last update Mon Jun  1 17:46:30 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -28,7 +28,6 @@ void	Player::update(const gdl::Clock &, gdl::Input &input) {
   for (std::map<int, int>::const_iterator it = _movementMap.begin(); it != _movementMap.end(); ++it)
     if (input.getKey((*it).first)) {
       _rotation.y = _movementMap[(*it).first];
-      // rotate(glm::vec3(0, 1, 0) , _movementMap[(*it).first]);
       if (!_isMoving) {
 	_model.pause(false);
 	_isMoving = true;
