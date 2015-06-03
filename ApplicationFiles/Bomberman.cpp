@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 18:26:20 2015 Alexander Saenen
-// Last update Wed Jun  3 18:42:29 2015 Alexander Saenen
+// Last update Wed Jun  3 19:03:51 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"
@@ -19,7 +19,7 @@ Bomberman::Bomberman(const int , const char **):
     ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 700);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
-    // ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 800)
+    ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 800)
     ->observe(std::string("Bomberman.init"), new Functor<Loader>(new Loader, &Loader::execute), 600);
 }
 

@@ -5,13 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:44:50 2015 Alexander Saenen
-// Last update Mon Jun  1 17:13:16 2015 Alexander Saenen
+// Last update Wed Jun  3 19:23:47 2015 Alexander Saenen
 //
 
 #ifndef SHAPE_HH_
 # define SHAPE_HH_
 
 # include <Geometry.hh>
+# include <sstream>
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
 # include <ArgException.hh>

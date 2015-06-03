@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Wed Jun  3 19:03:05 2015 Alexander Saenen
+// Last update Wed Jun  3 19:23:37 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -45,7 +45,7 @@ void	Cube::initialize(Event *) {
   _scale.z = 2.5;
   _position.y = 1.2;
 
-  setTexture("./GraphicsLib/assets/wall_512_1_05.tga");
+  // setTexture("./GraphicsLib/assets/wall_512_1_05.tga");
 
   _geometry.setColor(glm::vec4(0.64, 0.447, 0.46, 1));
   _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
@@ -93,8 +93,6 @@ void	Cube::draw(gdl::AShader &shader, const gdl::Clock &) {
   _texture.bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);
 }
-
-#include <sstream>
 
 void	Cube::configure(const std::string &conf)
 {

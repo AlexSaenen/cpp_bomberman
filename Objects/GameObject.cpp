@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Wed Jun  3 17:43:34 2015 Alexander Saenen
+// Last update Wed Jun  3 19:20:14 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
@@ -54,7 +54,8 @@ void	GameObject::update(const gdl::Clock &clock, gdl::Input &input) {
 }
 
 void	GameObject::draw(gdl::AShader &shader, const gdl::Clock &clock) {
-  _gameComponents.front()->draw(shader, clock);
+  for (std::list<IComponent *>::iterator it = _gameComponents.begin(); it != _gameComponents.end(); ++it)
+    (*it)->draw(shader, clock);
 }
 
 std::string	GameObject::getName() const {

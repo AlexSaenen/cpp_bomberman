@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Wed Jun  3 18:33:34 2015 Alexander Saenen
+// Last update Wed Jun  3 19:23:20 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -38,4 +38,13 @@ void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {
   _model.draw(shader, getTransformation(), clock.getElapsed());
 }
 
-void	ObjModel::configure(const std::string &) { }
+void	ObjModel::configure(const std::string &conf) {
+  std::stringstream     *stream = new std::stringstream(conf);
+
+  *stream >> _position.x;
+  *stream >> _position.z;
+  *stream >> _rotation.x;
+  *stream >> _rotation.y;
+  *stream >> _rotation.z;
+  delete stream;
+}
