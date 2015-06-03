@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:08:54 2015 Alexander Saenen
-// Last update Thu May 21 15:37:19 2015 Alexander Saenen
+// Last update Thu May 28 11:23:51 2015 Alexander Saenen
 //
 
 #include "EventModule.hh"
@@ -13,7 +13,7 @@
 EventModule::EventModule() : _isFlushed(false) { }
 
 EventModule::~EventModule() {
-  Event			*event;
+  Event		*event;
   Handler	*handler;
 
   while (!this->_events.empty()) {

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:31:42 2015 Alexander Saenen
-// Last update Fri May 15 14:52:07 2015 Alexander Saenen
+// Last update Thu May 28 11:50:37 2015 Alexander Saenen
 //
 
 #ifndef ICOMPONENT_HH_

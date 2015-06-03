@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Thu May 21 11:58:22 2015 Alexander Saenen
+// Last update Mon Jun  1 17:12:29 2015 Alexander Saenen
 //
 
 #ifndef OBJMODEL_HH_
@@ -26,28 +26,24 @@
 
 class	ObjModel : public IComponent, public Shape
 {
+protected:
   gdl::Model	_model;
   std::string	_modelName;
   float		_speed;
   bool		_isLoaded;
-  bool		_isMoving;
-  double	_animDuration;
-  int		_lastMovement;
-  std::map<int, int>		_movementMap;
-  std::map<int, int>		_animationMap;
   GameObject::ObjectType	_type;
 
 public:
-  ObjModel(const std::string &model, const GameObject::ObjectType type);
+  ObjModel();
   virtual ~ObjModel();
 
   void	initialize(Event *);
-  void	update(const gdl::Clock &clock, gdl::Input &input);
+  virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
-
   void	playAnimation(const std::string &animation, bool loop = true);
   void	playAnimation(int stack, bool loop = true);
   void	playSubAnim(const std::string &subAnimation, bool loop = true);
+  void	configure(const std::string &model, const GameObject::ObjectType type);
   void	configure(const std::string &conf);
 };
 
