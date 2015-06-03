@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Wed Jun  3 18:24:58 2015 Alexander Saenen
+// Last update Wed Jun  3 18:30:41 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -14,7 +14,7 @@ Cube::Cube() { }
 
 Cube::~Cube() { }
 
-Cube	*Cube::_setTexture(const std::string &texturePath) {
+Cube	*Cube::setTexture(const std::string &texturePath) {
  if (_texture.load(texturePath) == false) {
     throw ArgException("Cannot load the cube texture : " + texturePath);
   }

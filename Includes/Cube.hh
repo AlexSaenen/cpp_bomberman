@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Tue May 19 10:44:31 2015 Alexander Saenen
+// Last update Wed Jun  3 18:31:04 2015 Alexander Saenen
 //
 
 #ifndef CUBE_HH_
@@ -30,13 +30,11 @@ public:
   Cube();
   virtual ~Cube();
 
+  Cube		*setTexture(const std::string &texturePath);
   void		initialize(Event *);
   void		update(const gdl::Clock &clock, gdl::Input &input);
   void		draw(gdl::AShader &shader, const gdl::Clock &clock);
   void		configure(const std::string &conf);
-  
-private:
-  Cube	*_setTexture(const std::string &texturePath);
 };
 
 #endif /* Cube.hh */
