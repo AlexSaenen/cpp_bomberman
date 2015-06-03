@@ -37,10 +37,14 @@ public:
   ObjModel();
   virtual ~ObjModel();
 
-  void	configure(const std::string &model, const GameObject::ObjectType type);
   void	initialize(Event *);
   virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
+  void	playAnimation(const std::string &animation, bool loop = true);
+  void	playAnimation(int stack, bool loop = true);
+  void	playSubAnim(const std::string &subAnimation, bool loop = true);
+  void	configure(const std::string &model, const GameObject::ObjectType type);
+  void	configure(const std::string &conf);
 };
 
 #endif /* ObjModel.hh */

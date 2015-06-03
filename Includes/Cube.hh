@@ -30,10 +30,13 @@ public:
   Cube();
   virtual ~Cube();
 
-  Cube	*setTexture(const std::string &texturePath);
-  void	initialize(Event *);
-  void	update(const gdl::Clock &clock, gdl::Input &input);
-  void	draw(gdl::AShader &shader, const gdl::Clock &clock);
+  void		initialize(Event *);
+  void		update(const gdl::Clock &clock, gdl::Input &input);
+  void		draw(gdl::AShader &shader, const gdl::Clock &clock);
+  void		configure(const std::string &conf);
+  
+private:
+  Cube	*_setTexture(const std::string &texturePath);
 };
 
 #endif /* Cube.hh */

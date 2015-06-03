@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Wed Jun  3 17:51:41 2015 Alexander Saenen
+// Last update Wed Jun  3 18:29:40 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
@@ -75,7 +75,7 @@ void	MenuModule::initialize(Event *) {
   }
   homePage->pushComponent(new Button(HOME, true));
   homePage->pushComponent(cube);
-  homePage->pushComponent(model);
+  // homePage->pushComponent(model);
   _pages.insert(std::make_pair<MenuPage, GameObject *>(HOME, homePage));
   toggle(true);
 }

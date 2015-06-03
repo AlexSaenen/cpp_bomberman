@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Tue May 19 11:02:50 2015 Alexander Saenen
-// Last update Wed Jun  3 17:49:11 2015 Alexander Saenen
+// Started on  Wed Jun  3 18:26:20 2015 Alexander Saenen
+// Last update Wed Jun  3 18:29:18 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"
@@ -14,13 +14,13 @@ Bomberman::Bomberman(const int , const char **):
   _run(true)
 {
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Bomberman.quit"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000);
-  ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000);
+    ->observe(std::string("Bomberman.quit"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
+    ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
+    ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 700);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
-    ->observe(std::string("Bomberman.init"), new Functor<Parser>(new Parser, &Parser::execute), 800)
-    ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 600);
+    ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 800);
+    // ->observe(std::string("Bomberman.init"), new Functor<Loader>(new Loader, &Loader::execute), 600);
 }
 
 Bomberman::~Bomberman() {
@@ -43,7 +43,7 @@ void Bomberman::run()
       ->trigger("Display.draw", 400)
       ->trigger("Game.cleanup", 300)
       ->handle();
-  }  
+  }
 }
 
 void	Bomberman::_initialize(Event *) {

@@ -19,12 +19,14 @@
 # include "Functor.hpp"
 # include "AModule.hh"
 # include "GameRoutine.hh"
+# include "ComponentFactory.hpp"
 
 class ModulesManager
 {
   static ModulesManager			*_instance;
   std::map<std::string, AModule *>	_instances;
   static bool				_isInstantiated;
+  ComponentFactory			*_componentFactory;
 
 public:  
   ModulesManager();
@@ -43,6 +45,9 @@ public:
 
   template <typename T> T *get() {
     return (this->get<T>(typeid(T).name()));
+  }
+  template <typename T> IComponent *getComponent() {
+    return (_componentFactory->getComponent<T>());
   }
 };
 

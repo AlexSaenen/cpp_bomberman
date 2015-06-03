@@ -37,3 +37,8 @@ void	ObjModel::initialize(Event *) {
 void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {
   _model.draw(shader, getTransformation(), clock.getElapsed());
 }
+
+void	ObjModel::configure(const std::string &conf)
+{
+  (void)conf;
+}
