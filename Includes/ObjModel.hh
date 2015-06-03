@@ -48,6 +48,7 @@ public:
   void	playAnimation(const std::string &animation, bool loop = true);
   void	playAnimation(int stack, bool loop = true);
   void	playSubAnim(const std::string &subAnimation, bool loop = true);
+  void	configure(const std::string &conf);
 };
 
 #endif /* ObjModel.hh */

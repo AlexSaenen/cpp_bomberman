@@ -23,7 +23,7 @@ class Loader
 {
 private:
   std::istream *_is;
-  std::map<std::string, IConstructor *> _constructor;
+  std::map<std::string, IComponent *(ModulesManager::*)(void)> _constructor;
   std::filebuf *_file;
 
 public:

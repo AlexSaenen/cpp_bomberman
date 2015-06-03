@@ -15,12 +15,14 @@ bool		ModulesManager::_isInstantiated = false;
 
 ModulesManager::ModulesManager() {
   _instance = NULL;
+  _componentFactory = new ComponentFactory;
 }
 
 ModulesManager::~ModulesManager() {
   for (std::map<std::string, AModule *>::iterator it = _instances.begin(); it != _instances.end(); ++it)
     delete (*it).second;
   _isInstantiated = false;
+  delete _componentFactory;
 }
 
 ModulesManager	*ModulesManager::getInstance() {
@@ -33,3 +35,4 @@ ModulesManager	*ModulesManager::getInstance() {
 bool		ModulesManager::hasInstance() {
   return (_isInstantiated);
 }
+
