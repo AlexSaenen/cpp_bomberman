@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Mon Jun  1 17:58:35 2015 Alexander Saenen
+## Last update Wed Jun  3 17:42:12 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -34,13 +34,16 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)ModulesManager.cpp \
 		  $(APPDIR)$(MODDIR)EventModule.cpp \
 		  $(APPDIR)$(MODDIR)GameModule.cpp \
+		  $(APPDIR)$(MODDIR)MenuModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \
 		  $(SRCDIR)Event.cpp \
 		  $(CMPDIR)Cube.cpp \
 		  $(CMPDIR)ObjModel.cpp \
+		  $(CMPDIR)Button.cpp \
 		  $(SRCDIR)Player.cpp \
 		  $(SRCDIR)PlayerOne.cpp \
 		  $(SRCDIR)PlayerTwo.cpp \
+		  $(SRCDIR)Bomb.cpp \
 		  $(SRCDIR)IA.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \

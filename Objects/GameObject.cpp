@@ -5,15 +5,13 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Wed May 20 17:34:49 2015 Alexander Saenen
+// Last update Wed Jun  3 17:43:34 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
 
 GameObject::GameObject(const ObjectType type, const std::string &name)
-  : _type(type), _name(name) {
-  
-}
+  : _type(type), _name(name) { }
 
 GameObject::~GameObject() {
   IComponent	*component;

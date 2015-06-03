@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Mon Jun  1 17:46:30 2015 Alexander Saenen
+// Last update Tue Jun  2 17:44:58 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -21,13 +21,18 @@ void	Player::_initialize() {
   _isInitialized = true;
 }
 
-void	Player::update(const gdl::Clock &, gdl::Input &input) {
+void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
+  bool	hasTranslated = false;
+
   if (!_isInitialized)
     _initialize();
   _lastMovement = 0;
-  for (std::map<int, int>::const_iterator it = _movementMap.begin(); it != _movementMap.end(); ++it)
+  for (std::map<int, int>::const_iterator it = _rotationMap.begin();
+       it != _rotationMap.end() && !hasTranslated; ++it)
     if (input.getKey((*it).first)) {
-      _rotation.y = _movementMap[(*it).first];
+      hasTranslated = true;
+      _rotation.y = _rotationMap[(*it).first];
+      translate(_translationMap[(*it).first] * static_cast<float>(clock.getElapsed()) * _speed);
       if (!_isMoving) {
 	_model.pause(false);
 	_isMoving = true;

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Mon Jun  1 17:59:01 2015 Alexander Saenen
+// Last update Wed Jun  3 17:19:38 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -30,7 +30,7 @@ bool	GameRoutine::initialize() {
   GameObject	*marvin = new GameObject(GameObject::PLAYER1, "marvin");
   GameObject	*skeleton = new GameObject(GameObject::IA, "skeleton");
 
-  if (!_context.start(800, 600, "Bomb the House")) {
+  if (!_context.start(1280, 768, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
     return (false);
   }
@@ -61,8 +61,7 @@ bool	GameRoutine::initialize() {
   _objects.push_back(marvin);
   _objects.push_back(skeleton);
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000);
-  ModulesManager::getInstance()->get<EventModule>()
+    ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000)
     ->observe(std::string("Display.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
   return (true);
 }
@@ -98,13 +97,31 @@ GameObject	*GameRoutine::popGObject() {
   return (GObject);
 }
 
+gdl::BasicShader	*GameRoutine::getShader() {
+  return (&_shader);
+}
+
+gdl::Clock	*GameRoutine::getClock() {
+  _context.updateClock(_clock);
+  return (&_clock);
+}
+
+gdl::Input	*GameRoutine::getInput() {
+  _context.updateInputs(_input);
+  return (&_input);
+}
+
+gdl::SdlContext	*GameRoutine::getContext() {
+  return (&_context);
+}
+
 bool	GameRoutine::update() {
+  _context.updateClock(_clock);
+  _context.updateInputs(_input);
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT)) {
     ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
   }
-  _context.updateClock(_clock);
-  _context.updateInputs(_input);
   try {
     for (size_t i = 0; i < _objects.size(); ++i)
       _objects[i]->update(_clock, _input);

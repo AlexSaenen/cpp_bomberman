@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:08:54 2015 Alexander Saenen
-// Last update Thu May 28 11:23:51 2015 Alexander Saenen
+// Last update Wed Jun  3 14:00:59 2015 Alexander Saenen
 //
 
 #include "EventModule.hh"
@@ -43,35 +43,53 @@ void	EventModule::Handler::operator()(Event *ev) {
   (*this->_handle)(ev);
 }
 
-EventModule *EventModule::observe(const std::string &what, IFunctor *handle, const int priority) {
+EventModule	*EventModule::observe(const std::string &what, IFunctor *handle, const int priority) {
   EventModule::Handler	*caps = new EventModule::Handler(priority, handle);
 
-  // TODO : add an element if none exist in map
   this->_observers[what].push(caps);
   return this;
 }
 
-EventModule *EventModule::trigger(Event *ev) {
+EventModule	*EventModule::abandon(const std::string &what, const int priority) {
+  std::priority_queue<Handler *, std::vector<Handler *>, CompareH>	handlers;
+  std::priority_queue<Handler *, std::vector<Handler *>, CompareH>	stack;
+
+  if (_observers.find(what) == _observers.end())
+    return (this);
+  handlers = _observers[what];
+  while (!handlers.empty()) {
+    Handler	*handler = handlers.top();
+    if (handler->priority() != priority)
+      stack.push(handler);
+    else
+      delete handler;
+    handlers.pop();    
+  }
+  _observers[what] = stack;
+  return (this);
+}
+
+EventModule	*EventModule::trigger(Event *ev) {
   if (_isFlushed)
     _isFlushed = false;
   this->_events.push(ev);
   return this;
 }
 
-EventModule *EventModule::trigger(const std::string &name, const int priority) {
+EventModule	*EventModule::trigger(const std::string &name, const int priority) {
   if (_isFlushed)
     _isFlushed = false;
   this->_events.push(new Event(name, priority));
   return this;
 }
 
-EventModule *EventModule::handle() {
-  while (!this->_events.empty() && !_isFlushed)
+EventModule	*EventModule::handle() {
+  while (!this->_events.empty())
     {
       Event *ev = this->_events.top();
       this->_events.pop();
       std::priority_queue<Handler *, std::vector<Handler *>, CompareH>	handlers = this->_observers[ev->getName()];
-      while (!handlers.empty() && ev->propagate()) {
+      while (!handlers.empty() && ev->propagate() && !_isFlushed) {
 	Handler	*manage = handlers.top();
 	(*manage)(ev);
 	handlers.pop();

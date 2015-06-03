@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May  5 13:10:47 2015 Alexander Saenen
-// Last update Wed May  6 23:03:37 2015 Alexander Saenen
+// Last update Wed Jun  3 13:35:30 2015 Alexander Saenen
 //
 
 #ifndef EVENTMODULE_HH_
@@ -48,6 +48,7 @@ public:
   virtual ~EventModule();
 
 public:
+  EventModule	*abandon(const std::string &what, const int priority);
   EventModule	*observe(const std::string &, IFunctor *, const int priority = 0);
   EventModule	*trigger(Event *);
   EventModule	*trigger(const std::string &, const int priority = 0);

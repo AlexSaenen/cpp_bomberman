@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:02:50 2015 Alexander Saenen
-// Last update Thu May 21 15:36:36 2015 Alexander Saenen
+// Last update Wed Jun  3 17:49:11 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"
@@ -19,7 +19,8 @@ Bomberman::Bomberman(const int , const char **):
     ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
-    ->observe(std::string("Bomberman.init"), new Functor<Parser>(new Parser, &Parser::execute), 800);
+    ->observe(std::string("Bomberman.init"), new Functor<Parser>(new Parser, &Parser::execute), 800)
+    ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 600);
 }
 
 Bomberman::~Bomberman() {
@@ -35,7 +36,8 @@ void Bomberman::run()
 {
   EventModule *ev = ModulesManager::getInstance()->get<EventModule>();
 
-  ev->trigger("Bomberman.init")->handle();
+  if (this->_run)
+    ev->trigger("Bomberman.init")->handle();
   while (this->_run) {
     ev->trigger("Display.update", 500)
       ->trigger("Display.draw", 400)

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Mon Jun  1 17:56:55 2015 Alexander Saenen
+// Last update Tue Jun  2 17:11:16 2015 Alexander Saenen
 //
 
 #ifndef PLAYER_HH_
@@ -20,7 +20,8 @@ protected:
   double	_animLocked;
   int		_lastMovement;
   bool		_isInitialized;
-  std::map<int, int>	_movementMap;
+  std::map<int, int>		_rotationMap;
+  std::map<int, glm::vec3>	_translationMap;
 
 protected:
   void	_initialize();

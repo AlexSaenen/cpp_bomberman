@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Tue May 19 12:32:05 2015 Alexander Saenen
+// Last update Wed Jun  3 14:24:11 2015 Alexander Saenen
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -38,6 +38,10 @@ public:
   void		pushGObject(GameObject *GObject);
   GameObject	*popGObject();
   void		popGObject(GameObject *GObject);
+  gdl::BasicShader	*getShader();
+  gdl::Clock		*getClock();
+  gdl::Input		*getInput();
+  gdl::SdlContext	*getContext();
 
 private:
   bool	update();

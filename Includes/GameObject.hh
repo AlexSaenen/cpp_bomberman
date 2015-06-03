@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:06:51 2015 Alexander Saenen
-// Last update Fri May 15 14:53:51 2015 Alexander Saenen
+// Last update Wed Jun  3 15:13:54 2015 Alexander Saenen
 //
 
 #ifndef GAMEOBJECT_HH_
@@ -27,7 +27,7 @@ public:
       PLAYER2,
       IA,
       INTRO,
-      MENU,
+      MENUPAGE,
       GAMEWIN,
       GAMEOVER
     };
