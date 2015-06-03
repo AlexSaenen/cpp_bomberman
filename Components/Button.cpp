@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Wed Jun  3 15:22:57 2015 Alexander Saenen
+// Last update Wed Jun  3 18:32:57 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -14,6 +14,8 @@ Button::Button(const MenuModule::MenuPage linkedPage, const bool isSelected)
   : _isSelected(isSelected), _linkedPage(linkedPage) { }
 
 Button::~Button() { }
+
+void	Button::configure(const std::string &) { }
 
 bool	Button::isSelected() const {
   return (_isSelected);

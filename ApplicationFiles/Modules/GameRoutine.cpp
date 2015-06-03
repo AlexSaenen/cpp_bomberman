@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Wed Jun  3 17:19:38 2015 Alexander Saenen
+// Last update Wed Jun  3 18:43:45 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -27,8 +27,8 @@ GameRoutine::~GameRoutine() {
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
-  GameObject	*marvin = new GameObject(GameObject::PLAYER1, "marvin");
-  GameObject	*skeleton = new GameObject(GameObject::IA, "skeleton");
+  // GameObject	*marvin = new GameObject(GameObject::PLAYER1, "marvin");
+  // GameObject	*skeleton = new GameObject(GameObject::IA, "skeleton");
 
   if (!_context.start(1280, 768, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
@@ -46,20 +46,20 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
-  try {
-    ObjModel	*one = new PlayerOne();
-    one->configure("./GraphicsLib/assets/warrior.fbx", marvin->getType());
-    one->setPosition(2, 0, 0);
-    ObjModel	*two = new IA();
-    two->configure("./GraphicsLib/assets/skeletarcher.fbx", skeleton->getType());
-    marvin->pushComponent(one);
-    skeleton->pushComponent(two);
-  } catch (ArgException e) {
-    std::cerr << e.getMessage() << std::endl;
-    return (false);
-  }
-  _objects.push_back(marvin);
-  _objects.push_back(skeleton);
+  // try {
+  //   ObjModel	*one = new PlayerOne();
+  //   one->configure("./GraphicsLib/assets/warrior.fbx", marvin->getType());
+  //   one->setPosition(2, 0, 0);
+  //   ObjModel	*two = new IA();
+  //   two->configure("./GraphicsLib/assets/skeletarcher.fbx", skeleton->getType());
+  //   marvin->pushComponent(one);
+  //   skeleton->pushComponent(two);
+  // } catch (ArgException e) {
+  //   std::cerr << e.getMessage() << std::endl;
+  //   return (false);
+  // }
+  // _objects.push_back(marvin);
+  // _objects.push_back(skeleton);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000)
     ->observe(std::string("Display.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);

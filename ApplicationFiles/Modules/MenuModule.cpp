@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Wed Jun  3 18:29:40 2015 Alexander Saenen
+// Last update Wed Jun  3 18:42:51 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
@@ -61,12 +61,12 @@ void	MenuModule::initialize(Event *) {
   GameObject    *homePage = new GameObject(GameObject::MENUPAGE, "homepage");
   _activePage = homePage;
   Cube *cube = new Cube;
-  ObjModel *model = new Bomb(0, false);
+  // ObjModel *model = new Bomb(0, false);
   try {
     cube->initialize(NULL);
     cube->setTexture("./GraphicsLib/assets/Bomberman_Wallpaper_by_Star14man.tga");
-    model->configure("./GraphicsLib/assets/bomb.fbx", GameObject::BOMB);
-    model->initialize(NULL);
+    // model->configure("./GraphicsLib/assets/bomb.fbx", GameObject::BOMB);
+    // model->initialize(NULL);
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -96,7 +96,7 @@ void	MenuModule::_update(Event *ev) {
   try {
     for (std::map<MenuPage, GameObject *>::iterator it = _pages.begin(); it != _pages.end(); ++it)
       if ((*it).second == _activePage)
-	(*it).second->update(*clock, *input);
+  	(*it).second->update(*clock, *input);
   } catch (LogicException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()

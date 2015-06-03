@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Mon Jun  1 17:12:19 2015 Alexander Saenen
+// Last update Wed Jun  3 18:33:34 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -38,7 +38,4 @@ void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {
   _model.draw(shader, getTransformation(), clock.getElapsed());
 }
 
-void	ObjModel::configure(const std::string &conf)
-{
-  (void)conf;
-}
+void	ObjModel::configure(const std::string &) { }
