@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May  5 13:08:10 2015 Alexander Saenen
-// Last update Tue May 12 16:58:35 2015 Alexander Saenen
+// Last update Fri Jun  5 15:50:32 2015 Alexander Saenen
 //
 
 #ifndef MODULESMANAGER_HPP_
@@ -19,14 +19,12 @@
 # include "Functor.hpp"
 # include "AModule.hh"
 # include "GameRoutine.hh"
-# include "ComponentFactory.hpp"
 
 class ModulesManager
 {
   static ModulesManager			*_instance;
   std::map<std::string, AModule *>	_instances;
   static bool				_isInstantiated;
-  ComponentFactory			*_componentFactory;
 
 public:  
   ModulesManager();
@@ -45,9 +43,6 @@ public:
 
   template <typename T> T *get() {
     return (this->get<T>(typeid(T).name()));
-  }
-  template <typename T> IComponent *getComponent() {
-    return (_componentFactory->getComponent<T>());
   }
 };
 

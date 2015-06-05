@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Wed Jun  3 19:23:37 2015 Alexander Saenen
+// Last update Fri Jun  5 14:44:05 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -28,62 +28,33 @@ void	Cube::initialize(Event *) {
     glm::vec2(1.0f, 1.0f),
     glm::vec2(0.0f, 1.0f)    
   };
-  // glm::vec3	vertexMap[8] = {
-  //   glm::vec3(0.5, -0.5, 0.5),
-  //   glm::vec3(0.5, 0.5, 0.5),
-  //   glm::vec3(-0.5, 0.5, 0.5),
-  //   glm::vec3(-0.5, -0.5, 0.5),
-  //   glm::vec3(0.5, -0.5, -0.5),
-  //   glm::vec3(0.5, -0.5, 0.5),
-  //   glm::vec3(-0.5, 0.5, -0.5),
-  //   glm::vec3(-0.5, -0.5, -0.5)
-  // };
-
+  glm::vec3	vertexMap[8] = {
+    glm::vec3(0.5, 0.5, 0.5),
+    glm::vec3(0.5, 0.5, -0.5),
+    glm::vec3(0.5, -0.5, 0.5),
+    glm::vec3(0.5, -0.5, -0.5),
+    glm::vec3(-0.5, 0.5, 0.5),
+    glm::vec3(-0.5, 0.5, -0.5),
+    glm::vec3(-0.5, -0.5, 0.5),
+    glm::vec3(-0.5, -0.5, -0.5)
+  };
+  int		vertexOrder[24] = {
+    2, 0, 4, 6, 3, 1, 5, 7, 3, 1, 0, 2,
+    6, 4, 5, 7, 0, 1, 5, 4, 3, 2, 6, 7
+  };
+  std::string	textureKind;
   _speed = 10.0f;
   _scale.x = 2.5;
   _scale.y = 2.5;
   _scale.z = 2.5;
   _position.y = 1.2;
-
-  // setTexture("./GraphicsLib/assets/wall_512_1_05.tga");
-
   _geometry.setColor(glm::vec4(0.64, 0.447, 0.46, 1));
-  _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0.5));
-  for (int i = 0; i < 4; i++)
-    _geometry.pushUv(uvMap[i]);
-  _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, -0.5, -0.5));
-  for (int i = 0; i < 4; i++)
-    _geometry.pushUv(uvMap[i]);
-  _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
-  for (int i = 0; i < 4; i++)
-    _geometry.pushUv(uvMap[i]);
-  _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, -0.5, -0.5));
-  for (int i = 0; i < 4; i++)
-    _geometry.pushUv(uvMap[i]);
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.5));
-  for (int i = 0; i < 4; i++)
-    _geometry.pushUv(uvMap[i]);
-  _geometry.pushVertex(glm::vec3(0.5, -0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(0.5, -0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, -0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, -0.5, -0.5));
-  for (int i = 0; i < 4; i++)
-    _geometry.pushUv(uvMap[i]);
+  for (int i = 0; i < 24; ++i) {
+    _geometry.pushVertex(vertexMap[vertexOrder[i]]);
+    if (i > 0 && (i + 1) % 4 == 0)
+      for (int i = 0; i < 4; i++)
+	_geometry.pushUv(uvMap[i]);
+  }
   _geometry.build();
 }
 

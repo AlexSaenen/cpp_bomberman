@@ -1,18 +1,28 @@
-#ifndef _COMPONENT_FACTORY_HPP_
-# define _COMPONENT_FACTORY_HPP_
+//
+// ComponentFactory.hpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// 
+// Made by Alexander Saenen
+// Login   <saenen_a@epitech.net>
+// 
+// Started on  Fri Jun  5 15:51:26 2015 Alexander Saenen
+// Last update Fri Jun  5 16:16:57 2015 Alexander Saenen
+//
 
-# include "IComponent.hpp"
+#ifndef COMPONENT_FACTORY_HPP_
+# define COMPONENT_FACTORY_HPP_
 
-class	ComponentFactory
+# include <IComponent.hpp>
+# include <AModule.hh>
+
+class	ComponentFactory : public AModule
 {
 public:
-  ComponentFactory(){};
-  ~ComponentFactory(){};
+  ComponentFactory() { };
+  ~ComponentFactory() { };
 
-  template <typename T> T*getComponent()
-  {
+  template <typename T> IComponent*	getComponent() {
     return (new T);
-  }; 
+  };
 };
 
-#endif
+#endif /* ComponentFactory.hpp */

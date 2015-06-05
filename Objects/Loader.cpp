@@ -1,3 +1,12 @@
+//
+// Loader.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// 
+// Made by Alexander Saenen
+// Login   <saenen_a@epitech.net>
+// 
+// Started on  Fri Jun  5 15:03:33 2015 Alexander Saenen
+// Last update Fri Jun  5 16:19:10 2015 Alexander Saenen
+//
 
 #include "Loader.hh"
 
@@ -8,7 +17,7 @@ Loader::Loader() {
       _is = new std::istream(_file);
     else
       throw ArgException("Cannot open the file : test.conf");
-    _constructor["Cube"] = &ModulesManager::getComponent<Cube>;
+    _constructor["Cube"] = &ComponentFactory::getComponent<Cube>;
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -22,7 +31,18 @@ Loader::~Loader() {
   delete _file;
 }
 
-void Loader::execute(Event *)
+void	Loader::loadTexture(IComponent *component, const GameObject *go) const {
+  std::string	texturePath;
+  if (go->getType() == GameObject::CUBE)
+    texturePath = ModulesManager::getInstance()->get<MapModule>()->getTexturePath("cube");
+  else if (go->getType() == GameObject::CUBEDESTR)
+    texturePath = ModulesManager::getInstance()->get<MapModule>()->getTexturePath("destroy");
+  else
+    return ;
+  reinterpret_cast<Cube *>(component)->setTexture(texturePath);
+}
+
+void	Loader::execute(Event *)
 {
   std::list<GameObject *>	objectList;
   std::string			buff;
@@ -34,9 +54,12 @@ void Loader::execute(Event *)
   GameModule			*gameModule;
   IComponent			*component;
   ModulesManager		*modulesManager;
+  ComponentFactory		*factory;
 
-  std::cout << "Ralouf" << std::endl;
   modulesManager = ModulesManager::getInstance();
+  modulesManager->get<MapModule>()
+    ->loadMapValues();
+  factory = modulesManager->get<ComponentFactory>();
   gameModule = modulesManager->get<GameModule>();
   while (!_is->eof() && std::getline(*_is, buff, '@')) {
     content = new std::istringstream(buff);
@@ -44,31 +67,26 @@ void Loader::execute(Event *)
     std::getline(*content, buff, '\n');
     std::istringstream *verif = new std::istringstream(buff);
     *verif >> type;
-    // std::cout << "Ralouf : " << static_cast<GameObject::ObjectType>(type) << std::endl;
     go = new GameObject(static_cast<GameObject::ObjectType>(type), name);
     while (std::getline(*content, buff, '$') && buff == "")
       {
-	std::cout << "/" << content->str() << "/" << std::endl;
-	std::cout << "[" << "Ralouf2"<< std::endl;
 	std::getline(*content, buff, '%');
-	std::cout << "[" << buff << "]" << std::endl;
-	component = (modulesManager->*_constructor[buff])();
+	component = (factory->*_constructor[buff])();
 	std::getline(*content, args, '\n');
-	std::cout << "{" << args << "}" << std::endl;
 	component->initialize(NULL);
 	if (args != "")
 	  component->configure(args);
+	/* add try catch */
+	if (buff == "Cube")
+	  loadTexture(component, go);
 	go->pushComponent(component);
       }
-    std::cout << "Ralouf3" << std::endl;
     if (name == "intro")
       gameModule->handle(go, true);
     else
       gameModule->handle(go);
-    gdl::BasicShader	input;
-    gdl::Clock		clock;
-    go->draw(input, clock);
     std::getline(*content, buff, '\n');
+    delete verif;
+    delete content;
   }
-  std::cout << "Ralouf4" << std::endl;
 }

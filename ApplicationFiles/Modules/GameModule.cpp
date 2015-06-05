@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Tue May 19 13:20:48 2015 Alexander Saenen
+// Last update Fri Jun  5 14:53:27 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -20,9 +20,10 @@ void	GameModule::initialize() {
 }
 
 void	GameModule::handle(GameObject *object, const bool isLaunchable) const {
-  ModulesManager::getInstance()->get<GameRoutine>()
+  ModulesManager	*gr = ModulesManager::getInstance();
+
+  gr->get<GameRoutine>()
     ->pushGObject(object);
-  /* Arriver à rendre les GameObject launchables => càd qu'il lance ses Components (pas tous) */
   if (isLaunchable) { ; }
     //   object->launch();
 }

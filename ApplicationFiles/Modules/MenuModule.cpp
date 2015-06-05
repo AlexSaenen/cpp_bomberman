@@ -5,13 +5,11 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Wed Jun  3 19:27:07 2015 Alexander Saenen
+// Last update Thu Jun  4 15:23:31 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
 #include <Button.hh>
-
-#include <Bomb.hh>
 
 MenuModule::MenuModule()
   : _isActive(false), _activePage(0) {
@@ -32,7 +30,6 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->abandon("Display.update", 1001)
       ->abandon("Display.draw", 1001);
-    glEnable(GL_DEPTH_TEST);
     transformation = glm::lookAt(glm::vec3(0, 10, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     shader->bind();
     shader->setUniform("view", transformation);
@@ -41,8 +38,7 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
       ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
-    glDisable(GL_DEPTH_TEST);
-    transformation = glm::lookAt(glm::vec3(0, 2, 0.0001), glm::vec3(0, 0, 0), glm::vec3(-1, 0, 0));
+    transformation = glm::lookAt(glm::vec3(0, 1, 0), glm::vec3(0, 0, 0), glm::vec3(-1, 0, 0));
     shader->bind();
     shader->setUniform("view", transformation);
   }
@@ -59,11 +55,12 @@ void	MenuModule::initialize(Event *) {
     ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
   GameObject    *homePage = new GameObject(GameObject::MENUPAGE, "homepage");
   _activePage = homePage;
-  Cube *cube = new Cube;
+  Wallpaper *menuwall = new Wallpaper;
   ObjModel *model = new Bomb(0, false);
   try {
-    cube->initialize(NULL);
-    cube->setTexture("./GraphicsLib/assets/Bomberman_Wallpaper_by_Star14man.tga");
+    menuwall->initialize(NULL);
+    menuwall->configure("0 0 -1.85");
+    menuwall->setTexture("./GraphicsLib/assets/menu_wallpaper.tga");
     model->configure("./GraphicsLib/assets/bomb.fbx", GameObject::BOMB);
     model->configure("0 -1.37 300 10 90");
     model->initialize(NULL);
@@ -75,7 +72,7 @@ void	MenuModule::initialize(Event *) {
   }
   homePage->pushComponent(new Button(HOME, true));
   homePage->pushComponent(model);
-  homePage->pushComponent(cube);
+  homePage->pushComponent(menuwall);
   _pages.insert(std::make_pair<MenuPage, GameObject *>(HOME, homePage));
   toggle(true);
 }

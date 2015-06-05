@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Wed Jun  3 18:36:23 2015 Alexander Saenen
+## Last update Fri Jun  5 15:30:41 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -34,11 +34,14 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)ModulesManager.cpp \
 		  $(APPDIR)$(MODDIR)EventModule.cpp \
 		  $(APPDIR)$(MODDIR)GameModule.cpp \
+		  $(APPDIR)$(MODDIR)MapModule.cpp \
+		  $(APPDIR)$(MODDIR)MusicModule.cpp \
 		  $(APPDIR)$(MODDIR)MenuModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \
 		  $(SRCDIR)Event.cpp \
 		  $(CMPDIR)Cube.cpp \
 		  $(CMPDIR)ObjModel.cpp \
+		  $(CMPDIR)Wallpaper.cpp \
 		  $(CMPDIR)Button.cpp \
 		  $(SRCDIR)Player.cpp \
 		  $(SRCDIR)PlayerOne.cpp \
@@ -51,7 +54,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra -g3
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl
 

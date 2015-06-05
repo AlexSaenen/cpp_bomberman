@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:08:24 2015 Alexander Saenen
-// Last update Tue May 19 11:08:25 2015 Alexander Saenen
+// Last update Fri Jun  5 16:04:30 2015 Alexander Saenen
 //
 
 #include "ModulesManager.hpp"
@@ -15,14 +15,12 @@ bool		ModulesManager::_isInstantiated = false;
 
 ModulesManager::ModulesManager() {
   _instance = NULL;
-  _componentFactory = new ComponentFactory;
 }
 
 ModulesManager::~ModulesManager() {
   for (std::map<std::string, AModule *>::iterator it = _instances.begin(); it != _instances.end(); ++it)
     delete (*it).second;
   _isInstantiated = false;
-  delete _componentFactory;
 }
 
 ModulesManager	*ModulesManager::getInstance() {

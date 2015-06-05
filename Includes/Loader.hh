@@ -7,29 +7,30 @@
 # include <istream>
 # include <sstream>
 # include <fstream>
-# include <iostream>
 # include <iomanip>
 # include <string>
-
 
 # include "GameObject.hh"
 # include "Constructor.hpp"
 # include "Cube.hh"
 # include "Event.hh"
 # include "ModulesManager.hpp"
+# include "ComponentFactory.hpp"
 # include "GameModule.hh"
+# include "MapModule.hh"
 
 class Loader
 {
 private:
   std::istream *_is;
-  std::map<std::string, IComponent *(ModulesManager::*)(void)> _constructor;
+  std::map<std::string, IComponent *(ComponentFactory::*)(void)> _constructor;
   std::filebuf *_file;
 
 public:
   Loader();
   ~Loader();
-  void execute(Event *);
+  void	loadTexture(IComponent *component, const GameObject *go) const;
+  void	execute(Event *);
 };
 
 #endif

@@ -5,13 +5,12 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Tue May 19 13:21:00 2015 Alexander Saenen
+// Last update Fri Jun  5 10:36:42 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
 # define GAMEMODULE_HH_
 
-# include <AModule.hh>
 # include <GameObject.hh>
 # include <ModulesManager.hpp>
 

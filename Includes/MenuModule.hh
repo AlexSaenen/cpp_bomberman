@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Wed Jun  3 17:46:52 2015 Alexander Saenen
+// Last update Thu Jun  4 15:18:15 2015 Alexander Saenen
 //
 
 #ifndef MENUMODULE_HH_
@@ -19,6 +19,8 @@
 # include <iostream>
 # include <RuntimeException.hh>
 # include <map>
+# include <Bomb.hh>
+# include <Wallpaper.hh>
 
 class	MenuModule : public AModule
 {

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Wed Jun  3 18:32:57 2015 Alexander Saenen
+// Last update Thu Jun  4 14:50:05 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -38,5 +38,5 @@ void	Button::update(const gdl::Clock &, gdl::Input &input) {
 }
 
 void	Button::draw(gdl::AShader &, const gdl::Clock &) {
-  /* if isSelected then draw a cursor next to it */
+  /* if isSelected then displace the cursor next to it */
 }
