@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Mon Jun  8 17:03:12 2015 Alexander Saenen
+// Last update Mon Jun  8 18:23:23 2015 Thibaud PEAUGER
 //
 
 #include <GameObject.hh>
@@ -64,6 +64,7 @@ std::string	GameObject::getName() const {
 
 GameObject::ObjectType	GameObject::getType() const {
   return (_type);
+}
 
 std::list<IComponent *> GameObject::getComponents() const {
   return (_gameComponents);
