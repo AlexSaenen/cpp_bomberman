@@ -13,10 +13,13 @@
 
 # include <GameObject.hh>
 # include <ModulesManager.hpp>
+# include <Shape.hh>
+# include <LogicException.hh>
 
 class	GameModule : public AModule
 {
   std::list<GameObject *>	_garbage;
+  std::map<int, std::map<int, std::list<GameObject::ObjectType> > > _gameMap;
 
 public:
   virtual ~GameModule();
@@ -24,8 +27,9 @@ public:
 
   void	initialize();
   void	markForCleanup(GameObject *object);
-  void	handle(GameObject *object, const bool isLaunchable = false) const;
+  void	handle(GameObject *object, const bool isLaunchable = false);
   void	_onCleanup(Event *);
+  std::list<GameObject::ObjectType>	getObject(int x, int y);
 };
 
 #endif /* GameModule.hh */

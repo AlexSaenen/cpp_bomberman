@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Mon Jun  8 16:03:07 2015 Alexander Saenen
+// Last update Mon Jun  8 16:43:23 2015 Alexander Saenen
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -38,6 +38,7 @@ public:
   void	_draw(Event *);
   void		pushGObject(GameObject *GObject);
   void		popGObject(GameObject *GObject);
+  std::vector<GameObject *>	getGObjects(const GameObject::ObjectType type);
   gdl::BasicShader	*getShader();
   gdl::Clock		*getClock();
   gdl::Input		*getInput();

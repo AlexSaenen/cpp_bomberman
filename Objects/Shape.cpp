@@ -35,7 +35,7 @@ void	Shape::scale(glm::vec3 const &scale) {
 
 #include <iostream>
 
-glm::mat4	Shape::getTransformation() {
+glm::mat4	Shape::getTransformation() const {
   glm::mat4	transform(1);
 
   transform = glm::translate(transform, _position);
@@ -44,4 +44,12 @@ glm::mat4	Shape::getTransformation() {
   transform = glm::rotate(transform, _rotation.z, glm::vec3(0, 0, 1));
   transform = glm::scale(transform, _scale);
   return (transform);
+}
+
+int	Shape::getPosX() const {
+  return (_position.x);
+}
+
+int	Shape::getPosY() const {
+  return (_position.y);
 }

@@ -34,7 +34,9 @@ public:
   void	rotate(const glm::vec3 &axis, const float angle);
   void	scale(const glm::vec3 &scale);
 
-  glm::mat4	getTransformation();
+  glm::mat4	getTransformation() const;
+  int		getPosX() const;
+  int		getPosY() const;
 };
 
 #endif /* Shape.hh */

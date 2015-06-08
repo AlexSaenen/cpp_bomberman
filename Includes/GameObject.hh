@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:06:51 2015 Alexander Saenen
-// Last update Mon Jun  8 16:14:17 2015 Alexander Saenen
+// Last update Mon Jun  8 17:03:36 2015 Alexander Saenen
 //
 
 #ifndef GAMEOBJECT_HH_
@@ -48,6 +48,7 @@ public:
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
   std::string	getName() const;
   ObjectType	getType() const;
+  std::list<IComponent *>	getComponents() const;
 };
 
 #endif /* GameObject.hh */

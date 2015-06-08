@@ -11,6 +11,7 @@
 #ifndef IA_HH_
 # define IA_HH_
 
+# include <GameModule.hh>
 # include <Player.hh>
 
 class	IA : public Player
@@ -24,6 +25,7 @@ private:
   };
   
 private:
+  GameModule		*_gameModule;
   Coor			_me;
   std::list<Coor>	_map;
   std::list<Coor>	_players;

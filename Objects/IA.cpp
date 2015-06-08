@@ -16,6 +16,7 @@ IA::IA()
 IA::~IA() { }
 
 void	IA::_initialize() {
+  _gameModule = ModulesManager::getInstance()->get<GameModule>();
   _model.createSubAnim(0, "Run", 0, 30);
   playSubAnim("Run");
   _model.pause(true);
@@ -25,4 +26,6 @@ void	IA::_initialize() {
 void	IA::update(const gdl::Clock &, gdl::Input &) {
   if (!_isInitialized)
     _initialize();
+
+  
 }
