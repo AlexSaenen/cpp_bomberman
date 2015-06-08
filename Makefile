@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Fri Jun  5 15:30:41 2015 Alexander Saenen
+## Last update Mon Jun  8 10:41:38 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -28,6 +28,7 @@ GRADIR		= GraphicsLib/
 
 SRC		= $(ERRDIR)ArgException.cpp \
 		  $(ERRDIR)LogicException.cpp \
+		  $(ERRDIR)RangeException.cpp \
 		  $(ERRDIR)RuntimeException.cpp \
 		  $(APPDIR)main.cpp \
 		  $(APPDIR)Bomberman.cpp \
@@ -54,7 +55,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra -g3
+CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl
 
