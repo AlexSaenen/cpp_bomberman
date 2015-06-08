@@ -15,6 +15,21 @@
 
 class	IA : public Player
 {
+private:
+  class		Coor
+  {
+    int		_x;
+    int		_y;
+    int		_type;
+  };
+  
+private:
+  Coor			_me;
+  std::list<Coor>	_map;
+  std::list<Coor>	_players;
+  std::list<Coor>	_bombs;
+  std::list<Coor>	_bonus;
+
 public:
   IA();
   ~IA();
