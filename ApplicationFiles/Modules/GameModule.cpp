@@ -19,13 +19,36 @@ void	GameModule::initialize() {
     ->observe(std::string("Game.cleanup"), new Functor<GameModule>(this, &GameModule::_onCleanup), 1000);  
 }
 
-void	GameModule::handle(GameObject *object, const bool isLaunchable) const {
-  ModulesManager	*gr = ModulesManager::getInstance();
+void	GameModule::handle(GameObject *object, const bool isLaunchable) {
+  ModulesManager			*gr = ModulesManager::getInstance();
+  Shape					*shape = NULL;
+  std::list<IComponent *>		gameComponents;
+  std::list<IComponent *>::iterator	it;
 
   gr->get<GameRoutine>()
     ->pushGObject(object);
   if (isLaunchable) { ; }
-    //   object->launch();
+  //   object->launch();
+  if (object->getType() < 6) {
+    try {
+      gameComponents = object->getComponents();
+      it = gameComponents.begin();
+      while (it != gameComponents.end()) {
+	shape = dynamic_cast<Shape *>(*it);
+	it++;
+      }
+      if (shape == NULL)
+	throw LogicException("GameObject hasn't got a shape.");
+      if (_gameMap.find(shape->getPosX()) == _gameMap.end())
+	_gameMap[shape->getPosX()] = std::map<int, std::list<GameObject::ObjectType> >();
+      ((_gameMap[shape->getPosX()])[shape->getPosY()]).push_back(object->getType());
+    } catch(LogicException e) {
+      std::cerr<< e.getMessage() << std::endl;
+      ModulesManager::getInstance()->get<EventModule>()
+	->trigger("Engine.error", 1001)
+	->handle();
+    }
+  }
 }
 
 void	GameModule::_onCleanup(Event *) {
@@ -42,4 +65,8 @@ void	GameModule::_onCleanup(Event *) {
 
 void	GameModule::markForCleanup(GameObject *object) {
   _garbage.push_back(object);
+}
+
+std::list<GameObject::ObjectType>	GameModule::getObject(int x, int y) {
+  return ((_gameMap[x])[y]);
 }

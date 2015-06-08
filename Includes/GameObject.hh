@@ -22,7 +22,6 @@ public:
       CUBE,
       CUBEDESTR,
       BOMB,
-      ANIM,
       PLAYER1,
       PLAYER2,
       IA,
@@ -49,6 +48,7 @@ public:
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
   std::string	getName() const;
   ObjectType	getType() const;
+  std::list<IComponent *>	getComponents() const;
   void	handle() const; /* Unknown use yet */
 };
 

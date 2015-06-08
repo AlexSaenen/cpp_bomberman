@@ -67,3 +67,7 @@ GameObject::ObjectType	GameObject::getType() const {
 }
 
 void	GameObject::handle() const { }
+
+std::list<IComponent *> GameObject::getComponents() const {
+  return (_gameComponents);
+}
