@@ -1,14 +1,15 @@
-//
+//0
 // Bomberman.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 18:26:20 2015 Alexander Saenen
-// Last update Thu Jun  4 15:23:57 2015 Alexander Saenen
+// Last update Mon Jun  8 18:16:17 2015 Thibaud PEAUGER
 //
 
 #include "Bomberman.hh"
+#include "MusicModule.hh"
 
 Bomberman::Bomberman(const int , const char **):
   _run(true)
@@ -20,7 +21,8 @@ Bomberman::Bomberman(const int , const char **):
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
     // ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 800)
-    ->observe(std::string("Bomberman.init"), new Functor<Loader>(new Loader, &Loader::execute), 600);
+    ->observe(std::string("Bomberman.init"), new Functor<Loader>(new Loader, &Loader::execute), 600)
+    ->observe(std::string("Music.play"), new Functor<MusicModule>(new MusicModule, &MusicModule::initialize), 1000);
 }
 
 Bomberman::~Bomberman() {
