@@ -29,3 +29,7 @@ void	IA::update(const gdl::Clock &, gdl::Input &) {
 
   
 }
+
+IA::Coor	IA::_radar() {
+  return (IA::Coor());
+}
