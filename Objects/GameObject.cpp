@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Tue May 12 10:20:59 2015 Alexander Saenen
-// Last update Mon Jun  8 17:04:33 2015 Alexander Saenen
+// Started on  Wed Jun 10 16:07:49 2015 Alexander Saenen
+// Last update Wed Jun 10 16:07:49 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>

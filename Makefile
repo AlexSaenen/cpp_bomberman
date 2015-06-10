@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Mon Jun  8 10:41:38 2015 Alexander Saenen
+## Last update Tue Jun  9 15:40:30 2015 Thibaud PEAUGER
 ##
 
 CXX		= g++
@@ -57,7 +57,7 @@ OBJ		= $(SRC:.cpp=.o)
 
 CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
 
-LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl
+LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl -lfmod
 
 RED		= \033[00;34m
 
