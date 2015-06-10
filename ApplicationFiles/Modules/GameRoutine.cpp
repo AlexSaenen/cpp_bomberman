@@ -5,19 +5,24 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Thu Jun  4 15:29:45 2015 Alexander Saenen
+// Last update Mon Jun  8 16:43:34 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
 #include <ArgException.hh>
 #include <LogicException.hh>
 #include <RuntimeException.hh>
+#include <RangeException.hh>
 
 GameRoutine::GameRoutine() {}
 
 GameRoutine::~GameRoutine() {
-  while (!_objects.empty()) {
-    delete popGObject();
+  for (int it = 0; it < 9; ++it) {
+    GameObject::ObjectType i = static_cast<GameObject::ObjectType>(it);
+    while (!_objects[i].empty()) {
+      delete _objects[i].back();
+      _objects[i].pop_back();
+    }
   }
 }
 
@@ -55,27 +60,26 @@ void	GameRoutine::_draw(Event *) {
   this->draw();
 }
 
+std::vector<GameObject *>	GameRoutine::getGObjects(const GameObject::ObjectType type) {
+  if (_objects.find(type) == _objects.end())
+    throw RangeException("Couldn't find the GObjects for this type");
+  return (_objects[type]);
+}
+
 void	GameRoutine::pushGObject(GameObject *GObject) {
-  _objects.push_back(GObject);
+  _objects[GObject->getType()].push_back(GObject);
 }
 
 void	GameRoutine::popGObject(GameObject *GObject) {
-  std::vector<GameObject *>::iterator it = _objects.begin();
+  std::vector<GameObject *>	typedObjects = _objects[GObject->getType()];
+  std::vector<GameObject *>::iterator it = typedObjects.begin();
 
-  while (it != _objects.end() && (*it) != GObject)
+  while (it != typedObjects.end() && (*it) != GObject)
     ++it;
   if ((*it) != GObject) {
     throw LogicException("Can't pop an element that isn't stacked");
   }
-  _objects.erase(it);
-}
-
-GameObject	*GameRoutine::popGObject() {
-  GameObject	*GObject;
-
-  GObject = _objects.back();
-  _objects.pop_back();
-  return (GObject);
+  typedObjects.erase(it);
 }
 
 gdl::BasicShader	*GameRoutine::getShader() {
@@ -104,8 +108,11 @@ bool	GameRoutine::update() {
     return (false);
   }
   try {
-    for (size_t i = 0; i < _objects.size(); ++i)
-      _objects[i]->update(_clock, _input);
+    for (int it = 0; it < 9; ++it) {
+      GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
+      for (size_t i = 0; i < _objects[ot].size(); ++i)
+	_objects[ot][i]->update(_clock, _input);
+    }
   } catch (LogicException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -121,7 +128,10 @@ bool	GameRoutine::update() {
 void	GameRoutine::draw() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _shader.bind();
-  for (size_t i = 0; i < _objects.size(); ++i)
-    _objects[i]->draw(_shader, _clock);
+  for (int it = 0; it < 9; ++it) {
+    GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
+    for (size_t i = 0; i < _objects[ot].size(); ++i)
+      _objects[ot][i]->draw(_shader, _clock);
+  }
   _context.flush();
 }

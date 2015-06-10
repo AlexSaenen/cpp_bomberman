@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:06:51 2015 Alexander Saenen
-// Last update Wed Jun  3 15:13:54 2015 Alexander Saenen
+// Last update Mon Jun  8 17:03:36 2015 Alexander Saenen
 //
 
 #ifndef GAMEOBJECT_HH_
@@ -49,7 +49,6 @@ public:
   std::string	getName() const;
   ObjectType	getType() const;
   std::list<IComponent *>	getComponents() const;
-  void	handle() const; /* Unknown use yet */
 };
 
 #endif /* GameObject.hh */

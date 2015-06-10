@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Wed Jun  3 14:24:11 2015 Alexander Saenen
+// Last update Mon Jun  8 16:43:23 2015 Alexander Saenen
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -19,6 +19,7 @@
 # include <ModulesManager.hpp>
 # include <EventModule.hh>
 # include <GameObject.hh>
+# include <map>
 
 class	GameRoutine : public AModule, public gdl::Game
 {
@@ -26,7 +27,7 @@ class	GameRoutine : public AModule, public gdl::Game
   gdl::Clock		_clock;
   gdl::Input		_input;
   gdl::BasicShader	_shader;
-  std::vector<GameObject *>	_objects;
+  std::map<GameObject::ObjectType, std::vector<GameObject *> >	_objects;
 
 public:
   GameRoutine();
@@ -36,8 +37,8 @@ public:
   void	_update(Event *);
   void	_draw(Event *);
   void		pushGObject(GameObject *GObject);
-  GameObject	*popGObject();
   void		popGObject(GameObject *GObject);
+  std::vector<GameObject *>	getGObjects(const GameObject::ObjectType type);
   gdl::BasicShader	*getShader();
   gdl::Clock		*getClock();
   gdl::Input		*getInput();
