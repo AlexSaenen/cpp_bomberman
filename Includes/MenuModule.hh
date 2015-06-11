@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Thu Jun  4 15:18:15 2015 Alexander Saenen
+// Last update Thu Jun 11 10:40:24 2015 Alexander Saenen
 //
 
 #ifndef MENUMODULE_HH_
@@ -30,9 +30,16 @@ public:
     NEW,
     CONTINUE,
     OPTIONS,
-    CONTROLS,
     SCORE,
-    EXIT
+    EXIT,
+    NSCORE,
+    NOPTIONS,
+    SINGLEPLAYER,
+    MULTIPLAYER,
+    DEFAULT,
+    SVOLUME,
+    MVOLUME,
+    RANDOM
   };
 
 private:

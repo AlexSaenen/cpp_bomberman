@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 10:06:51 2015 Alexander Saenen
-// Last update Mon Jun  8 17:03:36 2015 Alexander Saenen
+// Last update Thu Jun 11 17:23:42 2015 Alexander Saenen
 //
 
 #ifndef GAMEOBJECT_HH_
@@ -35,6 +35,7 @@ private:
   std::list<IComponent *>	_gameComponents;
   ObjectType			_type;
   std::string			_name;
+  bool				_hasPressed;
 
 public:
   GameObject(const ObjectType type, const std::string &name);

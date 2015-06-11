@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:47:34 2015 Alexander Saenen
-// Last update Wed Jun  3 18:32:26 2015 Alexander Saenen
+// Last update Thu Jun 11 16:37:30 2015 Alexander Saenen
 //
 
 #ifndef BUTTON_HH_
@@ -19,6 +19,8 @@ class	Button : public IComponent
   glm::vec3	_position;
   bool		_isSelected;
   MenuModule::MenuPage	_linkedPage;
+  bool		_buttonPressed;
+  ObjModel	*_cursor;
 
 public:
   Button(const MenuModule::MenuPage linkedPage, const bool isSelected = false);

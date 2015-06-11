@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Fri Jun  5 15:37:06 2015 Alexander Saenen
+// Last update Thu Jun 11 15:57:47 2015 Alexander Saenen
 //
 
 #ifndef MAPMODULE_HH_
@@ -29,6 +29,7 @@ public:
 
   void	loadMapValues();
   std::string	getTexturePath(const std::string &textureType) const;
+  bool	isLoaded() const;
 };
 
 #endif /* MapModule.hh */
