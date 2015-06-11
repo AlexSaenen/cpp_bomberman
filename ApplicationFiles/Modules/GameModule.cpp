@@ -16,38 +16,18 @@ GameModule::~GameModule() { }
 
 void	GameModule::initialize() {
   ModulesManager::getInstance()->get<EventModule>()
-    ->observe(std::string("Game.cleanup"), new Functor<GameModule>(this, &GameModule::_onCleanup), 1000);  
+    ->observe(std::string("Game.cleanup"), new Functor<GameModule>(this, &GameModule::_onCleanup), 1000);
 }
 
 void	GameModule::handle(GameObject *object, const bool isLaunchable) {
   ModulesManager			*gr = ModulesManager::getInstance();
-  Shape					*shape = NULL;
-  std::list<IComponent *>		gameComponents;
-  std::list<IComponent *>::iterator	it;
 
   gr->get<GameRoutine>()
     ->pushGObject(object);
   if (isLaunchable) { ; }
   //   object->launch();
   if (object->getType() < 6) {
-    try {
-      gameComponents = object->getComponents();
-      it = gameComponents.begin();
-      while (it != gameComponents.end()) {
-	shape = dynamic_cast<Shape *>(*it);
-	it++;
-      }
-      if (shape == NULL)
-	throw LogicException("GameObject hasn't got a shape.");
-      if (_gameMap.find(shape->getPosX()) == _gameMap.end())
-	_gameMap[shape->getPosX()] = std::map<int, std::list<GameObject::ObjectType> >();
-      ((_gameMap[shape->getPosX()])[shape->getPosY()]).push_back(object->getType());
-    } catch(LogicException e) {
-      std::cerr<< e.getMessage() << std::endl;
-      ModulesManager::getInstance()->get<EventModule>()
-	->trigger("Engine.error", 1001)
-	->handle();
-    }
+    pushOnMap(object);
   }
 }
 
@@ -69,4 +49,63 @@ void	GameModule::markForCleanup(GameObject *object) {
 
 std::list<GameObject::ObjectType>	GameModule::getObject(int x, int y) {
   return ((_gameMap[x])[y]);
+}
+
+void					GameModule::pushOnMap(GameObject *object) {
+  Shape                                 *shape = NULL;
+  std::list<IComponent *>               gameComponents;
+  std::list<IComponent *>::iterator     it;
+  
+  try {
+    gameComponents = object->getComponents();
+    it = gameComponents.begin();
+    while (it != gameComponents.end()) {
+      shape = dynamic_cast<Shape *>(*it);
+      it++;
+    }
+    if (shape == NULL)
+      throw LogicException("GameObject hasn't got a shape.");
+    if (_gameMap.find(shape->getPosX()) == _gameMap.end())
+      _gameMap[shape->getPosX()] = std::map<int, std::list<GameObject::ObjectType> >();
+    ((_gameMap[shape->getPosX()])[shape->getPosY()]).push_back(object->getType());
+  } catch(LogicException e) {
+    std::cerr<< e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Engine.error", 1001)
+      ->handle();
+  }
+}
+
+void						GameModule::popOnMap(GameObject *object) {
+  Shape						*shape = NULL;
+  std::list<IComponent *>			gameComponents;
+  std::list<IComponent *>::iterator		it;
+  std::list<GameObject::ObjectType>		types;
+  std::list<GameObject::ObjectType>::iterator	typeIt;
+  
+  try {
+    gameComponents = object->getComponents();
+    it = gameComponents.begin();
+    while (it != gameComponents.end()) {
+      shape = dynamic_cast<Shape *>(*it);
+      it++;
+    }
+    if (shape == NULL)
+      throw LogicException("GameObject hasn't got a shape.");
+    if (_gameMap.find(shape->getPosX()) == _gameMap.end())
+      throw LogicException("GameObject isn't in the map.");
+    typeIt = ((_gameMap[shape->getPosX()])[shape->getPosY()]).begin();
+    while (typeIt != ((_gameMap[shape->getPosX()])[shape->getPosY()]).end()) {
+      if (*typeIt == object->getType()) {
+	((_gameMap[shape->getPosX()])[shape->getPosY()]).erase(typeIt);
+	break;
+	typeIt++;
+      }
+    }
+  } catch(LogicException e) {
+    std::cerr<< e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Engine.error", 1001)
+      ->handle();
+  }
 }

@@ -28,8 +28,12 @@ public:
   void	initialize();
   void	markForCleanup(GameObject *object);
   void	handle(GameObject *object, const bool isLaunchable = false);
-  void	_onCleanup(Event *);
   std::list<GameObject::ObjectType>	getObject(int x, int y);
+  void	pushOnMap(GameObject *object);
+  void    popOnMap(GameObject *object);
+
+private:
+  void	_onCleanup(Event *);
 };
 
 #endif /* GameModule.hh */

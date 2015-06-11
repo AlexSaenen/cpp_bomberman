@@ -38,6 +38,9 @@ public:
 
   void		_initialize();
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);
+
+private:
+  Coor		_radar();
 };
 
 #endif /* IA.hh */
