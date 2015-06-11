@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Mon Jun  8 16:43:34 2015 Alexander Saenen
+// Last update Wed Jun 10 20:32:01 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -30,7 +30,7 @@ bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
 
-  if (!_context.start(1280, 768, "Bomb the House")) {
+  if (!_context.start(1280, 720, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
     return (false);
   }

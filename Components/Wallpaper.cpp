@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Thu Jun  4 15:25:34 2015 Alexander Saenen
+// Last update Wed Jun 10 20:47:14 2015 Alexander Saenen
 //
 
 #include "Wallpaper.hh"
@@ -32,10 +32,10 @@ void	Wallpaper::initialize(Event *) {
   _scale.x = 2.5;
   _scale.y = 2.5;
   _scale.z = 2.5;
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.5));
-  _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.5));
-  _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.5));
+  _geometry.pushVertex(glm::vec3(0.5, 0.5, 0.667));
+  _geometry.pushVertex(glm::vec3(0.5, 0.5, -0.667));
+  _geometry.pushVertex(glm::vec3(-0.5, 0.5, -0.667));
+  _geometry.pushVertex(glm::vec3(-0.5, 0.5, 0.667));
   for (int i = 0; i < 4; i++)
     _geometry.pushUv(uvMap[i]);
   _geometry.build();

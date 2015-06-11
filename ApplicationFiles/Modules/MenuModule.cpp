@@ -5,10 +5,11 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Thu Jun  4 15:23:31 2015 Alexander Saenen
+// Last update Thu Jun 11 17:27:47 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
+#include <MenuSpawner.hh>
 #include <Button.hh>
 
 MenuModule::MenuModule()
@@ -38,7 +39,7 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
       ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
-    transformation = glm::lookAt(glm::vec3(0, 1, 0), glm::vec3(0, 0, 0), glm::vec3(-1, 0, 0));
+    transformation = glm::lookAt(glm::vec3(0, 1.57, 0), glm::vec3(0, 0, 0), glm::vec3(-1, 0, 0));
     shader->bind();
     shader->setUniform("view", transformation);
   }
@@ -53,27 +54,21 @@ void	MenuModule::initialize(Event *) {
   ModulesManager::getInstance()->get<EventModule>()
     ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
     ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
-  GameObject    *homePage = new GameObject(GameObject::MENUPAGE, "homepage");
-  _activePage = homePage;
-  Wallpaper *menuwall = new Wallpaper;
-  ObjModel *model = new Bomb(0, false);
   try {
-    menuwall->initialize(NULL);
-    menuwall->configure("0 0 -1.85");
-    menuwall->setTexture("./GraphicsLib/assets/menu_wallpaper.tga");
-    model->configure("./GraphicsLib/assets/bomb.fbx", GameObject::BOMB);
-    model->configure("0 -1.37 300 10 90");
-    model->initialize(NULL);
+    MenuSpawner	spawn;
+    MenuModule::MenuPage	homeButtons[4] = { NEW, NSCORE, NOPTIONS, EXIT };
+    _activePage = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_home_new.tga", homeButtons, 4);
+    _pages.insert(std::make_pair<MenuPage, GameObject *>(HOME, _activePage));
+    MenuModule::MenuPage	optionsButtons[3] = { MVOLUME, SVOLUME, HOME };
+    _pages.insert(std::make_pair<MenuPage, GameObject *>
+		  (OPTIONS, spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_options.tga",
+						 optionsButtons, 3)));
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
       ->trigger("Engine.error", 1000)->handle();
     return ;
   }
-  homePage->pushComponent(new Button(HOME, true));
-  homePage->pushComponent(model);
-  homePage->pushComponent(menuwall);
-  _pages.insert(std::make_pair<MenuPage, GameObject *>(HOME, homePage));
   toggle(true);
 }
 
@@ -125,6 +120,7 @@ void	MenuModule::_draw(Event *ev) {
 }
 
 void	MenuModule::activatePage(const MenuPage page) {
-  if (_activePage != _pages[page])
-    _activePage = _pages[page];
+  if (_pages.find(page) != _pages.end())
+    if (_activePage != _pages[page])
+      _activePage = _pages[page];
 }

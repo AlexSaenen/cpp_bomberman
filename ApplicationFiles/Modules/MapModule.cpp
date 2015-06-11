@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Fri Jun  5 15:36:22 2015 Alexander Saenen
+// Last update Thu Jun 11 15:59:32 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
@@ -16,8 +16,9 @@ MapModule::MapModule()
 MapModule::~MapModule() { }
 
 void	MapModule::loadMapValues() {
-  _textureMap["cube"] = "./GraphicsLib/assets/stone.tga";
-  _textureMap["destroy"] = "./GraphicsLib/assets/crate.tga";
+  _textureMap["cube"] = "./GraphicsLib/assets/Textures/stone.tga";
+  _textureMap["destroy"] = "./GraphicsLib/assets/Textures/crate.tga";
+  _textureMap["bomb"] = "./GraphicsLib/assets/bomb.fbx";
   _hasTextures = true;
 }
 
@@ -30,4 +31,8 @@ std::string	MapModule::getTexturePath(const std::string &textureType) const {
   if (it == _textureMap.end())
     throw ArgException("Trying to load a texture that doesn't exist");
   return ((*it).second);
+}
+
+bool	MapModule::isLoaded() const {
+  return (_hasTextures);
 }
