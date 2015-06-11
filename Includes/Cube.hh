@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Wed Jun  3 18:31:04 2015 Alexander Saenen
+// Last update Thu Jun 11 20:09:24 2015 Alexander Saenen
 //
 
 #ifndef CUBE_HH_
@@ -18,11 +18,13 @@
 # include <glm/glm.hpp>
 # include <glm/gtc/matrix_transform.hpp>
 # include <iostream>
+# include <ModulesManager.hpp>
+# include <TexturesModule.hh>
 # include <Shape.hh>
 
 class	Cube : public IComponent, public Shape
 {
-  gdl::Texture	_texture;
+  gdl::Texture	*_texture;
   gdl::Geometry	_geometry;
   float		_speed;
 

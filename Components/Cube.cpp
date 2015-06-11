@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Fri Jun  5 14:44:05 2015 Alexander Saenen
+// Last update Thu Jun 11 20:08:24 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -15,10 +15,9 @@ Cube::Cube() { }
 Cube::~Cube() { }
 
 Cube	*Cube::setTexture(const std::string &texturePath) {
- if (_texture.load(texturePath) == false) {
-    throw ArgException("Cannot load the cube texture : " + texturePath);
-  }
- return (this);
+  _texture = ModulesManager::getInstance()->get<TexturesModule>()
+    ->getInstance(texturePath);
+  return (this);
 }
 
 void	Cube::initialize(Event *) {
@@ -61,7 +60,7 @@ void	Cube::initialize(Event *) {
 void	Cube::update(const gdl::Clock &, gdl::Input &) { }
 
 void	Cube::draw(gdl::AShader &shader, const gdl::Clock &) {
-  _texture.bind();
+  _texture->bind();
   _geometry.draw(shader, getTransformation(), GL_QUADS);
 }
 

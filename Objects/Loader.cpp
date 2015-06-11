@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 15:03:33 2015 Alexander Saenen
-// Last update Fri Jun  5 16:19:10 2015 Alexander Saenen
+// Last update Thu Jun 11 20:11:50 2015 Alexander Saenen
 //
 
 #include "Loader.hh"
@@ -76,7 +76,6 @@ void	Loader::execute(Event *)
 	component->initialize(NULL);
 	if (args != "")
 	  component->configure(args);
-	/* add try catch */
 	if (buff == "Cube")
 	  loadTexture(component, go);
 	go->pushComponent(component);

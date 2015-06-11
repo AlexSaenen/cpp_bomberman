@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Thu Jun 11 18:30:05 2015 Thibaud PEAUGER
+// Last update Thu Jun 11 20:13:37 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -38,19 +38,19 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
        it != _rotationMap.end() && !hasTranslated; ++it)
     if (input.getKey((*it).first)) {
 
-      Event	*ev = new Event("Music.play");
-      std::string	param("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
-      std::string	name("FILE");
-      std::string	music;
-      std::string	type;
+      // Event	*ev = new Event("Music.play");
+      // std::string	param("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
+      // std::string	name("FILE");
+      // std::string	music;
+      // std::string	type;
 
-      ev->set<std::string>(name, param);
-      music = "MUSIC";
-      type = "TYPE";
-      ev->set<std::string>(type, music);
-      ModulesManager::getInstance()->get<EventModule>()
-	->trigger(ev)
-	->handle();
+      // ev->set<std::string>(name, param);
+      // music = "MUSIC";
+      // type = "TYPE";
+      // ev->set<std::string>(type, music);
+      // ModulesManager::getInstance()->get<EventModule>()
+      // 	->trigger(ev)
+      // 	->handle();
 
       hasTranslated = true;
       _rotation.y = _rotationMap[(*it).first];

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:04:34 2015 Alexander Saenen
-// Last update Fri Jun  5 14:34:47 2015 Alexander Saenen
+// Last update Thu Jun 11 20:26:56 2015 Alexander Saenen
 //
 
 #ifndef BOMBERMAN_HH_
@@ -17,6 +17,10 @@
 # include "GameRoutine.hh"
 # include "GameModule.hh"
 # include "MenuModule.hh"
+# include "RangeException.hh"
+# include "ArgException.hh"
+# include "LogicException.hh"
+# include "RuntimeException.hh"
 # include "Functor.hpp"
 # include "Event.hh"
 

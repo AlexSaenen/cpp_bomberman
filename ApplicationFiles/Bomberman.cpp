@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:02:03 2015 Alexander Saenen
-// Last update Thu Jun 11 18:02:04 2015 Alexander Saenen
+// Last update Thu Jun 11 20:31:09 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"

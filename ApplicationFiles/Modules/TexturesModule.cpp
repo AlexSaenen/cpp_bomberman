@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 16:18:18 2015 Alexander Saenen
-// Last update Thu Jun 11 16:32:15 2015 Alexander Saenen
+// Last update Thu Jun 11 20:18:26 2015 Alexander Saenen
 //
 
 #include <TexturesModule.hh>
@@ -22,7 +22,8 @@ TexturesModule::~TexturesModule() {
 gdl::Texture	*TexturesModule::getInstance(const std::string &texture) {
   if (_textureInstances.find(texture) == _textureInstances.end()) {
     gdl::Texture	*_texture = new gdl::Texture;
-    _texture->load(texture);
+    if (_texture->load(texture) == false)
+      throw ArgException("Cannot load the cube texture : " + texture);
     _textureInstances[texture] = _texture;
   }
   return (_textureInstances[texture]);

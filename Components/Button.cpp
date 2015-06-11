@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Thu Jun 11 18:23:09 2015 Alexander Saenen
+// Last update Thu Jun 11 20:32:17 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -62,7 +62,7 @@ void	Button::draw(gdl::AShader &shader, const gdl::Clock &clock) {
       strm << _position.x;
       strm << " ";
       strm << _position.z;
-      strm << " 2 270 0 90 0.028 0.028 0.028";
+      strm << " 2 270 0 90 0.028 0.028 0.028 bomb";
       _cursor->configure(strm.str());
     }
     _cursor->draw(shader, clock);
