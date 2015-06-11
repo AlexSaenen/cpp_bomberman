@@ -12,10 +12,12 @@
 # define PLAYER_HH_
 
 # include <ObjModel.hh>
+# include <GameModule.hh>
 
 class	Player : public ObjModel
 {
 protected:
+  GameModule	*_gameModule;
   bool		_isMoving;
   double	_animLocked;
   int		_lastMovement;

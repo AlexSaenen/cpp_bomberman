@@ -11,7 +11,9 @@
 #include "Player.hh"
 
 Player::Player()
-  : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) { }
+  : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) {
+  _gameModule = ModulesManager::getInstance()->get<GameModule>();
+}
 
 Player::~Player() { }
 
@@ -26,6 +28,7 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
 
   if (!_isInitialized)
     _initialize();
+  _gameModule->popOnMap(_position.x, _position.y, _type);
   _lastMovement = 0;
   for (std::map<int, int>::const_iterator it = _rotationMap.begin();
        it != _rotationMap.end() && !hasTranslated; ++it)
@@ -43,6 +46,7 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
     _isMoving = false;
     _model.pause(true);
   }
+  _gameModule->pushOnMap(_position.x, _position.y, _type);
 }
 
 void    Player::playAnimation(const std::string &animation, bool loop) {

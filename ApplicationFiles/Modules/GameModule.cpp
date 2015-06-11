@@ -47,7 +47,7 @@ void	GameModule::markForCleanup(GameObject *object) {
   _garbage.push_back(object);
 }
 
-std::list<GameObject::ObjectType>	GameModule::getObject(int x, int y) {
+std::list<GameObject::ObjectType>	&GameModule::getObject(int x, int y) {
   return ((_gameMap[x])[y]);
 }
 
@@ -76,6 +76,13 @@ void					GameModule::pushOnMap(GameObject *object) {
   }
 }
 
+void                                    GameModule::pushOnMap(int x, int y, GameObject::ObjectType type) {
+
+  if (_gameMap.find(x) == _gameMap.end())
+    _gameMap[x] = std::map<int, std::list<GameObject::ObjectType> >();
+  ((_gameMap[x])[y]).push_back(type);
+}
+
 void						GameModule::popOnMap(GameObject *object) {
   Shape						*shape = NULL;
   std::list<IComponent *>			gameComponents;
@@ -98,6 +105,29 @@ void						GameModule::popOnMap(GameObject *object) {
     while (typeIt != ((_gameMap[shape->getPosX()])[shape->getPosY()]).end()) {
       if (*typeIt == object->getType()) {
 	((_gameMap[shape->getPosX()])[shape->getPosY()]).erase(typeIt);
+	break;
+	typeIt++;
+      }
+    }
+  } catch(LogicException e) {
+    std::cerr<< e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Engine.error", 1001)
+      ->handle();
+  }
+}
+
+void                                            GameModule::popOnMap(int x, int y, GameObject::ObjectType type) {
+  std::list<GameObject::ObjectType>             types;
+  std::list<GameObject::ObjectType>::iterator   typeIt;
+
+  try {
+    if (_gameMap.find(x) == _gameMap.end())
+      throw LogicException("GameObject isn't in the map.");
+    typeIt = ((_gameMap[x])[y]).begin();
+    while (typeIt != ((_gameMap[x])[y]).end()) {
+      if (*typeIt == type) {
+	((_gameMap[x])[y]).erase(typeIt);
 	break;
 	typeIt++;
       }

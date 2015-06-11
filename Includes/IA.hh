@@ -13,20 +13,23 @@
 
 # include <GameModule.hh>
 # include <Player.hh>
+# include <GameObject.hh>
+# include <algorithm>
 
 class	IA : public Player
 {
 private:
   class		Coor
   {
-    int		_x;
-    int		_y;
-    int		_type;
+    int		x;
+    int		y;
+    int		type;
   };
   
 private:
   GameModule		*_gameModule;
-  Coor			_me;
+  GameRoutine		*_gameRoutine;
+  //  Coor			_me;
   std::list<Coor>	_map;
   std::list<Coor>	_players;
   std::list<Coor>	_bombs;
@@ -40,7 +43,8 @@ public:
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);
 
 private:
-  Coor		_radar();
+  int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
+  Coor		_radar(Coor &);
 };
 
 #endif /* IA.hh */
