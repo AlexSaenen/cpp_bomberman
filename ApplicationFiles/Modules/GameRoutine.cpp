@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Thu Jun 11 20:30:12 2015 Alexander Saenen
+// Last update Thu Jun 11 22:04:35 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -50,15 +50,6 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
-
-  Player	*one = new PlayerOne;
-  GameObject	*go = new GameObject(GameObject::PLAYER1, "player");
-  one->initialize(0);
-  one->configure("0 0 3 0 0 0 1 1 1 player1");
-  go->pushComponent(one);
-  ModulesManager::getInstance()->get<GameModule>()
-    ->handle(go);
-
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000)
     ->observe(std::string("Display.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
