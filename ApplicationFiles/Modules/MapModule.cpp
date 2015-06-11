@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Thu Jun 11 15:59:32 2015 Alexander Saenen
+// Last update Thu Jun 11 19:05:41 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
@@ -41,6 +41,7 @@ int     MapModule::getSize() const {
 
 void    MapModule::setSize(const int size) {
   _size = size;
+}
 
 bool	MapModule::isLoaded() const {
   return (_hasTextures);

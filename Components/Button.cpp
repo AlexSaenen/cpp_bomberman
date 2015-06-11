@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Thu Jun 11 17:44:49 2015 Alexander Saenen
+// Last update Thu Jun 11 18:23:09 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -43,7 +43,7 @@ void	Button::activate() const {
 void	Button::initialize(Event *) { }
 
 void	Button::update(const gdl::Clock &, gdl::Input &input) {
-  if (input.getKey(SDLK_RETURN)) {
+  if (_isSelected && input.getKey(SDLK_RETURN)) {
     if (!_buttonPressed) {
       _buttonPressed = true;
       activate();

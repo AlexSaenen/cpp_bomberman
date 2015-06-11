@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun 10 16:07:49 2015 Alexander Saenen
-// Last update Thu Jun 11 17:25:57 2015 Alexander Saenen
+// Last update Thu Jun 11 18:10:55 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
@@ -60,13 +60,14 @@ void	GameObject::update(const gdl::Clock &clock, gdl::Input &input) {
       _hasPressed = true;
       if (bt && bt->isSelected()) {
 	if (input.getKey(SDLK_UP)) {
-	  std::advance(it, 1);
+	  std::advance(it, 2);
 	  if (it != _gameComponents.end() && static_cast<Button *>(*it) != 0) {
+	    std::advance(it, -1);
 	    bt->select(false);
 	    (static_cast<Button *>(*it))->select(true);
 	    return ;
 	  }
-	  std::advance(it, -1);
+	  std::advance(it, -2);
 	}
 	if (input.getKey(SDLK_DOWN) && it != _gameComponents.begin()) {
 	  std::advance(it, -1);

@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
-## Last update Thu Jun 11 18:00:50 2015 Alexander Saenen
+## Last update Thu Jun 11 19:06:04 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -58,7 +58,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra -g3
+CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl -lfmod
 

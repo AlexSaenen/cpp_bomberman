@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Thu Jun 11 17:27:47 2015 Alexander Saenen
+// Last update Thu Jun 11 19:30:31 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
@@ -56,13 +56,18 @@ void	MenuModule::initialize(Event *) {
     ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
   try {
     MenuSpawner	spawn;
-    MenuModule::MenuPage	homeButtons[4] = { NEW, NSCORE, NOPTIONS, EXIT };
-    _activePage = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_home_new.tga", homeButtons, 4);
-    _pages.insert(std::make_pair<MenuPage, GameObject *>(HOME, _activePage));
-    MenuModule::MenuPage	optionsButtons[3] = { MVOLUME, SVOLUME, HOME };
-    _pages.insert(std::make_pair<MenuPage, GameObject *>
-		  (OPTIONS, spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_options.tga",
-						 optionsButtons, 3)));
+    MenuPage	hButtons[4] = { NEW, NSCORE, NOPTIONS, EXIT };
+    _activePage = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_home_new.tga", hButtons, 4);
+    _pages[HOME] = _activePage;
+    MenuPage	oButtons[3] = { MVOLUME, SVOLUME, HOME };
+    _pages[NOPTIONS] = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_options.tga", oButtons, 3);
+    MenuPage	cButtons[2] = { SINGLEPLAYER, MULTIPLAYER };
+    _pages[NEW] = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_type.tga", cButtons, 2);
+    MenuPage	mButtons[2] = { DEFAULT, RANDOM };
+    _pages[SINGLEPLAYER] = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_map.tga", mButtons, 2);
+    _pages[MULTIPLAYER] = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_map.tga", mButtons, 2);
+    MenuPage	rButtons[4] = { PLAY, NIA, SIZE, HOME };
+    _pages[RANDOM] = spawn.createMenuPage("./GraphicsLib/assets/Textures/menu_random.tga", rButtons, 4);
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()

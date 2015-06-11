@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Thu Jun 11 10:40:24 2015 Alexander Saenen
+// Last update Thu Jun 11 19:21:30 2015 Alexander Saenen
 //
 
 #ifndef MENUMODULE_HH_
@@ -39,7 +39,10 @@ public:
     DEFAULT,
     SVOLUME,
     MVOLUME,
-    RANDOM
+    RANDOM,
+    PLAY,
+    NIA,
+    SIZE
   };
 
 private:
