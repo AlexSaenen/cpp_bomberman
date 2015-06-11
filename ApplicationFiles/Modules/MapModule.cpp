@@ -11,7 +11,9 @@
 #include <MapModule.hh>
 
 MapModule::MapModule()
-  : _hasTextures(false) { }
+  : _hasTextures(false) {
+  _size = 0;
+}
 
 MapModule::~MapModule() { }
 
@@ -30,4 +32,12 @@ std::string	MapModule::getTexturePath(const std::string &textureType) const {
   if (it == _textureMap.end())
     throw ArgException("Trying to load a texture that doesn't exist");
   return ((*it).second);
+}
+
+int     MapModule::getSize() const {
+  return (_size);
+}
+
+void    MapModule::setSize(const int size) {
+  _size = size;
 }

@@ -17,6 +17,14 @@
 class	Player : public ObjModel
 {
 protected:
+  enum  BonusType
+    {
+      BOMB,
+      SPEED,
+      RANGE,
+    };
+  
+protected:
   GameModule	*_gameModule;
   bool		_isMoving;
   double	_animLocked;
@@ -24,6 +32,7 @@ protected:
   bool		_isInitialized;
   std::map<int, int>		_rotationMap;
   std::map<int, glm::vec3>	_translationMap;
+  std::map<BonusType, int>	_inventory;
 
 protected:
   void	_initialize();
@@ -37,6 +46,9 @@ public:
   void  playAnimation(const std::string &animation, bool loop = true);
   void  playAnimation(int stack, bool loop = true);
   void  playSubAnim(const std::string &subAnimation, bool loop = true);
+
+  int	getLevel(const BonusType&);
+  void	incrLevel(const BonusType&);
 };
 
 #endif /* Player.hh */

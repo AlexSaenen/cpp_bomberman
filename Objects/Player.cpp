@@ -14,6 +14,9 @@
 Player::Player()
   : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) {
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
+  _inventory[BOMB] = 1;
+  _inventory[SPEED] = 10;
+  _inventory[RANGE] = 2;
 }
 
 Player::~Player() { }
@@ -90,4 +93,12 @@ void    Player::playSubAnim(const std::string &subAnimation, bool loop) {
   if (!_model.setCurrentSubAnim(subAnimation, loop)) {
     throw RuntimeException("Couldn't launch the subAnimation");
   }
+}
+
+int	Player::getLevel(const BonusType &bt) {
+  return (_inventory[bt]);
+}
+
+void	Player::incrLevel(const BonusType &bt) {
+  _inventory[bt]++;
 }

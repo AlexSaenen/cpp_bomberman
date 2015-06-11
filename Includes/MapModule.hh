@@ -22,13 +22,16 @@ class	MapModule : public AModule
 {
   std::map<std::string, std::string>	_textureMap;
   bool					_hasTextures;
+  int					_size;
 
 public:
   MapModule();
   virtual ~MapModule();
 
-  void	loadMapValues();
+  void		loadMapValues();
   std::string	getTexturePath(const std::string &textureType) const;
+  int		getSize() const;
+  void		setSize(const int size);
 };
 
 #endif /* MapModule.hh */
