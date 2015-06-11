@@ -1,11 +1,11 @@
 ##
-## Makefile for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
+## Makefile for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 ## 
 ## Made by Alexander Saenen
 ## Login   <saenen_a@epitech.net>
 ## 
-## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Thu Jun 11 17:50:40 2015 Alexander Saenen
+## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
+## Last update Thu Jun 11 18:00:50 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -37,6 +37,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)$(MODDIR)GameModule.cpp \
 		  $(APPDIR)$(MODDIR)MapModule.cpp \
 		  $(APPDIR)$(MODDIR)MusicModule.cpp \
+		  $(APPDIR)$(MODDIR)Sound.cpp \
 		  $(APPDIR)$(MODDIR)MenuModule.cpp \
 		  $(APPDIR)$(MODDIR)TexturesModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \

@@ -1,11 +1,11 @@
 //
-// GameRoutine.cpp for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
+// GameRoutine.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Wed Jun 10 20:32:01 2015 Alexander Saenen
+// Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
+// Last update Thu Jun 11 18:01:41 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -25,6 +25,10 @@ GameRoutine::~GameRoutine() {
     }
   }
 }
+
+#include <PlayerOne.hh>
+#include <GameObject.hh>
+#include <GameModule.hh>
 
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
@@ -46,6 +50,14 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
+  Player	*one = new PlayerOne;
+  GameObject	*go = new GameObject(GameObject::PLAYER1, "player");
+  one->configure("./GraphicsLib/assets/archer.fbx", GameObject::PLAYER1);
+  one->initialize(NULL);
+  go->pushComponent(one);
+  ModulesManager::getInstance()->get<GameModule>()
+    ->handle(go);
+
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000)
     ->observe(std::string("Display.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
