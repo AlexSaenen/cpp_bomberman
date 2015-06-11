@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Thu Jun 11 12:27:44 2015 Thibaud PEAUGER
+// Last update Thu Jun 11 18:30:05 2015 Thibaud PEAUGER
 //
 
 #include "Player.hh"
@@ -36,7 +36,7 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
     if (input.getKey((*it).first)) {
 
       Event	*ev = new Event("Music.play");
-      std::string	param("GraphicsLib/assets/toto.mp3");
+      std::string	param("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
       std::string	name("FILE");
       std::string	music;
       std::string	type;
