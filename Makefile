@@ -1,11 +1,11 @@
 ##
-## Makefile for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
+## Makefile for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 ## 
 ## Made by Alexander Saenen
 ## Login   <saenen_a@epitech.net>
 ## 
-## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Wed Jun 10 16:44:31 2015 Thibaud PEAUGER
+## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
+## Last update Thu Jun 11 18:00:50 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -39,24 +39,26 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)$(MODDIR)MusicModule.cpp \
 		  $(APPDIR)$(MODDIR)Sound.cpp \
 		  $(APPDIR)$(MODDIR)MenuModule.cpp \
+		  $(APPDIR)$(MODDIR)TexturesModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \
-		  $(SRCDIR)Event.cpp \
 		  $(CMPDIR)Cube.cpp \
 		  $(CMPDIR)ObjModel.cpp \
 		  $(CMPDIR)Wallpaper.cpp \
 		  $(CMPDIR)Button.cpp \
-		  $(SRCDIR)Player.cpp \
-		  $(SRCDIR)PlayerOne.cpp \
-		  $(SRCDIR)PlayerTwo.cpp \
-		  $(SRCDIR)Bomb.cpp \
-		  $(SRCDIR)IA.cpp \
+		  $(CMPDIR)Player.cpp \
+		  $(CMPDIR)PlayerOne.cpp \
+		  $(CMPDIR)PlayerTwo.cpp \
+		  $(CMPDIR)Bomb.cpp \
+		  $(CMPDIR)IA.cpp \
+		  $(SRCDIR)Event.cpp \
+		  $(SRCDIR)MenuSpawner.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \
 		  $(SRCDIR)Loader.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra -g3
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl -lfmod
 

@@ -1,11 +1,11 @@
 //
-// GameRoutine.cpp for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
+// GameRoutine.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Wed Jun 10 16:55:43 2015 Thibaud PEAUGER
+// Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
+// Last update Thu Jun 11 18:01:41 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -34,7 +34,7 @@ bool	GameRoutine::initialize() {
   glm::mat4	projection;
   glm::mat4	transformation;
 
-  if (!_context.start(1280, 768, "Bomb the House")) {
+  if (!_context.start(1280, 720, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
     return (false);
   }
