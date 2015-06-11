@@ -5,10 +5,11 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Tue Jun  2 17:44:58 2015 Alexander Saenen
+// Last update Thu Jun 11 12:27:44 2015 Thibaud PEAUGER
 //
 
 #include "Player.hh"
+#include "ModulesManager.hpp"
 
 Player::Player()
   : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) { }
@@ -30,6 +31,21 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
   for (std::map<int, int>::const_iterator it = _rotationMap.begin();
        it != _rotationMap.end() && !hasTranslated; ++it)
     if (input.getKey((*it).first)) {
+
+      Event	*ev = new Event("Music.play");
+      std::string	param("GraphicsLib/assets/toto.mp3");
+      std::string	name("FILE");
+      std::string	music;
+      std::string	type;
+
+      ev->set<std::string>(name, param);
+      music = "MUSIC";
+      type = "TYPE";
+      ev->set<std::string>(type, music);
+      ModulesManager::getInstance()->get<EventModule>()
+	->trigger(ev)
+	->handle();
+
       hasTranslated = true;
       _rotation.y = _rotationMap[(*it).first];
       translate(_translationMap[(*it).first] * static_cast<float>(clock.getElapsed()) * _speed);

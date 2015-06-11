@@ -1,43 +1,51 @@
 //
-// Sound.hh for  in /home/peauge_t/rendu/cpp_bomberman/Fmod
+// MusicModule.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
-// Made by Thibaud PEAUGER
-// Login   <peauge_t@epitech.net>
+// Made by Alexander Saenen
+// Login   <saenen_a@epitech.net>
 // 
-// Started on  Sun Jun  7 22:39:21 2015 Thibaud PEAUGER
-// Last update Mon Jun  8 16:42:37 2015 Thibaud PEAUGER
+// Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
+// Last update Thu Jun 11 12:08:45 2015 Thibaud PEAUGER
 //
 
-#ifndef		_SOUND_HH_
-# define	_SOUND_HH_
+#ifndef _SOUND_HH_
+# define _SOUND_HH_
 
-# include <cstdlib>
-# include <cstdio>
+# include <ModulesManager.hpp>
 # include <SDL/SDL.h>
 # include <SDL/SDL_image.h>
 # include <fmod.h>
+# include <Event.hh>
 # include <string>
 # include <iostream>
 
-class		Sound
+class	Sound : public AModule
 {
-private:
-
-  FMOD_SYSTEM *system;
-  FMOD_SOUND *s;
-  FMOD_RESULT ret;
-  FMOD_CHANNELGROUP *chan;
-  FMOD_BOOL state;
-  std::string path;
+  FMOD_SYSTEM	*system;
+  FMOD_SOUND	*sound;
+  FMOD_RESULT	ret;
+  FMOD_CHANNELGROUP *chan_grp;
+  FMOD_BOOL	state;
+  std::string const	path_file;
+  std::string const	type;
+  double	_musicVolume;
+  double	_soundVolume;
+  bool		_playMusic;
+  bool		_playSound;
 
 public:
+  Sound(std::string const, std::string const, double const);
+  virtual ~Sound();
 
-  Sound(std::string const &_path);
-  ~Sound();
+  std::string	getPath() const;
 
-  void	play();
-  void	pause();
-  void	unpause();
+  void	initialize();
+  void	setVolume(double const volume);
+  void	volumeMusic(const double increase = 0.05);
+  void	volumeSound(const double increase = 0.05);
+  void	toggleMusic(const bool status);
+  void	toggleSound(const bool status);
+  void	playFile();
 };
 
-#endif		/* Sound.hh */
+#endif /* Sound.hh */

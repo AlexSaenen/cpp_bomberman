@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Mon Jun  8 18:18:42 2015 Thibaud PEAUGER
+// Last update Thu Jun 11 11:53:24 2015 Thibaud PEAUGER
 //
 
 #ifndef MUSICMODULE_HH_
@@ -18,31 +18,28 @@
 # include <Event.hh>
 # include <string>
 # include <iostream>
+# include <list>
+# include "Sound.hh"
 
 class	MusicModule : public AModule
 {
-  double	_musicVolume;
-  double	_soundVolume;
-  bool		_playMusic;
-  bool		_playSound;
-  FMOD_SYSTEM	*system;
-  FMOD_SOUND	*sound;
-  FMOD_RESULT	ret;
-  FMOD_CHANNELGROUP *chan;
-  FMOD_BOOL	state;
-  std::string	path_file;
-  std::string	type;
+  std::list<Sound *> listSound;
+  double	musicVolume;
+  double        soundVolume;
 
 public:
   MusicModule();
   virtual ~MusicModule();
 
-  void	initialize(Event *);
-  void	volumeMusic(const double increase = 0.05);
-  void	volumeSound(const double increase = 0.05);
-  void	toggleMusic(const bool status);
-  void	toggleSound(const bool status);
-  void	playFile();
+  double	getMusicVolume() const;
+  void		setMusicVolume(double const);
+  double	getSoundVolume() const;
+  void		setSoundVolume(double const);
+
+  bool		checkIn(std::string const& path, std::string const& type);
+  void		addSound(Event *);
+  void		removeSound(std::string const& path);
+  void		clearList();
 };
 
 #endif /* MusicModule.hh */
