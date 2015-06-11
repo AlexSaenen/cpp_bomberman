@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Mon Apr 27 12:06:58 2015 Alexander Saenen
-## Last update Tue Jun  9 15:40:30 2015 Thibaud PEAUGER
+## Last update Wed Jun 10 16:44:31 2015 Thibaud PEAUGER
 ##
 
 CXX		= g++
@@ -37,6 +37,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)$(MODDIR)GameModule.cpp \
 		  $(APPDIR)$(MODDIR)MapModule.cpp \
 		  $(APPDIR)$(MODDIR)MusicModule.cpp \
+		  $(APPDIR)$(MODDIR)Sound.cpp \
 		  $(APPDIR)$(MODDIR)MenuModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \
 		  $(SRCDIR)Event.cpp \

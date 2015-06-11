@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 13:52:34 2015 Alexander Saenen
-// Last update Mon Jun  8 16:43:34 2015 Alexander Saenen
+// Last update Wed Jun 10 16:55:43 2015 Thibaud PEAUGER
 //
 
 #include <GameRoutine.hh>
@@ -25,6 +25,10 @@ GameRoutine::~GameRoutine() {
     }
   }
 }
+
+#include <PlayerOne.hh>
+#include <GameObject.hh>
+#include <GameModule.hh>
 
 bool	GameRoutine::initialize() {
   glm::mat4	projection;
@@ -46,6 +50,14 @@ bool	GameRoutine::initialize() {
   _shader.bind();
   _shader.setUniform("view", transformation);
   _shader.setUniform("projection", projection);
+  Player	*one = new PlayerOne;
+  GameObject	*go = new GameObject(GameObject::PLAYER1, "player");
+  one->configure("./GraphicsLib/assets/archer.fbx", GameObject::PLAYER1);
+  one->initialize(NULL);
+  go->pushComponent(one);
+  ModulesManager::getInstance()->get<GameModule>()
+    ->handle(go);
+
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000)
     ->observe(std::string("Display.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);

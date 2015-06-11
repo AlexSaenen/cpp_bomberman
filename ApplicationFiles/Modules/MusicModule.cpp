@@ -5,61 +5,73 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Mon Jun  8 18:16:28 2015 Thibaud PEAUGER
+// Last update Thu Jun 11 12:29:14 2015 Thibaud PEAUGER
 //
 
 #include <MusicModule.hh>
 #include <Event.hh>
 
 MusicModule::MusicModule()
-  : _musicVolume(50), _soundVolume(50), _playMusic(true), _playSound(true) {
+  : musicVolume(0.5), soundVolume(0.5) {
+}
+
+void	MusicModule::clearList() {
+  while (!listSound.empty())
+    {
+      delete listSound.front();
+      listSound.pop_front();
+    }
 }
 
 MusicModule::~MusicModule() {
-  FMOD_Sound_Release(sound);
-  FMOD_System_Close(system);
-  FMOD_System_Release(system);
 }
 
-void	MusicModule::initialize(Event *ev) {
+double	MusicModule::getMusicVolume() const {
+  return (musicVolume);
+}
+
+void	MusicModule::setMusicVolume(double const _volume) {
+  musicVolume = _volume;
+}
+
+double	MusicModule::getSoundVolume() const {
+  return (soundVolume);
+}
+
+void	MusicModule::setSoundVolume(double const _volume) {
+  soundVolume = _volume;
+}
+
+bool	MusicModule::checkIn(std::string const& path_file, std::string const& type) {
+  for (std::list<Sound *>::iterator it = listSound.begin(); it != listSound.end(); ++it)
+    if ((*it)->getPath() == path_file)
+      {
+	if (type == "MUSIC")
+	  (*it)->setVolume(musicVolume);
+	else
+	  (*it)->setVolume(soundVolume);
+	(*it)->playFile();
+	return (true);
+      }
+  return (false);
+}
+
+void	MusicModule::addSound(Event *ev)
+{
+  std::string	path_file;
+  std::string	type;
+
   path_file = ev->get<std::string>("FILE");
   type = ev->get<std::string>("TYPE");
-  FMOD_System_Create(&system);
-  FMOD_System_Init(system, 1, FMOD_INIT_NORMAL, NULL);
-  ret = FMOD_System_CreateSound(system, path_file.c_str(), FMOD_2D | FMOD_CREATESTREAM, 0, &sound);
-  if (ret != FMOD_OK)
-    std::cout << "Music path invalid" << std::endl; // throw
-  FMOD_System_GetMasterChannelGroup(system, &chan);
-  FMOD_ChannelGroup_GetPaused(chan, &state);
-}
-
-void	MusicModule::volumeMusic(const double increase) {
-  _musicVolume += increase;
-  if (_musicVolume > 100)
-    _musicVolume = 100;
-  else if (_musicVolume < 0)
-    _musicVolume = 0;
-}
-
-void	MusicModule::volumeSound(const double increase) {
-  _soundVolume += increase;
-  if (_soundVolume > 100)
-    _soundVolume = 100;
-  else if (_soundVolume < 0)
-    _soundVolume = 0;
-}
-
-void	MusicModule::toggleMusic(const bool status) {
-  _playMusic = status;
-}
-
-void	MusicModule::toggleSound(const bool status) {
-  _playSound = status;
-}
-
-void	MusicModule::playFile() {
-
-  //FMOD_Channel_SetVolume(chan, _soundVolume);
-  if ((type == "MUSIC" && _playMusic) || (type == "SOUND" && _playSound))
-    FMOD_System_PlaySound(system, sound, chan, state, NULL);
+  if (checkIn(path_file, type) == false)
+    {
+      Sound	*s = new Sound(path_file, type, soundVolume);
+      s->initialize();
+      if (type == "MUSIC")
+	s->setVolume(musicVolume);
+      else
+	s->setVolume(soundVolume);
+      s->playFile();
+      listSound.push_back(s);
+    }
 }

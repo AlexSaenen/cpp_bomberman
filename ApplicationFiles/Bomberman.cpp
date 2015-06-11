@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 18:26:20 2015 Alexander Saenen
-// Last update Mon Jun  8 18:16:17 2015 Thibaud PEAUGER
+// Last update Wed Jun 10 16:29:17 2015 Thibaud PEAUGER
 //
 
 #include "Bomberman.hh"
@@ -22,7 +22,7 @@ Bomberman::Bomberman(const int , const char **):
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
     // ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(new MenuModule, &MenuModule::initialize), 800)
     ->observe(std::string("Bomberman.init"), new Functor<Loader>(new Loader, &Loader::execute), 600)
-    ->observe(std::string("Music.play"), new Functor<MusicModule>(new MusicModule, &MusicModule::initialize), 1000);
+    ->observe(std::string("Music.play"), new Functor<MusicModule>(new MusicModule, &MusicModule::addSound), 1000);
 }
 
 Bomberman::~Bomberman() {
