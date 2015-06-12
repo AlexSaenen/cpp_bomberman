@@ -1,11 +1,11 @@
 //
-// MenuModule.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// MenuModule.cpp for  in /home/peauge_t/rendu/cpp_bomberman
 // 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
+// Made by Thibaud PEAUGER
+// Login   <peauge_t@epitech.net>
 // 
-// Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Fri Jun 12 15:50:51 2015 Alexander Saenen
+// Started on  Fri Jun 12 16:29:58 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 17:24:49 2015 Thibaud PEAUGER
 //
 
 #include <MenuModule.hh>
@@ -27,6 +27,13 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->abandon("Display.update", 1001)
       ->abandon("Display.draw", 1001);
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
+    std::string     state("PAUSE");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), state);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 10, -10))
       ->set3Dimension()
@@ -37,6 +44,12 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
       ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
+    std::string     state("PAUSE");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), state);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 1.57, 0))
       ->set3Dimension(false)
