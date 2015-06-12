@@ -5,15 +5,15 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Fri Jun 12 14:02:07 2015 Alexander Saenen
+// Last update Fri Jun 12 14:18:59 2015 Alexander Saenen
 //
 
 #include <Button.hh>
 
 Button::Button(const MenuModule::MenuPage linkedPage, const bool isSelected)
   : _isSelected(isSelected), _linkedPage(linkedPage), _buttonPressed(true), _cursor(0) {
-  _actions[MenuModule::DEFAULT] = "Menu.default";
-  _actions[MenuModule::PLAY] = "Menu.random";
+  _actions[MenuModule::DEFAULT] = "Maps/default.map";
+  _actions[MenuModule::PLAY] = "Maps/random.map";
   _actions[MenuModule::EXIT] = "Bomberman.quit";
 }
 
@@ -47,9 +47,14 @@ void	Button::activate() const {
     ModulesManager::getInstance()->get<MenuModule>()
       ->activatePage(MenuModule::HOME);
     std::string	event = (*it).second;
-    ModulesManager::getInstance()->get<EventModule>()
-      ->trigger(event)
-      ->handle();
+    if (event == "Bomberman.quit") {
+      ModulesManager::getInstance()->get<EventModule>()
+	->trigger(event)
+	->handle();
+      return ;
+    }
+    Loader	ld(event);
+    ld.execute();
     ModulesManager::getInstance()->get<MenuModule>()
       ->toggle(false);
   }

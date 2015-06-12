@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:47:34 2015 Alexander Saenen
-// Last update Fri Jun 12 12:21:45 2015 Alexander Saenen
+// Last update Fri Jun 12 14:20:17 2015 Alexander Saenen
 //
 
 #ifndef BUTTON_HH_
@@ -13,6 +13,7 @@
 
 # include <IComponent.hpp>
 # include <MenuModule.hh>
+# include <Loader.hh>
 
 class	Button : public IComponent
 {
