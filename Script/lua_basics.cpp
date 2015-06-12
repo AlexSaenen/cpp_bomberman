@@ -1,5 +1,20 @@
 #include "lua_basics.hh"
 
+int my_function(lua_State *L)
+{
+  int argc = lua_gettop(L);
+
+  std::cout << "-- my_function() called with " << argc
+    << " arguments:" << std::endl;
+
+  for ( int n=1; n<=argc; ++n ) {
+    std::cout << "-- argument " << n << ": "
+      << lua_tostring(L, n) << std::endl;
+  }
+  lua_pushnumber(L, 123); // return value
+  return 1; // number of return values
+}
+
 LuaScript::LuaScript()
 {
   _luaVM = luaL_newstate();
@@ -9,40 +24,12 @@ LuaScript::LuaScript()
       return ;
     }
   luaL_openlibs(_luaVM);
-  ua_register(_luaVM, "HostVisible", function_visible);
-  luaL_dofile(_luaVM, "./test.lua");
+  lua_register(_luaVM, "my_function", my_function);
+  std::cerr << "-- Loading file: " << std::endl;
+  luaL_dofile(_luaVM, SCRIPT);
 }
 
 LuaScript::~LuaScript()
 {
   lua_close(_luaVM);
 }
-
-int	function_visible(lua_State* luaVM)
-{
-  lua_pushstring(_luaVM, "helloworld");
-  return (1);
-  // luabridge::LuaRef	getDirection = luabridge::getGlobal(L, "getDirection");
-  // luabridge::LuaRef	getBb = luabridge::getGlobal(L, "getBomb");//charge les fonction dans
-  // lua
-  // int	res = getDirection(5, 0);//call functions and send arguments
-  // int	bb = getBb(B, 5);
-}
-
-// int	lua_basics()
-// {
-//   lua_State*	luaVM;
-//   std::string	str;
-
-//   luaVM = luaL_newstate();
-//   if (luaVM == NULL)
-//     {
-//       std::cout << "initialization error" << std::endl;
-//       return (-1);
-//     }
-//   luaL_openlibs(luaVM);
-//   ua_register(luaVM, "HostVisible", function_visible);
-//   luaL_dofile(luaVM, SCRIPT);
-//   lua_close(luaVM);
-//   return (0);
-// }

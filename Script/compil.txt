@@ -1,1 +1,7 @@
 -llua
+
+installer readline
+make linux
+cp liblua.a /usr/lib /usr/lib64 /usr/include
+
+-llua -ldl

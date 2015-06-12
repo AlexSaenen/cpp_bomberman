@@ -5,5 +5,6 @@ int	main()
   LuaScript	*lua;
 
   lua = new LuaScript();
+  delete lua;
   return (0);
 }

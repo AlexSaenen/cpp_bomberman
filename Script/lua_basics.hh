@@ -3,16 +3,15 @@
 
 #include <iostream>
 #include <string>
-#include <lunar.h>
 
-// extern "C"
-// {
-// #include <lua.h>
-// #include <lauxlib.h>
-// #include <lualib.h>
-// }
+extern "C"
+{
+#include "./lualib/src/lua.h"
+#include "./lualib/src/lauxlib.h"
+#include "./lualib/src/lualib.h"
+}
 
-# define SCRIPT "./script_one.lua"
+# define SCRIPT "./ia.lua"
 
 class	LuaScript
 {
@@ -20,7 +19,6 @@ public:
   LuaScript();
   ~LuaScript();
 
-  int	function_visible(lua_State*);
 private:
   lua_State*	_luaVM;
 };
