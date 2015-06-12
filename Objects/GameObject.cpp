@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun 10 16:07:49 2015 Alexander Saenen
-// Last update Thu Jun 11 18:10:55 2015 Alexander Saenen
+// Last update Fri Jun 12 14:44:44 2015 Thibaud PEAUGER
 //
 
 #include <GameObject.hh>
@@ -24,7 +24,7 @@ GameObject::~GameObject() {
   }
 }
 
-GameObject::GameObject(const GameObject &other) 
+GameObject::GameObject(const GameObject &other)
   : _gameComponents(other._gameComponents), _type(other._type), _name(other._name) { }
 
 GameObject &GameObject::operator=(const GameObject &other) {
@@ -59,6 +59,12 @@ void	GameObject::update(const gdl::Clock &clock, gdl::Input &input) {
       Button	*bt = static_cast<Button *>((*it));
       _hasPressed = true;
       if (bt && bt->isSelected()) {
+	Event	*ev = new Event("Music.play");
+	std::string	name("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
+	std::string	music("MUSIC");
+	ev->set<std::string>(std::string("FILE"), name);
+	ev->set<std::string>(std::string("TYPE"), music);
+	ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
 	if (input.getKey(SDLK_UP)) {
 	  std::advance(it, 2);
 	  if (it != _gameComponents.end() && static_cast<Button *>(*it) != 0) {
