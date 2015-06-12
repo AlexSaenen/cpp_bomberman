@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 15:03:33 2015 Alexander Saenen
-// Last update Fri Jun 12 12:09:16 2015 Alexander Saenen
+// Last update Fri Jun 12 13:43:12 2015 Alexander Saenen
 //
 
 #include "Loader.hh"
@@ -43,8 +43,7 @@ void	Loader::loadTexture(IComponent *component, const GameObject *go) const {
   reinterpret_cast<Cube *>(component)->setTexture(texturePath);
 }
 
-void	Loader::execute(Event *)
-{
+void	Loader::execute(Event *) {
   std::list<GameObject *>	objectList;
   std::string			buff;
   std::string                   args;

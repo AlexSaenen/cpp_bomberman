@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:47:34 2015 Alexander Saenen
-// Last update Thu Jun 11 16:37:30 2015 Alexander Saenen
+// Last update Fri Jun 12 12:21:45 2015 Alexander Saenen
 //
 
 #ifndef BUTTON_HH_
@@ -20,6 +20,7 @@ class	Button : public IComponent
   bool		_isSelected;
   MenuModule::MenuPage	_linkedPage;
   bool		_buttonPressed;
+  std::map<MenuModule::MenuPage, std::string>	_actions;
   ObjModel	*_cursor;
 
 public:

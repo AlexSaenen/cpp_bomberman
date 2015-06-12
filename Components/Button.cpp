@@ -5,13 +5,17 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Thu Jun 11 20:32:17 2015 Alexander Saenen
+// Last update Fri Jun 12 12:42:17 2015 Alexander Saenen
 //
 
 #include <Button.hh>
 
 Button::Button(const MenuModule::MenuPage linkedPage, const bool isSelected)
-  : _isSelected(isSelected), _linkedPage(linkedPage), _buttonPressed(true), _cursor(0) { }
+  : _isSelected(isSelected), _linkedPage(linkedPage), _buttonPressed(true), _cursor(0) {
+  _actions[MenuModule::DEFAULT] = "Menu.default";
+  _actions[MenuModule::PLAY] = "Menu.random";
+  _actions[MenuModule::EXIT] = "Bomberman.quit";
+}
 
 Button::~Button() {
   delete _cursor;
@@ -36,6 +40,17 @@ void	Button::select(const bool isSelected) {
 }
 
 void	Button::activate() const {
+  std::map<MenuModule::MenuPage, std::string>::const_iterator	it;
+
+  it = _actions.find(_linkedPage);
+  if (it != _actions.end()) {
+    ModulesManager::getInstance()->get<MenuModule>()
+      ->activatePage(MenuModule::HOME);
+    std::string	event = (*it).second;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger(event)
+      ->handle();
+  }
   ModulesManager::getInstance()->get<MenuModule>()
     ->activatePage(_linkedPage);
 }

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Fri Jun 12 12:12:50 2015 Alexander Saenen
+// Last update Fri Jun 12 13:47:18 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -27,9 +27,6 @@ GameRoutine::~GameRoutine() {
 }
 
 bool	GameRoutine::initialize() {
-  glm::mat4	projection;
-  glm::mat4	transformation;
-
   if (!_context.start(1280, 720, "Bomb the House")) {
     std::cerr << "Error while trying to start the openGL context" << std::endl;
     return (false);
@@ -41,11 +38,7 @@ bool	GameRoutine::initialize() {
     std::cerr << "Error while trying to load the shaders" << std::endl;
     return (false);
   }
-  projection = glm::perspective(60.0f, 800.0f / 600.0f, 0.1f, 100.0f);
-  transformation = glm::lookAt(glm::vec3(0, 10, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-  _shader.bind();
-  _shader.setUniform("view", transformation);
-  _shader.setUniform("projection", projection);
+  ModulesManager::getInstance()->get<Camera>();
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Display.update"), new Functor<GameRoutine>(this, &GameRoutine::_update), 1000)
     ->observe(std::string("Display.draw"), new Functor<GameRoutine>(this, &GameRoutine::_draw), 1000);
@@ -117,10 +110,12 @@ bool	GameRoutine::update() {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
       ->trigger("Engine.error", 1000)->handle();
+    return (false);
   } catch (RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
       ->trigger("Engine.error", 1000)->handle();
+    return (false);
   }
   return (true);
 }

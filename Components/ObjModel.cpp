@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Thu Jun 11 20:29:59 2015 Alexander Saenen
+// Last update Fri Jun 12 13:38:52 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -38,6 +38,7 @@ void	ObjModel::configure(const std::string &conf) {
   int			type;
   std::string		model;
 
+  std::cout << conf << std::endl;
   *stream >> _position.x;
   *stream >> _position.z;
   *stream >> type;

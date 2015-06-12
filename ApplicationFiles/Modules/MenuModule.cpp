@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Thu Jun 11 19:30:31 2015 Alexander Saenen
+// Last update Fri Jun 12 13:34:21 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
@@ -23,25 +23,23 @@ MenuModule::~MenuModule() {
 }
 
 void	MenuModule::toggle(const bool status) {
-  gdl::BasicShader	*shader;
-  glm::mat4		transformation;
-
-  shader = ModulesManager::getInstance()->get<GameRoutine>()->getShader();
   if (!status && _isActive) {
     ModulesManager::getInstance()->get<EventModule>()
       ->abandon("Display.update", 1001)
       ->abandon("Display.draw", 1001);
-    transformation = glm::lookAt(glm::vec3(0, 10, -10), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
-    shader->bind();
-    shader->setUniform("view", transformation);
+    ModulesManager::getInstance()->get<Camera>()
+      ->setLookAt(glm::vec3(0, 10, -10))
+      ->set3Dimension()
+      ->confirm();
   }
   else if (status && !_isActive) {
     ModulesManager::getInstance()->get<EventModule>()
       ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
       ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
-    transformation = glm::lookAt(glm::vec3(0, 1.57, 0), glm::vec3(0, 0, 0), glm::vec3(-1, 0, 0));
-    shader->bind();
-    shader->setUniform("view", transformation);
+    ModulesManager::getInstance()->get<Camera>()
+      ->setLookAt(glm::vec3(0, 1.57, 0))
+      ->set3Dimension(false)
+      ->confirm();
   }
   _isActive = status;
 }
