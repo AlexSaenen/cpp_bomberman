@@ -6,9 +6,9 @@
 
 extern "C"
 {
-#include "./lualib/src/lua.h"
-#include "./lualib/src/lauxlib.h"
-#include "./lualib/src/lualib.h"
+#include "../LuaLib/src/lua.h"
+#include "../LuaLib/src/lauxlib.h"
+#include "../LuaLib/src/lualib.h"
 }
 
 # define SCRIPT "./ia.lua"
