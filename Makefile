@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
-## Last update Fri Jun 12 13:14:20 2015 Alexander Saenen
+## Last update Fri Jun 12 14:23:13 2015 Vividy
 ##
 
 CXX		= g++
@@ -71,7 +71,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CXX) $(OBJ) $(LIB) -o $(NAME)
-	@echo -e "$(RED)export LD_LIBRARY_PATH=GraphicsLib/libs/$(WHITE)"
+	@echo "$(RED)export LD_LIBRARY_PATH=GraphicsLib/libs/$(WHITE)"
 
 clean:
 	$(RM) $(OBJ)
