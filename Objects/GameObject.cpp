@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun 10 16:07:49 2015 Alexander Saenen
-// Last update Fri Jun 12 14:44:44 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 16:17:48 2015 Thibaud PEAUGER
 //
 
 #include <GameObject.hh>
@@ -61,7 +61,7 @@ void	GameObject::update(const gdl::Clock &clock, gdl::Input &input) {
       if (bt && bt->isSelected()) {
 	Event	*ev = new Event("Music.play");
 	std::string	name("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
-	std::string	music("MUSIC");
+	std::string	music("SOUND");
 	ev->set<std::string>(std::string("FILE"), name);
 	ev->set<std::string>(std::string("TYPE"), music);
 	ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();

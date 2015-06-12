@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Fri Jun 12 13:54:57 2015 Alexander Saenen
+// Last update Fri Jun 12 16:09:13 2015 Thibaud PEAUGER
 //
 
 #include <MenuModule.hh>
@@ -27,6 +27,13 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->abandon("Display.update", 1001)
       ->abandon("Display.draw", 1001);
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
+    std::string     music("MUSIC");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), music);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 10, -10))
       ->set3Dimension()

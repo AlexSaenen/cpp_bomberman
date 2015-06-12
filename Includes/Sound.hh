@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Thu Jun 11 12:08:45 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 15:54:50 2015 Thibaud PEAUGER
 //
 
 #ifndef _SOUND_HH_
@@ -41,6 +41,8 @@ public:
 
   void	initialize();
   void	setVolume(double const volume);
+  void	setLoop();
+  void	pause();
   void	volumeMusic(const double increase = 0.05);
   void	volumeSound(const double increase = 0.05);
   void	toggleMusic(const bool status);

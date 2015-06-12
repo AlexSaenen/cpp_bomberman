@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Thu Jun 11 18:38:39 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 16:19:32 2015 Thibaud PEAUGER
 //
 
 #include <Sound.hh>
@@ -25,7 +25,7 @@ Sound::~Sound() {
 void	Sound::initialize() {
   FMOD_System_Create(&system);
   FMOD_System_Init(system, 1, FMOD_INIT_NORMAL, NULL);
-  ret = FMOD_System_CreateSound(system, path_file.c_str(), FMOD_2D | FMOD_CREATESTREAM, 0, &sound);
+  ret = FMOD_System_CreateSound(system, path_file.c_str(), FMOD_2D | FMOD_CREATESTREAM | FMOD_LOOP_NORMAL, 0, &sound);
   if (ret != FMOD_OK)
     throw RuntimeException("Fmod Couldn't create the sound");
   FMOD_System_GetMasterChannelGroup(system, &chan_grp);
@@ -39,6 +39,18 @@ std::string	Sound::getPath() const
 
 void	Sound::setVolume(double volume) {
   _soundVolume = volume;
+}
+
+void	Sound::setLoop() {
+  FMOD_Sound_SetLoopCount(sound, 0);
+}
+
+void	Sound::pause() {
+  FMOD_ChannelGroup_GetPaused(chan_grp, &state);
+  if (state)
+    FMOD_ChannelGroup_SetPaused(chan_grp, 0);
+  else
+    FMOD_ChannelGroup_SetPaused(chan_grp, 1);
 }
 
 void	Sound::volumeMusic(const double increase) {

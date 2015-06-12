@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Thu Jun 11 12:29:14 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 16:21:16 2015 Thibaud PEAUGER
 //
 
 #include <MusicModule.hh>
@@ -47,9 +47,14 @@ bool	MusicModule::checkIn(std::string const& path_file, std::string const& type)
     if ((*it)->getPath() == path_file)
       {
 	if (type == "MUSIC")
-	  (*it)->setVolume(musicVolume);
+	  {
+	    (*it)->setVolume(musicVolume);
+	  }
 	else
-	  (*it)->setVolume(soundVolume);
+	  {
+	    (*it)->setVolume(soundVolume);
+	    (*it)->setLoop();
+	  }
 	(*it)->playFile();
 	return (true);
       }
@@ -70,7 +75,10 @@ void	MusicModule::addSound(Event *ev)
       if (type == "MUSIC")
 	s->setVolume(musicVolume);
       else
-	s->setVolume(soundVolume);
+	{
+	  s->setVolume(soundVolume);
+	  s->setLoop();
+	}
       s->playFile();
       listSound.push_back(s);
     }

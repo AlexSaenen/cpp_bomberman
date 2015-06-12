@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Fri Jun 12 14:45:58 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 16:18:48 2015 Thibaud PEAUGER
 //
 
 #include <Button.hh>
@@ -44,7 +44,7 @@ void	Button::activate() const {
   it = _actions.find(_linkedPage);
   Event   *ev = new Event("Music.play");
   std::string     name("GraphicsLib/assets/MenuSamples/selectmenu.mp3");
-  std::string     music("MUSIC");
+  std::string     music("SOUND");
   ev->set<std::string>(std::string("FILE"), name);
   ev->set<std::string>(std::string("TYPE"), music);
   ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
