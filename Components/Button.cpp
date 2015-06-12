@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Fri Jun 12 12:42:17 2015 Alexander Saenen
+// Last update Fri Jun 12 14:02:07 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -50,9 +50,12 @@ void	Button::activate() const {
     ModulesManager::getInstance()->get<EventModule>()
       ->trigger(event)
       ->handle();
+    ModulesManager::getInstance()->get<MenuModule>()
+      ->toggle(false);
   }
-  ModulesManager::getInstance()->get<MenuModule>()
-    ->activatePage(_linkedPage);
+  else
+    ModulesManager::getInstance()->get<MenuModule>()
+      ->activatePage(_linkedPage);
 }
 
 void	Button::initialize(Event *) { }

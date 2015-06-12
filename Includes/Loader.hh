@@ -18,6 +18,8 @@
 # include "GameModule.hh"
 # include "MapModule.hh"
 # include "PlayerOne.hh"
+# include "PlayerTwo.hh"
+# include "IA.hh"
 
 class Loader
 {

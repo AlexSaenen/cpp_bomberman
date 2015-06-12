@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 15:03:33 2015 Alexander Saenen
-// Last update Fri Jun 12 13:43:12 2015 Alexander Saenen
+// Last update Fri Jun 12 13:54:34 2015 Alexander Saenen
 //
 
 #include "Loader.hh"
@@ -19,6 +19,8 @@ Loader::Loader() {
       throw ArgException("Cannot open the file : test.conf");
     _constructor["Cube"] = &ComponentFactory::getComponent<Cube>;
     _constructor["PlayerOne"] = &ComponentFactory::getComponent<PlayerOne>;
+    _constructor["PlayerTwo"] = &ComponentFactory::getComponent<PlayerTwo>;
+    _constructor["IA"] = &ComponentFactory::getComponent<IA>;
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
