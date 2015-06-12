@@ -5,7 +5,7 @@
 // Login   <peauge_t@epitech.net>
 // 
 // Started on  Fri Jun 12 16:29:58 2015 Thibaud PEAUGER
-// Last update Fri Jun 12 16:29:59 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 17:24:49 2015 Thibaud PEAUGER
 //
 
 #include <MenuModule.hh>
@@ -29,9 +29,9 @@ void	MenuModule::toggle(const bool status) {
       ->abandon("Display.draw", 1001);
     Event   *ev = new Event("Music.play");
     std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
-    std::string     music("MUSIC");
+    std::string     state("PAUSE");
     ev->set<std::string>(std::string("FILE"), name);
-    ev->set<std::string>(std::string("TYPE"), music);
+    ev->set<std::string>(std::string("TYPE"), state);
     ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
 
     ModulesManager::getInstance()->get<Camera>()
@@ -44,6 +44,12 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<EventModule>()
       ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
       ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
+    std::string     state("PAUSE");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), state);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 1.57, 0))
       ->set3Dimension(false)
