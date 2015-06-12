@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:52:45 2015 Alexander Saenen
-// Last update Wed Jun 10 16:05:36 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 14:43:55 2015 Thibaud PEAUGER
 //
 
 #ifndef EVENT_HH_
@@ -31,7 +31,7 @@ public:
   bool			propagate() const;
   int			priority() const;
 
-  template<typename T> void	set(std::string &name, T &what);
+  template<typename T> void	set(std::string name, T &what);
   template<typename T> T	get(const std::string &name);
 
   void			stop();

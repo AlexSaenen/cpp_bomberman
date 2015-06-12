@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Thu Jun 11 20:13:37 2015 Alexander Saenen
+// Last update Fri Jun 12 15:15:46 2015 Alexander Saenen
 //
 
 #include "Player.hh"

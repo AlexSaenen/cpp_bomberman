@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Thu Jun 11 12:29:14 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 17:27:47 2015 Thibaud PEAUGER
 //
 
 #include <MusicModule.hh>
@@ -46,10 +46,18 @@ bool	MusicModule::checkIn(std::string const& path_file, std::string const& type)
   for (std::list<Sound *>::iterator it = listSound.begin(); it != listSound.end(); ++it)
     if ((*it)->getPath() == path_file)
       {
-	if (type == "MUSIC")
-	  (*it)->setVolume(musicVolume);
+	if (type == "PAUSE")
+	  {
+	    (*it)->pause();
+	    return (true);
+	  }
+	else if (type == "SOUND")
+	  {
+	    (*it)->setVolume(soundVolume);
+	    (*it)->setLoop();
+	  }
 	else
-	  (*it)->setVolume(soundVolume);
+	  (*it)->setVolume(musicVolume);
 	(*it)->playFile();
 	return (true);
       }
@@ -67,11 +75,16 @@ void	MusicModule::addSound(Event *ev)
     {
       Sound	*s = new Sound(path_file, type, soundVolume);
       s->initialize();
-      if (type == "MUSIC")
-	s->setVolume(musicVolume);
+      if (type == "SOUND")
+	{
+	  s->setVolume(soundVolume);
+	  s->setLoop();
+	}
       else
-	s->setVolume(soundVolume);
+	s->setVolume(musicVolume);
       s->playFile();
+      if (type == "PAUSE")
+	s->pause();
       listSound.push_back(s);
     }
 }

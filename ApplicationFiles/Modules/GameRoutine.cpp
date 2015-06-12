@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Fri Jun 12 13:47:18 2015 Alexander Saenen
+// Last update Fri Jun 12 15:55:27 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -123,6 +123,8 @@ bool	GameRoutine::update() {
 void	GameRoutine::draw() {
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
   _shader.bind();
+  ModulesManager::getInstance()->get<Camera>()
+    ->confirm();
   for (int it = 0; it < 9; ++it) {
     GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
     for (size_t i = 0; i < _objects[ot].size(); ++i)

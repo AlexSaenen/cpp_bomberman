@@ -1,9 +1,78 @@
 ralouf 3
 $PlayerOne%0 0 3 0 0 0 0.1 0.1 0.1 player1
 @
-zrgzrgzr 5
-$IA%1 7 5 0 0 0 0.1 0.1 0.1 ia
+Wall 0
+$Cube%2.5 2.5 0
 @
-efzr 4
-$PlayerTwo%3 2 4 0 0 0 0.1 0.1 0.1 player2
+Wall 0
+$Cube%2.5 7.5 0
+@
+Wall 0
+$Cube%2.5 12.5 0
+@
+Wall 0
+$Cube%2.5 17.5 0
+@
+Wall 0
+$Cube%2.5 22.5 0
+@
+Wall 0
+$Cube%7.5 2.5 0
+@
+Wall 0
+$Cube%7.5 7.5 0
+@
+Wall 0
+$Cube%7.5 12.5 0
+@
+Wall 0
+$Cube%7.5 17.5 0
+@
+Wall 0
+$Cube%7.5 22.5 0
+@
+Wall 0
+$Cube%12.5 2.5 0
+@
+Wall 0
+$Cube%12.5 7.5 0
+@
+Wall 0
+$Cube%12.5 12.5 0
+@
+Wall 0
+$Cube%12.5 17.5 0
+@
+Wall 0
+$Cube%12.5 22.5 0
+@
+Wall 0
+$Cube%17.5 2.5 0
+@
+Wall 0
+$Cube%17.5 7.5 0
+@
+Wall 0
+$Cube%17.5 12.5 0
+@
+Wall 0
+$Cube%17.5 17.5 0
+@
+Wall 0
+$Cube%17.5 22.5 0
+@
+Wall 0
+$Cube%22.5 2.5 0
+@
+Wall 0
+$Cube%22.5 7.5 0
+@
+Wall 0
+$Cube%22.5 12.5 0
+@
+Wall 0
+$Cube%22.5 17.5 0
+@
+Wall 0
+$Cube%22.5 22.5 0
 @

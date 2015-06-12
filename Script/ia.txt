@@ -1,0 +1,18 @@
+objet coor
+	x
+	y
+	?
+
+1er function:
+	recoit objet Coor avec 3eme argu (ma porter de bomb)
+	call checkbomb(Coor) (bomb dans perimetr) et recoit un Coor
+	Si dans ce Coor 3eme argu a zero = pas de bomb
+	Do algo....
+	else (si bomb)
+		3eme argu = range
+		x et y = pos bomb
+	chaque deplacement = regarder si bomb. While bomb ce deplacer (call checkbomb avec Coor modifier)
+
+	Si pas de bomb -> call radar function (renvoie Coor)
+	If Coor 3eme argu == 0 (Win)
+	If Coor 3eme argu == 1 (Joueur) x et y = coor jouer

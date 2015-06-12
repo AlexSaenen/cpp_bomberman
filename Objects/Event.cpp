@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:09:26 2015 Alexander Saenen
-// Last update Mon Jun  8 11:02:55 2015 Alexander Saenen
+// Last update Fri Jun 12 14:44:10 2015 Thibaud PEAUGER
 //
 
 #include "Event.hh"
@@ -29,7 +29,7 @@ int	Event::priority() const {
 }
 
 template<typename T>
-void	Event::set(std::string &name, T &what) {
+void	Event::set(std::string name, T &what) {
   this->_parameters.insert(std::make_pair(name, reinterpret_cast<void *>(&what)));
 }
 
@@ -48,5 +48,5 @@ bool	Event::CompareE::operator()(const Event *lhs, const Event *rhs) const {
   return (lhs->priority() < rhs->priority());
 }
 
-template void	Event::set<std::string>(std::string &name, std::string &what);
+template void	Event::set<std::string>(std::string name, std::string &what);
 template std::string	Event::get<std::string>(const std::string &name);
