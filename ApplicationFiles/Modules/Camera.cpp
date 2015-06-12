@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 13:02:38 2015 Alexander Saenen
-// Last update Fri Jun 12 16:13:54 2015 Alexander Saenen
+// Last update Fri Jun 12 16:27:04 2015 Alexander Saenen
 //
 
 #include <Camera.hh>
@@ -62,14 +62,14 @@ void	Camera::confirm() {
       shape = dynamic_cast<Shape *>(*it);
     if (!shape)
       return ;
-    glm::vec3	eye(0, 15, 0);
-    glm::vec3	center(0, 0, 0);
+    glm::vec3	eye(0.1f, 15.1f, 0.1f);
+    glm::vec3	center(0.0f, 0.0f, 0.0f);
     eye.x = shape->getPosX();
     if (eye.x == 0)
       eye.x = 0.001;
     eye.z = shape->getPosY() - 15;
-    center.x = eye.x;
-    center.z = eye.z + 15;
+    center.x = eye.x * 1.0;
+    center.z = eye.z + 15.0;
     transformation = glm::lookAt(eye, center, _up);
   }
   _shader->bind();
