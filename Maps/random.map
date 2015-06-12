@@ -2,5 +2,17 @@ ralouf 3
 $PlayerOne%0 0 3 0 0 0 0.1 0.1 0.1 player1
 @
 efzr 4
-$PlayerTwo%3 2 4 0 0 0 0.1 0.1 0.1 player2
+$PlayerTwo%2 0 4 0 0 0 0.1 0.1 0.1 player2
+@
+cube 0
+$Cube%5 0 0
+@
+cube 0
+$Cube%0 -5 0
+@
+cube 0
+$Cube%5 5 0
+@
+cube 0
+$Cube%-5 -5 0
 @

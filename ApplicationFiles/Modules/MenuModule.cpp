@@ -1,11 +1,11 @@
 //
-// MenuModule.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// MenuModule.cpp for  in /home/peauge_t/rendu/cpp_bomberman
 // 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
+// Made by Thibaud PEAUGER
+// Login   <peauge_t@epitech.net>
 // 
-// Started on  Wed Jun  3 12:02:05 2015 Alexander Saenen
-// Last update Fri Jun 12 16:09:13 2015 Thibaud PEAUGER
+// Started on  Fri Jun 12 16:29:58 2015 Thibaud PEAUGER
+// Last update Fri Jun 12 16:29:59 2015 Thibaud PEAUGER
 //
 
 #include <MenuModule.hh>
@@ -37,6 +37,7 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 10, -10))
       ->set3Dimension()
+      ->followPlayers()
       ->confirm();
   }
   else if (status && !_isActive) {

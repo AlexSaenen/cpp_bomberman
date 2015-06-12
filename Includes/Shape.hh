@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:44:50 2015 Alexander Saenen
-// Last update Wed Jun  3 19:23:47 2015 Alexander Saenen
+// Last update Fri Jun 12 16:26:10 2015 Alexander Saenen
 //
 
 #ifndef SHAPE_HH_
@@ -35,8 +35,8 @@ public:
   void	scale(const glm::vec3 &scale);
 
   glm::mat4	getTransformation() const;
-  int		getPosX() const;
-  int		getPosY() const;
+  float		getPosX() const;
+  float		getPosY() const;
 };
 
 #endif /* Shape.hh */

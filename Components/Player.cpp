@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Thu Jun 11 20:13:37 2015 Alexander Saenen
+// Last update Fri Jun 12 15:15:46 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -37,21 +37,6 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
   for (std::map<int, int>::const_iterator it = _rotationMap.begin();
        it != _rotationMap.end() && !hasTranslated; ++it)
     if (input.getKey((*it).first)) {
-
-      // Event	*ev = new Event("Music.play");
-      // std::string	param("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
-      // std::string	name("FILE");
-      // std::string	music;
-      // std::string	type;
-
-      // ev->set<std::string>(name, param);
-      // music = "MUSIC";
-      // type = "TYPE";
-      // ev->set<std::string>(type, music);
-      // ModulesManager::getInstance()->get<EventModule>()
-      // 	->trigger(ev)
-      // 	->handle();
-
       hasTranslated = true;
       _rotation.y = _rotationMap[(*it).first];
       translate(_translationMap[(*it).first] * static_cast<float>(clock.getElapsed()) * _speed);

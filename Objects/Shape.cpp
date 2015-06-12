@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:47:47 2015 Alexander Saenen
-// Last update Mon Jun  1 17:42:05 2015 Alexander Saenen
+// Last update Fri Jun 12 16:26:00 2015 Alexander Saenen
 //
 
 #include "Shape.hh"
@@ -46,10 +46,10 @@ glm::mat4	Shape::getTransformation() const {
   return (transform);
 }
 
-int	Shape::getPosX() const {
+float	Shape::getPosX() const {
   return (_position.x);
 }
 
-int	Shape::getPosY() const {
-  return (_position.y);
+float	Shape::getPosY() const {
+  return (_position.z);
 }
