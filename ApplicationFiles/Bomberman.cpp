@@ -20,8 +20,7 @@ Bomberman::Bomberman(const int , const char **):
     ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 700);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
-    // ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(ModulesManager::getInstance()->get<MenuModule>(), &MenuModule::initialize), 800)
-    ->observe(std::string("Bomberman.init"), new Functor<Loader>(new Loader, &Loader::execute), 600)
+    ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(ModulesManager::getInstance()->get<MenuModule>(), &MenuModule::initialize), 800)
     ->observe(std::string("Music.play"), new Functor<MusicModule>(new MusicModule, &MusicModule::addSound), 1000);
 }
 

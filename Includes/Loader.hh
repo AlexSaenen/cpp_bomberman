@@ -27,10 +27,13 @@ private:
   std::filebuf *_file;
 
 public:
-  Loader();
+  explicit Loader(const std::string &filename);
   ~Loader();
-  void	loadTexture(IComponent *component, const GameObject *go) const;
-  void	execute(Event *);
+  void	execute();
+
+private:
+  void	_loadTexture(IComponent *component, const GameObject *go) const;
+  std::istream Loader::*_init(const std::string &file);
 };
 
 #endif

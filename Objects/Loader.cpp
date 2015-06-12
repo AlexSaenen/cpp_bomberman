@@ -10,13 +10,13 @@
 
 #include "Loader.hh"
 
-Loader::Loader() {
+Loader::Loader(const std::string &filename) {
   try {
     _file = new std::filebuf();
-    if (_file->open("test.conf", std::ios::in))
+    if (_file->open(filename.c_str(), std::ios::in))
       _is = new std::istream(_file);
     else
-      throw ArgException("Cannot open the file : test.conf");
+      throw ArgException("Cannot open the file : " + filename);
     _constructor["Cube"] = &ComponentFactory::getComponent<Cube>;
     _constructor["PlayerOne"] = &ComponentFactory::getComponent<PlayerOne>;
   } catch (ArgException e) {
@@ -32,7 +32,7 @@ Loader::~Loader() {
   delete _file;
 }
 
-void	Loader::loadTexture(IComponent *component, const GameObject *go) const {
+void	Loader::_loadTexture(IComponent *component, const GameObject *go) const {
   std::string	texturePath;
   if (go->getType() == GameObject::CUBE)
     texturePath = ModulesManager::getInstance()->get<MapModule>()->getTexturePath("cube");
@@ -43,7 +43,7 @@ void	Loader::loadTexture(IComponent *component, const GameObject *go) const {
   reinterpret_cast<Cube *>(component)->setTexture(texturePath);
 }
 
-void	Loader::execute(Event *) {
+void	Loader::execute() {
   std::list<GameObject *>	objectList;
   std::string			buff;
   std::string                   args;
@@ -77,7 +77,7 @@ void	Loader::execute(Event *) {
 	if (args != "")
 	  component->configure(args);
 	if (buff == "Cube")
-	  loadTexture(component, go);
+	  _loadTexture(component, go);
 	go->pushComponent(component);
       }
     gameModule->handle(go);
