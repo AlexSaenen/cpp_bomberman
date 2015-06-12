@@ -55,8 +55,8 @@ int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types)
   return (0);
 }
 
-IA::Coor			IA::_radar() {
-  IA::Coor			result;
+IA::Coor			*IA::_radar() {
+  IA::Coor			*result = new IA::Coor();
   // std::vector<GameObject *>	players;
   // int				min;
   int				i;
@@ -101,18 +101,18 @@ IA::Coor			IA::_radar() {
   return (result);
 }
 
-Coor          &IA::_checkBomb(Coor &) {
-  
+IA::Coor          *IA::_checkBomb(Coor &) {
+  return (NULL);
 }
 
-Coor          &IA::_checkCase(Coor &target) {
+IA::Case          IA::_checkCase(IA::Coor &target) {
   std::list<GameObject::ObjectType>	objects;
 
-  objects = _gameModule->getObject(target->x, target->y);
+  objects = _gameModule->getObject(target.x, target.y);
   for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
-    if (*it->getType() == GameObject::CUBE)
+    if (*it == GameObject::CUBE)
       return (CUBE);
-    if (*it->getType() == GameObject::CUBEDESTR)
+    if (*it == GameObject::CUBEDESTR)
       return (CUBEDESTR);
   }
   return (EMPTY);

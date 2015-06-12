@@ -22,6 +22,7 @@ class	IA : public Player
 private:
   class		Coor
   {
+  public:
     int		x;
     int		y;
     int		type;
@@ -61,9 +62,9 @@ public:
 
 private:
   int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
-  Coor		&_radar();
-  Coor		&_checkBomb(Coor &);
-  Coor		&_checkCase(Coor &);
+  Coor		*_radar();
+  Coor		*_checkBomb(Coor &);
+  Case		_checkCase(Coor &);
 };
 
 #endif /* IA.hh */
