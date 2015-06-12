@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 12:55:54 2015 Alexander Saenen
-// Last update Fri Jun 12 15:44:57 2015 Alexander Saenen
+// Last update Fri Jun 12 17:34:00 2015 Alexander Saenen
 //
 
 #ifndef CAMERA_HH_
@@ -27,6 +27,7 @@ class	Camera : public AModule
   float	_far;
   gdl::BasicShader	*_shader;
   bool		_followPlayers;
+  bool		_isMulti;
 
 public:
   Camera();
@@ -37,6 +38,10 @@ public:
   Camera	*set3Dimension(const bool status = true);
   Camera	*followPlayers(const bool follow = true);
   void		confirm();
+  void		setCameraMode(const bool isMulti);
+
+private:
+  glm::vec3	getPlayerPos(const GameObject::ObjectType type) const;
 };
 
 #endif /* Camera.hh */

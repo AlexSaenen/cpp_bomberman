@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Fri Jun 12 12:44:20 2015 Alexander Saenen
+// Last update Fri Jun 12 18:23:12 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -75,7 +75,6 @@ void					GameModule::pushOnMap(GameObject *object) {
 }
 
 void                                    GameModule::pushOnMap(int x, int y, GameObject::ObjectType type) {
-
   if (_gameMap.find(x) == _gameMap.end())
     _gameMap[x] = std::map<int, std::list<GameObject::ObjectType> >();
   ((_gameMap[x])[y]).push_back(type);
@@ -127,8 +126,8 @@ void                                            GameModule::popOnMap(int x, int 
       if (*typeIt == type) {
 	((_gameMap[x])[y]).erase(typeIt);
 	break;
-	typeIt++;
       }
+      typeIt++;
     }
   } catch(LogicException e) {
     std::cerr<< e.getMessage() << std::endl;
