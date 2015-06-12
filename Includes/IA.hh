@@ -12,6 +12,7 @@
 # define IA_HH_
 
 # include <GameModule.hh>
+# include <MapModule.hh>
 # include <Player.hh>
 # include <GameObject.hh>
 # include <algorithm>
@@ -25,10 +26,26 @@ private:
     int		y;
     int		type;
   };
+
+  enum		Case
+    {
+      EMPTY,
+      CUBE,
+      CUBEDESTR,
+    };
+
+  enum		Action
+    {
+      UP,
+      DOWN,
+      RIGHT,
+      LEFT,
+      BOMB,
+    };
   
 private:
   GameModule		*_gameModule;
-  GameRoutine		*_gameRoutine;
+  MapModule		*_mapModule;
   //  Coor			_me;
   std::list<Coor>	_map;
   std::list<Coor>	_players;
@@ -44,7 +61,9 @@ public:
 
 private:
   int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
-  Coor		_radar(Coor &);
+  Coor		&_radar();
+  Coor		&_checkBomb(Coor &);
+  Coor		&_checkCase(Coor &);
 };
 
 #endif /* IA.hh */

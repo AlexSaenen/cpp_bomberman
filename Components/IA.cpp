@@ -17,7 +17,7 @@ IA::~IA() { }
 
 void	IA::_initialize() {
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
-  _gameRoutine = ModulesManager::getInstance()->get<GameRoutine>();
+  _mapModule = ModulesManager::getInstance()->get<MapModule>();
   _model.createSubAnim(0, "Run", 0, 30);
   playSubAnim("Run");
   _model.pause(true);
@@ -55,7 +55,7 @@ int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types)
   return (0);
 }
 
-IA::Coor			IA::_radar(IA::Coor &) {
+IA::Coor			IA::_radar() {
   IA::Coor			result;
   // std::vector<GameObject *>	players;
   // int				min;
@@ -76,7 +76,7 @@ IA::Coor			IA::_radar(IA::Coor &) {
   i = _position.x;
   j = _position.y;
   incr = 1;
-  while(find == 0) {
+  while(find == 0 && incr < _mapModule->getSize() * 2) {
     if (incr % 2 == 1) {
       for(int a = 0; a < incr; a++) {
 	i++;
@@ -99,4 +99,21 @@ IA::Coor			IA::_radar(IA::Coor &) {
     incr++;
   }  
   return (result);
+}
+
+Coor          &IA::_checkBomb(Coor &) {
+  
+}
+
+Coor          &IA::_checkCase(Coor &target) {
+  std::list<GameObject::ObjectType>	objects;
+
+  objects = _gameModule->getObject(target->x, target->y);
+  for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
+    if (*it->getType() == GameObject::CUBE)
+      return (CUBE);
+    if (*it->getType() == GameObject::CUBEDESTR)
+      return (CUBEDESTR);
+  }
+  return (EMPTY);
 }

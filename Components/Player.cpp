@@ -17,6 +17,9 @@ Player::Player()
   _inventory[BOMB] = 1;
   _inventory[SPEED] = 10;
   _inventory[RANGE] = 2;
+  _limit[BOMB] = 11;
+  _limit[SPEED] = 20;
+  _limit[RANGE] = 12;
 }
 
 Player::~Player() { }
@@ -37,21 +40,6 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
   for (std::map<int, int>::const_iterator it = _rotationMap.begin();
        it != _rotationMap.end() && !hasTranslated; ++it)
     if (input.getKey((*it).first)) {
-
-      // Event	*ev = new Event("Music.play");
-      // std::string	param("GraphicsLib/assets/MenuSamples/beepmenu2.mp3");
-      // std::string	name("FILE");
-      // std::string	music;
-      // std::string	type;
-
-      // ev->set<std::string>(name, param);
-      // music = "MUSIC";
-      // type = "TYPE";
-      // ev->set<std::string>(type, music);
-      // ModulesManager::getInstance()->get<EventModule>()
-      // 	->trigger(ev)
-      // 	->handle();
-
       hasTranslated = true;
       _rotation.y = _rotationMap[(*it).first];
       translate(_translationMap[(*it).first] * static_cast<float>(clock.getElapsed()) * _speed);
@@ -100,5 +88,6 @@ int	Player::getLevel(const BonusType &bt) {
 }
 
 void	Player::incrLevel(const BonusType &bt) {
-  _inventory[bt]++;
+  if (_inventory[bt] < _limit[bt])
+    _inventory[bt]++;
 }
