@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Thu Jun 11 22:04:35 2015 Alexander Saenen
+// Last update Fri Jun 12 12:12:50 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -25,10 +25,6 @@ GameRoutine::~GameRoutine() {
     }
   }
 }
-
-#include <PlayerOne.hh>
-#include <GameObject.hh>
-#include <GameModule.hh>
 
 bool	GameRoutine::initialize() {
   glm::mat4	projection;

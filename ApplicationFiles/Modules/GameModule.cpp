@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Fri Jun  5 14:53:27 2015 Alexander Saenen
+// Last update Fri Jun 12 12:12:35 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -19,13 +19,11 @@ void	GameModule::initialize() {
     ->observe(std::string("Game.cleanup"), new Functor<GameModule>(this, &GameModule::_onCleanup), 1000);
 }
 
-void	GameModule::handle(GameObject *object, const bool isLaunchable) {
-  ModulesManager			*gr = ModulesManager::getInstance();
+void	GameModule::handle(GameObject *object) {
+  ModulesManager	*gr = ModulesManager::getInstance();
 
   gr->get<GameRoutine>()
     ->pushGObject(object);
-  if (isLaunchable) { ; }
-  //   object->launch();
   if (object->getType() < 6) {
     pushOnMap(object);
   }
@@ -59,7 +57,7 @@ void					GameModule::pushOnMap(GameObject *object) {
   try {
     gameComponents = object->getComponents();
     it = gameComponents.begin();
-    while (it != gameComponents.end()) {
+    while (it != gameComponents.end() && !shape) {
       shape = dynamic_cast<Shape *>(*it);
       it++;
     }

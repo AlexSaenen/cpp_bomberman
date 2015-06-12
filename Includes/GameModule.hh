@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Fri Jun  5 10:36:42 2015 Alexander Saenen
+// Last update Fri Jun 12 12:08:19 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
@@ -27,7 +27,7 @@ public:
 
   void	initialize();
   void	markForCleanup(GameObject *object);
-  void	handle(GameObject *object, const bool isLaunchable = false);
+  void	handle(GameObject *object);
   std::list<GameObject::ObjectType>	&getObject(int x, int y);
   void	pushOnMap(GameObject *object);
   void  pushOnMap(int x, int y, GameObject::ObjectType type);

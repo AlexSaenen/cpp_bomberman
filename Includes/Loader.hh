@@ -9,7 +9,6 @@
 # include <fstream>
 # include <iomanip>
 # include <string>
-
 # include "GameObject.hh"
 # include "Constructor.hpp"
 # include "Cube.hh"
@@ -18,6 +17,7 @@
 # include "ComponentFactory.hpp"
 # include "GameModule.hh"
 # include "MapModule.hh"
+# include "PlayerOne.hh"
 
 class Loader
 {

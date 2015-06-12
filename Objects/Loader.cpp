@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 15:03:33 2015 Alexander Saenen
-// Last update Thu Jun 11 20:11:50 2015 Alexander Saenen
+// Last update Fri Jun 12 12:09:16 2015 Alexander Saenen
 //
 
 #include "Loader.hh"
@@ -18,6 +18,7 @@ Loader::Loader() {
     else
       throw ArgException("Cannot open the file : test.conf");
     _constructor["Cube"] = &ComponentFactory::getComponent<Cube>;
+    _constructor["PlayerOne"] = &ComponentFactory::getComponent<PlayerOne>;
   } catch (ArgException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -80,10 +81,7 @@ void	Loader::execute(Event *)
 	  loadTexture(component, go);
 	go->pushComponent(component);
       }
-    if (name == "intro")
-      gameModule->handle(go, true);
-    else
-      gameModule->handle(go);
+    gameModule->handle(go);
     std::getline(*content, buff, '\n');
     delete verif;
     delete content;
