@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Thu Jun 11 20:30:43 2015 Alexander Saenen
+// Last update Fri Jun 12 13:59:06 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
@@ -22,6 +22,8 @@ void	MapModule::loadMapValues() {
   _textureMap["destroy"] = "./GraphicsLib/assets/Textures/crate.tga";
   _textureMap["bomb"] = "./GraphicsLib/assets/bomb.fbx";
   _textureMap["player1"] = "./GraphicsLib/assets/archer.fbx";
+  _textureMap["player2"] = "./GraphicsLib/assets/warrior.fbx";
+  _textureMap["ia"] = "./GraphicsLib/assets/skeletarcher.fbx";
   _hasTextures = true;
 }
 
