@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Thu Jun 11 20:08:24 2015 Alexander Saenen
+// Last update Fri Jun 12 18:37:58 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -37,9 +37,9 @@ void	Cube::initialize(Event *) {
     glm::vec3(-0.5, -0.5, 0.5),
     glm::vec3(-0.5, -0.5, -0.5)
   };
-  int		vertexOrder[24] = {
-    2, 0, 4, 6, 3, 1, 5, 7, 3, 1, 0, 2,
-    6, 4, 5, 7, 0, 1, 5, 4, 3, 2, 6, 7
+  int		vertexOrder[16] = {
+    3, 1, 5, 7, 3, 1, 0, 2,
+    6, 4, 5, 7, 0, 1, 5, 4
   };
   std::string	textureKind;
   _speed = 10.0f;
@@ -48,7 +48,7 @@ void	Cube::initialize(Event *) {
   _scale.z = 2.5;
   _position.y = 1.2;
   _geometry.setColor(glm::vec4(0.64, 0.447, 0.46, 1));
-  for (int i = 0; i < 24; ++i) {
+  for (int i = 0; i < 16; ++i) {
     _geometry.pushVertex(vertexMap[vertexOrder[i]]);
     if (i > 0 && (i + 1) % 4 == 0)
       for (int i = 0; i < 4; i++)
