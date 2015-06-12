@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:47:47 2015 Alexander Saenen
-// Last update Mon Jun  1 17:42:05 2015 Alexander Saenen
+// Last update Fri Jun 12 16:04:48 2015 Alexander Saenen
 //
 
 #include "Shape.hh"
@@ -51,5 +51,5 @@ int	Shape::getPosX() const {
 }
 
 int	Shape::getPosY() const {
-  return (_position.y);
+  return (_position.z);
 }

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 11:44:50 2015 Alexander Saenen
-// Last update Wed Jun  3 19:23:47 2015 Alexander Saenen
+// Last update Fri Jun 12 15:17:06 2015 Alexander Saenen
 //
 
 #ifndef SHAPE_HH_

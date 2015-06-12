@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 12:55:54 2015 Alexander Saenen
-// Last update Fri Jun 12 13:31:39 2015 Alexander Saenen
+// Last update Fri Jun 12 15:44:57 2015 Alexander Saenen
 //
 
 #ifndef CAMERA_HH_
@@ -26,6 +26,7 @@ class	Camera : public AModule
   float	_near;
   float	_far;
   gdl::BasicShader	*_shader;
+  bool		_followPlayers;
 
 public:
   Camera();
@@ -34,7 +35,8 @@ public:
   Camera	*setPerspective(const float fovy, const float aspect, const float near, const float far);
   Camera	*setLookAt(const glm::vec3 &eye);
   Camera	*set3Dimension(const bool status = true);
-  void	confirm();
+  Camera	*followPlayers(const bool follow = true);
+  void		confirm();
 };
 
 #endif /* Camera.hh */
