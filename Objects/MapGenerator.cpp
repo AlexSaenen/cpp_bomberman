@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sun Jun 14 01:24:44 2015 Vividy
+// Last update Sun Jun 14 01:34:32 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -83,7 +83,7 @@ int			MapGenerator::generate()
       nb = se;
       nbIa = nb - nbPlayers;
     }
-  string << this->size << " " << nbIa;
+  string << this->size << " " << nbIa << "\n@";
   for (x = 0; x < nb; x++)
     {
       y = 0;
