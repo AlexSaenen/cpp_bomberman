@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 14:04:23 2015 Vividy
+// Last update Sat Jun 13 16:06:05 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -17,7 +17,7 @@ MapGenerator::MapGenerator(int const size, int const nbPlayers, int const nbIa)
     if (this->file->open("Maps/random.map", std::ios::out))
       this->is = new std::ostream(this->file);
     else
-      throw ArgException("Cannot open the file : loool");
+      throw ArgException("Cannot open the file : Maps/random.map");
  this->size = size;
  this->nbPlayers = nbPlayers;
  this->nbIa = nbIa;
@@ -90,7 +90,7 @@ int			MapGenerator::generate()
 	      else if (x == 1 && nbPlayers == 2)
 		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mm].x * 2.5 << " " << player[mm].y * 2.5 << " 4 0 0 0 0.1 0.1 0.1 player2\n@";
 	      else
-		string << "\nrandomralouf 5\n$IA%" << player[mm].x * 2.5 << " " << player[mm].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia\n@";
+		string << "\nrandomralouf 5\n$IA%" << player[mm].x * 2.5 << " " << player[mm].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia" << (rand() % 4) + 1 << "\n@";
 	      player[mm].u = 0;
 	    }
 	  else
@@ -105,7 +105,7 @@ int			MapGenerator::generate()
 	  else if (x == 1 && nbPlayers == 2)
 	    string << "\nfirstralouf 4\n$PlayerTwo%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 4 0 0 0 0.1 0.1 0.1 player2\n@";
 	  else
-	    string << "\nrandomralouf 5\n$IA%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia\n@";
+	    string << "\nrandomralouf 5\n$IA%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia" << (rand() % 4) + 1 << "\n@";
 	  player[y].u = 0;
 	}
     }
