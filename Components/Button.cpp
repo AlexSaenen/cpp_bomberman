@@ -5,14 +5,14 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:30:42 2015 Vividy
-// Last update Sat Jun 13 15:50:59 2015 Vividy
+// Last update Sat Jun 13 17:18:21 2015 Alexander Saenen
 //
 
 #include <Button.hh>
 
 Button::Button(const MenuModule::MenuPage linkedPage, const bool isSelected)
   : _isSelected(isSelected), _linkedPage(linkedPage), _buttonPressed(true), _cursor(0), _value(-42) {
-  _actions[MenuModule::DEFAULT] = "Maps/default.map";
+  _actions[MenuModule::DEFAULT] = "Maps/default";
   _actions[MenuModule::PLAY] = "Maps/random.map";
   _actions[MenuModule::EXIT] = "Bomberman.quit";
   _sliderDelta[MenuModule::MVOLUME] = 0.01;
@@ -72,11 +72,13 @@ void	Button::activate() const {
       ModulesManager::getInstance()->get<EventModule>()->trigger(event)->handle();
       return ;
     }
+    MapModule	*mapMod = ModulesManager::getInstance()->get<MapModule>();
     if (_linkedPage == MenuModule::PLAY) {
-      MapModule	*mapMod = ModulesManager::getInstance()->get<MapModule>();
       MapGenerator map(mapMod->getSize(), mapMod->isMultiplayer() ? 2 : 1, mapMod->getIA());
       map.generate();
     }
+    if (event == "Maps/default")
+      event = mapMod->isMultiplayer() ? "Maps/defaultMul.map" : "Maps/default.map";
     Loader	ld(event);
     ld.execute();
     ModulesManager::getInstance()->get<MenuModule>()->toggle(false);
