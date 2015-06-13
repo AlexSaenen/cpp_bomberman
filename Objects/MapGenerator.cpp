@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 17:33:16 2015 Vividy
+// Last update Sat Jun 13 18:09:37 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -129,19 +129,39 @@ int			MapGenerator::generate()
     }
   for (x = 0; x < (int)player.size(); x++)
     if (player[x].u != -1)
-      player[x].u += ((player[x].x == 0 || player[x].x + 1 == this->size) ? 1 : 0) + ((player[x].y == 0 || player[x].y + 1 == this->size) ? 1 : 0);
+      player[x].u += ((player[x].x == 0 || player[x].x + 1 == this->size) ? 2 : 0) + ((player[x].y == 0 || player[x].y + 1 == this->size) ? 1 : 0);
   for (x = 0; x < this->size; x++)
     for (y = 0; y < this->size; y++)
-      if (x % 2 != 1 || y % 2 != 1)
+      if ((x % 2 != 1 || y % 2 != 1))
 	{
 	  z = checkPerso(x, y, player);
-	  if ((z == -1 || player[z].u != 2 || (player[z].x == x && player[z].y == y && player[z].u == -1)) && rand() % 100 < 100)
+	  if (z == -1 || player[z].u == -1)
 	    {
 	      string << "\nWall 1\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
-	      if (z != -1 && player[z].u != -1)
-		player[z].u += 1;
+	      std::cout << "01" << std::endl;
 	    }
-	}
+	  else if (player[z].u != 3 || (player[z].x != x && player[z].y != y))
+	    {
+	      if (player[z].u != 2 && player[z].x == x)
+		{
+		  string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
+		  player[z].u += 2;
+		  std::cout << "02" << std::endl;
+		}
+	      else if (player[z].u != 1 && player[z].y == y)
+		{
+		  string << "\nWall 1\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
+		  player[z].u += 1;
+		  std::cout << "03" << std::endl;
+		}
+	    }
+	  // if ((z == -1 || player[z].u != 2 || (player[z].x == x && player[z].y == y && player[z].u == -1)) && rand() % 100 < 0)
+	  //   {
+	  //     string << "\nWall 1\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
+	  //     if (z != -1 && player[z].u != -1)
+	  // 	player[z].u += 1;
+	  //   }
+	    }
   str = string.str();
   this->is->write(str.c_str(), str.size());
   return (0);
