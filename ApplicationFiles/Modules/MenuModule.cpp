@@ -5,7 +5,7 @@
 // Login   <peauge_t@epitech.net>
 // 
 // Started on  Fri Jun 12 16:29:58 2015 Thibaud PEAUGER
-// Last update Fri Jun 12 17:24:49 2015 Thibaud PEAUGER
+// Last update Sun Jun 14 01:02:41 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
@@ -33,7 +33,6 @@ void	MenuModule::toggle(const bool status) {
     ev->set<std::string>(std::string("FILE"), name);
     ev->set<std::string>(std::string("TYPE"), state);
     ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
-
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 10, -10))
       ->set3Dimension()
