@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sun Jun 14 00:29:09 2015 Alexander Saenen
+// Last update Sun Jun 14 01:15:20 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -59,6 +59,13 @@ std::vector<GameObject *>	GameRoutine::getGObjects(const GameObject::ObjectType 
   return (_objects[type]);
 }
 
+bool	GameRoutine::getGOStatus(const GameObject::ObjectType type, std::vector<GameObject *> &objects) {
+  if (_objects.find(type) == _objects.end())
+    return (false);
+  objects = _objects[type];
+  return (true);
+}
+
 void	GameRoutine::pushGObject(GameObject *GObject) {
   _objects[GObject->getType()].push_back(GObject);
 }
@@ -103,6 +110,7 @@ bool	GameRoutine::update() {
   if (_input.getKey(SDLK_o)) {
     SaveMap	saver;
     saver.execute();
+    return (true);
   }
   try {
     for (int it = 0; it < 11; ++it) {
