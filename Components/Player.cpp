@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Fri Jun 12 18:18:29 2015 Alexander Saenen
+// Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
+// Last update Sat Jun 13 22:40:15 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -27,6 +27,17 @@ void	Player::_initialize() {
   _isInitialized = true;
 }
 
+void	Player::_tryMoveCollision(const gdl::Clock &, const glm::vec3 &pos) {
+  glm::vec3	destination = _position;
+  destination += pos;
+  if (destination.x > 0)
+    destination.x += 2.5;
+  if (destination.z > 0)
+    destination.z += 2.5;
+  // int	x = destination.x / 2.5;
+  // int	y = destination.z / 2.5;  
+}
+
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
   bool	hasTranslated = false;
 
@@ -39,7 +50,10 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
     if (input.getKey((*it).first)) {
       hasTranslated = true;
       _rotation.y = _rotationMap[(*it).first];
+
+      _tryMoveCollision(clock, _translationMap[(*it).first]);
       translate(_translationMap[(*it).first] * static_cast<float>(clock.getElapsed()) * _speed);
+
       if (!_isMoving) {
 	_model.pause(false);
 	_isMoving = true;

@@ -4,8 +4,8 @@
 ## Made by Alexander Saenen
 ## Login   <saenen_a@epitech.net>
 ## 
-## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
-## Last update Sat Jun 13 13:56:56 2015 Vividy
+## Started on  Sat Jun 13 22:38:58 2015 Alexander Saenen
+## Last update Sat Jun 13 22:38:58 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -56,7 +56,8 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(SRCDIR)MenuSpawner.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \
-		  $(SRCDIR)Loader.cpp
+		  $(SRCDIR)Loader.cpp \
+		  $(SRCDIR)SaveMap.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
@@ -72,6 +73,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CXX) $(OBJ) $(LIB) -o $(NAME)
+	mkdir -p Save
 	@echo -e "$(RED)export LD_LIBRARY_PATH=GraphicsLib/libs/$(WHITE)"
 
 clean:
