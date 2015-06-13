@@ -5,28 +5,19 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 13:40:14 2015 Vividy
+// Last update Sat Jun 13 14:04:23 2015 Vividy
 //
 
 #include "MapGenerator.hh"
 
 MapGenerator::MapGenerator(int const size, int const nbPlayers, int const nbIa)
 {
-  // try {
   srand (time(NULL));
     this->file = new std::filebuf();
-    // if (this->file->open("random.map", std::ios::out))
-    if (this->file->open("../Maps//default.map", std::ios::out))
+    if (this->file->open("Maps/random.map", std::ios::out))
       this->is = new std::ostream(this->file);
     else
-      std::cout << "ca marche pas" << std::endl;
-      // throw ArgException("Cannot open the file : loool");
-  // } catch (ArgException e) {
-  //   std::cerr << e.getMessage() << std::endl;
-  //   ModulesManager::getInstance()->get<EventModule>()
-  //     ->trigger("MapGenerator.error", 1001)
-  //     ->handle();
-  // }
+      throw ArgException("Cannot open the file : loool");
  this->size = size;
  this->nbPlayers = nbPlayers;
  this->nbIa = nbIa;

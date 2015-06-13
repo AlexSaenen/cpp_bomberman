@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Fri Jun 12 16:11:49 2015 Alexander Saenen
+// Last update Sat Jun 13 14:07:00 2015 Vividy
 //
 
 #include <ObjModel.hh>
@@ -24,9 +24,9 @@ void	ObjModel::configure(const std::string &model, const GameObject::ObjectType 
 
 void	ObjModel::initialize(Event *) {
   _speed = 10.0f;
-  _scale.x = 0.04;
-  _scale.y = 0.04;
-  _scale.z = 0.04;
+  _scale.x = 0.034;
+  _scale.y = 0.034;
+  _scale.z = 0.034;
 }
 
 void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {

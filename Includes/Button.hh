@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:47:34 2015 Alexander Saenen
-// Last update Sat Jun 13 12:08:25 2015 Alexander Saenen
+// Last update Sat Jun 13 13:56:28 2015 Vividy
 //
 
 #ifndef BUTTON_HH_
@@ -15,6 +15,7 @@
 # include <MenuModule.hh>
 # include <Loader.hh>
 # include <MusicModule.hh>
+# include <MapGenerator.hh>
 
 class	Button : public IComponent
 {

@@ -1,11 +1,11 @@
 //
-// Button.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Fri Jun 12 18:24:54 2015 Alexander Saenen
-// Last update Sat Jun 13 15:19:22 2015 Alexander Saenen
+// Button.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sat Jun 13 15:30:42 2015 Vividy
+// Last update Sat Jun 13 15:50:59 2015 Vividy
 //
 
 #include <Button.hh>
@@ -71,6 +71,11 @@ void	Button::activate() const {
     if (event == "Bomberman.quit" || event == "GameMode.multi") {
       ModulesManager::getInstance()->get<EventModule>()->trigger(event)->handle();
       return ;
+    }
+    if (_linkedPage == MenuModule::PLAY) {
+      MapModule	*mapMod = ModulesManager::getInstance()->get<MapModule>();
+      MapGenerator map(mapMod->getSize(), mapMod->isMultiplayer() ? 2 : 1, mapMod->getIA());
+      map.generate();
     }
     Loader	ld(event);
     ld.execute();
