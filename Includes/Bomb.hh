@@ -16,15 +16,17 @@
 class	Bomb : public ObjModel
 {
   double	_timeBeforeIgnition;
+  int		_range;
   bool		_hasExplosion;
   bool		_hasExploded;
-
+  
 public:
-  Bomb(const double timeBeforeIgnition, const bool hasExplosion = true);
+  Bomb(const double timeBeforeIgnition, const int range, const bool hasExplosion = true);
   ~Bomb();
 
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);
   bool	hasExploded() const;
+  int	getRange() const;
 };
 
 #endif /* Bomb.hh */

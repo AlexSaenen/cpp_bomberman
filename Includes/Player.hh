@@ -33,6 +33,7 @@ protected:
   std::map<int, int>		_rotationMap;
   std::map<int, glm::vec3>	_translationMap;
   std::map<BonusType, int>	_inventory;
+  std::map<BonusType, int>      _limit;
 
 protected:
   void	_initialize();

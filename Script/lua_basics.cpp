@@ -7,6 +7,15 @@
 //   std::cout << "-- my_function() called with " << argc
 //     << " arguments:" << std::endl;
 
+<<<<<<< HEAD
+  for ( int n=1; n<=argc; ++n ) {
+    std::cout << "-- argument " << n << ": "
+	      << lua_tostring(L, n) << std::endl;
+  }
+  lua_pushnumber(L, 123); // return value
+  return 1; // number of return values
+}
+=======
 //   for ( int n=1; n<=argc; ++n ) {
 //     std::cout << "-- argument " << n << ": "
 //       << lua_tostring(L, n) << std::endl;
@@ -14,6 +23,7 @@
 //   lua_pushnumber(L, 123); // return value
 //   return 1; // number of return values
 // }
+>>>>>>> 2949d62327a0d032622a047209a1efeef82c1126
 
 LuaScript::LuaScript()
 {

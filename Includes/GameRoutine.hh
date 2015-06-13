@@ -1,11 +1,11 @@
 //
-// GameRoutine.hh for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Sat Jun 13 23:11:52 2015 Vividy
+// GameRoutine.hh for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 01:29:24 2015 Vividy
+// Last update Sun Jun 14 01:29:26 2015 Vividy
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -42,6 +42,7 @@ public:
   void		pushGObject(GameObject *GObject);
   void		popGObject(GameObject *GObject);
   std::vector<GameObject *>	getGObjects(const GameObject::ObjectType type);
+  bool				getGOStatus(const GameObject::ObjectType type, std::vector<GameObject *> &);
   gdl::BasicShader	*getShader();
   gdl::Clock		*getClock();
   gdl::Input		*getInput();

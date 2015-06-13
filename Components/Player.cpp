@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sat Jun 13 22:40:15 2015 Alexander Saenen
+// Last update Sun Jun 14 00:39:53 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -17,6 +17,9 @@ Player::Player()
   _inventory[BOMB] = 1;
   _inventory[SPEED] = 10;
   _inventory[RANGE] = 2;
+  _limit[BOMB] = 11;
+  _limit[SPEED] = 20;
+  _limit[RANGE] = 12;
 }
 
 Player::~Player() { }
@@ -34,8 +37,9 @@ void	Player::_tryMoveCollision(const gdl::Clock &, const glm::vec3 &pos) {
     destination.x += 2.5;
   if (destination.z > 0)
     destination.z += 2.5;
-  // int	x = destination.x / 2.5;
-  // int	y = destination.z / 2.5;  
+  int	x = destination.x / 2.5;
+  int	y = destination.z / 2.5;
+  std::list<GameObject::ObjectType> types = _gameModule->getObject(x, y);
 }
 
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
@@ -99,5 +103,6 @@ int	Player::getLevel(const BonusType &bt) {
 }
 
 void	Player::incrLevel(const BonusType &bt) {
-  _inventory[bt]++;
+  if (_inventory[bt] < _limit[bt])
+    _inventory[bt]++;
 }

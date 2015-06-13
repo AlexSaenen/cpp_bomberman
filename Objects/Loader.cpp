@@ -57,17 +57,28 @@ void	Loader::execute() {
   IComponent			*component;
   ModulesManager		*modulesManager;
   ComponentFactory		*factory;
-
+  std::istringstream		*verif;
+  
   modulesManager = ModulesManager::getInstance();
   modulesManager->get<MapModule>()
     ->loadMapValues();
   factory = modulesManager->get<ComponentFactory>();
   gameModule = modulesManager->get<GameModule>();
+  std::getline(*_is, buff, '@');
+  content = new std::istringstream(buff);
+  std::getline(*content, buff, ' ');
+  verif = new std::istringstream(buff);
+  *verif >> type;
+  modulesManager->get<MapModule>()->setSize(type);
+  std::getline(*content, buff, '\n');
+  verif = new std::istringstream(buff);
+  *verif >> type;
+  modulesManager->get<MapModule>()->setIA(type);
   while (!_is->eof() && std::getline(*_is, buff, '@')) {
     content = new std::istringstream(buff);
     std::getline(*content, name, ' ');
     std::getline(*content, buff, '\n');
-    std::istringstream *verif = new std::istringstream(buff);
+    verif = new std::istringstream(buff);
     *verif >> type;
     go = new GameObject(static_cast<GameObject::ObjectType>(type), name);
     while (std::getline(*content, buff, '$') && buff == "")
