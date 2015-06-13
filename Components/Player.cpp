@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sat Jun 13 22:39:34 2015 Alexander Saenen
+// Last update Sat Jun 13 22:40:15 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -35,8 +35,7 @@ void	Player::_tryMoveCollision(const gdl::Clock &, const glm::vec3 &pos) {
   if (destination.z > 0)
     destination.z += 2.5;
   // int	x = destination.x / 2.5;
-  // int	y = destination.z / 2.5;
-  
+  // int	y = destination.z / 2.5;  
 }
 
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
