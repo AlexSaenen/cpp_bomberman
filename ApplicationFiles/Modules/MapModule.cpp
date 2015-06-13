@@ -5,14 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Fri Jun 12 18:06:51 2015 Alexander Saenen
+// Last update Sat Jun 13 11:17:22 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
 
 MapModule::MapModule()
   : _hasTextures(false), _isMultiplayer(false) {
-  _size = 0;
+  _size = 5;
 }
 
 MapModule::~MapModule() { }
@@ -56,7 +56,17 @@ int     MapModule::getSize() const {
 }
 
 void    MapModule::setSize(const int size) {
-  _size = size;
+  if (size >= 5 && size % 2 != 0)
+    _size = size;
+}
+
+int     MapModule::getIA() const {
+  return (_ia);
+}
+
+void    MapModule::setIA(const int ia) {
+  if (ia >= 0)
+    _ia = ia;
 }
 
 bool	MapModule::isLoaded() const {

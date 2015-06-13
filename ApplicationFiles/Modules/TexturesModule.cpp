@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 16:18:18 2015 Alexander Saenen
-// Last update Sat Jun 13 10:30:11 2015 Alexander Saenen
+// Last update Sat Jun 13 12:28:35 2015 Alexander Saenen
 //
 
 #include <TexturesModule.hh>
@@ -15,6 +15,10 @@ TexturesModule::TexturesModule() { }
 TexturesModule::~TexturesModule() {
   for (std::map<std::string, gdl::Texture *>::iterator it = _textureInstances.begin();
        it != _textureInstances.end(); ++it) {
+    delete (*it).second;
+  }
+  for (std::map<std::string, gdl::Geometry *>::iterator it = _geometryInstances.begin();
+       it != _geometryInstances.end(); ++it) {
     delete (*it).second;
   }
 }
@@ -34,8 +38,10 @@ gdl::Geometry	*TexturesModule::getGeoInstance(const std::string &geometry) {
     gdl::Geometry	*_geometry = new gdl::Geometry;
     if (geometry == "Cube")
       _loadCubeGeometry(_geometry);
-    else
+    else if (geometry == "Wall")
       _loadWallGeometry(_geometry);
+    else
+      _loadLetterGeometry(_geometry);
     _geometryInstances[geometry] = _geometry;
   }
   return (_geometryInstances[geometry]);
@@ -83,6 +89,22 @@ void	TexturesModule::_loadWallGeometry(gdl::Geometry *_geometry) const {
   _geometry->pushVertex(glm::vec3(0.5, 0.5, -0.667));
   _geometry->pushVertex(glm::vec3(-0.5, 0.5, -0.667));
   _geometry->pushVertex(glm::vec3(-0.5, 0.5, 0.667));
+  for (int i = 0; i < 4; i++)
+    _geometry->pushUv(uvMap[i]);
+  _geometry->build();
+}
+
+void	TexturesModule::_loadLetterGeometry(gdl::Geometry *_geometry) const {
+  glm::vec2     uvMap[4] = {
+    glm::vec2(0.0f, 0.0f),
+    glm::vec2(1.0f, 0.0f),
+    glm::vec2(1.0f, 1.0f),
+    glm::vec2(0.0f, 1.0f)
+  };
+  _geometry->pushVertex(glm::vec3(0.5, 0.5, 0.3));
+  _geometry->pushVertex(glm::vec3(0.5, 0.5, -0.3));
+  _geometry->pushVertex(glm::vec3(-0.5, 0.5, -0.3));
+  _geometry->pushVertex(glm::vec3(-0.5, 0.5, 0.3));
   for (int i = 0; i < 4; i++)
     _geometry->pushUv(uvMap[i]);
   _geometry->build();

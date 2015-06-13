@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Sat Jun 13 10:29:43 2015 Alexander Saenen
+// Last update Sat Jun 13 12:15:01 2015 Alexander Saenen
 //
 
 #ifndef TEXTURESMODULE_HH_
@@ -33,6 +33,7 @@ public:
 private:
   void	_loadCubeGeometry(gdl::Geometry *_geometry) const;
   void	_loadWallGeometry(gdl::Geometry *_geometry) const;
+  void	_loadLetterGeometry(gdl::Geometry *_geometry) const;
 };
 
 #endif /* TexturesModule.hh */
