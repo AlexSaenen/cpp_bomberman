@@ -25,6 +25,7 @@ public:
       PLAYER1,
       PLAYER2,
       IA,
+      BONUS,
       INTRO,
       MENUPAGE,
       GAMEWIN,
