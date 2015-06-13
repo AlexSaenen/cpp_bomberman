@@ -1,0 +1,129 @@
+Wall 0
+$Cube%2.5 2.5 0
+@
+Wall 0
+$Cube%2.5 7.5 0
+@
+Wall 0
+$Cube%2.5 12.5 0
+@
+Wall 0
+$Cube%2.5 17.5 0
+@
+Wall 0
+$Cube%2.5 22.5 0
+@
+Wall 0
+$Cube%7.5 2.5 0
+@
+Wall 0
+$Cube%7.5 7.5 0
+@
+Wall 0
+$Cube%7.5 12.5 0
+@
+Wall 0
+$Cube%7.5 17.5 0
+@
+Wall 0
+$Cube%7.5 22.5 0
+@
+Wall 0
+$Cube%12.5 2.5 0
+@
+Wall 0
+$Cube%12.5 7.5 0
+@
+Wall 0
+$Cube%12.5 12.5 0
+@
+Wall 0
+$Cube%12.5 17.5 0
+@
+Wall 0
+$Cube%12.5 22.5 0
+@
+Wall 0
+$Cube%17.5 2.5 0
+@
+Wall 0
+$Cube%17.5 7.5 0
+@
+Wall 0
+$Cube%17.5 12.5 0
+@
+Wall 0
+$Cube%17.5 17.5 0
+@
+Wall 0
+$Cube%17.5 22.5 0
+@
+Wall 0
+$Cube%22.5 2.5 0
+@
+Wall 0
+$Cube%22.5 7.5 0
+@
+Wall 0
+$Cube%22.5 12.5 0
+@
+Wall 0
+$Cube%22.5 17.5 0
+@
+Wall 0
+$Cube%22.5 22.5 0
+@
+firstralouf 3
+$PlayerOne%15 25 3 0 0 0 0.1 0.1 0.1 player1
+@
+firstralouf 4
+$PlayerTwo%10 10 4 0 0 0 0.1 0.1 0.1 player2
+@
+randomralouf 5
+$IA%20 0 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%25 15 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%0 0 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%5 25 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%25 5 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%25 25 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%20 20 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%0 10 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%20 10 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%5 5 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%15 15 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%5 15 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%0 20 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%10 20 5 0 0 0 0.1 0.1 0.1 ia1
+@
+randomralouf 5
+$IA%10 0 5 0 0 0 0.1 0.1 0.1 ia2
+@
+randomralouf 5
+$IA%15 5 5 0 0 0 0.1 0.1 0.1 ia1
+@

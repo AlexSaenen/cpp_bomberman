@@ -1,11 +1,11 @@
 //
-// Bomberman.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Thu Jun 11 18:02:03 2015 Alexander Saenen
-// Last update Fri Jun 12 18:05:15 2015 Alexander Saenen
+// Bomberman.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sat Jun 13 15:55:18 2015 Vividy
+// Last update Sat Jun 13 15:55:19 2015 Vividy
 //
 
 #include "Bomberman.hh"
@@ -17,11 +17,12 @@ Bomberman::Bomberman(const int , const char **):
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.quit"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
     ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
+    ->observe(std::string("MapGenerator.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
     ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 700);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
     ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(ModulesManager::getInstance()->get<MenuModule>(), &MenuModule::initialize), 800)
-    ->observe(std::string("Music.play"), new Functor<MusicModule>(new MusicModule, &MusicModule::addSound), 1000);
+    ->observe(std::string("Music.play"), new Functor<MusicModule>(ModulesManager::getInstance()->get<MusicModule>(), &MusicModule::addSound), 1000);
 }
 
 Bomberman::~Bomberman() {

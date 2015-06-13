@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 14:47:34 2015 Alexander Saenen
-// Last update Fri Jun 12 17:59:46 2015 Alexander Saenen
+// Last update Sat Jun 13 13:56:28 2015 Vividy
 //
 
 #ifndef BUTTON_HH_
@@ -14,6 +14,8 @@
 # include <IComponent.hpp>
 # include <MenuModule.hh>
 # include <Loader.hh>
+# include <MusicModule.hh>
+# include <MapGenerator.hh>
 
 class	Button : public IComponent
 {
@@ -22,7 +24,12 @@ class	Button : public IComponent
   MenuModule::MenuPage	_linkedPage;
   bool		_buttonPressed;
   std::map<MenuModule::MenuPage, std::string>	_actions;
+  std::map<MenuModule::MenuPage, double>	_sliderValue;
+  std::map<MenuModule::MenuPage, double>	_sliderDelta;
+  std::map<MenuModule::MenuPage, void (MapModule::*)(const int)>	_mapSetters;
+  std::map<MenuModule::MenuPage, void (MusicModule::*)(double const)>	_musicSetters;
   ObjModel	*_cursor;
+  double	_value;
 
 public:
   Button(const MenuModule::MenuPage linkedPage, const bool isSelected = false);
@@ -36,6 +43,9 @@ public:
   virtual void	initialize(Event *);
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);
   virtual void	draw(gdl::AShader &shader, const gdl::Clock &clock);
+
+private:
+  void	_writeSliderValue() const;
 };
 
 #endif /* Button.hh */

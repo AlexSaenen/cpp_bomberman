@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Fri Jun 12 17:27:47 2015 Thibaud PEAUGER
+// Last update Sat Jun 13 16:01:29 2015 Thibaud PEAUGER
 //
 
 #include <MusicModule.hh>
@@ -31,7 +31,8 @@ double	MusicModule::getMusicVolume() const {
 }
 
 void	MusicModule::setMusicVolume(double const _volume) {
-  musicVolume = _volume;
+  if (_volume >= 0 && _volume <= 1)
+    musicVolume = _volume;
 }
 
 double	MusicModule::getSoundVolume() const {
@@ -39,7 +40,8 @@ double	MusicModule::getSoundVolume() const {
 }
 
 void	MusicModule::setSoundVolume(double const _volume) {
-  soundVolume = _volume;
+  if (_volume >= 0 && _volume <= 1)
+    soundVolume = _volume;
 }
 
 bool	MusicModule::checkIn(std::string const& path_file, std::string const& type) {
@@ -48,6 +50,7 @@ bool	MusicModule::checkIn(std::string const& path_file, std::string const& type)
       {
 	if (type == "PAUSE")
 	  {
+	    (*it)->setVolume(musicVolume);
 	    (*it)->pause();
 	    return (true);
 	  }

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Thu Jun 11 20:09:24 2015 Alexander Saenen
+// Last update Sat Jun 13 10:26:00 2015 Alexander Saenen
 //
 
 #ifndef CUBE_HH_
@@ -25,7 +25,7 @@
 class	Cube : public IComponent, public Shape
 {
   gdl::Texture	*_texture;
-  gdl::Geometry	_geometry;
+  gdl::Geometry	*_geometry;
   float		_speed;
 
 public:

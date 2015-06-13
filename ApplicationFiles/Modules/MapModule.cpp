@@ -5,14 +5,15 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Fri Jun 12 18:06:51 2015 Alexander Saenen
+// Last update Sat Jun 13 16:09:37 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
 
 MapModule::MapModule()
   : _hasTextures(false), _isMultiplayer(false) {
-  _size = 0;
+  _size = 5;
+  _ia = 0;
 }
 
 MapModule::~MapModule() { }
@@ -34,7 +35,10 @@ void	MapModule::loadMapValues() {
   _textureMap["bomb"] = "./GraphicsLib/assets/bomb.fbx";
   _textureMap["player1"] = "./GraphicsLib/assets/archer.fbx";
   _textureMap["player2"] = "./GraphicsLib/assets/warrior.fbx";
-  _textureMap["ia"] = "./GraphicsLib/assets/skeletarcher.fbx";
+  _textureMap["ia1"] = "./GraphicsLib/assets/skeletarcher.fbx";
+  _textureMap["ia2"] = "./GraphicsLib/assets/skeletwarrior1.fbx";
+  _textureMap["ia3"] = "./GraphicsLib/assets/skeletwarrior2.fbx";
+  _textureMap["ia4"] = "./GraphicsLib/assets/skeletwarrior3.fbx";
   _hasTextures = true;
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("GameMode.multi"), new Functor<MapModule>(this, &MapModule::setGameMode), 1000);
@@ -56,7 +60,17 @@ int     MapModule::getSize() const {
 }
 
 void    MapModule::setSize(const int size) {
-  _size = size;
+  if (size >= 5 && size % 2 != 0)
+    _size = size;
+}
+
+int     MapModule::getIA() const {
+  return (_ia);
+}
+
+void    MapModule::setIA(const int ia) {
+  if (ia >= 0)
+    _ia = ia;
 }
 
 bool	MapModule::isLoaded() const {
