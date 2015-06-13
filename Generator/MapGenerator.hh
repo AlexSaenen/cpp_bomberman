@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Wed Jun 10 16:32:58 2015 Vividy
-// Last update Fri Jun 12 18:10:57 2015 Vividy
+// Last update Sat Jun 13 12:45:05 2015 Vividy
 //
 
 #ifndef MAPGENERATOR
@@ -14,7 +14,9 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
-#include <list>
+#include <vector>
+#include <stdlib.h>
+#include <time.h>
 
 class		MapGenerator
 {

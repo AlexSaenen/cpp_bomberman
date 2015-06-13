@@ -5,14 +5,14 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Wed Jun 10 16:29:53 2015 Vividy
-// Last update Sat Jun 13 11:20:02 2015 Vividy
+// Last update Sat Jun 13 13:38:56 2015 Vividy
 //
 
 #include "MapGenerator.hh"
 
 int	main()
 {
-  MapGenerator	map(11, 2, 6);
+  MapGenerator	map(11, 2, 188);
 
   map.generate();
   std::cout << "Ok!" << std::endl;
