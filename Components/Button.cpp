@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 18:24:54 2015 Alexander Saenen
-// Last update Sat Jun 13 15:16:59 2015 Alexander Saenen
+// Last update Sat Jun 13 15:19:22 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -66,8 +66,7 @@ void	Button::activate() const {
   ev->set<std::string>(std::string("TYPE"), music);
   ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
   if (it != _actions.end()) {
-    ModulesManager::getInstance()->get<MenuModule>()
-      ->activatePage(MenuModule::HOME);
+    ModulesManager::getInstance()->get<MenuModule>()->activatePage(MenuModule::HOME);
     std::string	event = (*it).second;
     if (event == "Bomberman.quit" || event == "GameMode.multi") {
       ModulesManager::getInstance()->get<EventModule>()->trigger(event)->handle();
