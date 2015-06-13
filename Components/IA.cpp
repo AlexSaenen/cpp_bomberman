@@ -44,7 +44,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
   try {
     _gameModule->popOnMap(_position.x, _position.y, _type);
 
-    std::cout << "IA update" << std::endl;
+    //    std::cout << "IA update" << std::endl;
     _luaLoader->lunchScript(_this, 1, 1, 1);//_inventory[Player::RANGE]);
     // _lastMovement = 0;
     // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
@@ -142,7 +142,7 @@ int					IA::_checkCase(lua_State *ls) {
 }
 
 int	IA::_command(lua_State *ls) {
-  std::cout << "toto !!!!" << std::endl;
+  //  std::cout << "toto !!!!" << std::endl;
   if (_toto < 1)
     _ac = static_cast<Action>(lua_tonumber(ls, 3));
   else if (_toto < 2)
@@ -158,7 +158,7 @@ int	IA::_command(lua_State *ls) {
 }
 
 int    IA::luaCall(lua_State *ls) {
-  std::cout << "luaCall" << std::endl;
+  //  std::cout << "luaCall" << std::endl;
   std::map <std::string, int (IA::*)(lua_State *)> _func;
   _func["command"] = &IA::_command;
   return ((static_cast<IA *>(const_cast<void *>(lua_topointer(ls, 1)))->*(_func[lua_tostring(ls, 2)]))(ls));
