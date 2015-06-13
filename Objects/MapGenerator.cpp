@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 20:11:59 2015 Vividy
+// Last update Sat Jun 13 21:39:59 2015 Bozo
 //
 
 #include "MapGenerator.hh"
@@ -13,14 +13,14 @@
 MapGenerator::MapGenerator(int const size, int const nbPlayers, int const nbIa)
 {
   srand (time(NULL));
-    this->file = new std::filebuf();
-    if (this->file->open("Maps/random.map", std::ios::out))
-      this->is = new std::ostream(this->file);
-    else
-      throw ArgException("Cannot open the file : Maps/random.map");
- this->size = size;
- this->nbPlayers = nbPlayers;
- this->nbIa = nbIa;
+  this->file = new std::filebuf();
+  if (this->file->open("Maps/random.map", std::ios::out))
+    this->is = new std::ostream(this->file);
+  else
+    throw ArgException("Cannot open the file : Maps/random.map");
+  this->size = size;
+  this->nbPlayers = nbPlayers;
+  this->nbIa = nbIa;
 }
 
 MapGenerator::~MapGenerator()
@@ -41,18 +41,12 @@ int	checkPerso(int x, int y, std::vector<MapGenerator::Coor> player)
   int	z;
 
   for (z = 0; z < (int)player.size(); z++)
-    {
-      if (player[z].x == x && player[z].y == y)
-	return (z);
-      if (player[z].x == x - 1 && player[z].y == y)
-	return (z);
-      if (player[z].x == x + 1 && player[z].y == y)
-	return (z);
-      if (player[z].x == x && player[z].y == y + 1)
-	return (z);
-      if (player[z].x == x && player[z].y == y - 1)
-	return (z);
-    }
+    if ((player[z].x == x && player[z].y == y) ||
+	(player[z].x == x - 1 && player[z].y == y) ||
+	(player[z].x == x + 1 && player[z].y == y) ||
+	(player[z].x == x && player[z].y == y + 1) ||
+	(player[z].x == x && player[z].y == y - 1))
+      return (z);
   return (-1);
 }
 
@@ -66,21 +60,21 @@ int			MapGenerator::generate()
   std::vector<MapGenerator::Coor>	player;
   int			nb;
   int			se;
-  int			mm;
+  int			mem;
 
   y = 0;
   for (x = 0; x < size; x++) {
-    if (x % 2 == 1){
+    if (x % 2 == 1) {
       for (y = 0; y < size; y++)
 	if (y % 2 == 1)
 	  string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
     } else {
       if (x % 4 == 0) {
-	for(y = 0; y < size; y++)
+	for (y = 0; y < size; y++)
 	  if (y % 4 == 0)
 	    player.push_back(MapGenerator::Coor(x, y, -1));
       } else {
-	for(y = 0; y < size; y++)
+	for (y = 0; y < size; y++)
 	  if ((y + 2) % 4 == 0)
 	    player.push_back(MapGenerator::Coor(x, y, -1));
       }
@@ -101,16 +95,16 @@ int			MapGenerator::generate()
 	{
 	  z = y;
 	  y++;
-	  mm = rand() % se;
-	  if (player[mm].u == -1)
+	  mem = rand() % se;
+	  if (player[mem].u == -1)
 	    {
 	      if (x == 0)
-		string << "\nfirstralouf 3\n$PlayerOne%" << player[mm].x * 2.5 << " " << player[mm].y * 2.5 << " 3 0 0 0 0.1 0.1 0.1 player1\n@";
+		string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.1 0.1 0.1 player1\n@";
 	      else if (x == 1 && nbPlayers == 2)
-		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mm].x * 2.5 << " " << player[mm].y * 2.5 << " 4 0 0 0 0.1 0.1 0.1 player2\n@";
+		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.1 0.1 0.1 player2\n@";
 	      else
-		string << "\nrandomralouf 5\n$IA%" << player[mm].x * 2.5 << " " << player[mm].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia" << (rand() % 4) + 1 << "\n@";
-	      player[mm].u = 0;
+		string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia" << (rand() % 4) + 1 << "\n@";
+	      player[mem].u = 0;
 	    }
 	  else
 	    z++;

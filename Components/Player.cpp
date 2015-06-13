@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Sat Jun 13 22:19:43 2015 Alexander Saenen
+// Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
+// Last update Sat Jun 13 22:39:34 2015 Alexander Saenen
 //
 
 #include "Player.hh"
