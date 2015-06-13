@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 18:24:54 2015 Alexander Saenen
-// Last update Sat Jun 13 13:46:49 2015 Alexander Saenen
+// Last update Sat Jun 13 15:16:59 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -93,15 +93,11 @@ void	Button::update(const gdl::Clock &, gdl::Input &input) {
       activate();
     }
   }
-  else if (_isSelected && !_buttonPressed && (input.getKey(SDLK_LEFT) || input.getKey(SDLK_RIGHT))) {
+  else if (_isSelected && !_buttonPressed && _sliderDelta.find(_linkedPage) != _sliderDelta.end()
+	   && (input.getKey(SDLK_LEFT) || input.getKey(SDLK_RIGHT))) {
     _buttonPressed = true;
     MusicModule	*music = ModulesManager::getInstance()->get<MusicModule>();
     MapModule	*map = ModulesManager::getInstance()->get<MapModule>();
-    // _sliderValue[MenuModule::MVOLUME] = music->getMusicVolume();
-    // _sliderValue[MenuModule::SVOLUME] = music->getSoundVolume();
-    // _sliderValue[MenuModule::SIZE] = map->getSize();
-    // _sliderValue[MenuModule::NIA] = map->getIA();
-    // _value = _sliderValue[_linkedPage];
     if (input.getKey(SDLK_LEFT))
       _value -= _sliderDelta[_linkedPage];
     else if (input.getKey(SDLK_RIGHT))
