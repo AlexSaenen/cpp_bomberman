@@ -59,7 +59,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     // 	_model.pause(false);
     // 	_isMoving = true;
     //     }
-    //     _lastMovement = (*it).first;
++    //     _lastMovement = (*it).first;
     //   }
     // if (!_lastMovement) {
     //   _isMoving = false;

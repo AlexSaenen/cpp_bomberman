@@ -23,7 +23,7 @@ LuaLoader::~LuaLoader() {
 }
 
 void	LuaLoader::lunchScript(void *object, int x, int y, int range) {
-  std::cout << object << " " << x << " "<< y << " " << range << std::endl;
+  // std::cout << object << " " << x << " "<< y << " " << range << std::endl;
   lua_getglobal(_luaVM, "run");
   lua_pushlightuserdata(_luaVM, object);
   lua_pushinteger(_luaVM, x);

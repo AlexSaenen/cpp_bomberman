@@ -24,7 +24,7 @@ void	GameModule::handle(GameObject *object) {
 
   gr->get<GameRoutine>()
     ->pushGObject(object);
-  if (object->getType() < 6) {
+  if (object->getType() < 7) {
     pushOnMap(object);
   }
 }
