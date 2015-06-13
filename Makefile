@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
-## Last update Sat Jun 13 13:56:56 2015 Vividy
+## Last update Sat Jun 13 22:28:00 2015 Vividy
 ##
 
 CXX		= g++
@@ -56,7 +56,8 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(SRCDIR)MenuSpawner.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \
-		  $(SRCDIR)Loader.cpp
+		  $(SRCDIR)Loader.cpp \
+		  $(SRCDIR)SaveMap.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
