@@ -11,9 +11,29 @@
 #include <IA.hh>
 
 IA::IA()
-  : Player() { }
+  : Player() {
+  _rotationMap.insert(std::pair<int, int>(UP, 0));
+  _rotationMap.insert(std::pair<int, int>(DOWN, 180));
+  _rotationMap.insert(std::pair<int, int>(LEFT, 90));
+  _rotationMap.insert(std::pair<int, int>(RIGHT, 270));
+  _translationMap.insert(std::pair<int, glm::vec3>(UP, glm::vec3(0, 0, 1)));
+  _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
+  _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
+  _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
 
-IA::~IA() { }
+  _luaVM = luaL_newstate();
+  if (_luaVM == NULL) {
+      std::cout << "initialization error" << std::endl;
+      return ;
+    }
+  luaL_openlibs(_luaVM);
+  std::cerr << "-- Loading file: " << std::endl;
+  luaL_dofile(_luaVM, SCRIPT);
+}
+
+IA::~IA() {
+  lua_close(_luaVM);
+}
 
 void	IA::_initialize() {
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
@@ -24,17 +44,23 @@ void	IA::_initialize() {
   _isInitialized = true;
 }
 
-void	IA::update(const gdl::Clock &, gdl::Input &) {
+void	IA::update(const gdl::Clock &clock, gdl::Input &) {
   if (!_isInitialized)
     _initialize();
   _gameModule->popOnMap(_position.x, _position.y, _type);
+  lua_register(_luaVM, "luaCall", IA::luaCall);
+  lua_getglobal(_luaVM, "run");
+  lua_pushlightuserdata(_luaVM, static_cast<void *>(this));
+  lua_pcall(_luaVM, 1, 0, 0);
   // _lastMovement = 0;
   // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
   //      it != _rotationMap.end() && !hasTranslated; ++it)
   //   if (input.getKey((*it).first)) {
   //     hasTranslated = true;
-  //     _rotation.y = _rotationMap[(*it).first];
-  //     translate(_translationMap[(*it).first] * static_cast<float>(clock.getElapsed()) * _speed);
+  if (_ac != BOMB) {
+    _rotation.y = _rotationMap[_ac];
+    translate(_translationMap[_ac] * static_cast<float>(clock.getElapsed()) * _speed);
+  }
   //     if (!_isMoving) {
   // 	_model.pause(false);
   // 	_isMoving = true;
@@ -55,23 +81,11 @@ int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types)
   return (0);
 }
 
-IA::Coor			*IA::_radar() {
-  IA::Coor			*result = new IA::Coor();
-  // std::vector<GameObject *>	players;
-  // int				min;
-  int				i;
-  int				j;
-  int				incr;
-  int				find = 0;
-  // players = _gameRoutine->getGObjects(static_cast<GameObject::ObjectType>(5));
-  // players.push_back(_gameRoutine->getGObjects(static_cast<GameObject::ObjectType>(3)).front());
-  // players.push_back(_gameRoutine->getGObjects(static_cast<GameObject::ObjectType>(4)).front());
-
-  // min = *(players.begin());
-  //   for(std::vector<GameObject *>::iterator it = players.begin() ; it != players.end(); ++it)
-  //     {
-  // 	// if (
-  //     }
+void		IA::_radar(lua_State *) {
+  int		i;
+  int		j;
+  int		incr;
+  int		find = 0;
 
   i = _position.x;
   j = _position.y;
@@ -98,22 +112,37 @@ IA::Coor			*IA::_radar() {
     }
     incr++;
   }  
-  return (result);
 }
 
-IA::Coor          *IA::_checkBomb(Coor &) {
-  return (NULL);
+void          IA::_checkBomb(lua_State *) {
 }
 
-IA::Case          IA::_checkCase(IA::Coor &target) {
-  std::list<GameObject::ObjectType>	objects;
+void	IA::_checkCase(lua_State *) {
+  // std::list<GameObject::ObjectType>	objects;
 
-  objects = _gameModule->getObject(target.x, target.y);
-  for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
-    if (*it == GameObject::CUBE)
-      return (CUBE);
-    if (*it == GameObject::CUBEDESTR)
-      return (CUBEDESTR);
-  }
-  return (EMPTY);
+  // objects = _gameModule->getObject(target.x, target.y);
+  // for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
+  //   if (*it == GameObject::CUBE) {
+  //     return (CUBE);
+  //     return ;
+  //   }
+  //   if (*it == GameObject::CUBEDESTR) {
+  //     return (CUBEDESTR);
+  //     return ;
+  //   }
+  // }
+  // return (EMPTY);
 }
+
+int	IA::_command(lua_State *ls) {
+  std::cout << "toto !!!!" << std::endl;
+  _ac = static_cast<Action>(lua_tonumber(ls, 3));
+  return (0);
+}
+
+int    IA::luaCall(lua_State *ls) {
+  std::map <std::string, int (IA::*)(lua_State *)> _func;
+  _func["command"] = &IA::_command;
+  (static_cast<IA *>(const_cast<void *>(lua_topointer(ls, 1)))->*(_func[lua_tostring(ls, 2)]))(ls);
+  return (0);
+};
