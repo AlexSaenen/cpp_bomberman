@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 13:02:38 2015 Alexander Saenen
-// Last update Fri Jun 12 18:04:21 2015 Alexander Saenen
+// Last update Sat Jun 13 17:06:21 2015 Alexander Saenen
 //
 
 #include <Camera.hh>
@@ -81,8 +81,11 @@ void	Camera::confirm() {
     glm::vec3	posPTwo = posPOne;
     if (_isMulti)
       posPTwo = getPlayerPos(GameObject::PLAYER2);
+    glm::vec3	combined(posPOne.x - posPTwo.x, posPOne.z - posPTwo.z, 0);
     eye.x = (posPOne.x + posPTwo.x) / 2;
     eye.z = ((posPOne.z + posPTwo.z) / 2) - 15;
+    if (_isMulti)
+      eye.y = (sqrt(((combined.x) * (combined.x)) + ((combined.y) * (combined.y))) / 1.2) + 15;
     center.x = eye.x;
     center.z = eye.z + 15.0;
     transformation = glm::lookAt(eye, center, _up);
