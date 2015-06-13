@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Thu Jun  4 15:16:56 2015 Alexander Saenen
+// Last update Sat Jun 13 10:31:27 2015 Alexander Saenen
 //
 
 #ifndef WALLPAPER_HH_
@@ -19,11 +19,12 @@
 # include <glm/gtc/matrix_transform.hpp>
 # include <iostream>
 # include <Shape.hh>
+# include <ModulesManager.hpp>
 
 class	Wallpaper : public IComponent, public Shape
 {
-  gdl::Texture	_texture;
-  gdl::Geometry	_geometry;
+  gdl::Texture	*_texture;
+  gdl::Geometry	*_geometry;
   float		_speed;
 
 public:
