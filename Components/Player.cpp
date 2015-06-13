@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Wed May 27 14:59:53 2015 Alexander Saenen
-// Last update Sat Jun 13 22:16:15 2015 Bozo
+// Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
+// Last update Sat Jun 13 22:40:15 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -30,13 +30,12 @@ void	Player::_initialize() {
 void	Player::_tryMoveCollision(const gdl::Clock &, const glm::vec3 &pos) {
   glm::vec3	destination = _position;
   destination += pos;
-  if (destination.x < 0)
-    destination.x += 1;
-  if (destination.z < 0)
-    destination.z += 1;
+  if (destination.x > 0)
+    destination.x += 2.5;
+  if (destination.z > 0)
+    destination.z += 2.5;
   // int	x = destination.x / 2.5;
-  // int	y = destination.z / 2.5;
-  
+  // int	y = destination.z / 2.5;  
 }
 
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {

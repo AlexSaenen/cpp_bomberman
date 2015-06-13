@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:30:42 2015 Vividy
-// Last update Sat Jun 13 17:18:21 2015 Alexander Saenen
+// Last update Sat Jun 13 23:08:08 2015 Thibaud PEAUGER
 //
 
 #include <Button.hh>
@@ -59,12 +59,23 @@ void	Button::select(const bool isSelected) {
 void	Button::activate() const {
   std::map<MenuModule::MenuPage, std::string>::const_iterator	it;
   it = _actions.find(_linkedPage);
-  Event   *ev = new Event("Music.play");
-  std::string     name("GraphicsLib/assets/MenuSamples/selectmenu.mp3");
-  std::string     music("SOUND");
-  ev->set<std::string>(std::string("FILE"), name);
-  ev->set<std::string>(std::string("TYPE"), music);
-  ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+
+  if (_linkedPage == MenuModule::HOME) {
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/MenuSamples/backmenu2.mp3");
+    std::string     music("SOUND");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), music);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+  }
+  else if (_sliderValue.find(_linkedPage) == _sliderValue.end()) {
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/MenuSamples/selectbonus.mp3");
+    std::string     music("SOUND");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), music);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+  }
   if (it != _actions.end()) {
     ModulesManager::getInstance()->get<MenuModule>()->activatePage(MenuModule::HOME);
     std::string	event = (*it).second;
@@ -96,6 +107,14 @@ void	Button::update(const gdl::Clock &, gdl::Input &input) {
   if (_isSelected && input.getKey(SDLK_RETURN)) {
     if (!_buttonPressed) {
       _buttonPressed = true;
+      if (_sliderValue.find(_linkedPage) != _sliderValue.end()) {
+	Event   *ev = new Event("Music.play");
+	std::string     name("GraphicsLib/assets/MenuSamples/errorbutton.mp3");
+	std::string     music("SOUND");
+	ev->set<std::string>(std::string("FILE"), name);
+	ev->set<std::string>(std::string("TYPE"), music);
+	ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+      }
       activate();
     }
   }

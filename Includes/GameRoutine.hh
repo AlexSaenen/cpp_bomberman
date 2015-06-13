@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Fri Jun 12 13:29:06 2015 Alexander Saenen
+// Last update Sat Jun 13 22:50:29 2015 Alexander Saenen
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -21,6 +21,7 @@
 # include <GameObject.hh>
 # include <Camera.hh>
 # include <map>
+# include <SaveMap.hh>
 
 class	GameRoutine : public AModule, public gdl::Game
 {
