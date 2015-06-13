@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 18:46:35 2015 Vividy
+// Last update Sat Jun 13 20:11:59 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -135,7 +135,6 @@ int			MapGenerator::generate()
       if ((x % 2 != 1 || y % 2 != 1) && rand() % 100 < 65)
 	{
 	  z = checkPerso(x, y, player);
-	  std::cout << "x:" << x << " y:" << y << " px:" << player[z].x << " py:" << player[z].y << std::endl;
 	  if (z == -1 || player[z].u == -1)
 	    string << "\nWall 1\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
 	  else if (player[z].u != 3 && !(player[z].x == x && player[z].y == y))
