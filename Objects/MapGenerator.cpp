@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 17:06:30 2015 Vividy
+// Last update Sat Jun 13 17:33:16 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -97,7 +97,6 @@ int			MapGenerator::generate()
     {
       y = 0;
       z = 0;
-      std::cout << x << std::endl;
       while (y == z && y < 5)
 	{
 	  z = y;
@@ -118,7 +117,6 @@ int			MapGenerator::generate()
 	}
       if (y == z)
 	{
-	  std::cout << "pb: " << x << std::endl;
 	  for (y = 0; player[y].u != -1 && (int)y < (int)player.size(); y++);
 	  if (x == 0)
 	    string << "\nfirstralouf 3\n$PlayerOne%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 3 0 0 0 0.1 0.1 0.1 player1\n@";
@@ -133,11 +131,11 @@ int			MapGenerator::generate()
     if (player[x].u != -1)
       player[x].u += ((player[x].x == 0 || player[x].x + 1 == this->size) ? 1 : 0) + ((player[x].y == 0 || player[x].y + 1 == this->size) ? 1 : 0);
   for (x = 0; x < this->size; x++)
-    for (y = 0; y < this->size; y++) // Si, je mettrais le "this"!
-      if (x % 2 != 1 && y % 2 != 1)
+    for (y = 0; y < this->size; y++)
+      if (x % 2 != 1 || y % 2 != 1)
 	{
 	  z = checkPerso(x, y, player);
-	  if ((z == -1 || player[z].u != 2 || (player[z].x == x && player[z].y == y && player[z].u != -1)) && rand() % 10 > 3)
+	  if ((z == -1 || player[z].u != 2 || (player[z].x == x && player[z].y == y && player[z].u == -1)) && rand() % 100 < 100)
 	    {
 	      string << "\nWall 1\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
 	      if (z != -1 && player[z].u != -1)
