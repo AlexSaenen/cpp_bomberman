@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 18:24:54 2015 Alexander Saenen
-// Last update Sat Jun 13 13:46:49 2015 Alexander Saenen
+// Last update Sat Jun 13 13:55:54 2015 Vividy
 //
 
 #include <Button.hh>
@@ -66,12 +66,16 @@ void	Button::activate() const {
   ev->set<std::string>(std::string("TYPE"), music);
   ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
   if (it != _actions.end()) {
-    ModulesManager::getInstance()->get<MenuModule>()
-      ->activatePage(MenuModule::HOME);
+    ModulesManager::getInstance()->get<MenuModule>()->activatePage(MenuModule::HOME);
     std::string	event = (*it).second;
     if (event == "Bomberman.quit" || event == "GameMode.multi") {
       ModulesManager::getInstance()->get<EventModule>()->trigger(event)->handle();
       return ;
+    }
+    if (_linkedPage == MenuModule::PLAY) {
+      MapModule	*mapMod = ModulesManager::getInstance()->get<MapModule>();
+      MapGenerator map(mapMod->getSize(), mapMod->isMultiplayer() ? 2 : 1, mapMod->getIA());
+      map.generate();
     }
     Loader	ld(event);
     ld.execute();

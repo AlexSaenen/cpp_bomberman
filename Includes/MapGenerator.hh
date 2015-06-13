@@ -5,18 +5,20 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Wed Jun 10 16:32:58 2015 Vividy
-// Last update Sat Jun 13 12:45:05 2015 Vividy
+// Last update Sat Jun 13 14:00:45 2015 Vividy
 //
 
 #ifndef MAPGENERATOR
 # define MAPGENERATOR
 
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <stdlib.h>
-#include <time.h>
+# include <iostream>
+# include <fstream>
+# include <sstream>
+# include <vector>
+# include <stdlib.h>
+# include <time.h>
+# include <ArgException.hh>
+# include <ModulesManager.hpp>
 
 class		MapGenerator
 {

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:02:03 2015 Alexander Saenen
-// Last update Fri Jun 12 18:05:15 2015 Alexander Saenen
+// Last update Sat Jun 13 14:01:52 2015 Vividy
 //
 
 #include "Bomberman.hh"
@@ -17,6 +17,7 @@ Bomberman::Bomberman(const int , const char **):
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.quit"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
     ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
+    ->observe(std::string("MapGenerator.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
     ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 700);
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)

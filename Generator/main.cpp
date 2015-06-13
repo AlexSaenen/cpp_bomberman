@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Wed Jun 10 16:29:53 2015 Vividy
-// Last update Sat Jun 13 13:38:56 2015 Vividy
+// Last update Sat Jun 13 14:03:07 2015 Vividy
 //
 
 #include "MapGenerator.hh"

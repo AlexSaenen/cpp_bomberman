@@ -5,7 +5,7 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
-## Last update Fri Jun 12 14:27:05 2015 Thibaud PEAUGER
+## Last update Sat Jun 13 13:56:56 2015 Vividy
 ##
 
 CXX		= g++
@@ -52,6 +52,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(CMPDIR)Bomb.cpp \
 		  $(CMPDIR)IA.cpp \
 		  $(SRCDIR)Event.cpp \
+		  $(SRCDIR)MapGenerator.cpp \
 		  $(SRCDIR)MenuSpawner.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \

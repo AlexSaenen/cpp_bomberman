@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Sat Jun 13 11:17:22 2015 Alexander Saenen
+// Last update Sat Jun 13 13:58:34 2015 Vividy
 //
 
 #include <MapModule.hh>
@@ -13,6 +13,7 @@
 MapModule::MapModule()
   : _hasTextures(false), _isMultiplayer(false) {
   _size = 5;
+  _ia = 0;
 }
 
 MapModule::~MapModule() { }
