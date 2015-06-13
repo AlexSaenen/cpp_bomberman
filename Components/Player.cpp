@@ -17,6 +17,9 @@ Player::Player()
   _inventory[BOMB] = 1;
   _inventory[SPEED] = 10;
   _inventory[RANGE] = 2;
+  _limit[BOMB] = 11;
+  _limit[SPEED] = 20;
+  _limit[RANGE] = 12;
 }
 
 Player::~Player() { }
@@ -100,5 +103,6 @@ int	Player::getLevel(const BonusType &bt) {
 }
 
 void	Player::incrLevel(const BonusType &bt) {
-  _inventory[bt]++;
+  if (_inventory[bt] < _limit[bt])
+    _inventory[bt]++;
 }

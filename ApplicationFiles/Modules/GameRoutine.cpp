@@ -17,7 +17,7 @@
 GameRoutine::GameRoutine() {}
 
 GameRoutine::~GameRoutine() {
-  for (int it = 0; it < 9; ++it) {
+  for (int it = 0; it < 11; ++it) {
     GameObject::ObjectType i = static_cast<GameObject::ObjectType>(it);
     while (!_objects[i].empty()) {
       delete _objects[i].back();
@@ -113,7 +113,7 @@ bool	GameRoutine::update() {
     return (true);
   }
   try {
-    for (int it = 0; it < 9; ++it) {
+    for (int it = 0; it < 11; ++it) {
       GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
       for (size_t i = 0; i < _objects[ot].size(); ++i)
 	_objects[ot][i]->update(_clock, _input);
@@ -137,7 +137,7 @@ void	GameRoutine::draw() {
   _shader.bind();
   ModulesManager::getInstance()->get<Camera>()
     ->confirm();
-  for (int it = 0; it < 9; ++it) {
+  for (int it = 0; it < 11; ++it) {
     GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
     for (size_t i = 0; i < _objects[ot].size(); ++i)
       _objects[ot][i]->draw(_shader, _clock);

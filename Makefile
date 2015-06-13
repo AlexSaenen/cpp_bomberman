@@ -26,6 +26,8 @@ ERRDIR		= Exceptions/
 
 GRADIR		= GraphicsLib/
 
+LUADIR		= LuaLib/src/
+
 SRC		= $(ERRDIR)ArgException.cpp \
 		  $(ERRDIR)LogicException.cpp \
 		  $(ERRDIR)RangeException.cpp \
@@ -57,13 +59,14 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \
 		  $(SRCDIR)Loader.cpp \
+		  $(SRCDIR)LuaLoader.cpp \
 		  $(SRCDIR)SaveMap.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -I$(LUADIR) -IIncludes -W -Wall -Werror -Wextra
 
-LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl -lfmod
+LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -lfmod -L$(LUADIR) -llua -ldl
 
 RED		= \033[00;34m
 

@@ -12,28 +12,54 @@
 # define IA_HH_
 
 # include <GameModule.hh>
+# include <MapModule.hh>
 # include <Player.hh>
 # include <GameObject.hh>
 # include <algorithm>
+# include <LuaLoader.hh>
 
 class	IA : public Player
 {
 private:
   class		Coor
   {
+  public:
     int		x;
     int		y;
     int		type;
   };
+
+  enum		Case
+    {
+      EMPTY,
+      CUBE,
+      CUBEDESTR,
+    };
+
+  enum		Action
+    {
+      UP,
+      DOWN,
+      RIGHT,
+      LEFT,
+      BOMB,
+    };
   
 private:
   GameModule		*_gameModule;
-  GameRoutine		*_gameRoutine;
+  MapModule		*_mapModule;
   //  Coor			_me;
   std::list<Coor>	_map;
   std::list<Coor>	_players;
   std::list<Coor>	_bombs;
   std::list<Coor>	_bonus;
+  int			_toto;
+  LuaLoader		*_luaLoader;
+  lua_State*		_luaVM;
+  void			*_this;
+  
+public:
+  Action		_ac;
 
 public:
   IA();
@@ -44,7 +70,13 @@ public:
 
 private:
   int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
-  Coor		_radar(Coor &);
+  int		_radar(lua_State *ls);
+  int		_checkBomb(lua_State *ls);
+  int		_checkCase(lua_State *ls);
+  int		_command(lua_State *ls);
+
+public:
+  static int	luaCall(lua_State *ls);
 };
 
 #endif /* IA.hh */

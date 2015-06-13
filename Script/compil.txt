@@ -1,6 +1,7 @@
 -llua
 
 installer readline
+sudo apt-get install libreadline6 libreadline6-dev
 make linux
 cp liblua.a /usr/lib /usr/lib64 /usr/include
 
