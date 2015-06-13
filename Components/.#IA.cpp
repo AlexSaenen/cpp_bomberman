@@ -1,1 +1,0 @@
-jeje@jeje-HP-EliteBook-8570p.8092:1434224240
