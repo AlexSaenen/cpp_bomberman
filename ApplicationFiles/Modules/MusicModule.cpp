@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Sat Jun 13 11:07:00 2015 Alexander Saenen
+// Last update Sat Jun 13 16:01:29 2015 Thibaud PEAUGER
 //
 
 #include <MusicModule.hh>
@@ -50,6 +50,7 @@ bool	MusicModule::checkIn(std::string const& path_file, std::string const& type)
       {
 	if (type == "PAUSE")
 	  {
+	    (*it)->setVolume(musicVolume);
 	    (*it)->pause();
 	    return (true);
 	  }

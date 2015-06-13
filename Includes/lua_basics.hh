@@ -19,6 +19,12 @@ public:
   LuaScript();
   ~LuaScript();
 
+  int	DoScript();
+  void	PullFunc(std::string const &);
+  // void	PushFunc(std::string const &);
+  void	PushString(std::string const &);
+  void	PushInteger(int);
+  int	Pcall(int, int, int);
 private:
   lua_State*	_luaVM;
 };
