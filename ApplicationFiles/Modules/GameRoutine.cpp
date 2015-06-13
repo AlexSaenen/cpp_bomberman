@@ -1,11 +1,11 @@
 //
-// GameRoutine.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sat Jun 13 23:15:19 2015 Vividy
+// GameRoutine.cpp for  in /home/vividy/rendu/cpp_bomberman/ApplicationFiles/Modules
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 00:45:12 2015 Vividy
+// Last update Sun Jun 14 00:45:13 2015 Vividy
 //
 
 #include <GameRoutine.hh>

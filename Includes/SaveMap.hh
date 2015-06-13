@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:05:28 2015 Vividy
-// Last update Sun Jun 14 00:30:42 2015 Vividy
+// Last update Sun Jun 14 01:06:01 2015 Vividy
 //
 
 #ifndef SAVEMAP_HH_
@@ -23,6 +23,7 @@ class	SaveMap
 private:
   GameRoutine			*gr;
   bool				multiplayer;
+  bool				isIa;
   std::vector<GameObject *>	playerone;
   std::vector<GameObject *>	playertwo;
   std::vector<GameObject *>	ia;
