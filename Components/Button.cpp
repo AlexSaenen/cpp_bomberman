@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 18:24:54 2015 Alexander Saenen
-// Last update Sat Jun 13 13:30:22 2015 Alexander Saenen
+// Last update Sat Jun 13 13:46:49 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -23,8 +23,15 @@ Button::Button(const MenuModule::MenuPage linkedPage, const bool isSelected)
   _mapSetters[MenuModule::NIA] = &MapModule::setIA;
   _musicSetters[MenuModule::MVOLUME] = &MusicModule::setMusicVolume;
   _musicSetters[MenuModule::SVOLUME] = &MusicModule::setSoundVolume;
-  if (_sliderDelta.find(linkedPage) != _sliderDelta.end())
-    _value = 0;
+  MusicModule	*music = ModulesManager::getInstance()->get<MusicModule>();
+  MapModule	*map = ModulesManager::getInstance()->get<MapModule>();
+  if (_sliderDelta.find(linkedPage) != _sliderDelta.end()) {
+    _sliderValue[MenuModule::MVOLUME] = music->getMusicVolume();
+    _sliderValue[MenuModule::SVOLUME] = music->getSoundVolume();
+    _sliderValue[MenuModule::SIZE] = map->getSize();
+    _sliderValue[MenuModule::NIA] = map->getIA();
+    _value = _sliderValue[_linkedPage];
+  }
 }
 
 Button::~Button() {
@@ -90,11 +97,11 @@ void	Button::update(const gdl::Clock &, gdl::Input &input) {
     _buttonPressed = true;
     MusicModule	*music = ModulesManager::getInstance()->get<MusicModule>();
     MapModule	*map = ModulesManager::getInstance()->get<MapModule>();
-    _sliderValue[MenuModule::MVOLUME] = music->getMusicVolume();
-    _sliderValue[MenuModule::SVOLUME] = music->getSoundVolume();
-    _sliderValue[MenuModule::SIZE] = map->getSize();
-    _sliderValue[MenuModule::NIA] = map->getIA();
-    _value = _sliderValue[_linkedPage];
+    // _sliderValue[MenuModule::MVOLUME] = music->getMusicVolume();
+    // _sliderValue[MenuModule::SVOLUME] = music->getSoundVolume();
+    // _sliderValue[MenuModule::SIZE] = map->getSize();
+    // _sliderValue[MenuModule::NIA] = map->getIA();
+    // _value = _sliderValue[_linkedPage];
     if (input.getKey(SDLK_LEFT))
       _value -= _sliderDelta[_linkedPage];
     else if (input.getKey(SDLK_RIGHT))
