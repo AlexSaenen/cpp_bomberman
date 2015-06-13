@@ -5,13 +5,13 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 13:02:38 2015 Alexander Saenen
-// Last update Sat Jun 13 17:06:21 2015 Alexander Saenen
+// Last update Sat Jun 13 17:19:15 2015 Alexander Saenen
 //
 
 #include <Camera.hh>
 
 Camera::Camera()
-  : _eye(0, 10, -10), _center(0, 0, 0), _up(0, 1, 0), _fovy(60.0f), _aspect(800.0f / 600.0f), _near(0.1f), _far(100.0f), _followPlayers(false), _isMulti(false) {
+  : _eye(0, 10, -10), _center(0, 0, 0), _up(0, 1, 0), _fovy(60.0f), _aspect(800.0f / 600.0f), _near(0.1f), _far(1000.0f), _followPlayers(false), _isMulti(false) {
   _shader = ModulesManager::getInstance()->get<GameRoutine>()->getShader();
   confirm();
 }
