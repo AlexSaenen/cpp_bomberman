@@ -20,19 +20,28 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-
-  _luaVM = luaL_newstate();
-  if (_luaVM == NULL) {
-      std::cout << "initialization error" << std::endl;
-      return ;
-    }
-  luaL_openlibs(_luaVM);
-  std::cerr << "-- Loading file: " << std::endl;
-  luaL_dofile(_luaVM, SCRIPT);
+  // _luaLoader = new LuaLoader("ia.lua");
+  try {
+    if ((_luaVM = luaL_newstate()) == NULL)
+      throw RuntimeException("Lua initialization error");
+    luaL_openlibs(_luaVM);
+    // std::cout << (DIR + namefile).c_str() << std::endl;
+    if (luaL_dofile(_luaVM, "Script/ia.lua") == 1)
+      throw RuntimeException("Lua script not found : ");
+    lua_register(_luaVM, "luaCall", IA::luaCall);
+    lua_getglobal(_luaVM, "run");
+  } catch(RuntimeException e) {
+    std::cerr << e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Lua.error", 1001)
+      ->handle();
+  }
+  _this = static_cast<void *>(this);
 }
 
 IA::~IA() {
   lua_close(_luaVM);
+  //delete _luaLoader;
 }
 
 void	IA::_initialize() {
@@ -47,45 +56,53 @@ void	IA::_initialize() {
 void	IA::update(const gdl::Clock &clock, gdl::Input &) {
   if (!_isInitialized)
     _initialize();
-  _gameModule->popOnMap(_position.x, _position.y, _type);
-  lua_register(_luaVM, "luaCall", IA::luaCall);
-  lua_getglobal(_luaVM, "run");
-  lua_pushlightuserdata(_luaVM, static_cast<void *>(this));
-  lua_pcall(_luaVM, 1, 0, 0);
-  // _lastMovement = 0;
-  // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
-  //      it != _rotationMap.end() && !hasTranslated; ++it)
-  //   if (input.getKey((*it).first)) {
-  //     hasTranslated = true;
-  if (_ac != BOMB) {
-    _rotation.y = _rotationMap[_ac];
-    translate(_translationMap[_ac] * static_cast<float>(clock.getElapsed()) * _speed);
+
+  try {
+    _gameModule->popOnMap(_position.x, _position.y, _type);
+
+    std::cout << "IA update" << std::endl;
+    lua_pushlightuserdata(_luaVM, _this);
+    lua_pcall(_luaVM, 1, 0, 0);
+    // _luaLoader->lunchScript(_this, 1, 1, 1);//_inventory[Player::RANGE]);
+    // _lastMovement = 0;
+    // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
+    //      it != _rotationMap.end() && !hasTranslated; ++it)
+    //   if (input.getKey((*it).first)) {
+    //     hasTranslated = true;
+    if (_ac != BOMB) {
+      _rotation.y = _rotationMap[_ac];
+      translate(_translationMap[_ac] * static_cast<float>(clock.getElapsed()) * _speed);
+    }
+    //     if (!_isMoving) {
+    // 	_model.pause(false);
+    // 	_isMoving = true;
+    //     }
+    //     _lastMovement = (*it).first;
+    //   }
+    // if (!_lastMovement) {
+    //   _isMoving = false;
+    //   _model.pause(true);
+    // }
+    _gameModule->pushOnMap(_position.x, _position.y, _type);
+  } catch(RuntimeException e) {
+    std::cerr << e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Lua.error", 1001)
+      ->handle();
   }
-  //     if (!_isMoving) {
-  // 	_model.pause(false);
-  // 	_isMoving = true;
-  //     }
-  //     _lastMovement = (*it).first;
-  //   }
-  // if (!_lastMovement) {
-  //   _isMoving = false;
-  //   _model.pause(true);
-  // }
-  _gameModule->pushOnMap(_position.x, _position.y, _type);
 }
 
-int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types)
-{
+int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end())
     return (1);
   return (0);
 }
 
-void		IA::_radar(lua_State *) {
-  int		i;
-  int		j;
-  int		incr;
-  int		find = 0;
+int	IA::_radar(lua_State *) {
+  int	i;
+  int	j;
+  int	incr;
+  int	find = 0;
 
   i = _position.x;
   j = _position.y;
@@ -111,38 +128,54 @@ void		IA::_radar(lua_State *) {
       }
     }
     incr++;
-  }  
+  }
+  return (3);
 }
 
-void          IA::_checkBomb(lua_State *) {
+int          IA::_checkBomb(lua_State *) {
+  return (3);
 }
 
-void	IA::_checkCase(lua_State *) {
-  // std::list<GameObject::ObjectType>	objects;
-
-  // objects = _gameModule->getObject(target.x, target.y);
-  // for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
-  //   if (*it == GameObject::CUBE) {
-  //     return (CUBE);
-  //     return ;
-  //   }
-  //   if (*it == GameObject::CUBEDESTR) {
-  //     return (CUBEDESTR);
-  //     return ;
-  //   }
-  // }
-  // return (EMPTY);
+int					IA::_checkCase(lua_State *) {
+  std::list<GameObject::ObjectType>	objects;
+  int					x = 0;
+  int					y = 0;
+  
+  // lua_tostring(L, n);
+  objects = _gameModule->getObject(x, y);
+  for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
+    if (*it == GameObject::CUBE) {
+      return (CUBE);
+      return (1);
+    }
+    if (*it == GameObject::CUBEDESTR) {
+      return (CUBEDESTR);
+      return (1);
+    }
+  }
+  return (EMPTY);
+  return (1);
 }
 
 int	IA::_command(lua_State *ls) {
   std::cout << "toto !!!!" << std::endl;
-  _ac = static_cast<Action>(lua_tonumber(ls, 3));
+  if (_toto < 1)
+    _ac = static_cast<Action>(lua_tonumber(ls, 3));
+  else if (_toto < 2)
+    _ac = RIGHT;
+  else if (_toto < 3)
+    _ac = DOWN;
+  else if (_toto < 4)
+    _ac = LEFT;
+  else
+    _toto = -1;
+  _toto++;
   return (0);
 }
 
 int    IA::luaCall(lua_State *ls) {
+  std::cout << "luaCall" << std::endl;
   std::map <std::string, int (IA::*)(lua_State *)> _func;
   _func["command"] = &IA::_command;
-  (static_cast<IA *>(const_cast<void *>(lua_topointer(ls, 1)))->*(_func[lua_tostring(ls, 2)]))(ls);
-  return (0);
+  return ((static_cast<IA *>(const_cast<void *>(lua_topointer(ls, 1)))->*(_func[lua_tostring(ls, 2)]))(ls));
 };

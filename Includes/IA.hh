@@ -16,15 +16,7 @@
 # include <Player.hh>
 # include <GameObject.hh>
 # include <algorithm>
-
-extern "C"
-{
-# include <lua.h>
-# include <lauxlib.h>
-# include <lualib.h>
-}
-
-# define SCRIPT "Script/ia.lua"
+# include <LuaLoader.hh>
 
 class	IA : public Player
 {
@@ -61,7 +53,11 @@ private:
   std::list<Coor>	_players;
   std::list<Coor>	_bombs;
   std::list<Coor>	_bonus;
+  int			_toto;
+  LuaLoader		*_luaLoader;
   lua_State*		_luaVM;
+  void			*_this;
+  
 public:
   Action		_ac;
 
@@ -74,9 +70,9 @@ public:
 
 private:
   int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
-  void		_radar(lua_State *ls);
-  void		_checkBomb(lua_State *ls);
-  void		_checkCase(lua_State *ls);
+  int		_radar(lua_State *ls);
+  int		_checkBomb(lua_State *ls);
+  int		_checkCase(lua_State *ls);
   int		_command(lua_State *ls);
 
 public:
