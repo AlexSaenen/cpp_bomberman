@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Sat Jun 13 13:58:34 2015 Vividy
+// Last update Sat Jun 13 16:09:37 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
@@ -35,7 +35,10 @@ void	MapModule::loadMapValues() {
   _textureMap["bomb"] = "./GraphicsLib/assets/bomb.fbx";
   _textureMap["player1"] = "./GraphicsLib/assets/archer.fbx";
   _textureMap["player2"] = "./GraphicsLib/assets/warrior.fbx";
-  _textureMap["ia"] = "./GraphicsLib/assets/skeletarcher.fbx";
+  _textureMap["ia1"] = "./GraphicsLib/assets/skeletarcher.fbx";
+  _textureMap["ia2"] = "./GraphicsLib/assets/skeletwarrior1.fbx";
+  _textureMap["ia3"] = "./GraphicsLib/assets/skeletwarrior2.fbx";
+  _textureMap["ia4"] = "./GraphicsLib/assets/skeletwarrior3.fbx";
   _hasTextures = true;
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("GameMode.multi"), new Functor<MapModule>(this, &MapModule::setGameMode), 1000);
