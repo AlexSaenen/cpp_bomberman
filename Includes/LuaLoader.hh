@@ -3,7 +3,6 @@
 
 # include <iostream>
 # include <RuntimeException.hh>
-# include <errno.h>
 
 extern "C"
 {

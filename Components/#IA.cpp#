@@ -77,6 +77,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
 int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end())
     return (1);
+  // else if (find(types.begin(), types.end(), GameObject::)
   return (0);
 }
 
