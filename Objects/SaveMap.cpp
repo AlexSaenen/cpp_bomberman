@@ -5,15 +5,16 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:03:46 2015 Vividy
-// Last update Sat Jun 13 22:32:37 2015 Vividy
+// Last update Sun Jun 14 00:43:02 2015 Vividy
 //
 
 #include "SaveMap.hh"
 
 SaveMap::SaveMap()
 {
-  this->i = 42;
-  std::cout << "Construction" << std::endl;
+  this->multiplayer = ModulesManager::getInstance()->get<MapModule>()->isMultiplayer();
+  this->gr = ModulesManager::getInstance()->get<GameRoutine>();
+std::cout << "Construction" << std::endl;
 }
 
 SaveMap::~SaveMap()
@@ -23,6 +24,10 @@ SaveMap::~SaveMap()
 
 void	SaveMap::execute()
 {
+  this->playerone = gr->getGObjects(GameObject::PLAYER1);
+  if (this->multiplayer)
+    this->playerone = gr->getGObjects(GameObject::PLAYER2);
+  std::cout << ModulesManager::getInstance()->get<MapModule>()->getIA() << std::endl;
   std::cout << "je fonctionne" << std::endl;
 }
 

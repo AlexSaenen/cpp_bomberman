@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sat Jun 13 22:50:49 2015 Alexander Saenen
+// Last update Sat Jun 13 23:15:19 2015 Vividy
 //
 
 #include <GameRoutine.hh>
@@ -14,7 +14,7 @@
 #include <RuntimeException.hh>
 #include <RangeException.hh>
 
-GameRoutine::GameRoutine() {}
+GameRoutine::GameRoutine() : _lastSaved(0) {}
 
 GameRoutine::~GameRoutine() {
   for (int it = 0; it < 9; ++it) {
@@ -100,10 +100,13 @@ bool	GameRoutine::update() {
     ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
   }
-  if (_input.getKey(SDLK_o)) {
+  if (_input.getKey(SDLK_o) && _lastSaved + _clock.getElapsed() > 5) {
     SaveMap	saver;
+    _lastSaved = 0;
     saver.execute();
   }
+  else
+    _lastSaved += _clock.getElapsed();
   try {
     for (int it = 0; it < 9; ++it) {
       GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);

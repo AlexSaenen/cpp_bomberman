@@ -5,18 +5,27 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:05:28 2015 Vividy
-// Last update Sat Jun 13 22:36:19 2015 Vividy
+// Last update Sun Jun 14 00:30:42 2015 Vividy
 //
 
 #ifndef SAVEMAP_HH_
 # define SAVEMAP_HH_
 
 #include <iostream>
+#include "ModulesManager.hpp"
+#include "MapModule.hh"
+#include "GameRoutine.hh"
+
+class	GameRoutine;
 
 class	SaveMap
 {
 private:
-  int	i;
+  GameRoutine			*gr;
+  bool				multiplayer;
+  std::vector<GameObject *>	playerone;
+  std::vector<GameObject *>	playertwo;
+  std::vector<GameObject *>	ia;
 public:
   SaveMap();
   ~SaveMap();
