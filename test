@@ -1,0 +1,24 @@
+GameRoutine *gr = ModulesManager::getInstance()->get<GameRoutine>();
+std::vector<GameObject *> players = gr->getGObjects(GameObject::PLAYER1);
+GameObject	*player = players.back();
+std::list<IComponent *>	comp = player->getComponents();
+
+player->getType();
+/* avoir le type de l'objet */
+player->getName();
+/* avoir le nom de l'objet */
+
+Shape	*shape = 0;
+for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it)
+    shape = dynamic_cast<Shape *>((*it));
+if (shape) {
+   shape->getPosX();
+   shape->getPosY();
+   if (type != CUBE && type != CUBDESTR) {
+      ObjModel	*model = dynamic_cast<ObjModel *>(shape);
+      if (model) {
+      	 model->getModelName();
+      }
+   }
+   /* utiliser positions pour écrire .map */
+}

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 12 17:13:34 2015 Alexander Saenen
-// Last update Sat Jun 13 14:07:00 2015 Vividy
+// Last update Sat Jun 13 21:40:38 2015 Alexander Saenen
 //
 
 #include <ObjModel.hh>
@@ -34,20 +34,20 @@ void	ObjModel::draw(gdl::AShader &shader, const gdl::Clock &clock) {
 }
 
 void	ObjModel::configure(const std::string &conf) {
-  std::stringstream     *stream = new std::stringstream(conf);
+  std::stringstream     stream(conf);
   int			type;
   std::string		model;
 
-  *stream >> _position.x;
-  *stream >> _position.z;
-  *stream >> type;
-  *stream >> _rotation.x;
-  *stream >> _rotation.y;
-  *stream >> _rotation.z;
-  *stream >> _scale.x;
-  *stream >> _scale.y;
-  *stream >> _scale.z;
-  *stream >> model;
+  stream >> _position.x;
+  stream >> _position.z;
+  stream >> type;
+  stream >> _rotation.x;
+  stream >> _rotation.y;
+  stream >> _rotation.z;
+  stream >> _scale.x;
+  stream >> _scale.y;
+  stream >> _scale.z;
+  stream >> model;
   MapModule	*map = ModulesManager::getInstance()->get<MapModule>();
   if (!map->isLoaded())
     map->loadMapValues();
@@ -55,5 +55,9 @@ void	ObjModel::configure(const std::string &conf) {
   if (_model.load(_modelName) == false)
     throw ArgException("Cannot load the model : " + _modelName);
   _isLoaded = true;
-  delete stream;
+}
+
+
+std::string	ObjModel::getModelName() const {
+  return (_modelName);
 }
