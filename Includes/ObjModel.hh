@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Mon Jun  1 17:12:29 2015 Alexander Saenen
+// Last update Sat Jun 13 21:38:54 2015 Alexander Saenen
 //
 
 #ifndef OBJMODEL_HH_
@@ -45,6 +45,7 @@ public:
   void	playSubAnim(const std::string &subAnimation, bool loop = true);
   void	configure(const std::string &model, const GameObject::ObjectType type);
   void	configure(const std::string &conf);
+  std::string	getModelName() const;
 };
 
 #endif /* ObjModel.hh */

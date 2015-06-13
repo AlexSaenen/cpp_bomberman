@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sat Jun 13 16:25:35 2015 Alexander Saenen
+// Last update Sat Jun 13 22:50:49 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -99,6 +99,10 @@ bool	GameRoutine::update() {
   if (_input.getKey(SDLK_ESCAPE) || _input.getInput(SDL_QUIT)) {
     ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
+  }
+  if (_input.getKey(SDLK_o)) {
+    SaveMap	saver;
+    saver.execute();
   }
   try {
     for (int it = 0; it < 9; ++it) {
