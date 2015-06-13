@@ -75,26 +75,56 @@ Wall 0
 $Cube%22.5 22.5 0
 @
 firstralouf 3
-$PlayerOne%0 0 3 0 0 0 0.1 0.1 0.1 player1
-@0
-randomralouf 5
-$IA%0 20 5 0 0 0 0.1 0.1 0.1 ia
-@1
-randomralouf 5
-$IA%5 15 5 0 0 0 0.1 0.1 0.1 ia
-@2
-randomralouf 5
-$IA%10 0 5 0 0 0 0.1 0.1 0.1 ia
-@3
-randomralouf 5
-$IA%10 20 5 0 0 0 0.1 0.1 0.1 ia
-@4
-randomralouf 5
-$IA%15 15 5 0 0 0 0.1 0.1 0.1 ia
-@5
+$PlayerOne%15 25 3 0 0 0 0.1 0.1 0.1 player1
+@
+firstralouf 4
+$PlayerTwo%10 10 4 0 0 0 0.1 0.1 0.1 player2
+@
 randomralouf 5
 $IA%20 0 5 0 0 0 0.1 0.1 0.1 ia
 @
-firstralouf 4
-$PlayerTwo%25 25 4 0 0 0 0.1 0.1 0.1 player2
+randomralouf 5
+$IA%25 15 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%0 0 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%5 25 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%25 5 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%25 25 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%20 20 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%0 10 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%20 10 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%5 5 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%15 15 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%5 15 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%0 20 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%10 20 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%10 0 5 0 0 0 0.1 0.1 0.1 ia
+@
+randomralouf 5
+$IA%15 5 5 0 0 0 0.1 0.1 0.1 ia
 @
