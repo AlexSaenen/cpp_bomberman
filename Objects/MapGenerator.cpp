@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 16:06:05 2015 Vividy
+// Last update Sat Jun 13 17:06:30 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -34,6 +34,26 @@ MapGenerator::Coor::Coor(int const _x, int const _y, int const _u)
   this->x = _x;
   this->y = _y;
   this->u = _u;
+}
+
+int	checkPerso(int x, int y, std::vector<MapGenerator::Coor> player)
+{
+  int	z;
+
+  for (z = 0; z < (int)player.size(); z++)
+    {
+      if (player[z].x == x && player[z].y == y)
+	return (z);
+      if (player[z].x == x - 1 && player[z].y == y)
+	return (z);
+      if (player[z].x == x + 1 && player[z].y == y)
+	return (z);
+      if (player[z].x == x && player[z].y == y + 1)
+	return (z);
+      if (player[z].x == x && player[z].y == y - 1)
+	return (z);
+    }
+  return (-1);
 }
 
 int			MapGenerator::generate()
@@ -109,6 +129,21 @@ int			MapGenerator::generate()
 	  player[y].u = 0;
 	}
     }
+  for (x = 0; x < (int)player.size(); x++)
+    if (player[x].u != -1)
+      player[x].u += ((player[x].x == 0 || player[x].x + 1 == this->size) ? 1 : 0) + ((player[x].y == 0 || player[x].y + 1 == this->size) ? 1 : 0);
+  for (x = 0; x < this->size; x++)
+    for (y = 0; y < this->size; y++) // Si, je mettrais le "this"!
+      if (x % 2 != 1 && y % 2 != 1)
+	{
+	  z = checkPerso(x, y, player);
+	  if ((z == -1 || player[z].u != 2 || (player[z].x == x && player[z].y == y && player[z].u != -1)) && rand() % 10 > 3)
+	    {
+	      string << "\nWall 1\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
+	      if (z != -1 && player[z].u != -1)
+		player[z].u += 1;
+	    }
+	}
   str = string.str();
   this->is->write(str.c_str(), str.size());
   return (0);
