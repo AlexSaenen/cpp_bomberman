@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Wed Jun  3 14:59:43 2015 Alexander Saenen
-// Last update Fri Jun 12 16:18:48 2015 Thibaud PEAUGER
+// Started on  Fri Jun 12 18:24:54 2015 Alexander Saenen
+// Last update Fri Jun 12 18:24:55 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -52,10 +52,8 @@ void	Button::activate() const {
     ModulesManager::getInstance()->get<MenuModule>()
       ->activatePage(MenuModule::HOME);
     std::string	event = (*it).second;
-    if (event == "Bomberman.quit") {
-      ModulesManager::getInstance()->get<EventModule>()
-	->trigger(event)
-	->handle();
+    if (event == "Bomberman.quit" || event == "GameMode.multi") {
+      ModulesManager::getInstance()->get<EventModule>()->trigger(event)->handle();
       return ;
     }
     Loader	ld(event);
@@ -63,9 +61,12 @@ void	Button::activate() const {
     ModulesManager::getInstance()->get<MenuModule>()
       ->toggle(false);
   }
-  else
+  else {
     ModulesManager::getInstance()->get<MenuModule>()
       ->activatePage(_linkedPage);
+    if (_linkedPage == MenuModule::MULTIPLAYER)
+      ModulesManager::getInstance()->get<EventModule>()->trigger("GameMode.multi")->handle();
+  }
 }
 
 void	Button::initialize(Event *) { }

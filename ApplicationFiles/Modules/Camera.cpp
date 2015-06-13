@@ -5,18 +5,22 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 13:02:38 2015 Alexander Saenen
-// Last update Fri Jun 12 16:27:04 2015 Alexander Saenen
+// Last update Fri Jun 12 18:04:21 2015 Alexander Saenen
 //
 
 #include <Camera.hh>
 
 Camera::Camera()
-  : _eye(0, 10, -10), _center(0, 0, 0), _up(0, 1, 0), _fovy(60.0f), _aspect(800.0f / 600.0f), _near(0.1f), _far(100.0f), _followPlayers(false) {
+  : _eye(0, 10, -10), _center(0, 0, 0), _up(0, 1, 0), _fovy(60.0f), _aspect(800.0f / 600.0f), _near(0.1f), _far(100.0f), _followPlayers(false), _isMulti(false) {
   _shader = ModulesManager::getInstance()->get<GameRoutine>()->getShader();
   confirm();
 }
 
 Camera::~Camera() { }
+
+void	Camera::setCameraMode(const bool isMulti) {
+  _isMulti = isMulti;
+}
 
 Camera	*Camera::followPlayers(const bool follow) {
   _followPlayers = follow;
@@ -44,6 +48,25 @@ Camera	*Camera::setLookAt(const glm::vec3 &eye) {
   return (this);
 }
 
+glm::vec3	Camera::getPlayerPos(const GameObject::ObjectType type) const {
+  std::vector<GameObject *> players = ModulesManager::getInstance()->get<GameRoutine>()
+    ->getGObjects(type);
+  GameObject *player = players.back();
+  std::list<IComponent *> components = player->getComponents();
+  Shape	*shape = 0;
+  for (std::list<IComponent *>::const_iterator it = components.begin();
+       it != components.end() && !shape; ++it)
+    shape = dynamic_cast<Shape *>(*it);
+  if (!shape)
+    throw RuntimeException("GameObject hasn't got a shape");
+  glm::vec3	pos(0, 0, 0);
+  pos.x = shape->getPosX();
+  if (pos.x == 0)
+    pos.x = 0.00001;
+  pos.z = shape->getPosY();
+  return (pos);
+}
+
 void	Camera::confirm() {
   glm::mat4 projection;
   glm::mat4 transformation;
@@ -52,23 +75,15 @@ void	Camera::confirm() {
   if (!_followPlayers)
     transformation = glm::lookAt(_eye, _center, _up);
   else {
-    std::vector<GameObject *> players = ModulesManager::getInstance()->get<GameRoutine>()
-      ->getGObjects(GameObject::PLAYER1);
-    GameObject *player = players.back();
-    std::list<IComponent *> components = player->getComponents();
-    Shape	*shape = 0;
-    for (std::list<IComponent *>::const_iterator it = components.begin();
-	 it != components.end() && !shape; ++it)
-      shape = dynamic_cast<Shape *>(*it);
-    if (!shape)
-      return ;
-    glm::vec3	eye(0.1f, 15.1f, 0.1f);
     glm::vec3	center(0.0f, 0.0f, 0.0f);
-    eye.x = shape->getPosX();
-    if (eye.x == 0)
-      eye.x = 0.001;
-    eye.z = shape->getPosY() - 15;
-    center.x = eye.x * 1.0;
+    glm::vec3	eye(0.1f, 15.1f, 0.1f);
+    glm::vec3	posPOne = getPlayerPos(GameObject::PLAYER1);
+    glm::vec3	posPTwo = posPOne;
+    if (_isMulti)
+      posPTwo = getPlayerPos(GameObject::PLAYER2);
+    eye.x = (posPOne.x + posPTwo.x) / 2;
+    eye.z = ((posPOne.z + posPTwo.z) / 2) - 15;
+    center.x = eye.x;
     center.z = eye.z + 15.0;
     transformation = glm::lookAt(eye, center, _up);
   }

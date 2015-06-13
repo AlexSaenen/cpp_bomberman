@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Wed Jun 10 16:07:49 2015 Alexander Saenen
-// Last update Fri Jun 12 16:17:48 2015 Thibaud PEAUGER
+// Started on  Fri Jun 12 18:24:41 2015 Alexander Saenen
+// Last update Fri Jun 12 18:24:41 2015 Alexander Saenen
 //
 
 #include <GameObject.hh>
@@ -49,9 +49,8 @@ void	GameObject::update(const gdl::Clock &clock, gdl::Input &input) {
   if (_type != MENUPAGE || (!input.getKey(SDLK_UP) && !input.getKey(SDLK_DOWN))) {
     _hasPressed = false;
     for (std::list<IComponent *>::iterator it = _gameComponents.begin();
-	 it != _gameComponents.end(); ++it) {
+	 it != _gameComponents.end(); ++it)
       (*it)->update(clock, input);
-    }
   }
   else if (_type == MENUPAGE && !_hasPressed) {
     for (std::list<IComponent *>::iterator it = _gameComponents.begin();

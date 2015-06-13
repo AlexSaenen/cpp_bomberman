@@ -1,6 +1,9 @@
 ralouf 3
 $PlayerOne%0 0 3 0 0 0 0.1 0.1 0.1 player1
 @
+ralouf 4
+$PlayerTwo%0 0 4 0 0 0 0.1 0.1 0.1 player2
+@
 Wall 0
 $Cube%2.5 2.5 0
 @

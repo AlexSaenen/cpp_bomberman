@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Thu Jun 11 15:57:47 2015 Alexander Saenen
+// Last update Fri Jun 12 17:36:38 2015 Alexander Saenen
 //
 
 #ifndef MAPMODULE_HH_
@@ -23,6 +23,7 @@ class	MapModule : public AModule
   std::map<std::string, std::string>	_textureMap;
   bool					_hasTextures;
   int					_size;
+  bool					_isMultiplayer;
 
 public:
   MapModule();
@@ -32,7 +33,9 @@ public:
   std::string	getTexturePath(const std::string &textureType) const;
   int		getSize() const;
   void		setSize(const int size);
-  bool	isLoaded() const;
+  bool		isLoaded() const;
+  void		setGameMode(Event *e);
+  bool		isMultiplayer() const;
 };
 
 #endif /* MapModule.hh */
