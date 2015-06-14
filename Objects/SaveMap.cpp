@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:03:46 2015 Vividy
-// Last update Sun Jun 14 14:02:48 2015 Vividy
+// Last update Sun Jun 14 15:50:41 2015 Vividy
 //
 
 #include "SaveMap.hh"
@@ -158,19 +158,14 @@ void	SaveMap::pushPlayerTwo()
 void	SaveMap::execute()
 {
   string << mm->getSize() << " " << mm->getIA();
-  if (isCube){
-      pushCube();
-    }
-  if (isPlayerOne){
-      pushPlayerOne();
-    }
-  if (isPlayerTwo){
-      pushPlayerTwo();
-    }
-  if (isIa){
-      pushIa();
-    }
-  if (isCubeDestr){
-      pushCubeDestr();
-    }
+  if (isCube)
+    pushCube();
+  if (isPlayerOne)
+    pushPlayerOne();
+  if (isPlayerTwo)
+    pushPlayerTwo();
+  if (isIa)
+    pushIa();
+  if (isCubeDestr)
+    pushCubeDestr();
 }
