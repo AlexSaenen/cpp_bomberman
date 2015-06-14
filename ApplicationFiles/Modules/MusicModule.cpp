@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Sun Jun 14 19:28:50 2015 Thibaud PEAUGER
+// Started on  Sun Jun 14 20:57:30 2015 Alexander Saenen
+// Last update Sun Jun 14 20:57:31 2015 Alexander Saenen
 //
 
 #include <MusicModule.hh>
