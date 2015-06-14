@@ -18,7 +18,9 @@ Bomberman::Bomberman(const int , const char **):
     ->observe(std::string("Bomberman.quit"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
     ->observe(std::string("Engine.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
     ->observe(std::string("MapGenerator.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
-    ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 700);
+    ->observe(std::string("Loader.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000)
+    ->observe(std::string("Lua.error"), new Functor<Bomberman>(this, &Bomberman::_onQuit), 1000);
+  
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
     ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(ModulesManager::getInstance()->get<MenuModule>(), &MenuModule::initialize), 800)
