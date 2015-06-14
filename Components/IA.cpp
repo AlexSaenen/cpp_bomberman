@@ -126,7 +126,7 @@ int	IA::_radar(lua_State *ls) {
 }
 
 int          IA::_checkBomb(lua_State *) {
-  
+  // for(int i = 1, int i )
   return (3);
 }
 
