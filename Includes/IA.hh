@@ -21,15 +21,6 @@
 
 class	IA : public Player
 {
-private:
-  class		Coor
-  {
-  public:
-    int		x;
-    int		y;
-    int		type;
-  };
-
   enum		Case
     {
       EMPTY,
@@ -44,6 +35,7 @@ private:
       RIGHT,
       LEFT,
       BOMB,
+      NONE,
     };
 
 private:
@@ -51,10 +43,10 @@ private:
   MapModule		*_mapModule;
   GameRoutine		*_gameRoutine;
   //  Coor			_me;
-  std::list<Coor>	_map;
-  std::list<Coor>	_players;
-  std::list<Coor>	_bombs;
-  std::list<Coor>	_bonus;
+  //  std::list<Coor>	_map;
+  //std::list<Coor>	_players;
+  //std::list<Coor>	_bombs;
+  //std::list<Coor>	_bonus;
   LuaLoader		*_luaLoader;
   lua_State*		_luaVM;
   void			*_this;

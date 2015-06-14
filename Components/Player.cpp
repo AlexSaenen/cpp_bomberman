@@ -1,11 +1,11 @@
 //
-// Player.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sun Jun 14 17:49:40 2015 Vividy
+// Player.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 17:58:23 2015 Vividy
+// Last update Sun Jun 14 17:58:23 2015 Vividy
 //
 
 #include "Player.hh"
@@ -55,15 +55,15 @@ void	Player::_tryMoveCollision(const gdl::Clock &clock, const glm::vec3 &pos) {
       if (pos.z > 0) {
 	trip.x = pos.x;
 	trip.z = ((y - 1) * 2.5) - _position.z;
-	_gameModule->popOnMap(_position.x, _position.y, _type);
+	_gameModule->popOnMap(_position.x, _position.z, _type);
 	translate(trip * elapsed * _speed);
-	_gameModule->pushOnMap(_position.x, _position.y, _type);
+	_gameModule->pushOnMap(_position.x, _position.z, _type);
       }
       return ;
     }
-  _gameModule->popOnMap(_position.x, _position.y, _type);
+  _gameModule->popOnMap(_position.x, _position.z, _type);
   translate(pos * elapsed * _speed);
-  _gameModule->pushOnMap(_position.x, _position.y, _type);
+  _gameModule->pushOnMap(_position.x, _position.z, _type);
 }
 
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {

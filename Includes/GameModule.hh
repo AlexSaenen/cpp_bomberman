@@ -1,11 +1,11 @@
 //
-// GameModule.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 17:14:41 2015 Vividy
+// GameModule.hh for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 17:58:59 2015 Vividy
+// Last update Sun Jun 14 17:59:00 2015 Vividy
 //
 
 #ifndef GAMEMODULE_HH_
@@ -30,6 +30,7 @@ public:
   void	markForCleanup(GameObject *object);
   void	handle(GameObject *object);
   std::list<GameObject::ObjectType>	&getObject(const int x, const int y);
+  bool	tryGetObject(const int x, const int y, std::list<GameObject::ObjectType> &);
   void	pushOnMap(GameObject *object);
   void  pushOnMap(const double x, const double y, const GameObject::ObjectType type);
   void	popOnMap(GameObject *object);
@@ -39,6 +40,7 @@ private:
   void	_onCleanup(Event *);
   void	_handleExplosion(Event *ev);
   void	_deleteDestroyables(const Bomb *bomb, const double x, const double y);
+  void	_popBonuses(GameObject **nearest);
 };
 
 #endif /* GameModule.hh */

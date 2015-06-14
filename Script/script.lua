@@ -5,7 +5,7 @@ my_object = 0
 size_map = 0
 
 EMPTY, INDESC, DESC = 0, 1, 2
-UP, DOWN, RIGHT, LEFT, BOMB = 0, 1, 2, 3, 4
+UP, DOWN, RIGHT, LEFT, BOMB, NONE = 0, 1, 2, 3, 4, 5
 
 -- Send the move
 function	sendMove(command)
@@ -43,21 +43,23 @@ function	attack_enemy(x, y)
 	   ret = luaCall(my_object, "checkCase", my_x + 1, my_y)
 	   isSafe(ret, my_x + 1, my_y, LEFT)
 	   print("right if")
-	end
-	if my_x > x then
+	--end
+	elseif my_x > x then
 		ret = luaCall(my_object, "checkCase", my_x - 1, my_y)
 		isSafe(ret, my_x - 1, my_y, RIGHT)
 	   print("left if")
-	end
-	if my_y < y then
+	--end
+	elseif my_y < y then
 	       ret = luaCall(my_object, "checkCase", my_x, my_y + 1)
 	       isSafe(ret, my_x, my_y + 1, UP)
 	   print("UP if")
-	end
-	if my_y > y then
+	--end
+	elseif my_y > y then
 		ret = luaCall(my_object, "checkCase", my_x, my_y - 1)
 		isSafe(ret, my_x, my_y - 1, DOWN)
 	   print("DOwn if")
+	else
+		sendMove(NONE)
 	end
 end
 
@@ -125,6 +127,43 @@ function	isSafe(ret, x, y, command)
 	end
 end
 
+-- check next move
+function	check_move(x, y)
+	ret = luaCall(my_object, "checkCase", x, y)
+	if ret == EMPTY then
+		return true
+	end
+	return false
+end
+
+
+-- avoid bombs 2.0
+function	avoidBombs(xbomb, ybomb, elem)
+	print("-----------AVOID BOMBS-----------\n")
+if (ybomb == my_y and math.abs(my_x - xbomb) < 5) then
+      if (check_move(my_x, my_y + 1)) then
+         sendMove(UP)
+      elseif (check_move(my_x, my_y - 1)) then
+         sendMove(DOWN)
+      elseif (xbomb >= my_x and check_move(my_x - 1, my_y)) then
+         sendMove(RIGHT)
+      elseif (xbomb < my_x and check_move(my_x + 1, my_y)) then
+         sendMove(LEFT)
+      end
+   end
+   if (xbomb == my_x and math.abs(my_y - ybomb) < 5) then
+      if (check_move(my_x + 1, my_y)) then
+         sendMove(LEFT)
+      elseif (check_move(my_x - 1, my_y)) then
+         sendMove(RIGHT)
+      elseif (ybomb >= my_y and check_move(my_x, my_y - 1)) then
+         sendMove(DOWN)
+      elseif (ybomb < my_y and check_move(my_x, my_y + 1)) then
+         sendMove(UP)
+      end
+   end
+end
+
 -- avoid bombs and find safe zone
 function	avoidBomb(x, y, elem)
 	print("avoidBomb")
@@ -148,9 +187,6 @@ end
 -- Run Script
 function	run(object, x, y, range, size)
 	io.write("Script Loaded\n")
-	print(x)
-	print(y)
-	print(range)
 	my_x = x
 	my_y = y
 	my_range = range
@@ -159,8 +195,9 @@ function	run(object, x, y, range, size)
 	size_map = size
 	print("luacall")
 	x, y, elem = luaCall(object, "checkBomb", my_x)
+	print(elem)
 	if elem > 0 then
-	      avoidBomb(x, y, elem)
+	      avoidBombs(x, y, elem)
 	end
 	search_nearest_element()
 end

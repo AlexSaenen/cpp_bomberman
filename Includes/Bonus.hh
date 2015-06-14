@@ -3,8 +3,9 @@
 
 # include <algorithm>
 # include <Player.hh>
+# include <Shape.hh>
 
-class	Bonus : public ObjModel
+class	Bonus : public IComponent, public Shape
 {
 public:
     enum  BonusType
@@ -22,13 +23,16 @@ private:
   BonusType	_bt;
   gdl::Texture  *_texture;
   gdl::Geometry *_geometry;
+  double	 _speed;
 
 public:
-  explicit Bonus(BonusType &bt, const std::string &texturePath);
+  explicit Bonus(BonusType &bt);
   ~Bonus();
 
+  void	initialize(Event *);
   virtual void  update(const gdl::Clock &clock, gdl::Input &input);
-
+  virtual void	configure(const std::string &);
+  void	draw(gdl::AShader &shader, const gdl::Clock &);
 private:
   Player  *_checkPlayer(std::vector<GameObject *> const players);
 };

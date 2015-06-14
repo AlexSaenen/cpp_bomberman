@@ -1,11 +1,11 @@
 //
-// IA.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Sun Jun 14 11:05:30 2015 Alexander Saenen
-// Last update Sun Jun 14 17:28:54 2015 Vividy
+// IA.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 17:57:58 2015 Vividy
+// Last update Sun Jun 14 17:57:59 2015 Vividy
 //
 
 #include <IA.hh>
@@ -20,7 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-  _luaLoader = new LuaLoader("");
+  _luaLoader = new LuaLoader("script.lua");
   _this = static_cast<void *>(this);
 }
 
@@ -43,30 +43,28 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _initialize();
 
   try {
-    _gameModule->popOnMap(_position.x, _position.z, _type);
-
-    //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());//_inventory[Player::RANGE]);
-    // _lastMovement = 0;
-    // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
-    //      it != _rotationMap.end() && !hasTranslated; ++it)
-    //   if (input.getKey((*it).first)) {
-    //     hasTranslated = true;
-    if (_ac != BOMB) {
+    _luaLoader->lunchScript(_this, static_cast<int>(_position.x / 2.5), static_cast<int>(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());
+    if (_ac != BOMB && _ac != NONE) {
+      _model.pause(false);
+      _gameModule->popOnMap(_position.x, _position.z, _type);
       _rotation.y = _rotationMap[_ac];
       translate(_translationMap[_ac] * static_cast<float>(clock.getElapsed()) * _speed);
+      _hasBombed -= clock.getElapsed();
+      _gameModule->pushOnMap(_position.x, _position.z, _type);
+    } else if (_ac == BOMB && _hasBombed <= 0) {
+      GameObject  *model = new GameObject(GameObject::BOMB, "bomb");
+      ObjModel    *bomb = new Bomb(2.5, _inventory[RANGE]);
+      _hasBombed = 3;
+      bomb->initialize(0);
+      std::stringstream strm;
+      strm << static_cast<int>((_position.x + 2) / 2.5) * 2.5
+	   << " " << static_cast<int>((_position.z + 1.25) / 2.5) * 2.5 << " 2 0 180 0 0.4 0.4 0.4 bomb";
+      bomb->configure(strm.str());
+      model->pushComponent(bomb);
+      _gameModule->handle(model);
+    } else {
+      _model.pause(true);
     }
-    //     if (!_isMoving) {
-    // 	_model.pause(false);
-    // 	_isMoving = true;
-    //     }
-    //     _lastMovement = (*it).first;
-    //   }
-    // if (!_lastMovement) {
-    //   _isMoving = false;
-    //   _model.pause(true);
-    // }
-  _gameModule->pushOnMap(_position.x, _position.z, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -101,7 +99,6 @@ int	IA::_radar(lua_State *ls) {
   int	incr;
   int	find = 0;
 
-  std::cout << "radar cpp" << std::endl;
   i = (_position.x / 2.5);
   j = (_position.z / 2.5);
   incr = 1;
@@ -120,7 +117,8 @@ int	IA::_radar(lua_State *ls) {
       for(int a = 0; a < incr; a++) {
 	i--;
 	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
-	  return (_found(ls, i, j , find));      }
+	  return (_found(ls, i, j , find));
+      }
       for(int a = 0; a < incr; a++) {
 	j++;
 	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
@@ -170,7 +168,6 @@ int					IA::_checkBomb(lua_State *ls){
   int					y;
   std::list<GameObject::ObjectType>	types;
 
-  std::cout << "checkBomb" << std::endl;
   x = lua_tointeger(ls, 3);
   y = lua_tointeger(ls, 4);
   for(int i = 1; i < 12; i++) {
@@ -222,7 +219,6 @@ int	IA::_command(lua_State *ls) {
 }
 
 int    IA::luaCall(lua_State *ls) {
-  std::cout << "luaCall cpp" << std::endl;
   std::map <std::string, int (IA::*)(lua_State *)> _func;
   _func["command"] = &IA::_command;
   _func["checkBomb"] = &IA::_checkBomb;
