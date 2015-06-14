@@ -4,8 +4,8 @@
 ## Made by Alexander Saenen
 ## Login   <saenen_a@epitech.net>
 ## 
-## Started on  Thu Jun 11 18:00:49 2015 Alexander Saenen
-## Last update Sat Jun 13 13:56:56 2015 Vividy
+## Started on  Sat Jun 13 22:38:58 2015 Alexander Saenen
+## Last update Sat Jun 13 22:38:58 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -25,6 +25,8 @@ MODDIR		= Modules/
 ERRDIR		= Exceptions/
 
 GRADIR		= GraphicsLib/
+
+LUADIR		= LuaLib/src/
 
 SRC		= $(ERRDIR)ArgException.cpp \
 		  $(ERRDIR)LogicException.cpp \
@@ -56,13 +58,15 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(SRCDIR)MenuSpawner.cpp \
 		  $(SRCDIR)Shape.cpp \
 		  $(SRCDIR)GameObject.cpp \
-		  $(SRCDIR)Loader.cpp
+		  $(SRCDIR)Loader.cpp \
+		  $(SRCDIR)LuaLoader.cpp \
+		  $(SRCDIR)SaveMap.cpp
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -IIncludes -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -I$(LUADIR) -IIncludes -W -Wall -Werror -Wextra
 
-LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -ldl -lfmod
+LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -lfmod -L$(LUADIR) -llua -ldl
 
 RED		= \033[00;34m
 
@@ -72,6 +76,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CXX) $(OBJ) $(LIB) -o $(NAME)
+	mkdir -p Save
 	@echo -e "$(RED)export LD_LIBRARY_PATH=GraphicsLib/libs/$(WHITE)"
 
 clean:

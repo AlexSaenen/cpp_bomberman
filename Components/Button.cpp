@@ -5,14 +5,14 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:30:42 2015 Vividy
-// Last update Sat Jun 13 15:50:59 2015 Vividy
+// Last update Sat Jun 13 23:08:08 2015 Thibaud PEAUGER
 //
 
 #include <Button.hh>
 
 Button::Button(const MenuModule::MenuPage linkedPage, const bool isSelected)
   : _isSelected(isSelected), _linkedPage(linkedPage), _buttonPressed(true), _cursor(0), _value(-42) {
-  _actions[MenuModule::DEFAULT] = "Maps/default.map";
+  _actions[MenuModule::DEFAULT] = "Maps/default";
   _actions[MenuModule::PLAY] = "Maps/random.map";
   _actions[MenuModule::EXIT] = "Bomberman.quit";
   _sliderDelta[MenuModule::MVOLUME] = 0.01;
@@ -59,12 +59,23 @@ void	Button::select(const bool isSelected) {
 void	Button::activate() const {
   std::map<MenuModule::MenuPage, std::string>::const_iterator	it;
   it = _actions.find(_linkedPage);
-  Event   *ev = new Event("Music.play");
-  std::string     name("GraphicsLib/assets/MenuSamples/selectmenu.mp3");
-  std::string     music("SOUND");
-  ev->set<std::string>(std::string("FILE"), name);
-  ev->set<std::string>(std::string("TYPE"), music);
-  ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+
+  if (_linkedPage == MenuModule::HOME) {
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/MenuSamples/backmenu2.mp3");
+    std::string     music("SOUND");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), music);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+  }
+  else if (_sliderValue.find(_linkedPage) == _sliderValue.end()) {
+    Event   *ev = new Event("Music.play");
+    std::string     name("GraphicsLib/assets/MenuSamples/selectbonus.mp3");
+    std::string     music("SOUND");
+    ev->set<std::string>(std::string("FILE"), name);
+    ev->set<std::string>(std::string("TYPE"), music);
+    ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+  }
   if (it != _actions.end()) {
     ModulesManager::getInstance()->get<MenuModule>()->activatePage(MenuModule::HOME);
     std::string	event = (*it).second;
@@ -72,11 +83,13 @@ void	Button::activate() const {
       ModulesManager::getInstance()->get<EventModule>()->trigger(event)->handle();
       return ;
     }
+    MapModule	*mapMod = ModulesManager::getInstance()->get<MapModule>();
     if (_linkedPage == MenuModule::PLAY) {
-      MapModule	*mapMod = ModulesManager::getInstance()->get<MapModule>();
       MapGenerator map(mapMod->getSize(), mapMod->isMultiplayer() ? 2 : 1, mapMod->getIA());
       map.generate();
     }
+    if (event == "Maps/default")
+      event = mapMod->isMultiplayer() ? "Maps/defaultMul.map" : "Maps/default.map";
     Loader	ld(event);
     ld.execute();
     ModulesManager::getInstance()->get<MenuModule>()->toggle(false);
@@ -94,6 +107,14 @@ void	Button::update(const gdl::Clock &, gdl::Input &input) {
   if (_isSelected && input.getKey(SDLK_RETURN)) {
     if (!_buttonPressed) {
       _buttonPressed = true;
+      if (_sliderValue.find(_linkedPage) != _sliderValue.end()) {
+	Event   *ev = new Event("Music.play");
+	std::string     name("GraphicsLib/assets/MenuSamples/errorbutton.mp3");
+	std::string     music("SOUND");
+	ev->set<std::string>(std::string("FILE"), name);
+	ev->set<std::string>(std::string("TYPE"), music);
+	ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
+      }
       activate();
     }
   }

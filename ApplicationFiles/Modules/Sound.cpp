@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Fri Jun 12 16:19:32 2015 Thibaud PEAUGER
+// Last update Sat Jun 13 16:01:50 2015 Thibaud PEAUGER
 //
 
 #include <Sound.hh>
@@ -46,6 +46,7 @@ void	Sound::setLoop() {
 }
 
 void	Sound::pause() {
+  FMOD_ChannelGroup_SetVolume(chan_grp, _soundVolume);
   FMOD_ChannelGroup_GetPaused(chan_grp, &state);
   if (state)
     FMOD_ChannelGroup_SetPaused(chan_grp, 0);

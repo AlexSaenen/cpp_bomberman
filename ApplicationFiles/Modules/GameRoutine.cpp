@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Fri Jun 12 18:10:21 2015 Alexander Saenen
+// Last update Sun Jun 14 01:15:20 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -17,7 +17,7 @@
 GameRoutine::GameRoutine() {}
 
 GameRoutine::~GameRoutine() {
-  for (int it = 0; it < 9; ++it) {
+  for (int it = 0; it < 11; ++it) {
     GameObject::ObjectType i = static_cast<GameObject::ObjectType>(it);
     while (!_objects[i].empty()) {
       delete _objects[i].back();
@@ -57,6 +57,13 @@ std::vector<GameObject *>	GameRoutine::getGObjects(const GameObject::ObjectType 
   if (_objects.find(type) == _objects.end())
     throw RangeException("Couldn't find the GObjects for this type");
   return (_objects[type]);
+}
+
+bool	GameRoutine::getGOStatus(const GameObject::ObjectType type, std::vector<GameObject *> &objects) {
+  if (_objects.find(type) == _objects.end())
+    return (false);
+  objects = _objects[type];
+  return (true);
 }
 
 void	GameRoutine::pushGObject(GameObject *GObject) {
@@ -100,8 +107,13 @@ bool	GameRoutine::update() {
     ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
   }
+  if (_input.getKey(SDLK_o)) {
+    SaveMap	saver;
+    saver.execute();
+    return (true);
+  }
   try {
-    for (int it = 0; it < 9; ++it) {
+    for (int it = 0; it < 11; ++it) {
       GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
       for (size_t i = 0; i < _objects[ot].size(); ++i)
 	_objects[ot][i]->update(_clock, _input);
@@ -125,7 +137,7 @@ void	GameRoutine::draw() {
   _shader.bind();
   ModulesManager::getInstance()->get<Camera>()
     ->confirm();
-  for (int it = 0; it < 9; ++it) {
+  for (int it = 0; it < 11; ++it) {
     GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
     for (size_t i = 0; i < _objects[ot].size(); ++i)
       _objects[ot][i]->draw(_shader, _clock);

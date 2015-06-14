@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Tue Jun  2 17:11:16 2015 Alexander Saenen
+// Last update Sat Jun 13 17:39:26 2015 Alexander Saenen
 //
 
 #ifndef PLAYER_HH_
@@ -33,9 +33,11 @@ protected:
   std::map<int, int>		_rotationMap;
   std::map<int, glm::vec3>	_translationMap;
   std::map<BonusType, int>	_inventory;
+  std::map<BonusType, int>      _limit;
 
 protected:
   void	_initialize();
+  void	_tryMoveCollision(const gdl::Clock &clock, const glm::vec3 &pos);
 
 public:
   Player();

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 -- function test lua_register
 function	test(one, two, three)
 	io.write("Script ....\n")
@@ -23,4 +24,8 @@ function	run(x, y, elem)
 		print(elem)
 		--avoidBomb(x, y)
 	     until elem != 0
+=======
+function run(object)
+	 luaCall(object, "command", 2)
+>>>>>>> 8d8c804aa568756275f2e630e3b5e338744b6761
 end

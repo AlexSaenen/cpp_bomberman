@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Fri Jun 12 18:23:12 2015 Alexander Saenen
+// Last update Sun Jun 14 00:27:53 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -24,7 +24,7 @@ void	GameModule::handle(GameObject *object) {
 
   gr->get<GameRoutine>()
     ->pushGObject(object);
-  if (object->getType() < 6) {
+  if (object->getType() < 7) {
     pushOnMap(object);
   }
 }
@@ -45,7 +45,7 @@ void	GameModule::markForCleanup(GameObject *object) {
   _garbage.push_back(object);
 }
 
-std::list<GameObject::ObjectType>	&GameModule::getObject(int x, int y) {
+std::list<GameObject::ObjectType>	&GameModule::getObject(const int x, const int y) {
   return ((_gameMap[x])[y]);
 }
 
@@ -61,11 +61,15 @@ void					GameModule::pushOnMap(GameObject *object) {
       shape = dynamic_cast<Shape *>(*it);
       it++;
     }
+    double	x = shape->getPosX();
+    double	y = shape->getPosY();
+    x = x > 0 ? ((x + 2.5) / 2.5) : x / 2.5;
+    y = y > 0 ? ((y + 2.5) / 2.5) : y / 2.5;
     if (shape == NULL)
       throw LogicException("GameObject hasn't got a shape.");
-    if (_gameMap.find(shape->getPosX()) == _gameMap.end())
-      _gameMap[shape->getPosX()] = std::map<int, std::list<GameObject::ObjectType> >();
-    ((_gameMap[shape->getPosX()])[shape->getPosY()]).push_back(object->getType());
+    if (_gameMap.find(x) == _gameMap.end())
+      _gameMap[x] = std::map<int, std::list<GameObject::ObjectType> >();
+    ((_gameMap[x])[y]).push_back(object->getType());
   } catch(LogicException e) {
     std::cerr<< e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -74,10 +78,12 @@ void					GameModule::pushOnMap(GameObject *object) {
   }
 }
 
-void                                    GameModule::pushOnMap(int x, int y, GameObject::ObjectType type) {
-  if (_gameMap.find(x) == _gameMap.end())
-    _gameMap[x] = std::map<int, std::list<GameObject::ObjectType> >();
-  ((_gameMap[x])[y]).push_back(type);
+void                                    GameModule::pushOnMap(const double x, const double y, const GameObject::ObjectType type) {
+  int	_x = x > 0 ? (x + 2.5) / 2.5 : x / 2.5;
+  int	_y = y > 0 ? (y + 2.5) / 2.5 : y / 2.5;
+  if (_gameMap.find(_x) == _gameMap.end())
+    _gameMap[_x] = std::map<int, std::list<GameObject::ObjectType> >();
+  ((_gameMap[_x])[_y]).push_back(type);
 }
 
 void						GameModule::popOnMap(GameObject *object) {
@@ -94,14 +100,20 @@ void						GameModule::popOnMap(GameObject *object) {
       shape = dynamic_cast<Shape *>(*it);
       it++;
     }
+    double	x = shape->getPosX();
+    double	y = shape->getPosY();
+    x = x > 0 ? ((x + 2.5) / 2.5) : x / 2.5;
+    y = y > 0 ? ((y + 2.5) / 2.5) : y / 2.5;
     if (shape == NULL)
       throw LogicException("GameObject hasn't got a shape.");
-    if (_gameMap.find(shape->getPosX()) == _gameMap.end())
+    if (_gameMap.find(x) == _gameMap.end())
       throw LogicException("GameObject isn't in the map.");
-    typeIt = ((_gameMap[shape->getPosX()])[shape->getPosY()]).begin();
-    while (typeIt != ((_gameMap[shape->getPosX()])[shape->getPosY()]).end()) {
+    std::list<GameObject::ObjectType>	objects =
+      ((_gameMap[x])[y]);
+    typeIt = objects.begin();
+    while (typeIt != objects.end()) {
       if (*typeIt == object->getType()) {
-	((_gameMap[shape->getPosX()])[shape->getPosY()]).erase(typeIt);
+	objects.erase(typeIt);
 	break;
 	typeIt++;
       }
@@ -114,17 +126,22 @@ void						GameModule::popOnMap(GameObject *object) {
   }
 }
 
-void                                            GameModule::popOnMap(int x, int y, GameObject::ObjectType type) {
+void                                            GameModule::popOnMap(const double x, const double y, const GameObject::ObjectType type) {
   std::list<GameObject::ObjectType>             types;
   std::list<GameObject::ObjectType>::iterator   typeIt;
 
+  double _x = x > 0 ? ((x + 2.5) / 2.5) : x / 2.5;
+  double _y = y > 0 ? ((y + 2.5) / 2.5) : y / 2.5;
   try {
-    if (_gameMap.find(x) == _gameMap.end())
+    if (_gameMap.find(_x) == _gameMap.end())
       throw LogicException("GameObject isn't in the map.");
-    typeIt = ((_gameMap[x])[y]).begin();
-    while (typeIt != ((_gameMap[x])[y]).end()) {
+    std::list<GameObject::ObjectType>	objects =
+      (_gameMap[_x])[_y];
+      (_gameMap[_x])[_y];
+    typeIt = objects.begin();
+    while (typeIt != objects.end()) {
       if (*typeIt == type) {
-	((_gameMap[x])[y]).erase(typeIt);
+	objects.erase(typeIt);
 	break;
       }
       typeIt++;
