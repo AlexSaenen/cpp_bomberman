@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 00:27:53 2015 Alexander Saenen
+// Last update Sun Jun 14 02:35:11 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -63,8 +63,9 @@ void					GameModule::pushOnMap(GameObject *object) {
     }
     double	x = shape->getPosX();
     double	y = shape->getPosY();
-    x = x > 0 ? ((x + 2.5) / 2.5) : x / 2.5;
-    y = y > 0 ? ((y + 2.5) / 2.5) : y / 2.5;
+    x = x / 2.5;
+    y = y / 2.5;
+    std::cout << "PUSH " << x << " " << y << std::endl;
     if (shape == NULL)
       throw LogicException("GameObject hasn't got a shape.");
     if (_gameMap.find(x) == _gameMap.end())
@@ -79,8 +80,9 @@ void					GameModule::pushOnMap(GameObject *object) {
 }
 
 void                                    GameModule::pushOnMap(const double x, const double y, const GameObject::ObjectType type) {
-  int	_x = x > 0 ? (x + 2.5) / 2.5 : x / 2.5;
-  int	_y = y > 0 ? (y + 2.5) / 2.5 : y / 2.5;
+  int	_x = x / 2.5;
+  int	_y = y / 2.5;
+    std::cout << "PUSH " << _x << " " << _y << std::endl;
   if (_gameMap.find(_x) == _gameMap.end())
     _gameMap[_x] = std::map<int, std::list<GameObject::ObjectType> >();
   ((_gameMap[_x])[_y]).push_back(type);
@@ -102,8 +104,8 @@ void						GameModule::popOnMap(GameObject *object) {
     }
     double	x = shape->getPosX();
     double	y = shape->getPosY();
-    x = x > 0 ? ((x + 2.5) / 2.5) : x / 2.5;
-    y = y > 0 ? ((y + 2.5) / 2.5) : y / 2.5;
+    x = x / 2.5;
+    y = y / 2.5;
     if (shape == NULL)
       throw LogicException("GameObject hasn't got a shape.");
     if (_gameMap.find(x) == _gameMap.end())
@@ -130,8 +132,8 @@ void                                            GameModule::popOnMap(const doubl
   std::list<GameObject::ObjectType>             types;
   std::list<GameObject::ObjectType>::iterator   typeIt;
 
-  double _x = x > 0 ? ((x + 2.5) / 2.5) : x / 2.5;
-  double _y = y > 0 ? ((y + 2.5) / 2.5) : y / 2.5;
+  double _x = x / 2.5;
+  double _y = y / 2.5;
   try {
     if (_gameMap.find(_x) == _gameMap.end())
       throw LogicException("GameObject isn't in the map.");

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sun Jun 14 02:21:04 2015 Alexander Saenen
+// Last update Sun Jun 14 03:26:32 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -34,14 +34,18 @@ void	Player::_tryMoveCollision(const gdl::Clock &clock, const glm::vec3 &pos) {
   glm::vec3	destination = _position;
   glm::vec3	trip = pos;
   trip = trip * static_cast<float>(clock.getElapsed()) * _speed;
-  destination += pos;
+  trip.x += 1.15;
+  trip.z += 1.15;
+  destination += trip;
+  std::cout << _position.x << " " << _position.z << std::endl;
   std::cout << trip.x << " " << trip.z << std::endl;
-  if (pos.x > 0)
-    destination.x += 2.5;
+  // if (pos.x > 0)
+  //   destination.x += 2.5;
   if (pos.z > 0)
     destination.z += 2.5;
   int	x = destination.x / 2.5;
   int	y = destination.z / 2.5;
+  std::cout << "CUBE at ? " << x << " " << y << std::endl;
   std::list<GameObject::ObjectType> types = _gameModule->getObject(x, y);
   for (std::list<GameObject::ObjectType>::iterator it = types.begin(); it != types.end(); ++it)
     if ((*it) <= GameObject::CUBEDESTR)
