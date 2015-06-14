@@ -43,10 +43,10 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _initialize();
 
   try {
-    _gameModule->popOnMap(_position.x, _position.y, _type);
+    _gameModule->popOnMap(_position.x, _position.z, _type);
 
     //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.y / 2.5), _inventory[Player::RANGE], _mapModule->getSize());//_inventory[Player::RANGE]);
+    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());//_inventory[Player::RANGE]);
     // _lastMovement = 0;
     // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
     //      it != _rotationMap.end() && !hasTranslated; ++it)
@@ -66,7 +66,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     //   _isMoving = false;
     //   _model.pause(true);
     // }
-  _gameModule->pushOnMap(_position.x, _position.y, _type);
+  _gameModule->pushOnMap(_position.x, _position.z, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -76,10 +76,12 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
 }
 
 int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
-  if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end())
+  if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()) {
     return (1);
-  else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end())
+  }
+  else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end()) {
     return (2);
+  }
   return (0);
 }
 
@@ -96,8 +98,9 @@ int	IA::_radar(lua_State *ls) {
   int	incr;
   int	find = 0;
 
-  i = _position.x / 2.5;
-  j = _position.y / 2.5;
+  std::cout << "radar cpp" << std::endl;
+  i = (_position.x / 2.5);
+  j = (_position.z / 2.5);
   incr = 1;
   while(find == 0 && incr < _mapModule->getSize() * 2) {
     if (incr % 2 == 1) {
@@ -164,6 +167,7 @@ int					IA::_checkBomb(lua_State *ls) {
   int					y;
   std::list<GameObject::ObjectType>	types;
 
+  std::cout << "checkBomb" << std::endl;
   x = lua_tointeger(ls, 3);
   y = lua_tointeger(ls, 4);
   for(int i = 1; i < 12; i++) {
@@ -215,8 +219,11 @@ int	IA::_command(lua_State *ls) {
 }
 
 int    IA::luaCall(lua_State *ls) {
-  //  std::cout << "luaCall" << std::endl;
+  std::cout << "luaCall cpp" << std::endl;
   std::map <std::string, int (IA::*)(lua_State *)> _func;
   _func["command"] = &IA::_command;
+  _func["checkBomb"] = &IA::_checkBomb;
+  _func["radar"] = &IA::_radar;
+  _func["checkCase"] = &IA::_checkCase;
   return ((static_cast<IA *>(const_cast<void *>(lua_topointer(ls, 1)))->*(_func[lua_tostring(ls, 2)]))(ls));
 };
