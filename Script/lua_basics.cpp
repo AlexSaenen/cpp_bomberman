@@ -1,33 +1,4 @@
-<<<<<<< HEAD
 #include "lua_basics.hh"
-=======
-#include "../Includes/lua_basics.hh"
-
-// int my_function(lua_State *L)
-// {
-//   int argc = lua_gettop(L);
-
-//   std::cout << "-- my_function() called with " << argc
-//     << " arguments:" << std::endl;
-
-<<<<<<< HEAD
-  for ( int n=1; n<=argc; ++n ) {
-    // std::cout << "-- argument " << n << ": "
-    // 	      << lua_tostring(L, n) << std::endl;
-  }
-  lua_pushnumber(L, 123); // return value
-  return 1; // number of return values
-}
-=======
-//   for ( int n=1; n<=argc; ++n ) {
-//     std::cout << "-- argument " << n << ": "
-//       << lua_tostring(L, n) << std::endl;
-//   }
-//   lua_pushnumber(L, 123); // return value
-//   return 1; // number of return values
-// }
->>>>>>> 2949d62327a0d032622a047209a1efeef82c1126
->>>>>>> 8d8c804aa568756275f2e630e3b5e338744b6761
 
 LuaScript::LuaScript()
 {

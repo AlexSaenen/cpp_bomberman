@@ -16,6 +16,10 @@ end
 -- search element
 function	search_nearest_element()
 	print("search_nearest_element")
+	x, y, elem = luaCall(object, "radar")
+	if elem == 0 then
+	   luaCall(object, "command", UP)
+	end
 end
 
 -- check if new position is safe or not
