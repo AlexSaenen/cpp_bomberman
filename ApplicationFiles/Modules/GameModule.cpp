@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 20:12:28 2015 Alexander Saenen
-// Last update Sun Jun 14 20:50:57 2015 Alexander Saenen
+// Last update Sun Jun 14 21:35:09 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -22,6 +22,24 @@ void	GameModule::initialize() {
     ->observe(std::string("Bomb.explosion"), new Functor<GameModule>(this, &GameModule::_handleExplosion), 1000);
 }
 
+bool	GameModule::_isSafe(const double xPlayer, const double yPlayer, const double xBomb, const double yBomb) const {
+  std::vector<GameObject *>    cubes;
+  if (ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(GameObject::CUBE, cubes)) {
+    for (std::vector<GameObject *>::iterator it = cubes.begin(); it != cubes.end(); ++it) {
+      Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
+      double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
+      double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
+      if (xPlayer == xBomb && xBomb == _x && ((_y >= yPlayer && _y <= yBomb)
+					      || (_y <= yPlayer && _y >= yBomb)))
+	return (true);
+      if (yPlayer == yBomb && yBomb == _y && ((_x >= xPlayer && _x <= xBomb)
+					      || (_x <= xPlayer && _x >= xBomb)))
+	return (true);
+    }
+  }
+  return (false);
+}
+
 void	GameModule::_killPlayers(const Bomb *bomb, const double x, const double y) {
   int	range = bomb->getRange();
   bool	_hasKilled = false;
@@ -32,11 +50,13 @@ void	GameModule::_killPlayers(const Bomb *bomb, const double x, const double y) 
       Shape	*shape = dynamic_cast<Shape *>(players.front()->getComponents().front());
       double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
       double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
-      if (x == _x && ((y + (range * 2.5) >= _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
+      if (x == _x && ((y + (range * 2.5) >= _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))
+	  && !_isSafe(_x, _y, x, y)) {	
 	_hasKilled = true;
 	markForCleanup(players.front());
       }
-      else if (y == _y && ((x + (range * 2.5) >= _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))) {
+      else if (y == _y && ((x + (range * 2.5) >= _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))
+	       && !_isSafe(_x, _y, x, y)) {
 	_hasKilled = true;
 	markForCleanup(players.front());
       }
@@ -50,7 +70,6 @@ void	GameModule::_killPlayers(const Bomb *bomb, const double x, const double y) 
       Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
       double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
       double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
-      std::cout << x << " " << y << " " << _x << " " << _y << std::endl;
       if (x == _x && ((y + (range * 2.5) >= _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
 	_hasKilled = true;
 	markForCleanup((*it));
@@ -151,7 +170,7 @@ void	GameModule::_handleExplosion(Event *ev) {
     model = (*it);
     std::list<IComponent *> comp = model->getComponents();
     bomb = dynamic_cast<Bomb *>(comp.front());
-    if (bomb && bomb->hasExploded() && bomb->getPosX() == x && bomb->getPosY())
+    if (bomb && bomb->hasExploded() && bomb->getPosX() == x && bomb->getPosY() == y)
       break;
   }
   if (model && bomb)
@@ -160,7 +179,6 @@ void	GameModule::_handleExplosion(Event *ev) {
   y = (bomb->getPosY() / 2.5) * 2.5;
   _deleteDestroyables(bomb, x, y);
   _killPlayers(bomb, x, y);
-  /* if persons are killed -> call GameOver and check */
 }
 
 void	GameModule::handle(GameObject *object) {

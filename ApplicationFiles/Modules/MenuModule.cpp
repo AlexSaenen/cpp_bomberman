@@ -5,7 +5,7 @@
 // Login   <peauge_t@epitech.net>
 // 
 // Started on  Fri Jun 12 16:29:58 2015 Thibaud PEAUGER
-// Last update Sun Jun 14 17:37:18 2015 Vividy
+// Last update Sun Jun 14 21:13:42 2015 Alexander Saenen
 //
 
 #include <MenuModule.hh>
@@ -24,9 +24,6 @@ MenuModule::~MenuModule() {
 
 void	MenuModule::toggle(const bool status) {
   if (!status && _isActive) {
-    ModulesManager::getInstance()->get<EventModule>()
-      ->abandon("Display.update", 1001)
-      ->abandon("Display.draw", 1001);
     Event   *ev = new Event("Music.play");
     std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
     std::string     state("PAUSE");
@@ -36,11 +33,11 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 10, -10))->set3Dimension()->followPlayers()
       ->confirm();
+    ModulesManager::getInstance()->get<EventModule>()
+      ->abandon("Display.update", 1001)
+      ->abandon("Display.draw", 1001);
   }
   else if (status && !_isActive) {
-    ModulesManager::getInstance()->get<EventModule>()
-      ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
-      ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
     Event   *ev = new Event("Music.play");
     std::string     name("GraphicsLib/assets/GameMusic/cirno.mp3");
     std::string     state("PAUSE");
@@ -50,6 +47,9 @@ void	MenuModule::toggle(const bool status) {
     ModulesManager::getInstance()->get<Camera>()
       ->setLookAt(glm::vec3(0, 1.57, 0))->set3Dimension(false)
       ->confirm();
+    ModulesManager::getInstance()->get<EventModule>()
+      ->observe("Display.update", new Functor<MenuModule>(this, &MenuModule::_update), 1001)
+      ->observe("Display.draw", new Functor<MenuModule>(this, &MenuModule::_draw), 1001);
   }
   _isActive = status;
 }

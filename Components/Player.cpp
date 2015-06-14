@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sun Jun 14 17:58:23 2015 Vividy
-// Last update Sun Jun 14 17:58:23 2015 Vividy
+// Last update Sun Jun 14 21:40:43 2015 Alexander Saenen
 //
 
 #include "Player.hh"

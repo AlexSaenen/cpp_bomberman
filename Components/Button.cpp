@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:30:42 2015 Vividy
-// Last update Sun Jun 14 08:03:20 2015 Alexander Saenen
+// Last update Sun Jun 14 21:14:57 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -90,9 +90,9 @@ void	Button::activate() const {
     }
     if (event == "Maps/default")
       event = mapMod->isMultiplayer() ? "Maps/defaultMul.map" : "Maps/default.map";
+    ModulesManager::getInstance()->get<MenuModule>()->toggle(false);
     Loader	ld(event);
     ld.execute();
-    ModulesManager::getInstance()->get<MenuModule>()->toggle(false);
   }
   else {
     ModulesManager::getInstance()->get<MenuModule>()->activatePage(_linkedPage);
