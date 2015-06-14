@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sun Jun 14 17:58:23 2015 Vividy
-// Last update Sun Jun 14 21:46:13 2015 Alexander Saenen
+// Last update Sun Jun 14 22:19:35 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -74,7 +74,7 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
     _initialize();
   _speed = _inventory[SPEED];
   _lastMovement = 0;
-  if (input.getKey(_keyForBomb) && _hasBombed <= 0) {
+  if (input.getKey(_keyForBomb) && (_hasBombed <= 0 || _inventory[0] > 1)) {
     GameObject	*model = new GameObject(GameObject::BOMB, "bomb");
     ObjModel	*bomb = new Bomb(2.5, _inventory[RANGE]);
     _hasBombed = 3;

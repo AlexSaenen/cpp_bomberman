@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:30:42 2015 Vividy
-// Last update Sun Jun 14 21:14:57 2015 Alexander Saenen
+// Last update Sun Jun 14 22:24:44 2015 Alexander Saenen
 //
 
 #include <Button.hh>

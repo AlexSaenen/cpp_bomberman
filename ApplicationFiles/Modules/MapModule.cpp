@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Sun Jun 14 13:43:56 2015 Alexander Saenen
+// Last update Sun Jun 14 22:53:15 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
@@ -65,6 +65,8 @@ int     MapModule::getSize() const {
 void    MapModule::setSize(const int size) {
   if (size >= 5 && size % 2 != 0)
     _size = size;
+  if (_size > 499)
+    _size = 499;
 }
 
 int     MapModule::getIA() const {
@@ -74,6 +76,8 @@ int     MapModule::getIA() const {
 void    MapModule::setIA(const int ia) {
   if (ia >= 0)
     _ia = ia;
+  if (_ia > 50)
+    _ia = 50;
 }
 
 bool	MapModule::isLoaded() const {

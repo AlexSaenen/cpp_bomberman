@@ -5,13 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 20:13:00 2015 Alexander Saenen
-// Last update Sun Jun 14 21:01:30 2015 Alexander Saenen
+// Last update Sun Jun 14 22:37:13 2015 Alexander Saenen
 //
 
 #include <IA.hh>
 
 IA::IA()
   : Player() {
+  _ac = NONE;
   _rotationMap.insert(std::pair<int, int>(UP, 0));
   _rotationMap.insert(std::pair<int, int>(DOWN, 180));
   _rotationMap.insert(std::pair<int, int>(LEFT, 90));
@@ -29,6 +30,7 @@ IA::~IA() {
 }
 
 void	IA::_initialize() {
+  _speed = 10.0f;
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
   _mapModule = ModulesManager::getInstance()->get<MapModule>();
   _gameRoutine = ModulesManager::getInstance()->get<GameRoutine>();
@@ -41,7 +43,6 @@ void	IA::_initialize() {
 void	IA::update(const gdl::Clock &clock, gdl::Input &) {
   if (!_isInitialized)
     _initialize();
-
   try {
     _luaLoader->lunchScript(_this, static_cast<int>(_position.x / 2.5), static_cast<int>(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());
     if (_ac != BOMB && _ac != NONE) {
@@ -162,7 +163,7 @@ int	IA::_checkRange(int const x, int const y, std::vector<GameObject *> const &b
   return (0);
 }
 
-int					IA::_checkBomb(lua_State *ls){
+int					IA::_checkBomb(lua_State *ls) {
   int					range;
   int					x;
   int					y;
@@ -173,19 +174,19 @@ int					IA::_checkBomb(lua_State *ls){
   for(int i = 1; i < 12; i++) {
     types = _gameModule->getObject(x + i, y);
     if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
-	&& (range = _checkRange(x + i, y, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+  	&& (range = _checkRange(x + i, y, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
       return (_found(ls, x + i, y, range));
     types = _gameModule->getObject(x, y + i);
     if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
-	&& (range = _checkRange(x, y + i, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+  	&& (range = _checkRange(x, y + i, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
       return (_found(ls, x, y + i, range));
     types = _gameModule->getObject(x, y - i);
     if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
-	&& (range = _checkRange(x, y - i, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+  	&& (range = _checkRange(x, y - i, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
       return (_found(ls, x, y - i, range));
     types = _gameModule->getObject(x - i, y);
     if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
-	&& (range = _checkRange(x - i, y, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+  	&& (range = _checkRange(x - i, y, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
       return (_found(ls, x - i, y + i, range));
   }
   return (_found(ls, x, y, 0));
