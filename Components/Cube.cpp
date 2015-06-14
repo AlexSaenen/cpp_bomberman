@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 15:35:31 2015 Alexander Saenen
-// Last update Sat Jun 13 10:36:33 2015 Alexander Saenen
+// Last update Sun Jun 14 14:19:09 2015 Alexander Saenen
 //
 
 #include "Cube.hh"
@@ -38,9 +38,8 @@ void	Cube::draw(gdl::AShader &shader, const gdl::Clock &) {
 }
 
 void	Cube::configure(const std::string &conf) {
-  std::stringstream	*stream = new std::stringstream(conf);
+  std::stringstream	stream(conf);
   
-  *stream >> _position.x;
-  *stream >> _position.z;
-  delete stream;
+  stream >> _position.x;
+  stream >> _position.z;
 }

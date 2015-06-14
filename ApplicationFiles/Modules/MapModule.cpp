@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 11:16:49 2015 Alexander Saenen
-// Last update Sun Jun 14 04:33:08 2015 Alexander Saenen
+// Last update Sun Jun 14 13:43:56 2015 Alexander Saenen
 //
 
 #include <MapModule.hh>
@@ -32,6 +32,9 @@ void	MapModule::setGameMode(Event *ev) {
 void	MapModule::loadMapValues() {
   _textureMap["cube"] = "./GraphicsLib/assets/Textures/stone.tga";
   _textureMap["destroy"] = "./GraphicsLib/assets/Textures/crate.tga";
+  _textureMap["bonus0"] = "./GraphicsLib/assets/Textures/Bomberman_Bombs.tga";
+  _textureMap["bonus2"] = "./GraphicsLib/assets/Textures/Bomberman_Flames.tga";
+  _textureMap["bonus1"] = "./GraphicsLib/assets/Textures/Bomberman_Speed.tga";
   _textureMap["bomb"] = "./GraphicsLib/assets/bomb.fbx";
   _textureMap["player1"] = "./GraphicsLib/assets/archer.fbx";
   _textureMap["player2"] = "./GraphicsLib/assets/warrior.fbx";

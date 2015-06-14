@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sun Jun 14 11:11:35 2015 Alexander Saenen
+// Last update Sun Jun 14 16:41:57 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -55,15 +55,15 @@ void	Player::_tryMoveCollision(const gdl::Clock &clock, const glm::vec3 &pos) {
       if (pos.z > 0) {
 	trip.x = pos.x;
 	trip.z = ((y - 1) * 2.5) - _position.z;
-	_gameModule->popOnMap(_position.x, _position.y, _type);
+	_gameModule->popOnMap(_position.x, _position.z, _type);
 	translate(trip * elapsed * _speed);
-	_gameModule->pushOnMap(_position.x, _position.y, _type);
+	_gameModule->pushOnMap(_position.x, _position.z, _type);
       }
       return ;
     }
-  _gameModule->popOnMap(_position.x, _position.y, _type);
+  _gameModule->popOnMap(_position.x, _position.z, _type);
   translate(pos * elapsed * _speed);
-  _gameModule->pushOnMap(_position.x, _position.y, _type);
+  _gameModule->pushOnMap(_position.x, _position.z, _type);
 }
 
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {

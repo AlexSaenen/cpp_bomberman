@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 13:07:21 2015 Alexander Saenen
+// Last update Sun Jun 14 16:32:42 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
@@ -30,6 +30,7 @@ public:
   void	markForCleanup(GameObject *object);
   void	handle(GameObject *object);
   std::list<GameObject::ObjectType>	&getObject(const int x, const int y);
+  bool	tryGetObject(const int x, const int y, std::list<GameObject::ObjectType> &);
   void	pushOnMap(GameObject *object);
   void  pushOnMap(const double x, const double y, const GameObject::ObjectType type);
   void	popOnMap(GameObject *object);
@@ -39,6 +40,7 @@ private:
   void	_onCleanup(Event *);
   void	_handleExplosion(Event *ev);
   void	_deleteDestroyables(const Bomb *bomb, const double x, const double y);
+  void	_popBonuses(GameObject **nearest);
 };
 
 #endif /* GameModule.hh */

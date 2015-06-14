@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 11:05:30 2015 Alexander Saenen
-// Last update Sun Jun 14 11:05:30 2015 Alexander Saenen
+// Last update Sun Jun 14 16:48:37 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -43,10 +43,10 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _initialize();
 
   try {
-    _gameModule->popOnMap(_position.x, _position.y, _type);
+    _gameModule->popOnMap(_position.x, _position.z, _type);
 
     //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.y / 2.5), _inventory[2], _mapModule->getSize());//_inventory[Player::RANGE]);
+    _luaLoader->lunchScript(_this, static_cast<int>(_position.x / 2.5), static_cast<int>(_position.z / 2.5), _inventory[2], _mapModule->getSize());//_inventory[Player::RANGE]);
     // _lastMovement = 0;
     // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
     //      it != _rotationMap.end() && !hasTranslated; ++it)
@@ -66,7 +66,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     //   _isMoving = false;
     //   _model.pause(true);
     // }
-  _gameModule->pushOnMap(_position.x, _position.y, _type);
+  _gameModule->pushOnMap(_position.x, _position.z, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -99,7 +99,7 @@ int	IA::_radar(lua_State *ls) {
   int	find = 0;
 
   i = _position.x / 2.5;
-  j = _position.y / 2.5;
+  j = _position.z / 2.5;
   incr = 1;
   while(find == 0 && incr < _mapModule->getSize() * 2) {
     if (incr % 2 == 1) {
@@ -116,7 +116,8 @@ int	IA::_radar(lua_State *ls) {
       for(int a = 0; a < incr; a++) {
 	i--;
 	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
-	  return (_found(ls, i, j , find));      }
+	  return (_found(ls, i, j , find));
+      }
       for(int a = 0; a < incr; a++) {
 	j++;
 	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)

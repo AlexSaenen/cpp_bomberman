@@ -5,10 +5,11 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 13:13:11 2015 Alexander Saenen
+// Last update Sun Jun 14 16:49:27 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
+#include <Bonus.hh>
 
 GameModule::GameModule() { }
 
@@ -52,11 +53,37 @@ void	GameModule::_deleteDestroyables(const Bomb *bomb, const double x, const dou
       }
     }
   }
+  _popBonuses(nearest);
+}
+
+void	GameModule::_popBonuses(GameObject **nearest) {
+  std::map<int, int>	_bonusLotto;
+  Bonus *bonus = 0;
+  _bonusLotto[rand() % 10] = 0;
+  int	value = rand() % 10;
+  while ((_bonusLotto.find(value)) != _bonusLotto.end())
+    value = rand() % 10;
+  _bonusLotto[value] = 1;
+  while ((_bonusLotto.find(value)) != _bonusLotto.end())
+    value = rand() % 10;;
+  _bonusLotto[value] = 2;
   for (size_t i = 0; i < 4; ++i)
     if (nearest[i]) {
       markForCleanup(nearest[i]);
-      
-    }
+      value = rand() % 10;
+      if (_bonusLotto.find(value) != _bonusLotto.end()) {
+	GameObject	*go = new GameObject(GameObject::BONUS, "bonus");
+	Bonus::BonusType	type = static_cast<Bonus::BonusType>(_bonusLotto[value]);
+	bonus = new Bonus(type);
+	bonus->initialize(0);
+	std::stringstream	strm;
+	Shape	*shape = dynamic_cast<Shape *>(nearest[i]->getComponents().front());
+	strm << shape->getPosX() << " " << shape->getPosY() << " " << type;
+	bonus->configure(strm.str());
+	go->pushComponent(bonus);
+	handle(go);
+      }
+    }  
 }
 
 void	GameModule::_handleExplosion(Event *ev) {
@@ -121,12 +148,23 @@ std::list<GameObject::ObjectType>	&GameModule::getObject(const int x, const int 
   return ((_gameMap[x])[y]);
 }
 
+bool			GameModule::tryGetObject(const int x, const int y, std::list<GameObject::ObjectType> &objects) {
+  if (_gameMap.find(x) == _gameMap.end() || _gameMap[x].find(y) == _gameMap[x].end())
+    return (false);
+  objects = _gameMap[x][y];
+  return (true);
+}
+
 void					GameModule::pushOnMap(GameObject *object) {
   Shape                                 *shape = NULL;
   std::list<IComponent *>               gameComponents;
   
   try {
+    try {
     gameComponents = object->getComponents();
+    } catch (ArgException e) {
+      std::cerr << e.getMessage() << std::endl;
+    }
     for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
       if ((shape = dynamic_cast<Shape *>(*it)) != NULL)
 	break;
