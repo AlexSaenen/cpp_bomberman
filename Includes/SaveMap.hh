@@ -28,17 +28,19 @@ private:
   std::ostream  *is;
   std::filebuf  *file;
   std::map<std::string, std::string>	_modelType;
+  std::map<GameObject::ObjectType, bool>	_isType;
+  std::map<GameObject::ObjectType, void (SaveMap::*)()>        _pushType;
   std::stringstream string;
   GameRoutine			*gr;
   MapModule			*mm;
   std::vector<GameObject *>	playerOne;
-  bool				isPlayerOne;
+  //bool				isPlayerOne;
   std::vector<GameObject *>	playerTwo;
-  bool				isPlayerTwo;
+  //bool				isPlayerTwo;
   std::vector<GameObject *>	ia;
-  bool				isIa;
+  //bool				isIa;
   std::vector<GameObject *>	cube;
-  bool				isCube;
+  //bool				isCube;
   std::vector<GameObject *>	cubeDestr;
   bool				isCubeDestr;
 public:

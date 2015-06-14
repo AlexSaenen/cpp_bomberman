@@ -1,61 +1,46 @@
-11 16
+13 10
 @
 firstralouf 3
-$PlayerOne%25 25 3 0 0 0 0.034 0.034 0.034 player1
+$PlayerOne%5 25 3 0 0 0 0.034 0.034 0.034 player1
 @
 firstralouf 4
-$PlayerTwo%20 20 4 0 0 0 0.034 0.034 0.034 player2
+$PlayerTwo%10 30 4 0 0 0 0.034 0.034 0.034 player2
 @
 randomralouf 5
-$IA%10 10 5 0 0 0 0.034 0.034 0.034 ia1
-@
-randomralouf 5
-$IA%15 15 5 0 0 0 0.034 0.034 0.034 ia3
-@
-randomralouf 5
-$IA%15 5 5 0 0 0 0.034 0.034 0.034 ia4
-@
-randomralouf 5
-$IA%15 25 5 0 0 0 0.034 0.034 0.034 ia4
-@
-randomralouf 5
-$IA%5 15 5 0 0 0 0.034 0.034 0.034 ia1
-@
-randomralouf 5
-$IA%10 0 5 0 0 0 0.034 0.034 0.034 ia1
-@
-randomralouf 5
-$IA%20 10 5 0 0 0 0.034 0.034 0.034 ia1
+$IA%30 0 5 0 0 0 0.034 0.034 0.034 ia4
 @
 randomralouf 5
 $IA%0 10 5 0 0 0 0.034 0.034 0.034 ia1
 @
 randomralouf 5
-$IA%25 15 5 0 0 0 0.034 0.034 0.034 ia4
+$IA%30 30 5 0 0 0 0.034 0.034 0.034 ia3
 @
 randomralouf 5
-$IA%0 20 5 0 0 0 0.034 0.034 0.034 ia2
+$IA%20 10 5 0 0 0 0.034 0.034 0.034 ia3
 @
 randomralouf 5
-$IA%25 5 5 0 0 0 0.034 0.034 0.034 ia4
+$IA%5 15 5 0 0 0 0.034 0.034 0.034 ia3
 @
 randomralouf 5
-$IA%0 0 5 0 0 0 0.034 0.034 0.034 ia4
+$IA%30 20 5 0 0 0 0.034 0.034 0.034 ia4
 @
 randomralouf 5
-$IA%10 20 5 0 0 0 0.034 0.034 0.034 ia1
+$IA%25 15 5 0 0 0 0.034 0.034 0.034 ia2
 @
 randomralouf 5
-$IA%5 5 5 0 0 0 0.034 0.034 0.034 ia2
+$IA%5 5 5 0 0 0 0.034 0.034 0.034 ia1
 @
 randomralouf 5
-$IA%5 25 5 0 0 0 0.034 0.034 0.034 ia1
+$IA%15 25 5 0 0 0 0.034 0.034 0.034 ia3
 @
 randomralouf 5
-$IA%20 0 5 0 0 0 0.034 0.034 0.034 ia2
+$IA%10 20 5 0 0 0 0.034 0.034 0.034 ia4
 @
 Wall 1
-$Cube%0 5 0
+$Cube%0 2.5 0
+@
+Wall 1
+$Cube%0 7.5 0
 @
 Wall 1
 $Cube%0 15 0
@@ -63,11 +48,26 @@ $Cube%0 15 0
 Wall 1
 $Cube%0 17.5 0
 @
-Wall 0
-$Cube%2.5 2.5 0
+Wall 1
+$Cube%0 20 0
 @
 Wall 1
-$Cube%2.5 5 0
+$Cube%0 22.5 0
+@
+Wall 1
+$Cube%0 25 0
+@
+Wall 1
+$Cube%0 27.5 0
+@
+Wall 1
+$Cube%0 30 0
+@
+Wall 1
+$Cube%2.5 0 0
+@
+Wall 0
+$Cube%2.5 2.5 0
 @
 Wall 0
 $Cube%2.5 7.5 0
@@ -81,8 +81,17 @@ $Cube%2.5 15 0
 Wall 0
 $Cube%2.5 17.5 0
 @
+Wall 1
+$Cube%2.5 20 0
+@
 Wall 0
 $Cube%2.5 22.5 0
+@
+Wall 1
+$Cube%2.5 25 0
+@
+Wall 0
+$Cube%2.5 27.5 0
 @
 Wall 1
 $Cube%5 0 0
@@ -91,16 +100,13 @@ Wall 1
 $Cube%5 2.5 0
 @
 Wall 1
-$Cube%5 10 0
-@
-Wall 1
-$Cube%5 17.5 0
-@
-Wall 1
 $Cube%5 20 0
 @
 Wall 1
-$Cube%7.5 0 0
+$Cube%5 27.5 0
+@
+Wall 1
+$Cube%5 30 0
 @
 Wall 0
 $Cube%7.5 2.5 0
@@ -108,17 +114,26 @@ $Cube%7.5 2.5 0
 Wall 0
 $Cube%7.5 7.5 0
 @
+Wall 1
+$Cube%7.5 10 0
+@
 Wall 0
 $Cube%7.5 12.5 0
 @
 Wall 0
 $Cube%7.5 17.5 0
 @
-Wall 1
-$Cube%7.5 20 0
-@
 Wall 0
 $Cube%7.5 22.5 0
+@
+Wall 0
+$Cube%7.5 27.5 0
+@
+Wall 1
+$Cube%7.5 30 0
+@
+Wall 1
+$Cube%10 2.5 0
 @
 Wall 1
 $Cube%10 5 0
@@ -127,16 +142,22 @@ Wall 1
 $Cube%10 7.5 0
 @
 Wall 1
+$Cube%10 10 0
+@
+Wall 1
 $Cube%10 15 0
 @
 Wall 1
 $Cube%10 17.5 0
 @
 Wall 1
-$Cube%10 25 0
+$Cube%12.5 0 0
 @
 Wall 0
 $Cube%12.5 2.5 0
+@
+Wall 1
+$Cube%12.5 5 0
 @
 Wall 0
 $Cube%12.5 7.5 0
@@ -147,23 +168,29 @@ $Cube%12.5 10 0
 Wall 0
 $Cube%12.5 12.5 0
 @
-Wall 1
-$Cube%12.5 15 0
-@
 Wall 0
 $Cube%12.5 17.5 0
 @
 Wall 0
 $Cube%12.5 22.5 0
 @
+Wall 0
+$Cube%12.5 27.5 0
+@
+Wall 1
+$Cube%15 0 0
+@
 Wall 1
 $Cube%15 2.5 0
 @
 Wall 1
-$Cube%15 10 0
+$Cube%15 5 0
 @
 Wall 1
 $Cube%15 12.5 0
+@
+Wall 1
+$Cube%15 15 0
 @
 Wall 1
 $Cube%15 20 0
@@ -180,6 +207,9 @@ $Cube%17.5 7.5 0
 Wall 0
 $Cube%17.5 12.5 0
 @
+Wall 1
+$Cube%17.5 15 0
+@
 Wall 0
 $Cube%17.5 17.5 0
 @
@@ -189,17 +219,35 @@ $Cube%17.5 20 0
 Wall 0
 $Cube%17.5 22.5 0
 @
+Wall 0
+$Cube%17.5 27.5 0
+@
+Wall 1
+$Cube%20 2.5 0
+@
 Wall 1
 $Cube%20 5 0
+@
+Wall 1
+$Cube%20 7.5 0
 @
 Wall 1
 $Cube%20 15 0
 @
 Wall 1
-$Cube%20 17.5 0
+$Cube%20 22.5 0
+@
+Wall 1
+$Cube%20 25 0
+@
+Wall 1
+$Cube%22.5 0 0
 @
 Wall 0
 $Cube%22.5 2.5 0
+@
+Wall 1
+$Cube%22.5 5 0
 @
 Wall 0
 $Cube%22.5 7.5 0
@@ -213,21 +261,72 @@ $Cube%22.5 12.5 0
 Wall 0
 $Cube%22.5 17.5 0
 @
+Wall 1
+$Cube%22.5 20 0
+@
 Wall 0
 $Cube%22.5 22.5 0
 @
 Wall 1
-$Cube%25 0 0
+$Cube%22.5 25 0
+@
+Wall 0
+$Cube%22.5 27.5 0
 @
 Wall 1
 $Cube%25 2.5 0
 @
 Wall 1
+$Cube%25 5 0
+@
+Wall 1
+$Cube%25 7.5 0
+@
+Wall 1
 $Cube%25 10 0
 @
 Wall 1
-$Cube%25 17.5 0
+$Cube%25 20 0
 @
 Wall 1
-$Cube%25 20 0
+$Cube%25 25 0
+@
+Wall 0
+$Cube%27.5 2.5 0
+@
+Wall 1
+$Cube%27.5 5 0
+@
+Wall 0
+$Cube%27.5 7.5 0
+@
+Wall 0
+$Cube%27.5 12.5 0
+@
+Wall 1
+$Cube%27.5 15 0
+@
+Wall 0
+$Cube%27.5 17.5 0
+@
+Wall 0
+$Cube%27.5 22.5 0
+@
+Wall 1
+$Cube%27.5 25 0
+@
+Wall 0
+$Cube%27.5 27.5 0
+@
+Wall 1
+$Cube%30 7.5 0
+@
+Wall 1
+$Cube%30 10 0
+@
+Wall 1
+$Cube%30 22.5 0
+@
+Wall 1
+$Cube%30 25 0
 @

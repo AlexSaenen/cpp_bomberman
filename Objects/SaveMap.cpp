@@ -27,11 +27,16 @@ SaveMap::SaveMap() {
     throw ArgException("Cannot open the file : " + str);
   this->gr = ModulesManager::getInstance()->get<GameRoutine>();
   this->mm = ModulesManager::getInstance()->get<MapModule>();
-  this->isPlayerOne = gr->getGOStatus(GameObject::PLAYER1, this->playerOne);
-  this->isPlayerTwo = gr->getGOStatus(GameObject::PLAYER2, this->playerTwo);
-  this->isIa = gr->getGOStatus(GameObject::IA, this->ia);
-  this->isCube = gr->getGOStatus(GameObject::CUBE, this->cube);
-  this->isCubeDestr = gr->getGOStatus(GameObject::CUBEDESTR, this->cubeDestr);
+  this->_isType[GameObject::PLAYER1] = gr->getGOStatus(GameObject::PLAYER1, this->playerOne);
+  this->_isType[GameObject::PLAYER2] = gr->getGOStatus(GameObject::PLAYER2, this->playerTwo);
+  this->_isType[GameObject::IA] = gr->getGOStatus(GameObject::IA, this->ia);
+  this->_isType[GameObject::CUBE] = gr->getGOStatus(GameObject::CUBE, this->cube);
+  this->_isType[GameObject::CUBEDESTR] = gr->getGOStatus(GameObject::CUBEDESTR, this->cubeDestr);
+  this->_pushType[GameObject::PLAYER1] = &SaveMap::pushPlayerOne;
+  this->_pushType[GameObject::PLAYER2] = &SaveMap::pushPlayerTwo;
+  this->_pushType[GameObject::IA] = &SaveMap::pushIa;
+  this->_pushType[GameObject::CUBE] = &SaveMap::pushCube;
+  this->_pushType[GameObject::CUBEDESTR] = &SaveMap::pushCubeDestr;
   _modelType["./GraphicsLib/assets/Textures/stone.tga"] = "cube";
   _modelType["./GraphicsLib/assets/Textures/crate.tga"] = "destroy";
   _modelType["./GraphicsLib/assets/archer.fbx"] = "player1";
@@ -157,15 +162,24 @@ void	SaveMap::pushPlayerTwo()
 
 void	SaveMap::execute()
 {
+  GameObject::ObjectType	i;
+  
   string << mm->getSize() << " " << mm->getIA();
-  if (isCube)
-    pushCube();
-  if (isPlayerOne)
-    pushPlayerOne();
-  if (isPlayerTwo)
-    pushPlayerTwo();
-  if (isIa)
-    pushIa();
-  if (isCubeDestr)
-    pushCubeDestr();
+  i = GameObject::CUBE;
+  while(i < 6)
+    {
+      if (_isType[i] == true)
+	(this->*_pushType[i])();
+      i = static_cast<GameObject::ObjectType>(i + 1);
+    }
+  // if (isCube)
+  //   pushCube();
+  // if (isPlayerOne)
+  //   pushPlayerOne();
+  // if (isPlayerTwo)
+  //   pushPlayerTwo();
+  // if (isIa)
+  //   pushIa();
+  // if (isCubeDestr)
+  //   pushCubeDestr();
 }
