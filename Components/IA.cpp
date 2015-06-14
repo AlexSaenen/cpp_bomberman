@@ -31,6 +31,7 @@ IA::~IA() {
 void	IA::_initialize() {
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
   _mapModule = ModulesManager::getInstance()->get<MapModule>();
+  _gameRoutine = ModulesManager::getInstance()->get<GameRoutine>();
   _model.createSubAnim(0, "Run", 0, 30);
   playSubAnim("Run");
   _model.pause(true);
@@ -95,8 +96,8 @@ int	IA::_radar(lua_State *ls) {
   int	incr;
   int	find = 0;
 
-  i = _position.x;
-  j = _position.y;
+  i = _position.x / 2.5;
+  j = _position.y / 2.5;
   incr = 1;
   while(find == 0 && incr < _mapModule->getSize() * 2) {
     if (incr % 2 == 1) {
@@ -122,12 +123,68 @@ int	IA::_radar(lua_State *ls) {
     }
     incr++;
   }
-  return (3);
+  return (_found(ls, i, j ,0));
 }
 
-int          IA::_checkBomb(lua_State *) {
-  // for(int i = 1, int i )
-  return (3);
+int	IA::_checkRange(int x, int y, std::vector<GameObject *> bombs) {
+  Bomb                                 *bomb = NULL;
+  std::list<IComponent *>               gameComponents;
+  double				vx;
+  double				vy;
+  
+  try {
+    for(std::vector<GameObject *>::iterator it = bombs.begin(); it != bombs.end(); it++) {
+      gameComponents = (*it)->getComponents();
+      for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
+	if ((bomb = dynamic_cast<Bomb *>(*it)) != NULL)
+	  break;
+	if (bomb == NULL)
+	  throw LogicException("Bomb hasn't got a shape.");
+	vx = bomb->getPosX();
+	vy = bomb->getPosY();
+	vx = vx / 2.5;
+	vy = vy / 2.5;
+	if ((int)vx == x && (int)vy == y)
+	  return (bomb->getRange());
+      }
+    }
+  } catch (LogicException e) {
+    std::cerr<< e.getMessage() << std::endl;
+    ModulesManager::getInstance()->get<EventModule>()
+      ->trigger("Lua.error", 1001)
+      ->handle();
+    return (0);
+  }
+  return (0);
+}
+
+int					IA::_checkBomb(lua_State *ls) {
+  int					range;
+  int					x;
+  int					y;
+  std::list<GameObject::ObjectType>	types;
+
+  x = lua_tointeger(ls, 3);
+  y = lua_tointeger(ls, 4);
+  for(int i = 1; i < 12; i++) {
+    types = _gameModule->getObject(x + i, y);
+    if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
+	&& (range = _checkRange(x + i, y, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+      return (_found(ls, x + i, y, range));
+    types = _gameModule->getObject(x, y + i);
+    if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
+	&& (range = _checkRange(x, y + i, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+      return (_found(ls, x, y + i, range));
+    types = _gameModule->getObject(x, y - i);
+    if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
+	&& (range = _checkRange(x, y - i, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+      return (_found(ls, x, y - i, range));
+    types = _gameModule->getObject(x - i, y);
+    if (find(types.begin(), types.end(), GameObject::BOMB) != types.end()
+	&& (range = _checkRange(x - i, y, _gameRoutine->getGObjects(GameObject::BOMB))) >= i)
+      return (_found(ls, x - i, y + i, range));
+  }
+  return (_found(ls, x, y, 0));
 }
 
 int					IA::_checkCase(lua_State *ls) {
@@ -135,8 +192,8 @@ int					IA::_checkCase(lua_State *ls) {
   int					x;
   int					y;
   
-  x = lua_tointeger(ls, 2);
-  y = lua_tointeger(ls, 3);
+  x = lua_tointeger(ls, 3);
+  y = lua_tointeger(ls, 4);
   objects = _gameModule->getObject(x, y);
   for(std::list<GameObject::ObjectType>::iterator it = objects.begin(); it != objects.end(); it++) {
     if (*it == GameObject::CUBE) {
@@ -153,18 +210,7 @@ int					IA::_checkCase(lua_State *ls) {
 }
 
 int	IA::_command(lua_State *ls) {
-  //  std::cout << "toto !!!!" << std::endl;
-  if (_toto < 1)
-    _ac = static_cast<Action>(lua_tonumber(ls, 3));
-  else if (_toto < 2)
-    _ac = RIGHT;
-  else if (_toto < 3)
-    _ac = DOWN;
-  else if (_toto < 4)
-    _ac = LEFT;
-  else
-    _toto = -1;
-  _toto++;
+  _ac = static_cast<Action>(lua_tonumber(ls, 3));
   return (0);
 }
 
