@@ -1,11 +1,11 @@
 //
-// IA.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Sun Jun 14 04:37:34 2015 Alexander Saenen
+// IA.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 05:11:01 2015 Vividy
+// Last update Sun Jun 14 05:11:01 2015 Vividy
 //
 
 #include <IA.hh>

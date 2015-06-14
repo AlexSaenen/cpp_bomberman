@@ -1,11 +1,11 @@
 //
-// GameRoutine.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sun Jun 14 03:30:41 2015 Alexander Saenen
+// GameRoutine.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 03:32:44 2015 Vividy
+// Last update Sun Jun 14 03:32:45 2015 Vividy
 //
 
 #include <GameRoutine.hh>
@@ -14,7 +14,7 @@
 #include <RuntimeException.hh>
 #include <RangeException.hh>
 
-GameRoutine::GameRoutine() {}
+GameRoutine::GameRoutine() : _lastSaved(0) {}
 
 GameRoutine::~GameRoutine() {
   for (int it = 0; it < 11; ++it) {
@@ -107,11 +107,14 @@ bool	GameRoutine::update() {
     ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
   }
-  if (_input.getKey(SDLK_o)) {
+  if (_input.getKey(SDLK_o) && _lastSaved + _clock.getElapsed() > 5) {
     SaveMap	saver;
+    _lastSaved = 0;
     saver.execute();
     return (true);
   }
+  else
+    _lastSaved += _clock.getElapsed();
   try {
     for (int it = 0; it < 11; ++it) {
       GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);

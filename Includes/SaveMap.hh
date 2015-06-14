@@ -5,18 +5,41 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:05:28 2015 Vividy
-// Last update Sat Jun 13 22:36:19 2015 Vividy
+// Last update Sun Jun 14 04:09:06 2015 Vividy
 //
 
 #ifndef SAVEMAP_HH_
 # define SAVEMAP_HH_
 
+#include <time.h>
 #include <iostream>
+#include "ModulesManager.hpp"
+#include "MapModule.hh"
+#include "GameRoutine.hh"
+#include "GameObject.hh"
+#include "ObjModel.hh"
+
+class	GameRoutine;
+class	MapModule;
 
 class	SaveMap
 {
 private:
-  int	i;
+  std::ostream  *is;
+  std::filebuf  *file;
+  std::map<std::string, std::string>	_modelType;
+  GameRoutine			*gr;
+  MapModule			*mm;
+  std::vector<GameObject *>	playerOne;
+  bool				isPlayerOne;
+  std::vector<GameObject *>	playerTwo;
+  bool				isPlayerTwo;
+  std::vector<GameObject *>	ia;
+  bool				isIa;
+  std::vector<GameObject *>	cube;
+  bool				isCube;
+  std::vector<GameObject *>	cubeDestr;
+  bool				isCubeDestr;
 public:
   SaveMap();
   ~SaveMap();

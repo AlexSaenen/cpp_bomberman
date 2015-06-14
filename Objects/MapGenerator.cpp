@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 21:39:59 2015 Bozo
+// Last update Sun Jun 14 03:05:07 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -64,11 +64,7 @@ int			MapGenerator::generate()
 
   y = 0;
   for (x = 0; x < size; x++) {
-    if (x % 2 == 1) {
-      for (y = 0; y < size; y++)
-	if (y % 2 == 1)
-	  string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
-    } else {
+    if (x % 2 != 1) {
       if (x % 4 == 0) {
 	for (y = 0; y < size; y++)
 	  if (y % 4 == 0)
@@ -87,6 +83,7 @@ int			MapGenerator::generate()
       nb = se;
       nbIa = nb - nbPlayers;
     }
+  string << this->size << " " << nbIa << "\n@";
   for (x = 0; x < nb; x++)
     {
       y = 0;
@@ -145,6 +142,8 @@ int			MapGenerator::generate()
 		}
 	    }
 	}
+      else if (x % 2 == 1 && y % 2 == 1)
+	string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
   str = string.str();
   this->is->write(str.c_str(), str.size());
   return (0);
