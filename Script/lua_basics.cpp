@@ -9,8 +9,8 @@
 
 <<<<<<< HEAD
   for ( int n=1; n<=argc; ++n ) {
-    std::cout << "-- argument " << n << ": "
-	      << lua_tostring(L, n) << std::endl;
+    // std::cout << "-- argument " << n << ": "
+    // 	      << lua_tostring(L, n) << std::endl;
   }
   lua_pushnumber(L, 123); // return value
   return 1; // number of return values
