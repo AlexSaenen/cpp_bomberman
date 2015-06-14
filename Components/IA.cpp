@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Tue Jun  2 17:53:06 2015 Alexander Saenen
+// Started on  Sun Jun 14 11:05:30 2015 Alexander Saenen
+// Last update Sun Jun 14 11:05:30 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -20,7 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-  _luaLoader = new LuaLoader("script.lua");
+  _luaLoader = new LuaLoader("ia.lua");
   _this = static_cast<void *>(this);
 }
 
@@ -34,7 +34,7 @@ void	IA::_initialize() {
   _gameRoutine = ModulesManager::getInstance()->get<GameRoutine>();
   _model.createSubAnim(0, "Run", 0, 30);
   playSubAnim("Run");
-  _model.pause(true);
+  _model.pause(false);
   _isInitialized = true;
 }
 
@@ -76,7 +76,9 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
 }
 
 int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
-  if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()) {
+  if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
+      || find(types.begin(), types.end(), GameObject::PLAYER2) != types.end()
+      || find(types.begin(), types.end(), GameObject::IA) != types.end())
     return (1);
   }
   else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end()) {

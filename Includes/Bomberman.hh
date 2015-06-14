@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:04:34 2015 Alexander Saenen
-// Last update Thu Jun 11 20:26:56 2015 Alexander Saenen
+// Last update Sun Jun 14 13:12:30 2015 Alexander Saenen
 //
 
 #ifndef BOMBERMAN_HH_
@@ -23,6 +23,7 @@
 # include "RuntimeException.hh"
 # include "Functor.hpp"
 # include "Event.hh"
+# include <time.h>
 
 class Bomberman
 {

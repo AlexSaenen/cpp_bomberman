@@ -5,21 +5,22 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sun Jun 14 04:00:20 2015 Alexander Saenen
+// Last update Sun Jun 14 11:11:35 2015 Alexander Saenen
 //
 
 #include "Player.hh"
 #include "ModulesManager.hpp"
 
 Player::Player()
-  : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) {
+  : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false), _keyForBomb(0) {
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
-  _inventory[BOMB] = 1;
-  _inventory[SPEED] = 10;
-  _inventory[RANGE] = 2;
-  _limit[BOMB] = 11;
-  _limit[SPEED] = 20;
-  _limit[RANGE] = 12;
+  _mapModule = ModulesManager::getInstance()->get<MapModule>();
+  _inventory[0] = 1;
+  _inventory[1] = 10;
+  _inventory[2] = 2;
+  _limit[0] = 11;
+  _limit[1] = 20;
+  _limit[2] = 12;
 }
 
 Player::~Player() { }
@@ -31,25 +32,38 @@ void	Player::_initialize() {
 }
 
 void	Player::_tryMoveCollision(const gdl::Clock &clock, const glm::vec3 &pos) {
-  glm::vec3	destination = _position;
   glm::vec3	trip = pos;
-  trip = trip * static_cast<float>(clock.getElapsed()) * _speed;
+  float		elapsed = static_cast<float>(clock.getElapsed());
+  int		size = _mapModule->getSize();
+  trip = trip * elapsed * _speed;
   trip.x += 1.15;
   trip.z += 1.15;
-  trip.x = trip.x > 2.5 ? 2.4 : trip.x; 
-  trip.x = trip.x < -2.5 ? -2.4 : trip.x; 
-  trip.y = trip.x > 2.5 ? 2.4 : trip.x; 
-  trip.y = trip.x < -2.5 ? -2.4 : trip.x; 
-  destination += trip;
+  trip.x = trip.x > 2.5 ? 2.3 : trip.x; 
+  trip.x = trip.x < -2.5 ? -2.3 : trip.x; 
+  trip.z = trip.z > 2.5 ? 2.4 : trip.z; 
+  trip.z = trip.z < -2.5 ? -2.4 : trip.z; 
+  trip += _position;
   if (pos.z > 0)
-    destination.z += 2.5;
-  int	x = destination.x / 2.5;
-  int	y = destination.z / 2.5;
+    trip.z += 2.5;
+  int	x = trip.x / 2.5;
+  int	y = trip.z / 2.5;
+  if ((pos.x != 0 && ((trip.x - 0.1) / 2.5 < 0 || (trip.x + 0.65) / 2.5 > size)) || y < 0 || y  > size)
+    return ;
   std::list<GameObject::ObjectType> types = _gameModule->getObject(x, y);
   for (std::list<GameObject::ObjectType>::iterator it = types.begin(); it != types.end(); ++it)
-    if ((*it) <= GameObject::CUBEDESTR)
+    if ((*it) <= GameObject::CUBEDESTR) {
+      if (pos.z > 0) {
+	trip.x = pos.x;
+	trip.z = ((y - 1) * 2.5) - _position.z;
+	_gameModule->popOnMap(_position.x, _position.y, _type);
+	translate(trip * elapsed * _speed);
+	_gameModule->pushOnMap(_position.x, _position.y, _type);
+      }
       return ;
-  translate(pos * static_cast<float>(clock.getElapsed()) * _speed);
+    }
+  _gameModule->popOnMap(_position.x, _position.y, _type);
+  translate(pos * elapsed * _speed);
+  _gameModule->pushOnMap(_position.x, _position.y, _type);
 }
 
 void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
@@ -57,8 +71,21 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
 
   if (!_isInitialized)
     _initialize();
-  _gameModule->popOnMap(_position.x, _position.y, _type);
+  _speed = _inventory[SPEED];
   _lastMovement = 0;
+  if (input.getKey(_keyForBomb) && _hasBombed <= 0) {
+    GameObject	*model = new GameObject(GameObject::BOMB, "bomb");
+    ObjModel	*bomb = new Bomb(2.5, _inventory[RANGE]);
+    _hasBombed = 3;
+    bomb->initialize(0);
+    std::stringstream strm;
+    strm << static_cast<int>((_position.x + 2) / 2.5) * 2.5 << " " << static_cast<int>((_position.z + 1.25) / 2.5) * 2.5 << " 2 0 180 0 0.4 0.4 0.4 bomb";
+    bomb->configure(strm.str());
+    model->pushComponent(bomb);
+    _gameModule->handle(model);
+  }
+  else if (!input.getKey(_keyForBomb))
+    _hasBombed -= clock.getElapsed();
   for (std::map<int, int>::const_iterator it = _rotationMap.begin();
        it != _rotationMap.end() && !hasTranslated; ++it)
     if (input.getKey((*it).first)) {
@@ -75,7 +102,6 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
     _isMoving = false;
     _model.pause(true);
   }
-  _gameModule->pushOnMap(_position.x, _position.y, _type);
 }
 
 void    Player::playAnimation(const std::string &animation, bool loop) {
@@ -105,11 +131,11 @@ void    Player::playSubAnim(const std::string &subAnimation, bool loop) {
   }
 }
 
-int	Player::getLevel(const BonusType &bt) {
+int	Player::getLevel(const int bt) {
   return (_inventory[bt]);
 }
 
-void	Player::incrLevel(const BonusType &bt) {
+void	Player::incrLevel(const int bt) {
   if (_inventory[bt] < _limit[bt])
     _inventory[bt]++;
 }

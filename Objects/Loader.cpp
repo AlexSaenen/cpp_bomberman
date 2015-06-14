@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 15:03:33 2015 Alexander Saenen
-// Last update Fri Jun 12 13:54:34 2015 Alexander Saenen
+// Last update Sun Jun 14 12:26:50 2015 Alexander Saenen
 //
 
 #include "Loader.hh"
@@ -76,6 +76,7 @@ void	Loader::execute() {
   modulesManager->get<MapModule>()->setIA(type);
   while (!_is->eof() && std::getline(*_is, buff, '@')) {
     content = new std::istringstream(buff);
+    std::getline(*content, buff, '\n');
     std::getline(*content, name, ' ');
     std::getline(*content, buff, '\n');
     verif = new std::istringstream(buff);

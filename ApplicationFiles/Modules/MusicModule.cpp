@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Sat Jun 13 16:01:29 2015 Thibaud PEAUGER
+// Last update Sun Jun 14 12:13:04 2015 Alexander Saenen
 //
 
 #include <MusicModule.hh>

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Sat Jun 13 17:39:26 2015 Alexander Saenen
+// Last update Sun Jun 14 11:07:38 2015 Alexander Saenen
 //
 
 #ifndef PLAYER_HH_
@@ -13,6 +13,7 @@
 
 # include <ObjModel.hh>
 # include <GameModule.hh>
+# include <MapModule.hh>
 
 class	Player : public ObjModel
 {
@@ -26,14 +27,17 @@ protected:
   
 protected:
   GameModule	*_gameModule;
+  MapModule	*_mapModule;
   bool		_isMoving;
   double	_animLocked;
   int		_lastMovement;
   bool		_isInitialized;
+  double	_hasBombed;
+  int		_keyForBomb;
   std::map<int, int>		_rotationMap;
   std::map<int, glm::vec3>	_translationMap;
-  std::map<BonusType, int>	_inventory;
-  std::map<BonusType, int>      _limit;
+  std::map<int, int>	_inventory;
+  std::map<int, int>      _limit;
 
 protected:
   void	_initialize();
@@ -49,8 +53,8 @@ public:
   void  playAnimation(int stack, bool loop = true);
   void  playSubAnim(const std::string &subAnimation, bool loop = true);
 
-  int	getLevel(const BonusType&);
-  void	incrLevel(const BonusType&);
+  int	getLevel(const int);
+  void	incrLevel(const int);
 };
 
 #endif /* Player.hh */

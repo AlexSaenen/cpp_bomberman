@@ -1,11 +1,11 @@
 //
-// GameRoutine.hh for  in /home/saenen_a/SchoolWork/rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Mon Apr 27 15:08:07 2015 Alexander Saenen
-// Last update Sun Jun 14 01:15:28 2015 Alexander Saenen
+// GameRoutine.hh for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 01:29:24 2015 Vividy
+// Last update Sun Jun 14 01:29:26 2015 Vividy
 //
 
 #ifndef GAMEROUTINE_HH_
@@ -30,6 +30,7 @@ class	GameRoutine : public AModule, public gdl::Game
   gdl::Input		_input;
   gdl::BasicShader	_shader;
   std::map<GameObject::ObjectType, std::vector<GameObject *> >	_objects;
+  double		_lastSaved;
 
 public:
   GameRoutine();

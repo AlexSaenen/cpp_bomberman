@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:55:18 2015 Vividy
-// Last update Sat Jun 13 15:55:19 2015 Vividy
+// Last update Sun Jun 14 13:12:44 2015 Alexander Saenen
 //
 
 #include "Bomberman.hh"
@@ -23,6 +23,7 @@ Bomberman::Bomberman(const int , const char **):
     ->observe(std::string("Bomberman.init"), new Functor<Bomberman>(this, &Bomberman::_initialize), 1000)
     ->observe(std::string("Bomberman.init"), new Functor<MenuModule>(ModulesManager::getInstance()->get<MenuModule>(), &MenuModule::initialize), 800)
     ->observe(std::string("Music.play"), new Functor<MusicModule>(ModulesManager::getInstance()->get<MusicModule>(), &MusicModule::addSound), 1000);
+  srand(time(0));
 }
 
 Bomberman::~Bomberman() {

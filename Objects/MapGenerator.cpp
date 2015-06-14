@@ -1,18 +1,17 @@
 //
-// MapGenerator.cpp for  in /home/vividy/test/Generator
-//
-// Made by Vividy
-// Login   <vividy@epitech.net>
-//
-// Started on  Fri Jun 12 16:22:03 2015 Vividy
-// Last update Sat Jun 13 21:39:59 2015 Bozo
+// MapGenerator.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// 
+// Made by Alexander Saenen
+// Login   <saenen_a@epitech.net>
+// 
+// Started on  Sun Jun 14 11:03:04 2015 Alexander Saenen
+// Last update Sun Jun 14 13:12:07 2015 Alexander Saenen
 //
 
 #include "MapGenerator.hh"
 
 MapGenerator::MapGenerator(int const size, int const nbPlayers, int const nbIa)
 {
-  srand (time(NULL));
   this->file = new std::filebuf();
   if (this->file->open("Maps/random.map", std::ios::out))
     this->is = new std::ostream(this->file);
@@ -64,11 +63,7 @@ int			MapGenerator::generate()
 
   y = 0;
   for (x = 0; x < size; x++) {
-    if (x % 2 == 1) {
-      for (y = 0; y < size; y++)
-	if (y % 2 == 1)
-	  string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
-    } else {
+    if (x % 2 != 1) {
       if (x % 4 == 0) {
 	for (y = 0; y < size; y++)
 	  if (y % 4 == 0)
@@ -87,6 +82,7 @@ int			MapGenerator::generate()
       nb = se;
       nbIa = nb - nbPlayers;
     }
+  string << this->size << " " << nbIa << "\n@";
   for (x = 0; x < nb; x++)
     {
       y = 0;
@@ -99,11 +95,11 @@ int			MapGenerator::generate()
 	  if (player[mem].u == -1)
 	    {
 	      if (x == 0)
-		string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.1 0.1 0.1 player1\n@";
+		string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
 	      else if (x == 1 && nbPlayers == 2)
-		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.1 0.1 0.1 player2\n@";
+		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.034 0.034 0.034 player2\n@";
 	      else
-		string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia" << (rand() % 4) + 1 << "\n@";
+		string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.034 0.034 0.034 ia" << (rand() % 4) + 1 << "\n@";
 	      player[mem].u = 0;
 	    }
 	  else
@@ -113,11 +109,11 @@ int			MapGenerator::generate()
 	{
 	  for (y = 0; player[y].u != -1 && (int)y < (int)player.size(); y++);
 	  if (x == 0)
-	    string << "\nfirstralouf 3\n$PlayerOne%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 3 0 0 0 0.1 0.1 0.1 player1\n@";
+	    string << "\nfirstralouf 3\n$PlayerOne%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
 	  else if (x == 1 && nbPlayers == 2)
-	    string << "\nfirstralouf 4\n$PlayerTwo%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 4 0 0 0 0.1 0.1 0.1 player2\n@";
+	    string << "\nfirstralouf 4\n$PlayerTwo%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 4 0 0 0 0.034 0.034 0.034 player2\n@";
 	  else
-	    string << "\nrandomralouf 5\n$IA%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 5 0 0 0 0.1 0.1 0.1 ia" << (rand() % 4) + 1 << "\n@";
+	    string << "\nrandomralouf 5\n$IA%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 5 0 0 0 0.034 0.034 0.034 ia" << (rand() % 4) + 1 << "\n@";
 	  player[y].u = 0;
 	}
     }
@@ -145,6 +141,8 @@ int			MapGenerator::generate()
 		}
 	    }
 	}
+      else if (x % 2 == 1 && y % 2 == 1)
+	string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
   str = string.str();
   this->is->write(str.c_str(), str.size());
   return (0);

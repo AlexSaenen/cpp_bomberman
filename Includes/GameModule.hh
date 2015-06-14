@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 00:37:53 2015 Alexander Saenen
+// Last update Sun Jun 14 13:07:21 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
@@ -14,6 +14,7 @@
 # include <GameObject.hh>
 # include <ModulesManager.hpp>
 # include <Shape.hh>
+# include <Bomb.hh>
 # include <LogicException.hh>
 
 class	GameModule : public AModule
@@ -36,6 +37,8 @@ public:
   
 private:
   void	_onCleanup(Event *);
+  void	_handleExplosion(Event *ev);
+  void	_deleteDestroyables(const Bomb *bomb, const double x, const double y);
 };
 
 #endif /* GameModule.hh */

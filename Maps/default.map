@@ -109,19 +109,19 @@ Wall 0
 $Cube%27.5 27.5 0
 @
 firstralouf 3
-$PlayerOne%15 0 3 0 0 0 0.1 0.1 0.1 player1
+$PlayerOne%15 0 3 0 0 0 0.034 0.034 0.034 player1
 @
 randomralouf 5
-$IA%30 30 5 0 0 0 0.1 0.1 0.1 ia3
+$IA%30 30 5 0 0 0 0.034 0.034 0.034 ia3
 @
 randomralouf 5
-$IA%30 0 5 0 0 0 0.1 0.1 0.1 ia3
+$IA%30 0 5 0 0 0 0.034 0.034 0.034 ia3
 @
 randomralouf 5
-$IA%0 30 5 0 0 0 0.1 0.1 0.1 ia4
+$IA%0 30 5 0 0 0 0.034 0.034 0.034 ia4
 @
 randomralouf 5
-$IA%0 0 5 0 0 0 0.1 0.1 0.1 ia4
+$IA%0 0 5 0 0 0 0.034 0.034 0.034 ia4
 @
 Wall 1
 $Cube%15 30 0

@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Wed Jun 10 16:32:58 2015 Vividy
-// Last update Sat Jun 13 14:00:45 2015 Vividy
+// Last update Sun Jun 14 13:12:14 2015 Alexander Saenen
 //
 
 #ifndef MAPGENERATOR
@@ -16,7 +16,6 @@
 # include <sstream>
 # include <vector>
 # include <stdlib.h>
-# include <time.h>
 # include <ArgException.hh>
 # include <ModulesManager.hpp>
 

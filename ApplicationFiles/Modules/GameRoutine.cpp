@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sun Jun 14 03:30:41 2015 Alexander Saenen
+// Started on  Sun Jun 14 11:05:46 2015 Alexander Saenen
+// Last update Sun Jun 14 13:01:23 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -14,7 +14,7 @@
 #include <RuntimeException.hh>
 #include <RangeException.hh>
 
-GameRoutine::GameRoutine() {}
+GameRoutine::GameRoutine() : _lastSaved(0) {}
 
 GameRoutine::~GameRoutine() {
   for (int it = 0; it < 11; ++it) {
@@ -72,14 +72,14 @@ void	GameRoutine::pushGObject(GameObject *GObject) {
 
 void	GameRoutine::popGObject(GameObject *GObject) {
   std::vector<GameObject *>	typedObjects = _objects[GObject->getType()];
-  std::vector<GameObject *>::iterator it = typedObjects.begin();
 
-  while (it != typedObjects.end() && (*it) != GObject)
-    ++it;
-  if ((*it) != GObject) {
-    throw LogicException("Can't pop an element that isn't stacked");
+  for (std::vector<GameObject *>::iterator it = typedObjects.begin(); it != typedObjects.end(); ++it) {
+    if ((*it) == GObject) {
+      typedObjects.erase(it);
+      _objects[GObject->getType()] = typedObjects;
+      return ;
+    }
   }
-  typedObjects.erase(it);
 }
 
 gdl::BasicShader	*GameRoutine::getShader() {
@@ -107,11 +107,14 @@ bool	GameRoutine::update() {
     ModulesManager::getInstance()->get<EventModule>()->trigger("Bomberman.quit", 1000);
     return (false);
   }
-  if (_input.getKey(SDLK_o)) {
+  if (_input.getKey(SDLK_o) && _lastSaved + _clock.getElapsed() > 5) {
     SaveMap	saver;
+    _lastSaved = 0;
     saver.execute();
     return (true);
   }
+  else
+    _lastSaved += _clock.getElapsed();
   try {
     for (int it = 0; it < 11; ++it) {
       GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
