@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 13:13:11 2015 Alexander Saenen
+// Last update Sun Jun 14 17:15:00 2015 Vividy
 //
 
 #include <GameModule.hh>
@@ -124,7 +124,7 @@ std::list<GameObject::ObjectType>	&GameModule::getObject(const int x, const int 
 void					GameModule::pushOnMap(GameObject *object) {
   Shape                                 *shape = NULL;
   std::list<IComponent *>               gameComponents;
-  
+
   try {
     gameComponents = object->getComponents();
     for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {

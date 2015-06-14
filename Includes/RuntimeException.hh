@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 12:33:52 2015 Alexander Saenen
-// Last update Tue May 19 18:01:56 2015 Alexander Saenen
+// Last update Sun Jun 14 17:50:42 2015 Vividy
 //
 
 #ifndef RUNTIMEEXCEPTION_HH_
@@ -21,7 +21,7 @@ public:
   RuntimeException(std::string const &message);
   RuntimeException(const RuntimeException &other);
   RuntimeException &operator=(const RuntimeException &other);
-  
+
   virtual std::string const &getMessage() const;
 private:
   std::string	_message;

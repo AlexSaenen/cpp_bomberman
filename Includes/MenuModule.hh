@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Thu Jun 11 19:21:30 2015 Alexander Saenen
+// Last update Sun Jun 14 17:37:19 2015 Vividy
 //
 
 #ifndef MENUMODULE_HH_
@@ -49,7 +49,7 @@ private:
   std::map<MenuPage, GameObject *>	_pages;
   bool					_isActive;
   GameObject				*_activePage;
-  
+
 private:
   void	_update(Event *);
   void	_draw(Event *);

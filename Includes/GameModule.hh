@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 13:07:21 2015 Alexander Saenen
+// Last update Sun Jun 14 17:14:41 2015 Vividy
 //
 
 #ifndef GAMEMODULE_HH_
@@ -34,7 +34,7 @@ public:
   void  pushOnMap(const double x, const double y, const GameObject::ObjectType type);
   void	popOnMap(GameObject *object);
   void  popOnMap(const double x, const double y, const GameObject::ObjectType type);
-  
+
 private:
   void	_onCleanup(Event *);
   void	_handleExplosion(Event *ev);

@@ -16,11 +16,11 @@ extern "C"
 class		LuaLoader
 {
   lua_State*	_luaVM;
-  
+
 public:
   explicit LuaLoader(const std::string &namefile);
   ~LuaLoader();
-  void lunchScript(void *object, int x, int y, int range, int size);
+  void lunchScript(void *object, int const x, int const y, int const range, int const size);
 
 };
 

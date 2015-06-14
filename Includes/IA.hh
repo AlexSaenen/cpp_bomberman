@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Jun  1 17:48:36 2015 Alexander Saenen
-// Last update Mon Jun  1 17:56:33 2015 Alexander Saenen
+// Last update Sun Jun 14 17:28:56 2015 Vividy
 //
 
 #ifndef IA_HH_
@@ -45,7 +45,7 @@ private:
       LEFT,
       BOMB,
     };
-  
+
 private:
   GameModule		*_gameModule;
   MapModule		*_mapModule;
@@ -58,7 +58,7 @@ private:
   LuaLoader		*_luaLoader;
   lua_State*		_luaVM;
   void			*_this;
-  
+
 public:
   Action		_ac;
 
@@ -71,13 +71,13 @@ public:
 
 private:
   int		_found(lua_State *ls, const int i, const int j, const int find);
-  int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
+  int		_lookForPlayer(std::list<GameObject::ObjectType> const &types);
   int		_radar(lua_State *ls);
   int		_checkBomb(lua_State *ls);
   int		_checkCase(lua_State *ls);
   int		_command(lua_State *ls);
-  int		_checkRange(int x, int y, std::vector<GameObject *> bombs);
-  
+  int		_checkRange(int const x, int const y, std::vector<GameObject *> const &bombs) const;
+
 public:
   static int	luaCall(lua_State *ls);
 };

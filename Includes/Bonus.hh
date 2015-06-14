@@ -22,7 +22,7 @@ private:
   BonusType	_bt;
   gdl::Texture  *_texture;
   gdl::Geometry *_geometry;
-  
+
 public:
   explicit Bonus(BonusType &bt, const std::string &texturePath);
   ~Bonus();
@@ -30,7 +30,7 @@ public:
   virtual void  update(const gdl::Clock &clock, gdl::Input &input);
 
 private:
-  Player  *_checkPlayer(std::vector<GameObject *> players);
+  Player  *_checkPlayer(std::vector<GameObject *> const players);
 };
 
 #endif

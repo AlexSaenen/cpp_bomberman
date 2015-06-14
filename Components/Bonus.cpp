@@ -31,7 +31,7 @@ Bonus::~Bonus() {
 void	Bonus::update(const gdl::Clock &, gdl::Input &) {
   std::list<GameObject::ObjectType> types;
   Player *player;
-  
+
   types = _gameModule->getObject(_x, _y);
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
       || find(types.begin(), types.end(), GameObject::PLAYER2) != types.end()
@@ -45,13 +45,13 @@ void	Bonus::update(const gdl::Clock &, gdl::Input &) {
   }
 }
 
-Player	*Bonus::_checkPlayer(std::vector<GameObject *> players) {
+Player	*Bonus::_checkPlayer(std::vector<GameObject *> const players) {
   std::list<IComponent *>               gameComponents;
   Player                                *player = NULL;
   double                                vx;
   double                                vy;
   try {
-    for(std::vector<GameObject *>::iterator it = players.begin(); it != players.end(); it++) {
+    for(std::vector<GameObject *>::const_iterator it = players.begin(); it != players.end(); it++) {
       gameComponents = (*it)->getComponents();
       for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
 	if ((player = dynamic_cast<Player *>(*it)) != NULL)
