@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 11:03:04 2015 Alexander Saenen
-// Last update Sun Jun 14 15:45:18 2015 Bozo
+// Last update Sun Jun 14 16:07:29 2015 Bozo
 //
 
 #include "MapGenerator.hh"
@@ -35,7 +35,7 @@ MapGenerator::Coor::Coor(int const _x, int const _y, int const _u)
   this->u = _u;
 }
 
-int	checkPerso(int const x, int const y, std::vector<MapGenerator::Coor> player)
+int	checkPerso(int const x, int const y, std::vector<MapGenerator::Coor> const &player)
 {
   int	z;
 
@@ -49,7 +49,7 @@ int	checkPerso(int const x, int const y, std::vector<MapGenerator::Coor> player)
   return (-1);
 }
 
-std::vector<MapGenerator::Coor> fillPlayer(std::vector<MapGenerator::Coor> player, int const size)
+std::vector<MapGenerator::Coor> fillPlayer(std::vector<MapGenerator::Coor> &player, int const size)
 {
   int	x;
   int	y;
@@ -70,7 +70,7 @@ std::vector<MapGenerator::Coor> fillPlayer(std::vector<MapGenerator::Coor> playe
   return (player);
 }
 
-void	algoPutAll(int const nbPlayers, int size, int se, int const nb, std::vector<MapGenerator::Coor>	player, int nbIa, std::ostream  *is)
+void	algoPutAll(int const nbPlayers, int const size, int const se, int const nb, std::vector<MapGenerator::Coor> &player, int const nbIa, std::ostream *is)
 {
   std::stringstream	string;
   std::string		str;
@@ -92,12 +92,12 @@ void	algoPutAll(int const nbPlayers, int size, int se, int const nb, std::vector
 	  if (player[mem].u == -1)
 	    {
 	      if (x == 0)
-	      	string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
+		string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
 	      else if (x == 1 && nbPlayers == 2)
-	      	string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.034 0.034 0.034 player2\n@";
+		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.034 0.034 0.034 player2\n@";
 	      else
-	      	string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.034 0.034 0.034 ia" << (rand() % 4) + 1 << "\n@";
-	      player[mem].u = 0;
+    string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.034 0.034 0.034 ia" << (rand() % 4) + 1 << "\n@";
+  player[mem].u = 0;
 	    }
 	  else
 	    z++;
