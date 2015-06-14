@@ -79,8 +79,9 @@ int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
       || find(types.begin(), types.end(), GameObject::PLAYER2) != types.end()
       || find(types.begin(), types.end(), GameObject::IA) != types.end())
-    return (1);
-  }
+    {
+      return (1);
+    }
   else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end()) {
     return (2);
   }
