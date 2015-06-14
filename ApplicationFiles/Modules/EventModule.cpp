@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:08:54 2015 Alexander Saenen
-// Last update Wed Jun  3 14:00:59 2015 Alexander Saenen
+// Last update Sun Jun 14 08:56:41 2015 Alexander Saenen
 //
 
 #include "EventModule.hh"
@@ -22,7 +22,7 @@ EventModule::~EventModule() {
     _events.pop();
   }
   for (std::map<std::string, std::priority_queue<Handler *, std::vector<Handler *>, CompareH> >::iterator
-	 it = this->_observers.begin(); it != this->_observers.end(); ++it) {
+  	 it = this->_observers.begin(); it != this->_observers.end(); ++it) {
     std::priority_queue<Handler *, std::vector<Handler *>, CompareH>	handlers = (*it).second;
     while (!handlers.empty()) {
       handler = handlers.top();
@@ -61,9 +61,7 @@ EventModule	*EventModule::abandon(const std::string &what, const int priority) {
     Handler	*handler = handlers.top();
     if (handler->priority() != priority)
       stack.push(handler);
-    else
-      delete handler;
-    handlers.pop();    
+    handlers.pop(); 
   }
   _observers[what] = stack;
   return (this);
@@ -91,8 +89,8 @@ EventModule	*EventModule::handle() {
       std::priority_queue<Handler *, std::vector<Handler *>, CompareH>	handlers = this->_observers[ev->getName()];
       while (!handlers.empty() && ev->propagate() && !_isFlushed) {
 	Handler	*manage = handlers.top();
-	(*manage)(ev);
 	handlers.pop();
+	(*manage)(ev);
       }
       delete ev;
     }

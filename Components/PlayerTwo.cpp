@@ -5,13 +5,14 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Tue Jun  2 17:17:42 2015 Alexander Saenen
+// Last update Sun Jun 14 06:03:11 2015 Alexander Saenen
 //
 
 #include <PlayerTwo.hh>
 
 PlayerTwo::PlayerTwo()
   : Player() {
+  _keyForBomb = SDLK_SPACE;
   _rotationMap.insert(std::pair<int, int>(SDLK_z, 0));
   _rotationMap.insert(std::pair<int, int>(SDLK_s, 180));
   _rotationMap.insert(std::pair<int, int>(SDLK_q, 90));

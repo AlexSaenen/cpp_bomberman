@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Sun Jun 14 04:37:34 2015 Alexander Saenen
+// Last update Sun Jun 14 05:13:03 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -34,7 +34,7 @@ void	IA::_initialize() {
   _gameRoutine = ModulesManager::getInstance()->get<GameRoutine>();
   _model.createSubAnim(0, "Run", 0, 30);
   playSubAnim("Run");
-  _model.pause(true);
+  _model.pause(false);
   _isInitialized = true;
 }
 

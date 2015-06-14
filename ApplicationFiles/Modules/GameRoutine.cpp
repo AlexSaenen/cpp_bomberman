@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Thu Jun 11 18:01:41 2015 Alexander Saenen
-// Last update Sun Jun 14 03:30:41 2015 Alexander Saenen
+// Last update Sun Jun 14 10:20:36 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -72,14 +72,14 @@ void	GameRoutine::pushGObject(GameObject *GObject) {
 
 void	GameRoutine::popGObject(GameObject *GObject) {
   std::vector<GameObject *>	typedObjects = _objects[GObject->getType()];
-  std::vector<GameObject *>::iterator it = typedObjects.begin();
 
-  while (it != typedObjects.end() && (*it) != GObject)
-    ++it;
-  if ((*it) != GObject) {
-    throw LogicException("Can't pop an element that isn't stacked");
+  for (std::vector<GameObject *>::iterator it = typedObjects.begin(); it != typedObjects.end(); ++it) {
+    if ((*it) == GObject) {
+      typedObjects.erase(it);
+      _objects[GObject->getType()] = typedObjects;
+      return ;
+    }
   }
-  typedObjects.erase(it);
 }
 
 gdl::BasicShader	*GameRoutine::getShader() {

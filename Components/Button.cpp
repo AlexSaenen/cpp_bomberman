@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 15:30:42 2015 Vividy
-// Last update Sat Jun 13 23:08:08 2015 Thibaud PEAUGER
+// Last update Sun Jun 14 08:03:20 2015 Alexander Saenen
 //
 
 #include <Button.hh>
@@ -183,7 +183,7 @@ void	Button::_writeSliderValue() const {
 void	Button::draw(gdl::AShader &shader, const gdl::Clock &clock) {
   if (_isSelected) {
     if (!_cursor) {
-      _cursor = new Bomb(0, false);
+      _cursor = new Bomb(0, 0, false);
       _cursor->initialize(0);
       std::stringstream	strm;
       strm << _position.x;
