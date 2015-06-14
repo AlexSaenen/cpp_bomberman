@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sun Jun 14 17:58:23 2015 Vividy
-// Last update Sun Jun 14 21:40:43 2015 Alexander Saenen
+// Last update Sun Jun 14 21:46:13 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -21,6 +21,7 @@ Player::Player()
   _limit[0] = 11;
   _limit[1] = 20;
   _limit[2] = 12;
+  _hasBombed = 0;
 }
 
 Player::~Player() { }

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 20:12:28 2015 Alexander Saenen
-// Last update Sun Jun 14 21:35:09 2015 Alexander Saenen
+// Last update Sun Jun 14 21:48:26 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -29,11 +29,11 @@ bool	GameModule::_isSafe(const double xPlayer, const double yPlayer, const doubl
       Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
       double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
       double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
-      if (xPlayer == xBomb && xBomb == _x && ((_y >= yPlayer && _y <= yBomb)
-					      || (_y <= yPlayer && _y >= yBomb)))
+      if (xPlayer == xBomb && xBomb == _x && ((_y > yPlayer && _y < yBomb)
+					      || (_y < yPlayer && _y > yBomb)))
 	return (true);
-      if (yPlayer == yBomb && yBomb == _y && ((_x >= xPlayer && _x <= xBomb)
-					      || (_x <= xPlayer && _x >= xBomb)))
+      if (yPlayer == yBomb && yBomb == _y && ((_x > xPlayer && _x < xBomb)
+					      || (_x < xPlayer && _x > xBomb)))
 	return (true);
     }
   }
