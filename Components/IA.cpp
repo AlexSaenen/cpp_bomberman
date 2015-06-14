@@ -142,6 +142,7 @@ int	IA::_checkRange(int const x, int const y, std::vector<GameObject *> const &b
       for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
 	if ((bomb = dynamic_cast<Bomb *>(*it)) != NULL)
 	  break;
+      }
 	if (bomb == NULL)
 	  throw LogicException("Bomb hasn't got a shape.");
 	vx = bomb->getPosX();
@@ -150,7 +151,6 @@ int	IA::_checkRange(int const x, int const y, std::vector<GameObject *> const &b
 	vy = vy / 2.5;
 	if (static_cast<int>(vx) == x && static_cast<int>(vy) == y)
 	  return (bomb->getRange());
-      }
     }
   } catch (LogicException e) {
     std::cerr<< e.getMessage() << std::endl;

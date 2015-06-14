@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Sun Jun 14 20:38:30 2015 Alexander Saenen
+// Started on  Sun Jun 14 20:57:30 2015 Alexander Saenen
+// Last update Sun Jun 14 20:57:31 2015 Alexander Saenen
 //
 
 #include <MusicModule.hh>
@@ -67,27 +67,27 @@ bool	MusicModule::checkIn(std::string const& path_file, std::string const& type)
   return (false);
 }
 
-void	MusicModule::addSound(Event *)
+void	MusicModule::addSound(Event *ev)
 {
-  // std::string	path_file;
-  // std::string	type;
+  std::string	path_file;
+  std::string	type;
 
-  // path_file = ev->get<std::string>("FILE");
-  // type = ev->get<std::string>("TYPE");
-  // if (checkIn(path_file, type) == false)
-  //   {
-  //     Sound	*s = new Sound(path_file, type, soundVolume);
-  //     s->initialize();
-  //     if (type == "SOUND")
-  // 	{
-  // 	  s->setVolume(soundVolume);
-  // 	  s->setLoop();
-  // 	}
-  //     else
-  // 	s->setVolume(musicVolume);
-  //     s->playFile();
-  //     if (type == "PAUSE")
-  // 	s->pause();
-  //     listSound.push_back(s);
-  //   }
+  path_file = ev->get<std::string>("FILE");
+  type = ev->get<std::string>("TYPE");
+  if (checkIn(path_file, type) == false)
+    {
+      Sound	*s = new Sound(path_file, type, soundVolume);
+      s->initialize();
+      if (type == "SOUND")
+  	{
+  	  s->setVolume(soundVolume);
+  	  s->setLoop();
+  	}
+      else
+  	s->setVolume(musicVolume);
+      s->playFile();
+      if (type == "PAUSE")
+  	s->pause();
+      listSound.push_back(s);
+    }
 }
