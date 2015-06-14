@@ -67,27 +67,27 @@ bool	MusicModule::checkIn(std::string const& path_file, std::string const& type)
   return (false);
 }
 
-void	MusicModule::addSound(Event *ev)
+void	MusicModule::addSound(Event *)
 {
-  std::string	path_file;
-  std::string	type;
+  // std::string	path_file;
+  // std::string	type;
 
-  path_file = ev->get<std::string>("FILE");
-  type = ev->get<std::string>("TYPE");
-  if (checkIn(path_file, type) == false)
-    {
-      Sound	*s = new Sound(path_file, type, soundVolume);
-      s->initialize();
-      if (type == "SOUND")
-	{
-	  s->setVolume(soundVolume);
-	  s->setLoop();
-	}
-      else
-	s->setVolume(musicVolume);
-      s->playFile();
-      if (type == "PAUSE")
-	s->pause();
-      listSound.push_back(s);
-    }
+  // path_file = ev->get<std::string>("FILE");
+  // type = ev->get<std::string>("TYPE");
+  // if (checkIn(path_file, type) == false)
+  //   {
+  //     Sound	*s = new Sound(path_file, type, soundVolume);
+  //     s->initialize();
+  //     if (type == "SOUND")
+  // 	{
+  // 	  s->setVolume(soundVolume);
+  // 	  s->setLoop();
+  // 	}
+  //     else
+  // 	s->setVolume(musicVolume);
+  //     s->playFile();
+  //     if (type == "PAUSE")
+  // 	s->pause();
+  //     listSound.push_back(s);
+  //   }
 }

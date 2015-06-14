@@ -20,7 +20,7 @@ class		LuaLoader
 public:
   explicit LuaLoader(const std::string &namefile);
   ~LuaLoader();
-  void lunchScript(void *object, int x, int y, int range);
+  void lunchScript(void *object, int x, int y, int range, int size);
 
 };
 

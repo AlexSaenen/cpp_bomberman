@@ -13,9 +13,51 @@ function	sendMove(command)
 	luaCall(object, "command", command)
 end
 
+function	attack_enemy(x, y)
+	print("attack enemy")
+	if my_x < x then
+	   ret = luaCall(object, "checkCase", my_x + 1, my_y)
+	   isSafe(ret, my_x + 1, my_y, RIGHT)
+	elseif my_x > x then
+		ret = luaCall(object, "checkCase", my_x - 1, my_y)
+		isSafe(ret, my_x - 1, my_y, LEFT)
+	elseif my_y < y then
+	       ret = luaCall(object, "checkCase", my_x, my_y + 1)
+	       isSafe(ret, my_x, my_y + 1, UP)
+	elseif my_y > y then
+		ret = luaCall(object, "checkCase", my_x, my_y - 1)
+		isSafe(ret, my_x, my_y - 1, DOWN)
+	end
+end
+
+function	take_bonus(x, y)
+	print("take bonus")
+	if my_x < x then
+	   ret = luaCall(object, "checkCase", my_x + 1, my_y)
+	   isSafe(ret, my_x + 1, my_y, RIGHT)
+	elseif my_x > x then
+		ret = luaCall(object, "checkCase", my_x - 1, my_y)
+		isSafe(ret, my_x - 1, my_y, LEFT)
+	elseif my_y < y then
+	       ret = luaCall(object, "checkCase", my_x, my_y + 1)
+	       isSafe(ret, my_x, my_y + 1, UP)
+	elseif my_y > y then
+		ret = luaCall(object, "checkCase", my_x, my_y - 1)
+		isSafe(ret, my_x, my_y - 1, DOWN)
+	end
+end
+
 -- search element
 function	search_nearest_element()
 	print("search_nearest_element")
+	x, y, elem = luaCall(object, "radar")
+	if elem == 0 then
+	   luaCall(object, "command", UP)
+	elseif elem == 1 then
+		attack_enemy(x, y)
+	elseif elem == 2 then
+	       take_bonus(x, y)
+	end
 end
 
 -- check if new position is safe or not

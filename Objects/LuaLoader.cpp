@@ -21,14 +21,15 @@ LuaLoader::~LuaLoader() {
   lua_close(_luaVM);
 }
 
-void	LuaLoader::lunchScript(void *object, int x, int y, int range) {
+void	LuaLoader::lunchScript(void *object, int x, int y, int range, int size) {
   // std::cout << object << " " << x << " "<< y << " " << range << std::endl;
   lua_getglobal(_luaVM, "run");
   lua_pushlightuserdata(_luaVM, object);
   lua_pushinteger(_luaVM, x);
   lua_pushinteger(_luaVM, y);
   lua_pushinteger(_luaVM, range);
-  if (lua_pcall(_luaVM, 4, 0, 0) != 0) {
+  lua_pushinteger(_luaVM, size);
+  if (lua_pcall(_luaVM, 5, 0, 0) != 0) {
     throw RuntimeException("Wrong call of lua function");
   }
 }
