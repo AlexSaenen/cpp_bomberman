@@ -17,6 +17,7 @@
 # include <GameObject.hh>
 # include <algorithm>
 # include <LuaLoader.hh>
+# include <Bomb.hh>
 
 class	IA : public Player
 {
@@ -48,12 +49,12 @@ private:
 private:
   GameModule		*_gameModule;
   MapModule		*_mapModule;
+  GameRoutine		*_gameRoutine;
   //  Coor			_me;
   std::list<Coor>	_map;
   std::list<Coor>	_players;
   std::list<Coor>	_bombs;
   std::list<Coor>	_bonus;
-  int			_toto;
   LuaLoader		*_luaLoader;
   lua_State*		_luaVM;
   void			*_this;
@@ -75,7 +76,8 @@ private:
   int		_checkBomb(lua_State *ls);
   int		_checkCase(lua_State *ls);
   int		_command(lua_State *ls);
-
+  int		_checkRange(int x, int y, std::vector<GameObject *> bombs);
+  
 public:
   static int	luaCall(lua_State *ls);
 };
