@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 11:03:04 2015 Alexander Saenen
-// Last update Sun Jun 14 13:12:07 2015 Alexander Saenen
+// Last update Sun Jun 14 15:45:18 2015 Bozo
 //
 
 #include "MapGenerator.hh"
@@ -35,7 +35,7 @@ MapGenerator::Coor::Coor(int const _x, int const _y, int const _u)
   this->u = _u;
 }
 
-int	checkPerso(int x, int y, std::vector<MapGenerator::Coor> player)
+int	checkPerso(int const x, int const y, std::vector<MapGenerator::Coor> player)
 {
   int	z;
 
@@ -49,19 +49,11 @@ int	checkPerso(int x, int y, std::vector<MapGenerator::Coor> player)
   return (-1);
 }
 
-int			MapGenerator::generate()
+std::vector<MapGenerator::Coor> fillPlayer(std::vector<MapGenerator::Coor> player, int const size)
 {
-  int			x;
-  int			y;
-  int			z;
-  std::stringstream	string;
-  std::string		str;
-  std::vector<MapGenerator::Coor>	player;
-  int			nb;
-  int			se;
-  int			mem;
+  int	x;
+  int	y;
 
-  y = 0;
   for (x = 0; x < size; x++) {
     if (x % 2 != 1) {
       if (x % 4 == 0) {
@@ -75,14 +67,19 @@ int			MapGenerator::generate()
       }
     }
   }
-  se = player.size();
-  nb = nbPlayers + nbIa;
-  if (se < nb)
-    {
-      nb = se;
-      nbIa = nb - nbPlayers;
-    }
-  string << this->size << " " << nbIa << "\n@";
+  return (player);
+}
+
+void	algoPutAll(int const nbPlayers, int size, int se, int const nb, std::vector<MapGenerator::Coor>	player, int nbIa, std::ostream  *is)
+{
+  std::stringstream	string;
+  std::string		str;
+  int			x = 0;
+  int			y = 0;
+  int			z = 0;
+  int			mem;
+
+  string << size << " " << nbIa << "\n@";
   for (x = 0; x < nb; x++)
     {
       y = 0;
@@ -95,11 +92,11 @@ int			MapGenerator::generate()
 	  if (player[mem].u == -1)
 	    {
 	      if (x == 0)
-		string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
+	      	string << "\nfirstralouf 3\n$PlayerOne%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
 	      else if (x == 1 && nbPlayers == 2)
-		string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.034 0.034 0.034 player2\n@";
+	      	string << "\nfirstralouf 4\n$PlayerTwo%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 4 0 0 0 0.034 0.034 0.034 player2\n@";
 	      else
-		string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.034 0.034 0.034 ia" << (rand() % 4) + 1 << "\n@";
+	      	string << "\nrandomralouf 5\n$IA%" << player[mem].x * 2.5 << " " << player[mem].y * 2.5 << " 5 0 0 0 0.034 0.034 0.034 ia" << (rand() % 4) + 1 << "\n@";
 	      player[mem].u = 0;
 	    }
 	  else
@@ -119,9 +116,9 @@ int			MapGenerator::generate()
     }
   for (x = 0; x < (int)player.size(); x++)
     if (player[x].u != -1)
-      player[x].u += ((player[x].x == 0 || player[x].x + 1 == this->size) ? 1 : 0) + ((player[x].y == 0 || player[x].y + 1 == this->size) ? 2 : 0);
-  for (x = 0; x < this->size; x++)
-    for (y = 0; y < this->size; y++)
+      player[x].u += ((player[x].x == 0 || player[x].x + 1 == size) ? 1 : 0) + ((player[x].y == 0 || player[x].y + 1 == size) ? 2 : 0);
+  for (x = 0; x < size; x++)
+    for (y = 0; y < size; y++)
       if ((x % 2 != 1 || y % 2 != 1) && rand() % 100 < 65)
 	{
 	  z = checkPerso(x, y, player);
@@ -144,6 +141,23 @@ int			MapGenerator::generate()
       else if (x % 2 == 1 && y % 2 == 1)
 	string << "\nWall 0\n$Cube%" << x * 2.5 << " " << y * 2.5 << " 0\n@";
   str = string.str();
-  this->is->write(str.c_str(), str.size());
+  is->write(str.c_str(), str.size());
+}
+
+int			MapGenerator::generate()
+{
+  std::vector<MapGenerator::Coor>	player;
+  int			nb = 0;
+  int			se = 0;
+
+  player = fillPlayer(player, size);
+  se = player.size();
+  nb = nbPlayers + nbIa;
+  if (se < nb)
+    {
+      nb = se;
+      nbIa = nb - nbPlayers;
+    }
+  algoPutAll(nbPlayers, size, se, nb, player, nbIa, is);
   return (0);
 }
