@@ -5,20 +5,16 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sun Jun 14 05:43:48 2015 Vividy
-// Last update Sun Jun 14 17:05:24 2015 Alexander Saenen
+// Last update Sun Jun 14 20:54:28 2015 Alexander Saenen
 //
 
 #include "GameOver.hh"
 
-GameOver::GameOver() {
-  this->ev = new Event("Bomberman.quit", 1002);
+GameOver::GameOver() : isPlayerOne(true), isPlayerTwo(true), isIa(true) {
   this->gr = ModulesManager::getInstance()->get<GameRoutine>();
-  std::cout << "Handle victory" << std::endl;
 }
 
-GameOver::~GameOver() {
-  std::cout << "endvictory" << std::endl;
-}
+GameOver::~GameOver() { }
 
 void	GameOver::execute(Event *) {
   std::vector<GameObject *>     Mem;
@@ -35,7 +31,7 @@ void	GameOver::execute(Event *) {
 	std::cout << "ia won!!" << std::endl;
       else
 	std::cout << "Player " << ((isPlayerOne) ? "One" : "Two") << " is the Winner!!" << std::endl;
+      Event *ev = new Event("Bomberman.quit", 1002);
       ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
     }
-  std::cout << "executevictory" << std::endl;
 }

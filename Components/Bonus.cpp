@@ -15,14 +15,7 @@ Bonus::Bonus(BonusType &bt) : _bt(bt) {
   _textureMap[BOMB] = "bonus0";
 }
 
-Bonus::~Bonus() {
-  Event *ev = new Event("Music.play");
-  std::string name("GraphicsLib/assets/GameSounds/bonus2.mp3");
-  std::string type("SOUND");
-  ev->set<std::string>(std::string("FILE"), name);
-  ev->set<std::string>(std::string("TYPE"), type);
-  ModulesManager::getInstance()->get<EventModule>()->trigger(ev)->handle();
-}
+Bonus::~Bonus() { }
 
 void	Bonus::initialize(Event *) {
   _speed = 10.0f;
