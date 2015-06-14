@@ -42,11 +42,6 @@ private:
   GameModule		*_gameModule;
   MapModule		*_mapModule;
   GameRoutine		*_gameRoutine;
-  //  Coor			_me;
-  //  std::list<Coor>	_map;
-  //std::list<Coor>	_players;
-  //std::list<Coor>	_bombs;
-  //std::list<Coor>	_bonus;
   LuaLoader		*_luaLoader;
   lua_State*		_luaVM;
   void			*_this;
