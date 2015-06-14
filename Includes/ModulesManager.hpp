@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May  5 13:08:10 2015 Alexander Saenen
-// Last update Fri Jun  5 15:50:32 2015 Alexander Saenen
+// Last update Sun Jun 14 17:38:12 2015 Vividy
 //
 
 #ifndef MODULESMANAGER_HPP_
@@ -26,7 +26,7 @@ class ModulesManager
   std::map<std::string, AModule *>	_instances;
   static bool				_isInstantiated;
 
-public:  
+public:
   ModulesManager();
   ~ModulesManager();
 

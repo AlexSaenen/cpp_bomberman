@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Apr 27 14:54:27 2015 Alexander Saenen
-// Last update Sat Jun 13 21:38:54 2015 Alexander Saenen
+// Last update Sun Jun 14 17:43:56 2015 Vividy
 //
 
 #ifndef OBJMODEL_HH_
@@ -40,9 +40,9 @@ public:
   void	initialize(Event *);
   virtual void	update(const gdl::Clock &clock, gdl::Input &input) = 0;
   void	draw(gdl::AShader &shader, const gdl::Clock &clock);
-  void	playAnimation(const std::string &animation, bool loop = true);
-  void	playAnimation(int stack, bool loop = true);
-  void	playSubAnim(const std::string &subAnimation, bool loop = true);
+  void	playAnimation(const std::string &animation, bool const loop = true);
+  void	playAnimation(int const stack, bool const loop = true);
+  void	playSubAnim(const std::string &subAnimation, bool const loop = true);
   void	configure(const std::string &model, const GameObject::ObjectType type);
   void	configure(const std::string &conf);
   std::string	getModelName() const;

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed Jun  3 11:42:53 2015 Alexander Saenen
-// Last update Fri Jun 12 14:41:00 2015 Thibaud PEAUGER
+// Last update Sun Jun 14 17:39:28 2015 Vividy
 //
 
 #ifndef MUSICMODULE_HH_
@@ -36,7 +36,7 @@ public:
   double	getSoundVolume() const;
   void		setSoundVolume(double const);
 
-  bool		checkIn(std::string const& path, std::string const& type);
+  bool		checkIn(std::string const& path, std::string const& type) const;
   void		addSound(Event *);
   void		removeSound(std::string const& path);
   void		clearList();

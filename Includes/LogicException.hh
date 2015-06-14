@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 12:33:52 2015 Alexander Saenen
-// Last update Tue May 19 12:34:37 2015 Alexander Saenen
+// Last update Sun Jun 14 17:31:05 2015 Vividy
 //
 
 #ifndef LOGICEXCEPTION_HH_
@@ -21,7 +21,7 @@ public:
   LogicException(std::string const &message);
   LogicException(const LogicException &other);
   LogicException &operator=(const LogicException &other);
-  
+
   virtual std::string const &getMessage() const;
 private:
   std::string	_message;

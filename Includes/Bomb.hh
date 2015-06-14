@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Mon Jun  8 11:25:28 2015 Alexander Saenen
+// Last update Sun Jun 14 16:50:51 2015 Vividy
 //
 
 #ifndef BOMB_HH_
@@ -19,7 +19,7 @@ class	Bomb : public ObjModel
   int		_range;
   bool		_hasExplosion;
   bool		_hasExploded;
-  
+
 public:
   Bomb(const double timeBeforeIgnition, const int range, const bool hasExplosion = true);
   ~Bomb();

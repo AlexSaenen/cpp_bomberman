@@ -24,7 +24,7 @@ private:
   gdl::Texture  *_texture;
   gdl::Geometry *_geometry;
   double	 _speed;
-  
+
 public:
   explicit Bonus(BonusType &bt);
   ~Bonus();
@@ -34,7 +34,7 @@ public:
   virtual void	configure(const std::string &);
   void	draw(gdl::AShader &shader, const gdl::Clock &);
 private:
-  Player  *_checkPlayer(std::vector<GameObject *> players);
+  Player  *_checkPlayer(std::vector<GameObject *> const players);
 };
 
 #endif

@@ -1,11 +1,11 @@
 //
-// GameModule.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// GameModule.cpp for  in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 20:05:04 2015 Alexander Saenen
+// Started on  Sun Jun 14 20:12:28 2015 Alexander Saenen
+// Last update Sun Jun 14 20:12:28 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -208,7 +208,7 @@ bool			GameModule::tryGetObject(const int x, const int y, std::list<GameObject::
 void					GameModule::pushOnMap(GameObject *object) {
   Shape                                 *shape = NULL;
   std::list<IComponent *>               gameComponents;
-  
+
   try {
     try {
     gameComponents = object->getComponents();

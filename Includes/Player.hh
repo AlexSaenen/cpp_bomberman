@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Sun Jun 14 11:07:38 2015 Alexander Saenen
+// Last update Sun Jun 14 17:49:37 2015 Vividy
 //
 
 #ifndef PLAYER_HH_
@@ -49,9 +49,9 @@ public:
 
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);
 
-  void  playAnimation(const std::string &animation, bool loop = true);
-  void  playAnimation(int stack, bool loop = true);
-  void  playSubAnim(const std::string &subAnimation, bool loop = true);
+  void  playAnimation(const std::string &animation, bool const loop = true);
+  void  playAnimation(int const stack, bool const loop = true);
+  void  playSubAnim(const std::string &subAnimation, bool const loop = true);
 
   int	getLevel(const int);
   void	incrLevel(const int);

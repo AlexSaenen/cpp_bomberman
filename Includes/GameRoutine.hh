@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sun Jun 14 01:29:24 2015 Vividy
-// Last update Sun Jun 14 01:29:26 2015 Vividy
+// Last update Sun Jun 14 17:21:43 2015 Vividy
 //
 
 #ifndef GAMEROUTINE_HH_

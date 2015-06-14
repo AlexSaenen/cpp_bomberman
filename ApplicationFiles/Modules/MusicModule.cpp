@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 10:46:57 2015 Alexander Saenen
-// Last update Sun Jun 14 13:33:58 2015 Bozo
+// Last update Sun Jun 14 17:40:09 2015 Vividy
 //
 
 #include <MusicModule.hh>
@@ -44,8 +44,8 @@ void	MusicModule::setSoundVolume(double const _volume) {
     soundVolume = _volume;
 }
 
-bool	MusicModule::checkIn(std::string const& path_file, std::string const& type) {
-  for (std::list<Sound *>::iterator it = listSound.begin(); it != listSound.end(); ++it)
+bool	MusicModule::checkIn(std::string const& path_file, std::string const& type) const {
+  for (std::list<Sound *>::const_iterator it = listSound.begin(); it != listSound.end(); ++it)
     if ((*it)->getPath() == path_file)
       {
 	if (type == "PAUSE")

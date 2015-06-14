@@ -1,0 +1,179 @@
+9 0
+@
+firstralouf 3
+$PlayerOne%10 0 3 0 0 0 0.034 0.034 0.034 player1
+@
+firstralouf 4
+$PlayerTwo%15 15 4 0 0 0 0.034 0.034 0.034 player2
+@
+Wall 1
+$Cube%0 0 0
+@
+Wall 1
+$Cube%0 2.5 0
+@
+Wall 1
+$Cube%0 7.5 0
+@
+Wall 1
+$Cube%2.5 0 0
+@
+Wall 0
+$Cube%2.5 2.5 0
+@
+Wall 1
+$Cube%2.5 5 0
+@
+Wall 0
+$Cube%2.5 7.5 0
+@
+Wall 1
+$Cube%2.5 10 0
+@
+Wall 0
+$Cube%2.5 12.5 0
+@
+Wall 1
+$Cube%2.5 15 0
+@
+Wall 0
+$Cube%2.5 17.5 0
+@
+Wall 1
+$Cube%2.5 20 0
+@
+Wall 1
+$Cube%5 5 0
+@
+Wall 1
+$Cube%5 7.5 0
+@
+Wall 1
+$Cube%5 10 0
+@
+Wall 1
+$Cube%5 15 0
+@
+Wall 1
+$Cube%5 17.5 0
+@
+Wall 1
+$Cube%5 20 0
+@
+Wall 1
+$Cube%7.5 0 0
+@
+Wall 0
+$Cube%7.5 2.5 0
+@
+Wall 1
+$Cube%7.5 5 0
+@
+Wall 0
+$Cube%7.5 7.5 0
+@
+Wall 0
+$Cube%7.5 12.5 0
+@
+Wall 1
+$Cube%7.5 15 0
+@
+Wall 0
+$Cube%7.5 17.5 0
+@
+Wall 1
+$Cube%7.5 20 0
+@
+Wall 1
+$Cube%10 7.5 0
+@
+Wall 1
+$Cube%10 12.5 0
+@
+Wall 1
+$Cube%10 15 0
+@
+Wall 1
+$Cube%10 17.5 0
+@
+Wall 1
+$Cube%10 20 0
+@
+Wall 0
+$Cube%12.5 2.5 0
+@
+Wall 1
+$Cube%12.5 5 0
+@
+Wall 0
+$Cube%12.5 7.5 0
+@
+Wall 1
+$Cube%12.5 10 0
+@
+Wall 0
+$Cube%12.5 12.5 0
+@
+Wall 1
+$Cube%12.5 15 0
+@
+Wall 0
+$Cube%12.5 17.5 0
+@
+Wall 1
+$Cube%15 0 0
+@
+Wall 1
+$Cube%15 2.5 0
+@
+Wall 1
+$Cube%15 5 0
+@
+Wall 1
+$Cube%15 7.5 0
+@
+Wall 1
+$Cube%15 10 0
+@
+Wall 1
+$Cube%15 12.5 0
+@
+Wall 1
+$Cube%15 20 0
+@
+Wall 1
+$Cube%17.5 0 0
+@
+Wall 0
+$Cube%17.5 2.5 0
+@
+Wall 1
+$Cube%17.5 5 0
+@
+Wall 0
+$Cube%17.5 7.5 0
+@
+Wall 0
+$Cube%17.5 12.5 0
+@
+Wall 0
+$Cube%17.5 17.5 0
+@
+Wall 1
+$Cube%17.5 20 0
+@
+Wall 1
+$Cube%20 0 0
+@
+Wall 1
+$Cube%20 2.5 0
+@
+Wall 1
+$Cube%20 12.5 0
+@
+Wall 1
+$Cube%20 17.5 0
+@
+Wall 1
+$Cube%20 20 0
+@

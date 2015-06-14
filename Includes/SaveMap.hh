@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:05:28 2015 Vividy
-// Last update Sun Jun 14 13:59:11 2015 Vividy
+// Last update Sun Jun 14 16:44:33 2015 Vividy
 //
 
 #ifndef SAVEMAP_HH_
@@ -34,15 +34,10 @@ private:
   GameRoutine			*gr;
   MapModule			*mm;
   std::vector<GameObject *>	playerOne;
-  //bool				isPlayerOne;
   std::vector<GameObject *>	playerTwo;
-  //bool				isPlayerTwo;
   std::vector<GameObject *>	ia;
-  //bool				isIa;
   std::vector<GameObject *>	cube;
-  //bool				isCube;
   std::vector<GameObject *>	cubeDestr;
-  bool				isCubeDestr;
 public:
   SaveMap();
   ~SaveMap();

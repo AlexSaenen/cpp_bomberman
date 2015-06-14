@@ -1,11 +1,11 @@
 //
-// GameModule.hh for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// GameModule.hh for  in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 17:01:19 2015 Alexander Saenen
+// Started on  Sun Jun 14 20:13:10 2015 Alexander Saenen
+// Last update Sun Jun 14 20:13:11 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
@@ -35,7 +35,7 @@ public:
   void  pushOnMap(const double x, const double y, const GameObject::ObjectType type);
   void	popOnMap(GameObject *object);
   void  popOnMap(const double x, const double y, const GameObject::ObjectType type);
-  
+
 private:
   void	_onCleanup(Event *);
   void	_handleExplosion(Event *ev);

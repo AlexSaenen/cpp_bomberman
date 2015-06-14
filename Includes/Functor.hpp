@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:53:48 2015 Alexander Saenen
-// Last update Wed May  6 22:34:18 2015 Alexander Saenen
+// Last update Sun Jun 14 17:07:48 2015 Vividy
 //
 
 #ifndef FUNCTOR_HPP_
@@ -21,7 +21,7 @@ class Functor : public IFunctor
   handler _handle;
 
 public:
-  Functor(ME *instance, handler what): _instance(instance), _handle(what) { }
+  Functor(ME *instance, handler const &what): _instance(instance), _handle(what) { }
   ~Functor() { }
 
   void operator()(Event *e) {
@@ -29,4 +29,4 @@ public:
   }
 };
 
-#endif /* Functor.hpp */ 
+#endif /* Functor.hpp */

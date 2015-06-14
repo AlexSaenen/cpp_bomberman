@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon May  4 18:53:48 2015 Alexander Saenen
-// Last update Tue May 12 18:07:45 2015 Alexander Saenen
+// Last update Sun Jun 14 17:02:36 2015 Vividy
 //
 
 #ifndef CONSTRUCTOR_HPP_
@@ -25,4 +25,4 @@ public:
   }
 };
 
-#endif /* Constructor.hpp */ 
+#endif /* Constructor.hpp */

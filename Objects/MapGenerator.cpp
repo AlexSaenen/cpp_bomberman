@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 11:03:04 2015 Alexander Saenen
-// Last update Sun Jun 14 16:07:29 2015 Bozo
+// Last update Sun Jun 14 17:55:18 2015 Vividy
 //
 
 #include "MapGenerator.hh"
@@ -39,7 +39,7 @@ int	checkPerso(int const x, int const y, std::vector<MapGenerator::Coor> const &
 {
   int	z;
 
-  for (z = 0; z < (int)player.size(); z++)
+  for (z = 0; z < static_cast<int>(player.size()); z++)
     if ((player[z].x == x && player[z].y == y) ||
 	(player[z].x == x - 1 && player[z].y == y) ||
 	(player[z].x == x + 1 && player[z].y == y) ||
@@ -104,7 +104,7 @@ void	algoPutAll(int const nbPlayers, int const size, int const se, int const nb,
 	}
       if (y == z)
 	{
-	  for (y = 0; player[y].u != -1 && (int)y < (int)player.size(); y++);
+	  for (y = 0; player[y].u != -1 && y < static_cast<int>(player.size()); y++);
 	  if (x == 0)
 	    string << "\nfirstralouf 3\n$PlayerOne%" << player[y].x * 2.5 << " " << player[y].y * 2.5 << " 3 0 0 0 0.034 0.034 0.034 player1\n@";
 	  else if (x == 1 && nbPlayers == 2)
@@ -114,7 +114,7 @@ void	algoPutAll(int const nbPlayers, int const size, int const se, int const nb,
 	  player[y].u = 0;
 	}
     }
-  for (x = 0; x < (int)player.size(); x++)
+  for (x = 0; x < static_cast<int>(player.size()); x++)
     if (player[x].u != -1)
       player[x].u += ((player[x].x == 0 || player[x].x + 1 == size) ? 1 : 0) + ((player[x].y == 0 || player[x].y + 1 == size) ? 2 : 0);
   for (x = 0; x < size; x++)

@@ -1,11 +1,11 @@
 //
-// Player.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
-// 
-// Made by Alexander Saenen
-// Login   <saenen_a@epitech.net>
-// 
-// Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sun Jun 14 16:41:57 2015 Alexander Saenen
+// Player.cpp for  in /home/vividy/rendu/cpp_bomberman
+//
+// Made by Vividy
+// Login   <vividy@epitech.net>
+//
+// Started on  Sun Jun 14 17:58:23 2015 Vividy
+// Last update Sun Jun 14 17:58:23 2015 Vividy
 //
 
 #include "Player.hh"
@@ -104,7 +104,7 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
   }
 }
 
-void    Player::playAnimation(const std::string &animation, bool loop) {
+void    Player::playAnimation(const std::string &animation, bool const loop) {
   if (!_isLoaded) {
     throw LogicException("Can't set an Animation when the model hasn't been loaded yet");
   }
@@ -113,7 +113,7 @@ void    Player::playAnimation(const std::string &animation, bool loop) {
   }
 }
  
-void    Player::playAnimation(int stack, bool loop) {
+void    Player::playAnimation(int const stack, bool const loop) {
   if (!_isLoaded) {
     throw LogicException("Can't set an Animation when the model hasn't been loaded yet");
   }
@@ -122,7 +122,7 @@ void    Player::playAnimation(int stack, bool loop) {
   }
 }
  
-void    Player::playSubAnim(const std::string &subAnimation, bool loop) {
+void    Player::playSubAnim(const std::string &subAnimation, bool const loop) {
   if (!_isLoaded) {
     throw LogicException("Can't set a subAnimation when the model hasn't been loaded yet");
   }

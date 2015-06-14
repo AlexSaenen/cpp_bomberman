@@ -1,11 +1,11 @@
 //
-// IA.cpp for bomberman in /home/saenen_a/Work/Rendu/cpp_bomberman
+// IA.cpp for  in /home/saenen_a/Work/Rendu/cpp_bomberman
 // 
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Sun Jun 14 16:49:55 2015 Alexander Saenen
-// Last update Sun Jun 14 17:19:02 2015 Alexander Saenen
+// Started on  Sun Jun 14 20:13:00 2015 Alexander Saenen
+// Last update Sun Jun 14 20:13:00 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -73,7 +73,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
   }
 }
 
-int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
+int	IA::_lookForPlayer(std::list<GameObject::ObjectType> const &types) {
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
       || find(types.begin(), types.end(), GameObject::PLAYER2) != types.end()
       || find(types.begin(), types.end(), GameObject::IA) != types.end())
@@ -130,14 +130,14 @@ int	IA::_radar(lua_State *ls) {
   return (_found(ls, i, j ,0));
 }
 
-int	IA::_checkRange(int x, int y, std::vector<GameObject *> bombs) {
+int	IA::_checkRange(int const x, int const y, std::vector<GameObject *> const &bombs) const{
   Bomb                                 *bomb = NULL;
   std::list<IComponent *>               gameComponents;
   double				vx;
   double				vy;
-  
+
   try {
-    for(std::vector<GameObject *>::iterator it = bombs.begin(); it != bombs.end(); it++) {
+    for(std::vector<GameObject *>::const_iterator it = bombs.begin(); it != bombs.end(); it++) {
       gameComponents = (*it)->getComponents();
       for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
 	if ((bomb = dynamic_cast<Bomb *>(*it)) != NULL)
@@ -148,7 +148,7 @@ int	IA::_checkRange(int x, int y, std::vector<GameObject *> bombs) {
 	vy = bomb->getPosY();
 	vx = vx / 2.5;
 	vy = vy / 2.5;
-	if ((int)vx == x && (int)vy == y)
+	if (static_cast<int>(vx) == x && static_cast<int>(vy) == y)
 	  return (bomb->getRange());
       }
     }
@@ -162,7 +162,7 @@ int	IA::_checkRange(int x, int y, std::vector<GameObject *> bombs) {
   return (0);
 }
 
-int					IA::_checkBomb(lua_State *ls) {
+int					IA::_checkBomb(lua_State *ls){
   int					range;
   int					x;
   int					y;
@@ -195,7 +195,7 @@ int					IA::_checkCase(lua_State *ls) {
   std::list<GameObject::ObjectType>	objects;
   int					x;
   int					y;
-  
+
   x = lua_tointeger(ls, 3);
   y = lua_tointeger(ls, 4);
   objects = _gameModule->getObject(x, y);

@@ -59,6 +59,7 @@ void	Bonus::update(const gdl::Clock &, gdl::Input &) {
   std::list<GameObject::ObjectType> types;
   Player *player;
 
+  types = _gameModule->getObject(_x, _y);
   if (!_gameModule->tryGetObject(_x, _y, types))
     return ;
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
@@ -96,14 +97,14 @@ void	Bonus::draw(gdl::AShader &shader, const gdl::Clock &) {
   _geometry->draw(shader, getTransformation(), GL_QUADS);
 }
 
-Player	*Bonus::_checkPlayer(std::vector<GameObject *> players) {
+Player	*Bonus::_checkPlayer(std::vector<GameObject *> const players) {
   std::list<IComponent *>               gameComponents;
   Player                                *player = NULL;
   int                                vx;
   int                                vy;
 
   try {
-    for(std::vector<GameObject *>::iterator it = players.begin(); it != players.end(); it++) {
+    for(std::vector<GameObject *>::const_iterator it = players.begin(); it != players.end(); it++) {
       gameComponents = (*it)->getComponents();
       for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
 	if ((player = dynamic_cast<Player *>(*it)) != NULL)
