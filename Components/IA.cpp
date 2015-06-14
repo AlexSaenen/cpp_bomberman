@@ -20,11 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-<<<<<<< HEAD
   _luaLoader = new LuaLoader("script.lua");
-=======
-  _luaLoader = new LuaLoader("");
->>>>>>> c9cd0e083e3a2875ef778e0eecc05e61e59fdfad
   _this = static_cast<void *>(this);
 }
 
