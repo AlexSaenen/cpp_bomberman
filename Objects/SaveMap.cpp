@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:03:46 2015 Vividy
-// Last update Sun Jun 14 01:52:09 2015 Vividy
+// Last update Sun Jun 14 02:10:51 2015 Vividy
 //
 
 #include "SaveMap.hh"
@@ -28,6 +28,10 @@ SaveMap::~SaveMap()
 
 void	SaveMap::execute()
 {
+  std::list<IComponent *> comp;
+
+  // std::cout << playerOne.back()->getType() << " " << playerOne.back()->getType() << std::endl;
+  comp = playerOne.back()->getComponents();
   std::cout << "je fonctionne" << std::endl;
 }
 

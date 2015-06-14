@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Tue Jun  2 17:53:06 2015 Alexander Saenen
+// Last update Sun Jun 14 02:09:48 2015 Vividy
 //
 
 #include <IA.hh>
@@ -59,13 +59,13 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     // 	_model.pause(false);
     // 	_isMoving = true;
     //     }
-+    //     _lastMovement = (*it).first;
+    //     _lastMovement = (*it).first;
     //   }
     // if (!_lastMovement) {
     //   _isMoving = false;
     //   _model.pause(true);
     // }
-    _gameModule->pushOnMap(_position.x, _position.y, _type);
+    // _gameModule->pushOnMap(_position.x, _position.y, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
