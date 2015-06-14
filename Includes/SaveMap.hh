@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:05:28 2015 Vividy
-// Last update Sun Jun 14 01:47:48 2015 Vividy
+// Last update Sun Jun 14 03:05:23 2015 Vividy
 //
 
 #ifndef SAVEMAP_HH_
@@ -15,12 +15,17 @@
 #include "ModulesManager.hpp"
 #include "MapModule.hh"
 #include "GameRoutine.hh"
+#include "GameObject.hh"
+#include "ObjModel.hh"
 
 class	GameRoutine;
 
 class	SaveMap
 {
 private:
+  std::ostream  *is;
+  std::filebuf  *file;
+  std::map<std::string, std::string>	_modelType;
   GameRoutine			*gr;
   std::vector<GameObject *>	playerOne;
   bool				isPlayerOne;

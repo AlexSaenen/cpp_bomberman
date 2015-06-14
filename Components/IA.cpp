@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Sun Jun 14 02:09:48 2015 Vividy
+// Last update Sun Jun 14 02:15:58 2015 Vividy
 //
 
 #include <IA.hh>
@@ -45,7 +45,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _gameModule->popOnMap(_position.x, _position.y, _type);
 
     //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, 1, 1, 1);//_inventory[Player::RANGE]);
+      _luaLoader->lunchScript(_this, 1, 1, 1);//_inventory[Player::RANGE]);
     // _lastMovement = 0;
     // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
     //      it != _rotationMap.end() && !hasTranslated; ++it)
@@ -65,7 +65,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     //   _isMoving = false;
     //   _model.pause(true);
     // }
-    // _gameModule->pushOnMap(_position.x, _position.y, _type);
+  _gameModule->pushOnMap(_position.x, _position.y, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -77,11 +77,19 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
 int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end())
     return (1);
-  // else if (find(types.begin(), types.end(), GameObject::)
+  else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end())
+    return (2);
   return (0);
 }
 
-int	IA::_radar(lua_State *) {
+int	IA::_found(lua_State *ls, const int i, const int j, const int find) {
+  lua_pushinteger(ls, i);
+  lua_pushinteger(ls, j);
+  lua_pushinteger(ls, find);
+  return (3);
+}
+
+int	IA::_radar(lua_State *ls) {
   int	i;
   int	j;
   int	incr;
@@ -94,20 +102,22 @@ int	IA::_radar(lua_State *) {
     if (incr % 2 == 1) {
       for(int a = 0; a < incr; a++) {
 	i++;
-	find = _lookForPlayer(_gameModule->getObject(i, j));
+	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
+	  return (_found(ls, i, j , find));
       }
       for(int a = 0; a < incr; a++) {
 	j--;
-	find = _lookForPlayer(_gameModule->getObject(i, j));
-      }
+	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
+	  return (_found(ls, i, j , find));}
     } else {
       for(int a = 0; a < incr; a++) {
 	i--;
-	find = _lookForPlayer(_gameModule->getObject(i, j));
-      }
+	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
+	  return (_found(ls, i, j , find));      }
       for(int a = 0; a < incr; a++) {
 	j++;
-	find = _lookForPlayer(_gameModule->getObject(i, j));
+	if ((find = _lookForPlayer(_gameModule->getObject(i, j))) != 0)
+	  return (_found(ls, i, j , find));
       }
     }
     incr++;
@@ -116,6 +126,7 @@ int	IA::_radar(lua_State *) {
 }
 
 int          IA::_checkBomb(lua_State *) {
+  
   return (3);
 }
 

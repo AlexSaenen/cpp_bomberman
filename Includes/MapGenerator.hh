@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Wed Jun 10 16:32:58 2015 Vividy
-// Last update Sat Jun 13 14:00:45 2015 Vividy
+// Last update Sun Jun 14 03:05:28 2015 Vividy
 //
 
 #ifndef MAPGENERATOR
