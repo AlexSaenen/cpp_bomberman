@@ -54,6 +54,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(CMPDIR)PlayerTwo.cpp \
 		  $(CMPDIR)Bomb.cpp \
 		  $(CMPDIR)IA.cpp \
+		  $(CMPDIR)Bonus.cpp \
 		  $(SRCDIR)Event.cpp \
 		  $(SRCDIR)MapGenerator.cpp \
 		  $(SRCDIR)MenuSpawner.cpp \

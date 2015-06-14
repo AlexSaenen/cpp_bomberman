@@ -14,12 +14,12 @@
 Player::Player()
   : ObjModel(), _isMoving(false), _animLocked(0), _lastMovement(0), _isInitialized(false) {
   _gameModule = ModulesManager::getInstance()->get<GameModule>();
-  _inventory[BOMB] = 1;
-  _inventory[SPEED] = 10;
-  _inventory[RANGE] = 2;
-  _limit[BOMB] = 11;
-  _limit[SPEED] = 20;
-  _limit[RANGE] = 12;
+  _inventory[0] = 1;
+  _inventory[1] = 10;
+  _inventory[2] = 2;
+  _limit[0] = 11;
+  _limit[1] = 20;
+  _limit[2] = 12;
 }
 
 Player::~Player() { }
@@ -110,11 +110,11 @@ void    Player::playSubAnim(const std::string &subAnimation, bool loop) {
   }
 }
 
-int	Player::getLevel(const BonusType &bt) {
+int	Player::getLevel(const int bt) {
   return (_inventory[bt]);
 }
 
-void	Player::incrLevel(const BonusType &bt) {
+void	Player::incrLevel(const int bt) {
   if (_inventory[bt] < _limit[bt])
     _inventory[bt]++;
 }

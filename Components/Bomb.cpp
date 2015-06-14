@@ -14,7 +14,8 @@
 #include <sstream>
 
 Bomb::Bomb(const double timeBeforeIgnition, const int range, const bool hasExplosion)
-  : ObjModel(), _timeBeforeIgnition(timeBeforeIgnition), _range(range), _hasExplosion(hasExplosion), _hasExploded(false) { }
+  : ObjModel(), _timeBeforeIgnition(timeBeforeIgnition), _range(range), _hasExplosion(hasExplosion), _hasExploded(false) {
+}
 
 Bomb::~Bomb() { }
 
