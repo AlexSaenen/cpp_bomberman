@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sun Jun 14 05:43:43 2015 Vividy
-// Last update Sun Jun 14 06:19:15 2015 Vividy
+// Last update Sun Jun 14 17:04:35 2015 Alexander Saenen
 //
 
 #ifndef GameOver_HH_
@@ -29,6 +29,7 @@ private:
 public:
   GameOver();
   ~GameOver();
+
 public:
   void	execute(Event *);
 };

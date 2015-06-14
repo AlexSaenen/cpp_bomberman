@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 16:49:55 2015 Alexander Saenen
-// Last update Sun Jun 14 16:51:50 2015 Alexander Saenen
+// Last update Sun Jun 14 17:19:02 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -20,7 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-  _luaLoader = new LuaLoader("script.lua");
+  _luaLoader = new LuaLoader("");
   _this = static_cast<void *>(this);
 }
 

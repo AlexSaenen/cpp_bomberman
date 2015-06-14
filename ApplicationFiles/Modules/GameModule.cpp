@@ -5,11 +5,12 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 16:49:27 2015 Alexander Saenen
+// Last update Sun Jun 14 20:05:04 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
 #include <Bonus.hh>
+#include <GameOver.hh>
 
 GameModule::GameModule() { }
 
@@ -19,6 +20,51 @@ void	GameModule::initialize() {
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Game.cleanup"), new Functor<GameModule>(this, &GameModule::_onCleanup), 1000)
     ->observe(std::string("Bomb.explosion"), new Functor<GameModule>(this, &GameModule::_handleExplosion), 1000);
+}
+
+void	GameModule::_killPlayers(const Bomb *bomb, const double x, const double y) {
+  int	range = bomb->getRange();
+  bool	_hasKilled = false;
+  std::vector<GameObject *>    players;
+  GameObject::ObjectType it = GameObject::PLAYER1;
+  while (it <= GameObject::PLAYER2) {
+    if (ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(it, players)) {
+      Shape	*shape = dynamic_cast<Shape *>(players.front()->getComponents().front());
+      double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
+      double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
+      if (x == _x && ((y + (range * 2.5) >= _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
+	_hasKilled = true;
+	markForCleanup(players.front());
+      }
+      else if (y == _y && ((x + (range * 2.5) >= _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))) {
+	_hasKilled = true;
+	markForCleanup(players.front());
+      }
+    }
+    if (_hasKilled && players.size() == 1)
+      ModulesManager::getInstance()->get<GameOver>()->execute(0);
+    it = static_cast<GameObject::ObjectType>(it + 1);
+  }
+  if (ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(GameObject::IA, players)) {
+    for (std::vector<GameObject *>::iterator it = players.begin(); it != players.end(); ++it) {
+      Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
+      double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
+      double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
+      std::cout << x << " " << y << " " << _x << " " << _y << std::endl;
+      if (x == _x && ((y + (range * 2.5) >= _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
+	_hasKilled = true;
+	markForCleanup((*it));
+      }
+      else if (y == _y && ((x + (range * 2.5) >= _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))) {
+	_hasKilled = true;
+	markForCleanup((*it));
+      }
+    }
+    if (_hasKilled && players.size() == 1) {
+      std::cout << "IA are dead" << std::endl;
+      ModulesManager::getInstance()->get<GameOver>()->execute(0);
+    }
+  }
 }
 
 void	GameModule::_deleteDestroyables(const Bomb *bomb, const double x, const double y) {
@@ -113,8 +159,8 @@ void	GameModule::_handleExplosion(Event *ev) {
   x = (bomb->getPosX() / 2.5) * 2.5;
   y = (bomb->getPosY() / 2.5) * 2.5;
   _deleteDestroyables(bomb, x, y);
+  _killPlayers(bomb, x, y);
   /* if persons are killed -> call GameOver and check */
-
 }
 
 void	GameModule::handle(GameObject *object) {
@@ -128,20 +174,24 @@ void	GameModule::handle(GameObject *object) {
 
 void	GameModule::_onCleanup(Event *) {
   GameObject	*GObject;
-  GameRoutine	*gr;
 
-  gr = ModulesManager::getInstance()->get<GameRoutine>();
   while (!_garbage.empty()) {
     GObject = _garbage.front();
     _garbage.pop_front();
-    popOnMap(GObject);
-    gr->popGObject(GObject);
     delete GObject;
   }
 }
 
 void	GameModule::markForCleanup(GameObject *object) {
+  GameRoutine	*gr;
+  gr = ModulesManager::getInstance()->get<GameRoutine>();
+  for (std::list<GameObject *>::const_iterator it = _garbage.begin(); it != _garbage.end(); ++it) {
+    if ((*it) == object)
+      return ;
+  }
   _garbage.push_back(object);
+  popOnMap(object);
+  gr->popGObject(object);
 }
 
 std::list<GameObject::ObjectType>	&GameModule::getObject(const int x, const int y) {
@@ -219,7 +269,7 @@ void						GameModule::popOnMap(GameObject *object) {
     while (typeIt != objects.end()) {
       if (*typeIt == object->getType()) {
 	objects.erase(typeIt);
-	_gameMap[x][y] = objects;
+	((_gameMap[x])[y]) = objects;
 	break;
       }
       typeIt++;

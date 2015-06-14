@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 16:32:42 2015 Alexander Saenen
+// Last update Sun Jun 14 17:01:19 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
@@ -41,6 +41,7 @@ private:
   void	_handleExplosion(Event *ev);
   void	_deleteDestroyables(const Bomb *bomb, const double x, const double y);
   void	_popBonuses(GameObject **nearest);
+  void	_killPlayers(const Bomb *bomb, const double x, const double y);
 };
 
 #endif /* GameModule.hh */

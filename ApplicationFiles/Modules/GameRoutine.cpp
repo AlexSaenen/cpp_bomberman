@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 11:05:46 2015 Alexander Saenen
-// Last update Sun Jun 14 13:01:23 2015 Alexander Saenen
+// Last update Sun Jun 14 19:26:32 2015 Alexander Saenen
 //
 
 #include <GameRoutine.hh>
@@ -60,7 +60,7 @@ std::vector<GameObject *>	GameRoutine::getGObjects(const GameObject::ObjectType 
 }
 
 bool	GameRoutine::getGOStatus(const GameObject::ObjectType type, std::vector<GameObject *> &objects) {
-  if (_objects.find(type) == _objects.end())
+  if (_objects.find(type) == _objects.end() || _objects[type].size() == 0)
     return (false);
   objects = _objects[type];
   return (true);

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun 12 13:02:38 2015 Alexander Saenen
-// Last update Sat Jun 13 17:19:15 2015 Alexander Saenen
+// Last update Sun Jun 14 17:24:34 2015 Alexander Saenen
 //
 
 #include <Camera.hh>
@@ -49,8 +49,9 @@ Camera	*Camera::setLookAt(const glm::vec3 &eye) {
 }
 
 glm::vec3	Camera::getPlayerPos(const GameObject::ObjectType type) const {
-  std::vector<GameObject *> players = ModulesManager::getInstance()->get<GameRoutine>()
-    ->getGObjects(type);
+  std::vector<GameObject *> players;
+  if (!ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(type, players))
+    return (glm::vec3(0, 0, 0));
   GameObject *player = players.back();
   std::list<IComponent *> components = player->getComponents();
   Shape	*shape = 0;
