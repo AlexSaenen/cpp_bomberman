@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Mon Jun  1 16:19:45 2015 Alexander Saenen
-// Last update Sun Jun 14 05:13:03 2015 Alexander Saenen
+// Started on  Sun Jun 14 11:05:30 2015 Alexander Saenen
+// Last update Sun Jun 14 11:05:30 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -46,7 +46,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _gameModule->popOnMap(_position.x, _position.y, _type);
 
     //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.y / 2.5), _inventory[Player::RANGE], _mapModule->getSize());//_inventory[Player::RANGE]);
+    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.y / 2.5), _inventory[2], _mapModule->getSize());//_inventory[Player::RANGE]);
     // _lastMovement = 0;
     // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
     //      it != _rotationMap.end() && !hasTranslated; ++it)
@@ -76,7 +76,9 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
 }
 
 int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
-  if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end() || find(types.begin(), types.end(), GameObject::PLAYER1) != types.end())
+  if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
+      || find(types.begin(), types.end(), GameObject::PLAYER2) != types.end()
+      || find(types.begin(), types.end(), GameObject::IA) != types.end())
     return (1);
   else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end())
     return (2);

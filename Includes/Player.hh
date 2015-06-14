@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Wed May 27 16:26:32 2015 Alexander Saenen
-// Last update Sun Jun 14 10:50:42 2015 Alexander Saenen
+// Last update Sun Jun 14 11:04:34 2015 Alexander Saenen
 //
 
 #ifndef PLAYER_HH_
@@ -53,8 +53,12 @@ public:
   void  playAnimation(int stack, bool loop = true);
   void  playSubAnim(const std::string &subAnimation, bool loop = true);
 
-  int	getLevel(const BonusType&);
-  void	incrLevel(const BonusType&);
+  int	getLevel(const int);
+  void	incrLevel(const int);
+
+protected:
+  std::map<int, int>	_inventory;
+  std::map<int, int>	_limit;
 };
 
 #endif /* Player.hh */

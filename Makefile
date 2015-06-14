@@ -4,8 +4,8 @@
 ## Made by Alexander Saenen
 ## Login   <saenen_a@epitech.net>
 ## 
-## Started on  Sat Jun 13 22:38:58 2015 Alexander Saenen
-## Last update Sun Jun 14 08:33:53 2015 Alexander Saenen
+## Started on  Sun Jun 14 11:03:56 2015 Alexander Saenen
+## Last update Sun Jun 14 11:03:57 2015 Alexander Saenen
 ##
 
 CXX		= g++
@@ -43,6 +43,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)$(MODDIR)MenuModule.cpp \
 		  $(APPDIR)$(MODDIR)TexturesModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \
+		  $(APPDIR)$(MODDIR)GameOver.cpp \
 		  $(APPDIR)$(MODDIR)Camera.cpp \
 		  $(CMPDIR)Cube.cpp \
 		  $(CMPDIR)ObjModel.cpp \
@@ -53,6 +54,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(CMPDIR)PlayerTwo.cpp \
 		  $(CMPDIR)Bomb.cpp \
 		  $(CMPDIR)IA.cpp \
+		  $(CMPDIR)Bonus.cpp \
 		  $(SRCDIR)Event.cpp \
 		  $(SRCDIR)MapGenerator.cpp \
 		  $(SRCDIR)MenuSpawner.cpp \
