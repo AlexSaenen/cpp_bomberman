@@ -11,7 +11,7 @@ extern "C"
 #include "../LuaLib/src/lualib.h"
 }
 
-# define SCRIPT "./ia.lua"
+# define SCRIPT "./script.lua"
 
 class	LuaScript
 {
@@ -19,9 +19,9 @@ public:
   LuaScript();
   ~LuaScript();
 
+  lua_State*	getLua();
   int	DoScript();
   void	PullFunc(std::string const &);
-  // void	PushFunc(std::string const &);
   void	PushString(std::string const &);
   void	PushInteger(int);
   int	Pcall(int, int, int);
