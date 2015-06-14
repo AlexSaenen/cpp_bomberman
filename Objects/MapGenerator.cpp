@@ -5,14 +5,13 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sun Jun 14 11:03:04 2015 Alexander Saenen
-// Last update Sun Jun 14 11:03:05 2015 Alexander Saenen
+// Last update Sun Jun 14 13:12:07 2015 Alexander Saenen
 //
 
 #include "MapGenerator.hh"
 
 MapGenerator::MapGenerator(int const size, int const nbPlayers, int const nbIa)
 {
-  srand (time(NULL));
   this->file = new std::filebuf();
   if (this->file->open("Maps/random.map", std::ios::out))
     this->is = new std::ostream(this->file);

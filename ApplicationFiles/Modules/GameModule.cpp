@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 13:02:22 2015 Alexander Saenen
+// Last update Sun Jun 14 13:13:11 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -18,6 +18,45 @@ void	GameModule::initialize() {
   ModulesManager::getInstance()->get<EventModule>()
     ->observe(std::string("Game.cleanup"), new Functor<GameModule>(this, &GameModule::_onCleanup), 1000)
     ->observe(std::string("Bomb.explosion"), new Functor<GameModule>(this, &GameModule::_handleExplosion), 1000);
+}
+
+void	GameModule::_deleteDestroyables(const Bomb *bomb, const double x, const double y) {
+  int	closest[4] = { 13, 13, 13, 13 };
+  GameObject	*nearest[4] = { 0, 0, 0, 0 };
+  int	range = bomb->getRange();
+  std::vector<GameObject *>	cubes;
+  if (ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(GameObject::CUBEDESTR, cubes)) {
+    for (std::vector<GameObject *>::iterator it = cubes.begin(); it != cubes.end(); ++it) {
+      Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
+      double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
+      double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
+      if (x == _x && ((y + (range * 2.5) >= _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
+	if (_y >= y && closest[0] > _y - y) {
+	  closest[0] = _y - y;
+	  nearest[0] = (*it);
+	}
+	else if (_y <= y && closest[1] > y - _y) {
+	  closest[1] = y - _y;
+	  nearest[1] = (*it);
+	}
+      }
+      else if (y == _y && ((x + (2.5 * range) >= _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))) {
+	if (_x >= x && closest[2] > _x - x) {
+	  closest[2] = _x - x;
+	  nearest[2] = (*it);
+	}
+	else if (_x <= x && closest[3] > x - _x) {
+	  closest[3] = x - _x;
+	  nearest[3] = (*it);
+	}	
+      }
+    }
+  }
+  for (size_t i = 0; i < 4; ++i)
+    if (nearest[i]) {
+      markForCleanup(nearest[i]);
+      
+    }
 }
 
 void	GameModule::_handleExplosion(Event *ev) {
@@ -46,40 +85,7 @@ void	GameModule::_handleExplosion(Event *ev) {
     markForCleanup(model);
   x = (bomb->getPosX() / 2.5) * 2.5;
   y = (bomb->getPosY() / 2.5) * 2.5;
-  int	closest[4] = { 13, 13, 13, 13 };
-  GameObject	*nearest[4] = { 0, 0, 0, 0 };
-  int	range = bomb->getRange();
-  std::vector<GameObject *>	cubes;
-  if (ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(GameObject::CUBEDESTR, cubes)) {
-    for (std::vector<GameObject *>::iterator it = cubes.begin(); it != cubes.end(); ++it) {
-      Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
-      double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
-      double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
-      if (x == _x && ((y + (range * 2.5) > _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
-	if (_y >= y && closest[0] > _y - y) {
-	  closest[0] = _y - y;
-	  nearest[0] = (*it);
-	}
-	else if (_y <= y && closest[1] > y - _y) {
-	  closest[1] = y - _y;
-	  nearest[1] = (*it);
-	}
-      }
-      else if (y == _y && ((x + (2.5 * range) > _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))) {
-	if (_x >= x && closest[2] > _x - x) {
-	  closest[2] = _x - x;
-	  nearest[2] = (*it);
-	}
-	else if (_x <= x && closest[3] > x - _x) {
-	  closest[3] = x - _x;
-	  nearest[3] = (*it);
-	}	
-      }
-    }
-  }
-  for (size_t i = 0; i < 4; ++i)
-    if (nearest[i])
-      markForCleanup(nearest[i]);
+  _deleteDestroyables(bomb, x, y);
   /* if persons are killed -> call GameOver and check */
 
 }

@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 10:58:39 2015 Alexander Saenen
-// Last update Sun Jun 14 06:37:50 2015 Alexander Saenen
+// Last update Sun Jun 14 13:07:21 2015 Alexander Saenen
 //
 
 #ifndef GAMEMODULE_HH_
@@ -27,7 +27,6 @@ public:
   GameModule();
 
   void	initialize();
-  void	_handleExplosion(Event *ev);
   void	markForCleanup(GameObject *object);
   void	handle(GameObject *object);
   std::list<GameObject::ObjectType>	&getObject(const int x, const int y);
@@ -38,6 +37,8 @@ public:
   
 private:
   void	_onCleanup(Event *);
+  void	_handleExplosion(Event *ev);
+  void	_deleteDestroyables(const Bomb *bomb, const double x, const double y);
 };
 
 #endif /* GameModule.hh */
