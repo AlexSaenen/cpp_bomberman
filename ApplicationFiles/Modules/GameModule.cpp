@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 02:35:11 2015 Alexander Saenen
+// Last update Sun Jun 14 04:31:19 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -64,7 +64,6 @@ void					GameModule::pushOnMap(GameObject *object) {
     double	y = shape->getPosY();
     x = x / 2.5;
     y = y / 2.5;
-    std::cout << "PUSH " << x << " " << y << std::endl;
     if (shape == NULL)
       throw LogicException("GameObject hasn't got a shape.");
     if (_gameMap.find(x) == _gameMap.end())
@@ -81,7 +80,6 @@ void					GameModule::pushOnMap(GameObject *object) {
 void                                    GameModule::pushOnMap(const double x, const double y, const GameObject::ObjectType type) {
   int	_x = x / 2.5;
   int	_y = y / 2.5;
-    std::cout << "PUSH " << _x << " " << _y << std::endl;
   if (_gameMap.find(_x) == _gameMap.end())
     _gameMap[_x] = std::map<int, std::list<GameObject::ObjectType> >();
   ((_gameMap[_x])[_y]).push_back(type);
