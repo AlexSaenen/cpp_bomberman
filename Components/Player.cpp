@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Sat Jun 13 22:39:18 2015 Alexander Saenen
-// Last update Sun Jun 14 11:05:14 2015 Alexander Saenen
+// Last update Sun Jun 14 11:11:35 2015 Alexander Saenen
 //
 
 #include "Player.hh"
@@ -79,7 +79,7 @@ void	Player::update(const gdl::Clock &clock, gdl::Input &input) {
     _hasBombed = 3;
     bomb->initialize(0);
     std::stringstream strm;
-    strm << _position.x << " " << _position.z << " 2 0 180 0 0.4 0.4 0.4 bomb";
+    strm << static_cast<int>((_position.x + 2) / 2.5) * 2.5 << " " << static_cast<int>((_position.z + 1.25) / 2.5) * 2.5 << " 2 0 180 0 0.4 0.4 0.4 bomb";
     bomb->configure(strm.str());
     model->pushComponent(bomb);
     _gameModule->handle(model);
