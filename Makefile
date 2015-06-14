@@ -5,10 +5,9 @@
 ## Login   <saenen_a@epitech.net>
 ## 
 ## Started on  Sat Jun 13 22:38:58 2015 Alexander Saenen
-## Last update Sun Jun 14 00:28:20 2015 Vividy
+## Last update Sun Jun 14 06:20:45 2015 Vividy
 ##
 
-# CXX		= clang
 CXX		= g++
 
 RM		= rm -f
@@ -44,6 +43,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 		  $(APPDIR)$(MODDIR)MenuModule.cpp \
 		  $(APPDIR)$(MODDIR)TexturesModule.cpp \
 		  $(APPDIR)$(MODDIR)GameRoutine.cpp \
+		  $(APPDIR)$(MODDIR)GameOver.cpp \
 		  $(APPDIR)$(MODDIR)Camera.cpp \
 		  $(CMPDIR)Cube.cpp \
 		  $(CMPDIR)ObjModel.cpp \
