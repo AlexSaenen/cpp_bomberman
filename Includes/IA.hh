@@ -69,6 +69,7 @@ public:
   virtual void	update(const gdl::Clock &clock, gdl::Input &input);
 
 private:
+  int		_found(lua_State *ls, const int i, const int j, const int find);
   int		_lookForPlayer(std::list<GameObject::ObjectType> &types);
   int		_radar(lua_State *ls);
   int		_checkBomb(lua_State *ls);
