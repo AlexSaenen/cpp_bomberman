@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Tue May 19 11:00:44 2015 Alexander Saenen
-// Last update Sun Jun 14 10:59:39 2015 Alexander Saenen
+// Last update Sun Jun 14 13:02:22 2015 Alexander Saenen
 //
 
 #include <GameModule.hh>
@@ -39,14 +39,47 @@ void	GameModule::_handleExplosion(Event *ev) {
     model = (*it);
     std::list<IComponent *> comp = model->getComponents();
     bomb = dynamic_cast<Bomb *>(comp.front());
-    if (bomb && bomb->hasExploded())
+    if (bomb && bomb->hasExploded() && bomb->getPosX() == x && bomb->getPosY())
       break;
   }
   if (model && bomb)
     markForCleanup(model);
-  
-  /* get objects for destructible, players, ia and kill if necessary */
-
+  x = (bomb->getPosX() / 2.5) * 2.5;
+  y = (bomb->getPosY() / 2.5) * 2.5;
+  int	closest[4] = { 13, 13, 13, 13 };
+  GameObject	*nearest[4] = { 0, 0, 0, 0 };
+  int	range = bomb->getRange();
+  std::vector<GameObject *>	cubes;
+  if (ModulesManager::getInstance()->get<GameRoutine>()->getGOStatus(GameObject::CUBEDESTR, cubes)) {
+    for (std::vector<GameObject *>::iterator it = cubes.begin(); it != cubes.end(); ++it) {
+      Shape	*shape = dynamic_cast<Shape *>((*it)->getComponents().front());
+      double	_x = static_cast<int>(shape->getPosX() / 2.5) * 2.5;
+      double	_y = static_cast<int>(shape->getPosY() / 2.5) * 2.5;
+      if (x == _x && ((y + (range * 2.5) > _y && _y >= y) || (y - (2.5 * range) <= _y && _y <= y))) {
+	if (_y >= y && closest[0] > _y - y) {
+	  closest[0] = _y - y;
+	  nearest[0] = (*it);
+	}
+	else if (_y <= y && closest[1] > y - _y) {
+	  closest[1] = y - _y;
+	  nearest[1] = (*it);
+	}
+      }
+      else if (y == _y && ((x + (2.5 * range) > _x && _x >= x) || (x - (2.5 * range) <= _x && _x <= x))) {
+	if (_x >= x && closest[2] > _x - x) {
+	  closest[2] = _x - x;
+	  nearest[2] = (*it);
+	}
+	else if (_x <= x && closest[3] > x - _x) {
+	  closest[3] = x - _x;
+	  nearest[3] = (*it);
+	}	
+      }
+    }
+  }
+  for (size_t i = 0; i < 4; ++i)
+    if (nearest[i])
+      markForCleanup(nearest[i]);
   /* if persons are killed -> call GameOver and check */
 
 }
@@ -92,12 +125,12 @@ void					GameModule::pushOnMap(GameObject *object) {
       if ((shape = dynamic_cast<Shape *>(*it)) != NULL)
 	break;
     }
+    if (shape == NULL)
+      throw LogicException("GameObject hasn't got a shape.");
     double	x = shape->getPosX();
     double	y = shape->getPosY();
     x = x / 2.5;
     y = y / 2.5;
-    if (shape == NULL)
-      throw LogicException("GameObject hasn't got a shape.");
     if (_gameMap.find(x) == _gameMap.end())
       _gameMap[x] = std::map<int, std::list<GameObject::ObjectType> >();
     ((_gameMap[x])[y]).push_back(object->getType());
@@ -125,16 +158,15 @@ void						GameModule::popOnMap(GameObject *object) {
   
   try {
     gameComponents = object->getComponents();
-    for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++) {
+    for (std::list<IComponent *>::iterator it = gameComponents.begin(); it != gameComponents.end(); it++)
       if ((shape = dynamic_cast<Shape *>(*it)) != NULL)
 	break;
-    }
+    if (shape == NULL)
+      throw LogicException("GameObject hasn't got a shape.");
     double	x = shape->getPosX();
     double	y = shape->getPosY();
     x = x / 2.5;
     y = y / 2.5;
-    if (shape == NULL)
-      throw LogicException("GameObject hasn't got a shape.");
     if (_gameMap.find(x) == _gameMap.end() || _gameMap[x].find(y) == _gameMap[x].end())
       throw LogicException("GameObject isn't in the map.");
     std::list<GameObject::ObjectType>	objects =
@@ -143,6 +175,7 @@ void						GameModule::popOnMap(GameObject *object) {
     while (typeIt != objects.end()) {
       if (*typeIt == object->getType()) {
 	objects.erase(typeIt);
+	_gameMap[x][y] = objects;
 	break;
       }
       typeIt++;
@@ -166,11 +199,11 @@ void                                            GameModule::popOnMap(const doubl
       throw LogicException("GameObject isn't in the map.");
     std::list<GameObject::ObjectType>	objects =
       (_gameMap[_x])[_y];
-      (_gameMap[_x])[_y];
     typeIt = objects.begin();
     while (typeIt != objects.end()) {
       if (*typeIt == type) {
 	objects.erase(typeIt);
+	_gameMap[_x][_y] = objects;
 	break;
       }
       typeIt++;

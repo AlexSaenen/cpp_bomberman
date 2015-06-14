@@ -5,7 +5,7 @@
 // Login   <saenen_a@epitech.net>
 // 
 // Started on  Fri Jun  5 15:51:26 2015 Alexander Saenen
-// Last update Fri Jun  5 16:16:57 2015 Alexander Saenen
+// Last update Sun Jun 14 12:28:46 2015 Alexander Saenen
 //
 
 #ifndef COMPONENT_FACTORY_HPP_
@@ -21,7 +21,7 @@ public:
   ~ComponentFactory() { };
 
   template <typename T> IComponent*	getComponent() {
-    return (new T);
+    return (new T());
   };
 };
 
