@@ -4,8 +4,8 @@
 // Made by Alexander Saenen
 // Login   <saenen_a@epitech.net>
 // 
-// Started on  Sun Jun 14 11:05:30 2015 Alexander Saenen
-// Last update Sun Jun 14 16:48:37 2015 Alexander Saenen
+// Started on  Sun Jun 14 16:49:55 2015 Alexander Saenen
+// Last update Sun Jun 14 16:51:50 2015 Alexander Saenen
 //
 
 #include <IA.hh>
@@ -20,7 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-  _luaLoader = new LuaLoader("ia.lua");
+  _luaLoader = new LuaLoader("script.lua");
   _this = static_cast<void *>(this);
 }
 
@@ -43,30 +43,28 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _initialize();
 
   try {
-    _gameModule->popOnMap(_position.x, _position.z, _type);
-
-    //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, static_cast<int>(_position.x / 2.5), static_cast<int>(_position.z / 2.5), _inventory[2], _mapModule->getSize());//_inventory[Player::RANGE]);
-    // _lastMovement = 0;
-    // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
-    //      it != _rotationMap.end() && !hasTranslated; ++it)
-    //   if (input.getKey((*it).first)) {
-    //     hasTranslated = true;
-    if (_ac != BOMB) {
+    _luaLoader->lunchScript(_this, static_cast<int>(_position.x / 2.5), static_cast<int>(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());
+    if (_ac != BOMB && _ac != NONE) {
+      _model.pause(false);
+      _gameModule->popOnMap(_position.x, _position.z, _type);
       _rotation.y = _rotationMap[_ac];
       translate(_translationMap[_ac] * static_cast<float>(clock.getElapsed()) * _speed);
+      _hasBombed -= clock.getElapsed();
+      _gameModule->pushOnMap(_position.x, _position.z, _type);
+    } else if (_ac == BOMB && _hasBombed <= 0) {
+      GameObject  *model = new GameObject(GameObject::BOMB, "bomb");
+      ObjModel    *bomb = new Bomb(2.5, _inventory[RANGE]);
+      _hasBombed = 3;
+      bomb->initialize(0);
+      std::stringstream strm;
+      strm << static_cast<int>((_position.x + 2) / 2.5) * 2.5
+	   << " " << static_cast<int>((_position.z + 1.25) / 2.5) * 2.5 << " 2 0 180 0 0.4 0.4 0.4 bomb";
+      bomb->configure(strm.str());
+      model->pushComponent(bomb);
+      _gameModule->handle(model);
+    } else {
+      _model.pause(true);
     }
-    //     if (!_isMoving) {
-    // 	_model.pause(false);
-    // 	_isMoving = true;
-    //     }
-    //     _lastMovement = (*it).first;
-    //   }
-    // if (!_lastMovement) {
-    //   _isMoving = false;
-    //   _model.pause(true);
-    // }
-  _gameModule->pushOnMap(_position.x, _position.z, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
@@ -79,9 +77,12 @@ int	IA::_lookForPlayer(std::list<GameObject::ObjectType> &types) {
   if (find(types.begin(), types.end(), GameObject::PLAYER1) != types.end()
       || find(types.begin(), types.end(), GameObject::PLAYER2) != types.end()
       || find(types.begin(), types.end(), GameObject::IA) != types.end())
-    return (1);
-  else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end())
+    {
+      return (1);
+    }
+  else if (find(types.begin(), types.end(), GameObject::BONUS) != types.end()) {
     return (2);
+  }
   return (0);
 }
 
@@ -98,8 +99,8 @@ int	IA::_radar(lua_State *ls) {
   int	incr;
   int	find = 0;
 
-  i = _position.x / 2.5;
-  j = _position.z / 2.5;
+  i = (_position.x / 2.5);
+  j = (_position.z / 2.5);
   incr = 1;
   while(find == 0 && incr < _mapModule->getSize() * 2) {
     if (incr % 2 == 1) {
@@ -218,8 +219,10 @@ int	IA::_command(lua_State *ls) {
 }
 
 int    IA::luaCall(lua_State *ls) {
-  //  std::cout << "luaCall" << std::endl;
   std::map <std::string, int (IA::*)(lua_State *)> _func;
   _func["command"] = &IA::_command;
+  _func["checkBomb"] = &IA::_checkBomb;
+  _func["radar"] = &IA::_radar;
+  _func["checkCase"] = &IA::_checkCase;
   return ((static_cast<IA *>(const_cast<void *>(lua_topointer(ls, 1)))->*(_func[lua_tostring(ls, 2)]))(ls));
 };

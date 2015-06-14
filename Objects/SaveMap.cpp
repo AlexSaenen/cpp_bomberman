@@ -5,7 +5,7 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:03:46 2015 Vividy
-// Last update Sun Jun 14 05:06:56 2015 Vividy
+// Last update Sun Jun 14 15:50:41 2015 Vividy
 //
 
 #include "SaveMap.hh"
@@ -27,11 +27,16 @@ SaveMap::SaveMap() {
     throw ArgException("Cannot open the file : " + str);
   this->gr = ModulesManager::getInstance()->get<GameRoutine>();
   this->mm = ModulesManager::getInstance()->get<MapModule>();
-  this->isPlayerOne = gr->getGOStatus(GameObject::PLAYER1, this->playerOne);
-  this->isPlayerTwo = gr->getGOStatus(GameObject::PLAYER2, this->playerTwo);
-  this->isIa = gr->getGOStatus(GameObject::IA, this->ia);
-  this->isCube = gr->getGOStatus(GameObject::CUBE, this->cube);
-  this->isCubeDestr = gr->getGOStatus(GameObject::CUBEDESTR, this->cubeDestr);
+  this->_isType[GameObject::PLAYER1] = gr->getGOStatus(GameObject::PLAYER1, this->playerOne);
+  this->_isType[GameObject::PLAYER2] = gr->getGOStatus(GameObject::PLAYER2, this->playerTwo);
+  this->_isType[GameObject::IA] = gr->getGOStatus(GameObject::IA, this->ia);
+  this->_isType[GameObject::CUBE] = gr->getGOStatus(GameObject::CUBE, this->cube);
+  this->_isType[GameObject::CUBEDESTR] = gr->getGOStatus(GameObject::CUBEDESTR, this->cubeDestr);
+  this->_pushType[GameObject::PLAYER1] = &SaveMap::pushPlayerOne;
+  this->_pushType[GameObject::PLAYER2] = &SaveMap::pushPlayerTwo;
+  this->_pushType[GameObject::IA] = &SaveMap::pushIa;
+  this->_pushType[GameObject::CUBE] = &SaveMap::pushCube;
+  this->_pushType[GameObject::CUBEDESTR] = &SaveMap::pushCubeDestr;
   _modelType["./GraphicsLib/assets/Textures/stone.tga"] = "cube";
   _modelType["./GraphicsLib/assets/Textures/crate.tga"] = "destroy";
   _modelType["./GraphicsLib/assets/archer.fbx"] = "player1";
@@ -45,100 +50,136 @@ SaveMap::SaveMap() {
 
 SaveMap::~SaveMap()
 {
+  this->is->write(string.str().c_str(), string.str().size());
   delete this->is;
   delete this->file;
   std::cout << "Map Saved!" << std::endl;
 }
 
-void	SaveMap::execute()
+void	SaveMap::pushCube()
 {
-  std::list<IComponent *> comp;;
+  std::list<IComponent *> comp;
   Shape   *shape = 0;
-  std::stringstream     string;
-  std::string           str;
   std::list<IComponent *>::iterator at;
   int	i;
 
-  string << mm->getSize() << " " << mm->getIA();
-  if (isCube)
-    {
-      for (i = 0; i < (int)cube.size(); i++)
-	{
-	  shape = 0;
-	  comp = cube[i]->getComponents();
-	  for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
-	    shape = dynamic_cast<Shape *>((*it));
-	    at = it;
-	  }
-	  if (shape) {
-	      string << "\n" << cube[i]->getName() << " " << cube[i]->getType() << "\n$Cube%" << shape->getPosX() << " " << shape->getPosY() << " 0\n@";
-	}
-      }
-    }
-  if (isPlayerOne)
+  for (i = 0; i < (int)cube.size(); i++)
     {
       shape = 0;
-      comp = playerOne.back()->getComponents();
+      comp = cube[i]->getComponents();
       for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
 	shape = dynamic_cast<Shape *>((*it));
 	at = it;
       }
       if (shape) {
-	ObjModel  *model = dynamic_cast<ObjModel *>((*at));
-	if (model) {
-	  string << "\n" << playerOne.back()->getName() << " " << playerOne.back()->getType() << "\n$PlayerOne%" << shape->getPosX() << " " << shape->getPosY() << " " << playerOne.back()->getType() << " 0 0 0 0.1 0.1 0.1 " << _modelType[model->getModelName()] << "\n@";
-	}
+	string << "\n" << cube[i]->getName() << " " << cube[i]->getType() << "\n$Cube%" << shape->getPosX() << " " << shape->getPosY() << " 0\n@";
       }
     }
-  if (isPlayerTwo)
-    {
-      shape = 0;
-      comp = playerTwo.back()->getComponents();
-      for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
-	shape = dynamic_cast<Shape *>((*it));
-	at = it;
-      }
-      if (shape) {
-	ObjModel  *model = dynamic_cast<ObjModel *>((*at));
-	if (model) {
-	  string << "\n" << playerTwo.back()->getName() << " " << playerTwo.back()->getType() << "\n$PlayerTwo%" << shape->getPosX() << " " << shape->getPosY() << " " << playerTwo.back()->getType() << " 0 0 0 0.1 0.1 0.1 " << _modelType[model->getModelName()] << "\n@";
-	}
-      }
-    }
-  if (isIa)
-    {
-      for (i = 0; i < (int)ia.size(); i++)
-	{
-	  shape = 0;
-	  comp = ia[i]->getComponents();
-	  for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
-	    shape = dynamic_cast<Shape *>((*it));
-	    at = it;
-	  }
-	  if (shape) {
-	    ObjModel  *model = dynamic_cast<ObjModel *>((*at));
-	    if (model) {
-	      string << "\n" << ia[i]->getName() << " " << ia[i]->getType() << "\n$IA%" << shape->getPosX() << " " << shape->getPosY() << " " << ia[i]->getType() << " 0 0 0 0.1 0.1 0.1 " << _modelType[model->getModelName()] << "\n@";
-	    }
-	}
-      }
-    }
-  if (isCubeDestr)
-    {
-      for (i = 0; i < (int)cubeDestr.size(); i++)
-	{
-	  shape = 0;
-	  comp = cubeDestr[i]->getComponents();
-	  for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
-	    shape = dynamic_cast<Shape *>((*it));
-	    at = it;
-	  }
-	  if (shape) {
-	      string << "\n" << cubeDestr[i]->getName() << " " << cubeDestr[i]->getType() << "\n$Cube%" << shape->getPosX() << " " << shape->getPosY() << " 0\n@";
-	}
-      }
-    }
-  str = string.str();
-  this->is->write(str.c_str(), str.size());
 }
 
+void	SaveMap::pushIa()
+{
+  std::list<IComponent *> comp;
+  Shape   *shape = 0;
+  std::list<IComponent *>::iterator at;
+  int	i;
+
+  for (i = 0; i < (int)ia.size(); i++)
+    {
+      shape = 0;
+      comp = ia[i]->getComponents();
+      for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
+	shape = dynamic_cast<Shape *>((*it));
+	at = it;
+      }
+      if (shape) {
+	ObjModel  *model = dynamic_cast<ObjModel *>((*at));
+	if (model) {
+	  string << "\n" << ia[i]->getName() << " " << ia[i]->getType() << "\n$IA%" << shape->getPosX() << " " << shape->getPosY() << " " << ia[i]->getType() << " 0 0 0 0.1 0.1 0.1 " << _modelType[model->getModelName()] << "\n@";
+	}
+      }
+    }
+}
+
+void	SaveMap::pushCubeDestr()
+{
+  std::list<IComponent *> comp;
+  Shape   *shape = 0;
+  std::list<IComponent *>::iterator at;
+  int	i;
+
+  for (i = 0; i < (int)cubeDestr.size(); i++)
+    {
+      shape = 0;
+      comp = cubeDestr[i]->getComponents();
+      for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
+	shape = dynamic_cast<Shape *>((*it));
+	at = it;
+      }
+      if (shape) {
+	string << "\n" << cubeDestr[i]->getName() << " " << cubeDestr[i]->getType() << "\n$Cube%" << shape->getPosX() << " " << shape->getPosY() << " 0\n@";
+      }
+    }
+}
+
+void	SaveMap::pushPlayerOne()
+{
+  std::list<IComponent *> comp;
+  Shape   *shape = 0;
+  std::list<IComponent *>::iterator at;
+
+  comp = playerOne.back()->getComponents();
+  for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
+    shape = dynamic_cast<Shape *>((*it));
+    at = it;
+  }
+  if (shape) {
+    ObjModel  *model = dynamic_cast<ObjModel *>((*at));
+    if (model) {
+      string << "\n" << playerOne.back()->getName() << " " << playerOne.back()->getType() << "\n$PlayerOne%" << shape->getPosX() << " " << shape->getPosY() << " " << playerOne.back()->getType() << " 0 0 0 0.034 0.034 0.034 " << _modelType[model->getModelName()] << "\n@";
+    }
+  }
+}
+
+void	SaveMap::pushPlayerTwo()
+{
+  std::list<IComponent *> comp;
+  Shape   *shape = 0;
+  std::list<IComponent *>::iterator at;
+
+  comp = playerTwo.back()->getComponents();
+  for (std::list<IComponent *>::iterator it = comp.begin(); it != comp.end() && !shape; ++it) {
+    shape = dynamic_cast<Shape *>((*it));
+    at = it;
+  }
+  if (shape) {
+    ObjModel  *model = dynamic_cast<ObjModel *>((*at));
+    if (model) {
+      string << "\n" << playerTwo.back()->getName() << " " << playerTwo.back()->getType() << "\n$PlayerTwo%" << shape->getPosX() << " " << shape->getPosY() << " " << playerTwo.back()->getType() << " 0 0 0 0.034 0.034 0.034 " << _modelType[model->getModelName()] << "\n@";
+    }
+  }
+}
+
+void	SaveMap::execute()
+{
+  GameObject::ObjectType	i;
+  
+  string << mm->getSize() << " " << mm->getIA();
+  i = GameObject::CUBE;
+  while(i < 6)
+    {
+      if (_isType[i] == true)
+	(this->*_pushType[i])();
+      i = static_cast<GameObject::ObjectType>(i + 1);
+    }
+  // if (isCube)
+  //   pushCube();
+  // if (isPlayerOne)
+  //   pushPlayerOne();
+  // if (isPlayerTwo)
+  //   pushPlayerTwo();
+  // if (isIa)
+  //   pushIa();
+  // if (isCubeDestr)
+  //   pushCubeDestr();
+}
