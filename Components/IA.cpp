@@ -20,7 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-  _luaLoader = new LuaLoader("ia.lua");
+  _luaLoader = new LuaLoader("script.lua");
   _this = static_cast<void *>(this);
 }
 
@@ -43,30 +43,28 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _initialize();
 
   try {
-    _gameModule->popOnMap(_position.x, _position.z, _type);
-
-    //    std::cout << "IA update" << std::endl;
-    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());//_inventory[Player::RANGE]);
-    // _lastMovement = 0;
-    // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
-    //      it != _rotationMap.end() && !hasTranslated; ++it)
-    //   if (input.getKey((*it).first)) {
-    //     hasTranslated = true;
-    if (_ac != BOMB) {
+    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.z / 2.5), _inventory[Player::RANGE], _mapModule->getSize());
+    if (_ac != BOMB && _ac != NONE) {
+      _model.pause(false);
+      _gameModule->popOnMap(_position.x, _position.z, _type);
       _rotation.y = _rotationMap[_ac];
       translate(_translationMap[_ac] * static_cast<float>(clock.getElapsed()) * _speed);
+      _hasBombed -= clock.getElapsed();
+      _gameModule->pushOnMap(_position.x, _position.z, _type);
+    } else if (_ac == BOMB && _hasBombed <= 0) {                                                
+      GameObject  *model = new GameObject(GameObject::BOMB, "bomb");   
+      ObjModel    *bomb = new Bomb(2.5, _inventory[RANGE]);
+      _hasBombed = 3;
+      bomb->initialize(0);
+      std::stringstream strm;
+      strm << static_cast<int>((_position.x + 2) / 2.5) * 2.5
+	   << " " << static_cast<int>((_position.z + 1.25) / 2.5) * 2.5 << " 2 0 180 0 0.4 0.4 0.4 bomb";
+      bomb->configure(strm.str());
+      model->pushComponent(bomb);
+      _gameModule->handle(model);
+    } else {
+      _model.pause(true);
     }
-    //     if (!_isMoving) {
-    // 	_model.pause(false);
-    // 	_isMoving = true;
-    //     }
-    //     _lastMovement = (*it).first;
-    //   }
-    // if (!_lastMovement) {
-    //   _isMoving = false;
-    //   _model.pause(true);
-    // }
-  _gameModule->pushOnMap(_position.x, _position.z, _type);
   } catch(RuntimeException e) {
     std::cerr << e.getMessage() << std::endl;
     ModulesManager::getInstance()->get<EventModule>()
