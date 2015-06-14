@@ -20,7 +20,7 @@ IA::IA()
   _translationMap.insert(std::pair<int, glm::vec3>(DOWN, glm::vec3(0, 0, -1)));
   _translationMap.insert(std::pair<int, glm::vec3>(LEFT, glm::vec3(1, 0, 0)));
   _translationMap.insert(std::pair<int, glm::vec3>(RIGHT, glm::vec3(-1, 0, 0)));
-  _luaLoader = new LuaLoader("ia.lua");
+  _luaLoader = new LuaLoader("script.lua");
   _this = static_cast<void *>(this);
 }
 
@@ -46,7 +46,7 @@ void	IA::update(const gdl::Clock &clock, gdl::Input &) {
     _gameModule->popOnMap(_position.x, _position.y, _type);
 
     //    std::cout << "IA update" << std::endl;
-      _luaLoader->lunchScript(_this, 1, 1, 1);//_inventory[Player::RANGE]);
+    _luaLoader->lunchScript(_this, (int)(_position.x / 2.5), (int)(_position.y / 2.5), _inventory[Player::RANGE], _mapModule->getSize());//_inventory[Player::RANGE]);
     // _lastMovement = 0;
     // for (std::map<int, int>::const_iterator it = _rotationMap.begin();
     //      it != _rotationMap.end() && !hasTranslated; ++it)

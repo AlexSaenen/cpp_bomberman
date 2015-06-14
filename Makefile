@@ -64,7 +64,7 @@ SRC		= $(ERRDIR)ArgException.cpp \
 
 OBJ		= $(SRC:.cpp=.o)
 
-CXXFLAGS	= -I$(GRADIR)includes/ -I$(LUADIR) -IIncludes -W -Wall -Werror -Wextra
+CXXFLAGS	= -I$(GRADIR)includes/ -I$(LUADIR) -IIncludes -W -Wall -Werror -Wextra -g3
 
 LIB		= -L$(GRADIR)libs/ -lgdl_gl -lGL -lGLEW -lrt -lfbxsdk -lSDL2 -lpthread -lfmod -L$(LUADIR) -llua -ldl
 
