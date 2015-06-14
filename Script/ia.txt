@@ -1,7 +1,14 @@
-objet coor
-	x
-	y
-	?
+run(object, my_x, my_y, my_range)
+
+call luaCall()
+ex checkbomb:
+   luaCall(object, "checkBomb", my_x, my_y)
+
+   luaCall(object, "checkCase", x, y) // envoyer x et y de la case ou je veux aller
+	return: enum //enum;0 = empty, enum;1 = indestructible, enum;2= destructible
+   luaCall(object, "command", enum) // fin de script up=0, down=1, right=2, left=3, bomb=4
+   luaCall(object, "radar")
+		return: x, y, elem;  elem;0= win(up)  elem;1= ennemy  elem;2=bonus
 
 1er function:
 	recoit objet Coor avec 3eme argu (ma porter de bomb)

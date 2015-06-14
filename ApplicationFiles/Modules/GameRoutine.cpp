@@ -4,8 +4,8 @@
 // Made by Vividy
 // Login   <vividy@epitech.net>
 //
-// Started on  Sun Jun 14 01:27:25 2015 Vividy
-// Last update Sun Jun 14 01:27:27 2015 Vividy
+// Started on  Sun Jun 14 03:32:44 2015 Vividy
+// Last update Sun Jun 14 03:32:45 2015 Vividy
 //
 
 #include <GameRoutine.hh>
@@ -118,8 +118,9 @@ bool	GameRoutine::update() {
   try {
     for (int it = 0; it < 11; ++it) {
       GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
-      for (size_t i = 0; i < _objects[ot].size(); ++i)
-	_objects[ot][i]->update(_clock, _input);
+      if (_objects.find(ot) != _objects.end())
+	for (size_t i = 0; i < _objects[ot].size(); ++i)
+	  _objects[ot][i]->update(_clock, _input);
     }
   } catch (LogicException e) {
     std::cerr << e.getMessage() << std::endl;
@@ -142,8 +143,9 @@ void	GameRoutine::draw() {
     ->confirm();
   for (int it = 0; it < 11; ++it) {
     GameObject::ObjectType ot = static_cast<GameObject::ObjectType>(it);
-    for (size_t i = 0; i < _objects[ot].size(); ++i)
-      _objects[ot][i]->draw(_shader, _clock);
+    if (_objects.find(ot) != _objects.end())
+      for (size_t i = 0; i < _objects[ot].size(); ++i)
+	_objects[ot][i]->draw(_shader, _clock);
   }
   _context.flush();
 }

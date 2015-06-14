@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+#include "lua_basics.hh"
+=======
 #include "../Includes/lua_basics.hh"
 
 // int my_function(lua_State *L)
@@ -9,8 +12,8 @@
 
 <<<<<<< HEAD
   for ( int n=1; n<=argc; ++n ) {
-    std::cout << "-- argument " << n << ": "
-	      << lua_tostring(L, n) << std::endl;
+    // std::cout << "-- argument " << n << ": "
+    // 	      << lua_tostring(L, n) << std::endl;
   }
   lua_pushnumber(L, 123); // return value
   return 1; // number of return values
@@ -24,6 +27,7 @@
 //   return 1; // number of return values
 // }
 >>>>>>> 2949d62327a0d032622a047209a1efeef82c1126
+>>>>>>> 8d8c804aa568756275f2e630e3b5e338744b6761
 
 LuaScript::LuaScript()
 {
@@ -34,13 +38,16 @@ LuaScript::LuaScript()
       return ;
     }
   luaL_openlibs(_luaVM);
-  // lua_register(_luaVM, "my_function", my_function);
-  // luaL_dofile(_luaVM, SCRIPT);
 }
 
 LuaScript::~LuaScript()
 {
   lua_close(_luaVM);
+}
+
+lua_State*	LuaScript::getLua()
+{
+  return (_luaVM);
 }
 
 void	LuaScript::PullFunc(std::string const & string)
@@ -49,13 +56,6 @@ void	LuaScript::PullFunc(std::string const & string)
   lua_getglobal(_luaVM, func_name);
   std::cout << "push func: " << string << std::endl;
 }
-
-// void	LuaScript::PushFunc(std::string const & string)
-// {
-//   const char* func_name = string.c_str();
-//   lua_register(_luaVM, func_name, pointeur sur fonction);
-//   std::cout << "push func: " << string << std::endl;
-// }
 
 void	LuaScript::PushString(std::string const & string)
 {

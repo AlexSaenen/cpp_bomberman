@@ -5,12 +5,13 @@
 // Login   <vividy@epitech.net>
 //
 // Started on  Sat Jun 13 22:05:28 2015 Vividy
-// Last update Sun Jun 14 03:05:23 2015 Vividy
+// Last update Sun Jun 14 04:09:06 2015 Vividy
 //
 
 #ifndef SAVEMAP_HH_
 # define SAVEMAP_HH_
 
+#include <time.h>
 #include <iostream>
 #include "ModulesManager.hpp"
 #include "MapModule.hh"
@@ -19,6 +20,7 @@
 #include "ObjModel.hh"
 
 class	GameRoutine;
+class	MapModule;
 
 class	SaveMap
 {
@@ -27,6 +29,7 @@ private:
   std::filebuf  *file;
   std::map<std::string, std::string>	_modelType;
   GameRoutine			*gr;
+  MapModule			*mm;
   std::vector<GameObject *>	playerOne;
   bool				isPlayerOne;
   std::vector<GameObject *>	playerTwo;

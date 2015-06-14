@@ -6,7 +6,6 @@ LuaLoader::LuaLoader(const std::string &namefile) {
     if ((_luaVM = luaL_newstate()) == NULL)
       throw RuntimeException("Lua initialization error");
     luaL_openlibs(_luaVM);
-    std::cout << (DIR + namefile).c_str() << std::endl;
     if (luaL_dofile(_luaVM, (DIR + namefile).c_str()) == 1)
       throw RuntimeException("Lua script not found : " + namefile);
     lua_register(_luaVM, "luaCall", IA::luaCall);
